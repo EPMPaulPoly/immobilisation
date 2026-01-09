@@ -50,8 +50,8 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         }
     }
 
-    const obtiensTousEntetesReglements: RequestHandler = async (req, res): Promise<void> => {
-        console.log('Serveur - Obtention toutes entetes')
+    const obtiensReglements: RequestHandler = async (req, res): Promise<void> => {
+        console.log('Serveur - Obtention règlements')
         try {
             const params = parseParamsGetRules(req)
             const result_2 = await serviceGetReg(pool,params)
@@ -447,8 +447,9 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         });
     }
     // Routes
-    router.get('/entete', obtiensTousEntetesReglements);
-    router.get('/complet/:idToSplit', obtiensReglementCompletParId);
+    router.get('',obtiensReglements)
+    //router.get('/entete', obtiensTousEntetesReglements);
+    //router.get('/complet/:idToSplit', obtiensReglementCompletParId);
     router.get('/operations', obtiensToutesOperations)
     router.get('/unites', obtiensToutesUnites)
     router.get('/unites/:id', obtiensUnitesParLot)

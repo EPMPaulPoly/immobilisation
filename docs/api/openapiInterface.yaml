@@ -39,8 +39,8 @@ paths:
     $ref: './paths/reglements/getUnitesReg.yaml'
   /api/reglements/unites/{g_no_lot}:
     $ref: './paths/reglements/getInputsByLot.yaml'
-  /api/reglements/complet/{id_reg_stat}:
-    $ref: './paths/reglements/reglementComplet.yaml'
+  /api/reglements:
+    $ref: './paths/reglements/getRegs.yaml'
   /api/reglements/entete:
     $ref: './paths/reglements/reglementsEnteteNoId.yaml'
   /api/reglements/entete/{id_reg_stat}:

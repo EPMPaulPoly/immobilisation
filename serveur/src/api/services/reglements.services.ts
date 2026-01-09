@@ -20,7 +20,8 @@ export const serviceGetReg = async (
         id_er?: number|number[],
         id_periode_geo?:number|number[],
         id_periode?:number|number[],
-        cubf?: number|number[]
+        cubf?: number|number[],
+        id_reg_stat?:number|number[]
     }
 ) =>{
     
