@@ -17,7 +17,10 @@ Mémoire(À venir)
 [Procédure détaillée](/docs/md/012-Procedure.md)
 
 ## Références utiles pour la compréhension
-Chester
+Chester, M., Fraser, A., Matute, J., Flower, C., & Pendyala, R. (2015). Parking Infrastructure : A Constraint on or Opportunity for Urban Redevelopment? A Study of Los Angeles County Parking Supply and Growth. Journal of the American Planning Association, 81(4), 268‑286. https://doi.org/10.1080/01944363.2015.1092879
+
+Hoehne, C. G., Chester, M. V., Fraser, A. M., & King, D. A. (2019). Valley of the sun-drenched parking space : The growth, extent, and implications of parking infrastructure in Phoenix. Cities, 89, 186‑198. https://doi.org/10.1016/j.cities.2019.02.007
+
 
 ## Structure de base du logiciel
 Le dossier est divisé en trois grandes sections:
