@@ -39,8 +39,8 @@ paths:
     $ref: './paths/reglements/getUnitesReg.yaml'
   /api/reglements/unites/{g_no_lot}:
     $ref: './paths/reglements/getInputsByLot.yaml'
-  /api/reglements/complet/{id_reg_stat}:
-    $ref: './paths/reglements/reglementComplet.yaml'
+  /api/reglements:
+    $ref: './paths/reglements/getRegs.yaml'
   /api/reglements/entete:
     $ref: './paths/reglements/reglementsEnteteNoId.yaml'
   /api/reglements/entete/{id_reg_stat}:
@@ -51,6 +51,8 @@ paths:
     $ref: './paths/reglements/ligneDefReglementWId.yaml'
   /api/reglements/ligne-def:
     $ref: './paths/reglements/ligneDefReglementNoId.yaml'
+  /api/reglements/graphiques:
+    $ref: './paths/reglements/graphiqueStat.yaml'
   /api/ens-reg/{id_er}:
     $ref: './paths/ensemble_reglements/ensRegWId.yaml'
   /api/ens-reg/complet/{id_er}:
@@ -113,8 +115,24 @@ paths:
     $ref: './paths/analyse-variabilite/getVariaData.yaml'
   /api/ana-var/histo-varia:
     $ref: './paths/analyse-variabilite/GetHistoGramVariabilite.yaml'
-  /api/ana-var/boxplot-facteurs:
-    $ref: './paths/analyse-variabilite/getBoxplotFacteurs.yaml'
+  /api/valid/strate:
+    $ref: './paths/evaluation_perf/strateNoId.yaml'
+  /api/valid/strate/{id_strate}:
+    $ref: './paths/evaluation_perf/strateWId.yaml'
+  /api/valid/strate/donnees_intrantes:
+    $ref: './paths/evaluation_perf/strateDonneesIntrantes.yaml'
+  /api/valid/strate/colonnes_possibles:
+    $ref: './paths/evaluation_perf/strateColonnesPossibles.yaml'
+  /api/valid/feuilles:
+    $ref: './paths/evaluation_perf/feuillesStrates.yaml'
+  /api/valid/resultats:
+    $ref: './paths/evaluation_perf/resultatsNoId.yaml'
+  /api/valid/resultats/{id_val}:
+    $ref: './paths/evaluation_perf/resultatsWId.yaml'
+  /api/valid/popu-strate:
+    $ref: './paths/evaluation_perf/popuStrate.yaml'
+  /api/valid/graphiques:
+    $ref: './paths/evaluation_perf/graphiquesEvalPerf.yaml'
 components:
   schemas:
     $ref: './components/schemas.yaml'

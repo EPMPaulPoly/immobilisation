@@ -3,15 +3,14 @@ import { Pool } from 'pg';
 import { DbDefReglement, DbEnteteReglement, DbReglementComplet } from '../../types/database';
 import path from 'path';
 import { spawn } from 'child_process';
-
+import { GetReglementsParams } from '../repositories/reglements.repositories';
+import { serviceGetReg } from '../services/reglements.services';
 
 export const creationRouteurReglements = (pool: Pool): Router => {
     const router = Router();
     // Get all lines
     // Get all lines
-    const obtiensTousEntetesReglements: RequestHandler = async (req, res): Promise<void> => {
-        console.log('Serveur - Obtention toutes entetes')
-
+    const parseParamsGetRules = (req:Request):GetReglementsParams =>{
         const {
             annee_debut_apres,
             annee_debut_avant,
@@ -21,100 +20,48 @@ export const creationRouteurReglements = (pool: Pool): Router => {
             ville,
             texte,
             article,
-            paragraphe
+            paragraphe,
+            unite,
+            format,
+            id_er,
+            id_periode_geo,
+            id_periode,
+            cubf,
+            id_reg_stat
         } = req.query;
 
-        const conditions: string[] = [];
-        const values: any[] = []; // store parameters
-        let paramIndex = 1;
+        return{
+            reg_complet: format!==undefined && format==='c'?true:false,
+            annee_debut_apres: annee_debut_apres!==undefined? Number(annee_debut_apres) : undefined,
+            annee_debut_avant: annee_debut_avant!==undefined? annee_debut_avant!=='null'? Number(annee_debut_avant):null:undefined,
+            annee_fin_avant: annee_fin_avant!==undefined?Number(annee_fin_avant):undefined,
+            annee_fin_apres: annee_fin_apres!==undefined?annee_fin_apres!=='null'?Number(annee_fin_apres):null:undefined,
+            description: description!==undefined?String(description):undefined,
+            ville: ville!==undefined?String(ville):undefined,
+            texte: texte!==undefined?String(texte):undefined,
+            paragraphe: paragraphe!==undefined?String(paragraphe):undefined,
+            article: article!==undefined?String(article):undefined,
+            unite: unite!==undefined?String(unite).split(',').map((item)=>Number(item)):undefined,
+            id_er: id_er!==undefined?String(id_er).split(',').map((item)=>Number(item)):undefined,
+            id_periode_geo:id_periode_geo!==undefined?String(id_periode_geo).split(',').map((item)=>Number(item)):undefined,
+            id_periode: id_periode!==undefined?String(id_periode).split(',').map((item)=>Number(item)):undefined,
+            cubf: cubf!==undefined?String(cubf).split(',').map((item)=>Number(item)):undefined,
+            id_reg_stat: id_reg_stat!==undefined?String(id_reg_stat).split(',').map((item)=>Number(item)):undefined,
+        }
+    }
 
-        let client;
-
+    const obtiensReglements: RequestHandler = async (req, res): Promise<void> => {
+        console.log('Serveur - Obtention règlements')
         try {
-            // Helper function to add condition and param
-            const addCondition = (sql: string, value: any) => {
-                conditions.push(sql.replace('?', `$${paramIndex}`));
-                values.push(value);
-                paramIndex++;
-            };
-
-            if (annee_debut_apres !== undefined) {
-                if (annee_debut_apres === 'null') {
-                    conditions.push('annee_debut_reg IS NULL');
-                } else {
-                    addCondition('annee_debut_reg >= ?', Number(annee_debut_apres));
-                }
-            }
-
-            if (annee_debut_avant !== undefined) {
-                if (annee_debut_avant === 'null') {
-                    conditions.push('annee_debut_reg IS NULL');
-                } else {
-                    addCondition('annee_debut_reg <= ?', Number(annee_debut_avant));
-                }
-            }
-
-            if (annee_fin_apres !== undefined) {
-                if (annee_fin_apres === 'null') {
-                    conditions.push('annee_fin_reg IS NULL');
-                } else {
-                    addCondition('annee_fin_reg >= ?', Number(annee_fin_apres));
-                }
-            }
-
-            if (annee_fin_avant !== undefined) {
-                if (annee_fin_avant === 'null') {
-                    conditions.push('annee_fin_reg IS NULL');
-                } else {
-                    addCondition('annee_fin_reg <= ?', Number(annee_fin_avant));
-                }
-            }
-
-            if (description !== undefined) {
-                addCondition(`to_tsvector('french', description) @@ plainto_tsquery('french', ?)`, decodeURIComponent(description as string));
-            }
-
-            if (ville !== undefined) {
-                addCondition(`to_tsvector('french', ville) @@ plainto_tsquery('french', ?)`, decodeURIComponent(ville as string));
-            }
-
-            if (texte !== undefined) {
-                addCondition(`to_tsvector('french', texte_loi) @@ plainto_tsquery('french', ?)`, decodeURIComponent(texte as string));
-            }
-
-            if (paragraphe !== undefined) {
-                addCondition(`to_tsvector('french', paragraphe_loi) @@ plainto_tsquery('french', ?)`, decodeURIComponent(paragraphe as string));
-            }
-
-            if (article !== undefined) {
-                addCondition(`to_tsvector('french', article_loi) @@ plainto_tsquery('french', ?)`, decodeURIComponent(article as string));
-            }
-
-            // Final SQL build
-            let query = `
-      SELECT *
-      FROM public.entete_reg_stationnement
-    `;
-
-            if (conditions.length > 0) {
-                query += 'WHERE ' + conditions.join(' AND ') + '\n';
-            }
-
-            query += 'ORDER BY id_reg_stat ASC';
-
-            client = await pool.connect();
-            const result = await client.query(query, values);
-            res.json({ success: true, data: result.rows });
+            const params = parseParamsGetRules(req)
+            const result_2 = await serviceGetReg(pool,params)
+            res.json({ success: true, data: result_2 });
         } catch (err) {
             res.status(500).json({ success: false, error: 'Database error' });
-        } finally {
-            if (client) {
-                client.release(); // Release the connection back to the pool
-            }
-        }
+        } 
     };
 
-    const obtiensReglementCompletParId: RequestHandler = async (req, res): Promise<void> => {
+    const obtiensReglementCompletParId: RequestHandler = async (req:any, res:any): Promise<void> => {
         console.log('Serveur - Obtention reg complet par id')
         let client;
         try {
@@ -124,7 +71,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
             const idArray = idToSplit.split(',').map(Number);
 
             // Dynamically create placeholders for the query (e.g., $1, $2, $3, ...)
-            const placeholders = idArray.map((_, index: number) => `$${index + 1}`).join(',');
+            const placeholders = idArray.map((_:number, index: number) => `$${index + 1}`).join(',');
 
             // Query to fetch headers
             const query1 = `
@@ -172,7 +119,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
     const obtiensUnitesParLot: RequestHandler = async (req, res): Promise<void> => {
 
         const { id } = req.params;
-        const decipheredId = id.replace(/_/g, " ");
+        const decipheredId = typeof id === 'string' ? id.replace(/_/g, " ") : id[0].replace(/_/g, " ");
         console.log(`obtention des unités pour les règlements s'appliquant au lot : ${decipheredId}`)
         const scriptPath = path.resolve(__dirname, "../../../../serveur_calcul_python/obtention_reglements_lot.py");
 
@@ -185,12 +132,12 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         let errorData = '';
 
         // Capturer l'output standard
-        pythonProcess.stdout.on('data', (data) => {
+        pythonProcess.stdout.on('data', (data:string) => {
             outputData += data.toString();
         });
 
         // Capturer les erreurs standard
-        pythonProcess.stderr.on('data', (data) => {
+        pythonProcess.stderr.on('data', (data:string) => {
             errorData += data.toString();
         });
 
@@ -500,8 +447,9 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         });
     }
     // Routes
-    router.get('/entete', obtiensTousEntetesReglements);
-    router.get('/complet/:idToSplit', obtiensReglementCompletParId);
+    router.get('',obtiensReglements)
+    //router.get('/entete', obtiensTousEntetesReglements);
+    //router.get('/complet/:idToSplit', obtiensReglementCompletParId);
     router.get('/operations', obtiensToutesOperations)
     router.get('/unites', obtiensToutesUnites)
     router.get('/unites/:id', obtiensUnitesParLot)
