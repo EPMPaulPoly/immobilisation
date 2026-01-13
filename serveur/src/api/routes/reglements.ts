@@ -61,7 +61,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         } 
     };
 
-    const obtiensReglementCompletParId: RequestHandler = async (req, res): Promise<void> => {
+    const obtiensReglementCompletParId: RequestHandler = async (req:any, res:any): Promise<void> => {
         console.log('Serveur - Obtention reg complet par id')
         let client;
         try {
@@ -71,7 +71,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
             const idArray = idToSplit.split(',').map(Number);
 
             // Dynamically create placeholders for the query (e.g., $1, $2, $3, ...)
-            const placeholders = idArray.map((_, index: number) => `$${index + 1}`).join(',');
+            const placeholders = idArray.map((_:number, index: number) => `$${index + 1}`).join(',');
 
             // Query to fetch headers
             const query1 = `
@@ -119,7 +119,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
     const obtiensUnitesParLot: RequestHandler = async (req, res): Promise<void> => {
 
         const { id } = req.params;
-        const decipheredId = id.replace(/_/g, " ");
+        const decipheredId = typeof id === 'string' ? id.replace(/_/g, " ") : id[0].replace(/_/g, " ");
         console.log(`obtention des unités pour les règlements s'appliquant au lot : ${decipheredId}`)
         const scriptPath = path.resolve(__dirname, "../../../../serveur_calcul_python/obtention_reglements_lot.py");
 
@@ -132,12 +132,12 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         let errorData = '';
 
         // Capturer l'output standard
-        pythonProcess.stdout.on('data', (data) => {
+        pythonProcess.stdout.on('data', (data:string) => {
             outputData += data.toString();
         });
 
         // Capturer les erreurs standard
-        pythonProcess.stderr.on('data', (data) => {
+        pythonProcess.stderr.on('data', (data:string) => {
             errorData += data.toString();
         });
 
