@@ -44,6 +44,8 @@ services:
       - ./serveur_calcul_python:/app/serveur_calcul_python
       - serveur_node_modules:/app/serveur/node_modules
     command: npm run dev 
+    stdin_open: true
+    tty: true
 
 volumes:
   client_node_modules:
