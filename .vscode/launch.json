@@ -21,6 +21,21 @@
             }
         },
         {
+            "name": "Debug Frontend (Ubuntu)",
+            "type": "pwa-chrome",                // <-- moderne, fonctionne mieux
+            "request": "launch",
+            "runtimeExecutable": "/snap/bin/chromium",   // chemin absolu
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/client",
+            "runtimeArgs": [
+                "--user-data-dir=${workspaceFolder}/.vscode/chrome",   // profil séparé
+                "--remote-debugging-port=9222"                          // port pour debugger
+            ],
+            "sourceMapPathOverrides": {
+                "/app/*": "${workspaceFolder}/client/*"
+            }
+        },
+        {
             "name": "Debug Backend",
             "type": "node",
             "request": "attach",
