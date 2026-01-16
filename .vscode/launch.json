@@ -93,6 +93,10 @@
             "name": "Full Stack: Frontend + Backend",
             "configurations": ["Debug Frontend", "Debug Backend"]
         },
+        {   
+            "name": "Full Stack Ubuntu",
+            "configurations": ["Debug Frontend (Ubuntu)","Debug Backend"]
+        },
         {
             "name": "Full Stack: Frontend + Backend + Python",
             "configurations": ["Debug Frontend", "Debug Backend", "Python: Attach Docker"]
