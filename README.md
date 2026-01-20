@@ -10,11 +10,11 @@ Mémoire(À venir)
 
 [Installation](/docs/md/010-Installation.md)
 
-[Démarrage rapide](/docs/md/011-QuickStart.md)
+[Téléversement des données](/docs/md/020-Upload.md)
+
+[Logigramme de l'analyste](/docs/md/012-Procedure.md)
 
 [Information API](/docs/md/070-APIIntro.md)
-
-[Procédure détaillée](/docs/md/012-Procedure.md)
 
 ## Références utiles pour la compréhension
 Chester, M., Fraser, A., Matute, J., Flower, C., & Pendyala, R. (2015). Parking Infrastructure : A Constraint on or Opportunity for Urban Redevelopment? A Study of Los Angeles County Parking Supply and Growth. Journal of the American Planning Association, 81(4), 268‑286. https://doi.org/10.1080/01944363.2015.1092879
