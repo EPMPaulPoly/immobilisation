@@ -11,6 +11,14 @@
             "args": ["${input:myArgs}"]
         },
         {
+            "name": "Python: Current File (Conda Env)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "/"
+        },
+        {
             "name": "Debug Frontend",
             "type": "chrome",
             "request": "launch",

@@ -253,7 +253,11 @@ export interface inventaire_stationnement{
 export interface quartiers_analyse{
     id_quartier:number,
     nom_quartier:string,
+    acro?:string,
+    superficie_quartier?:number,
 }
+
+
 
 export interface informations_reglementaire_manuelle{
     cubf:number,

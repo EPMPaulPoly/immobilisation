@@ -48,7 +48,9 @@ sudo -u postgres psql
 ```
 Entrez ensuite la commande suivante dans la base de données en substituant votre mot de passe choisi:
 
-``` ALTER USER postgres WITH PASSWORD 'nouveau_mot_de_passe';```
+``` 
+ALTER USER postgres WITH PASSWORD 'nouveau_mot_de_passe';
+```
 
 Les étapes pour téléverser les données pertinentes et la structure de données seront détaillées dans la [page pertinente](020-Upload.md)
 
@@ -71,7 +73,9 @@ host    replication     all             172.25.0.0/16           scram-sha-256
 
 Il faut ensuite télécharger le code dans le dossier de votre choix. Naviguer au dossier de votre choix et faites un click-droit > Ouvrir dans un terminal. Une fois le terminal ouvert, entrer la commande
 
-``` git clone https://github.com/EPMPaulPoly/immobilisation.git```
+``` 
+git clone https://github.com/EPMPaulPoly/immobilisation.git
+```
 
 Un nouveau dossier nommé immobilisation apparaitra à ce moment.
 
@@ -79,7 +83,7 @@ Un nouveau dossier nommé immobilisation apparaitra à ce moment.
 
 ### Insllation miniconda(optionnel) et création d'environnement virtuel
 
-Pour téléverser les données de cadastre et du rôle foncier, quelques scripts python ont été écrits et requièrent une distribution Python. Il est recommandé d'utiliser un environnement virtuel pour faire ce type d'opérations plutôt que de se fier à la distribution principale installée sur le système. Anaconda met en place un environnemetn virtuel avec une distribution de python stable ainsi que l'ensemble des librairies requises. Pour installer anaconda, entrez les instructions suivantes dans le terminal:
+Pour téléverser les données de cadastre et du rôle foncier, quelques scripts python ont été écrits et requièrent une distribution Python. Il est recommandé d'utiliser un environnement virtuel pour faire ce type d'opérations plutôt que de se fier à la distribution principale installée sur le système. Anaconda met en place un environnement virtuel avec une distribution de python stable ainsi que l'ensemble des librairies requises. Pour installer anaconda, entrez les instructions suivantes dans le terminal:
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
@@ -125,7 +129,9 @@ Téléchargez [git pour windows](https://git-scm.com/install/windows) et install
 
 Comme pour Ubuntu, allez au dossier que vous voulez utiliser pour entreposer le dépot git et ouvrez un terminal à partir d'un clic droit. Dans le terminal, entrez la commande suivante:
 
-``` git clone https://github.com/EPMPaulPoly/immobilisation.git```
+``` 
+git clone https://github.com/EPMPaulPoly/immobilisation.git
+```
 
 Un nouveau dossier nommé immobilisation apparaitra à ce moment.
 
@@ -135,7 +141,7 @@ Un nouveau dossier nommé immobilisation apparaitra à ce moment.
 
 Pour téléverser les données de cadastre et du rôle foncier, quelques scripts python ont été écrits et requièrent une distribution Python. Il est recommandé d'utiliser un environnement virtuel pour faire ce type d'opérations plutôt que de se fier à la distribution principale installée sur le système. Anaconda met en place un environnemetn virtuel avec une distribution de python stable ainsi que l'ensemble des librairies requises. 
 
-Pour installer miniconda, suivez les instructions données 
+Pour installer miniconda, suivez les instructions données  sur  [le site web](https://www.anaconda.com/docs/getting-started/miniconda/install) 
 
 Une fois conda installé naviguer au dossier serveur_calcul_python dans le dossier téléchargé à l'étape précédente. Entrez la commande suivante:
 ```

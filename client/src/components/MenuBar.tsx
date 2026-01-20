@@ -16,6 +16,7 @@ const MenuBar: React.FC<{}> = () => {
             <SubMenuComponent
                 label={"Entrée Règlementation"}
                 options={[
+                    {label:"Secteurs d'analyse",path:"/sec-analyse-verse"},
                     {label:"Historique",path:"/historique"},
                     {label:"Règlements",path:"/reg"},
                     {label:"Ensembles de règlements",path:"/ens-reg"},

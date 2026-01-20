@@ -1,0 +1,28 @@
+.page-sec-analyse {
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+    .contenu-sec-analyse {
+        flex: 1; /* Take up remaining space */
+        overflow: hidden; /* Enable scrolling if content overflows */
+        padding: 20px;
+        color: #ffffff;
+        flex-direction:row;
+        display:flex
+
+    }
+        .table-sec-analyse {
+            width: 40vw;
+            border-collapse: collapse;
+        }
+
+    .menu-manip-sec-analyse {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        gap: 10px;
+        align-items: center; 
+    }

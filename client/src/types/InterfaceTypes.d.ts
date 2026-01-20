@@ -35,7 +35,49 @@ export interface role_set_state{
     state:boolean,
     set_role_set_state:SetStateAction<boolean>
 }
+// ---------------------------------------------------------------
+// ------------------ Versement Secteurs d'analyse ---------------
+// ---------------------------------------------------------------
+export interface PropsVersSecAnalyse{
+    modalOuvert:boolean,
+    setModalOuvert:React.Dispatch<SetStateAction<boolean>>,
+    secAnalyseNew: FeatureCollection<Geometry,quartiers_analyse>,
+    setSecAnalyseNew:React.Dispatch<SetStateAction<FeatureCollection<Geometry,quartiers_analyse>>>,
+}
 
+export interface propsMenuSecAnalyse{
+    secAnalyseAct: FeatureCollection<Geometry,quartiers_analyse>,
+    setSecAnalyseAct:React.Dispatch<SetStateAction<FeatureCollection<Geometry,quartiers_analyse>>>,
+    secAnalyseNew: FeatureCollection<Geometry,quartiers_analyse>,
+    setSecAnalyseNew:React.Dispatch<SetStateAction<FeatureCollection<Geometry,quartiers_analyse>>>,
+    modalOuvert:boolean,
+    setModalOuvert:React.Dispatch<SetStateAction<boolean>>,
+    optionVisPoss: NouveauAncienSecteurAnalyse[],
+    optionsVis:NouveauAncienSecteurAnalyse,
+    setOptionsVis:React.Dispatch<SetStateAction<NouveauAncienSecteurAnalyse>>,
+}
+
+export interface NouveauAncienSecteurAnalyse{
+    idSecs: number;
+    description: string;
+}
+
+export interface propsParamSecAnalyse{
+    secAnalyseMontrer:FeatureCollection<Geometry,quartiers_analyse>,
+    setSecAnalyseMontrer:React.Dispatch<SetStateAction<FeatureCollection<Geometry,quartiers_analyse>>>,
+    optionSecteurAnalyse:NouveauAncienSecteurAnalyse,
+}
+
+export interface CarteSecAnalyseProps{
+    territoires:GeoJSON.FeatureCollection<GeoJSON.Geometry,quartiers_analyse>;
+    defTerritoires: React.Dispatch<SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry,quartiers_analyse>>>;
+    territoireSelect: number;
+    defTerritoireSelect: React.Dispatch<SetStateAction<number>>;
+    startPosition: LatLngExpression;
+    setStartPosition:React.Dispatch<SetStateAction<LatLngExpression>>;
+    startZoom: number;
+    setStartZoom: React.Dispatch<SetStateAction<number>>;
+}
 // ---------------------------------------------------------------
 // --------------------------- Inventaire ------------------------
 // ---------------------------------------------------------------
