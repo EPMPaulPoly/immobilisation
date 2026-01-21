@@ -2,6 +2,7 @@
     "name": "parking-inventory-backend",
     "version": "1.0.0",
     "description": "Backend for parking inventoery",
+    "type": "module",
     "main": "dist/serveur.js",
     "scripts": {
         "dev": "nodemon --legacy-watch",

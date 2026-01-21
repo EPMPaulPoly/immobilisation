@@ -8,12 +8,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "resolveJsonModule": true,
     "sourceMap": true, // Make sure this is true
     "inlineSourceMap": false, // This should be false when sourceMap is true
     "inlineSources": false,
-    "baseUrl": ".",
     "paths": {
       "*": [
         "node_modules/*",
