@@ -1,0 +1,85 @@
+post:
+  description: Écrase les quartiers d'analyse existants et insère les nouveaux quartiers d'analyse fournis dans la requête.
+  tags: 
+    - Quartier
+  requestBody:
+    description: Liste des quartiers d'analyse à insérer.
+    required: true
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: '../../components/schemas.yaml#/quartier_analyse'
+        example:
+          - id_quartier: 1
+            nom_quartier: "Quartier A"
+            superf_quartier: 1500.5
+            acro: "QA"
+            geometry:
+              type: "Polygon"
+              coordinates:
+                - 
+                  - [102.0, 2.0]
+                  - [103.0, 2.0]
+                  - [103.0, 3.0]
+                  - [102.0, 3.0]
+                  - [102.0, 2.0]
+          - id_quartier: 2
+            nom_quartier: "Quartier B"
+            superf_quartier: 2500.75
+            acro: "QB"
+            geometry:
+              type: "Polygon"
+              coordinates:
+                - 
+                  - [100.0, 0.0]
+                  - [101.0, 0.0]
+                  - [101.0, 1.0]
+                  - [100.0, 1.0]
+                  - [100.0, 0.0]
+  responses:
+    '200':
+      description: Quartiers d'analyse insérés avec succès.
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/reponse_quartier_analyse'
+          example:
+            success: true
+            data:
+              - id_quartier: 1
+                nom_quartier: "Quartier A"
+                superf_quartier: 1500.5
+                acro: "QA"
+                geometry:
+                  type: "Polygon"
+                  coordinates:
+                    - 
+                      - [102.0, 2.0]
+                      - [103.0, 2.0]
+                      - [103.0, 3.0]
+                      - [102.0, 3.0]
+                      - [102.0, 2.0]
+              - id_quartier: 2
+                nom_quartier: "Quartier B"
+                superf_quartier: 2500.75
+                acro: "QB"
+                geometry:
+                  type: "Polygon"
+                  coordinates:
+                    - 
+                      - [100.0, 0.0]
+                      - [101.0, 0.0]
+                      - [101.0, 1.0]
+                      - [100.0, 1.0]
+                      - [100.0, 0.0]
+    '500':              
+      description: Erreur interne du serveur. 
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: false
+            message: "Erreur lors de l'insertion des quartiers d'analyse."

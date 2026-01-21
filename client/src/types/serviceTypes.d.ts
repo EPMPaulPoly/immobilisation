@@ -1,4 +1,39 @@
-import { periode, territoire, quartiers_analyse, inventaire_stationnement, territoireGeoJsonProperties, entete_reglement_stationnement, reglement_complet, entete_ensembles_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps, lotCadastralDB, roleFoncierDB, lotCadastralGeomSeulDb, comboERRoleFoncier, lotCadastralBoolInvDB, lotCadastralAvecBoolInvGeoJsonProperties, PAV_quartier, entreePAV, operation_reglement_stationnement, unites_reglement_stationnement, definition_reglement_stationnement, association_territoire_entete_ensemble_reglement, association_util_reglement, utilisation_sol, associaion_territoire_ensemble_reglement, data_graphique, comptes_utilisations_sol, FeuilleFinaleStrate, EntreeValidation, data_graphique_text_labels,resultatAnalyseVariabilite, resultatHistoVariabilite } from './DataTypes'
+import { 
+    periode, 
+    territoire, 
+    quartiers_analyse, 
+    inventaire_stationnement, 
+    territoireGeoJsonProperties, 
+    entete_reglement_stationnement, 
+    reglement_complet, 
+    entete_ensembles_reglement_stationnement, 
+    ensemble_reglements_stationnement, 
+    inventaireGeoJSONProps, 
+    lotCadastralGeoJsonProperties, 
+    roleFoncierGeoJsonProps, 
+    lotCadastralDB, 
+    roleFoncierDB, 
+    lotCadastralGeomSeulDb, 
+    comboERRoleFoncier, 
+    lotCadastralBoolInvDB, 
+    lotCadastralAvecBoolInvGeoJsonProperties, 
+    PAV_quartier, 
+    entreePAV, 
+    operation_reglement_stationnement, 
+    unites_reglement_stationnement, 
+    definition_reglement_stationnement, 
+    association_territoire_entete_ensemble_reglement, 
+    association_util_reglement, 
+    utilisation_sol, 
+    associaion_territoire_ensemble_reglement, 
+    data_graphique, 
+    comptes_utilisations_sol, 
+    FeuilleFinaleStrate, 
+    EntreeValidation, 
+    data_graphique_text_labels,
+    resultatAnalyseVariabilite, 
+    resultatHistoVariabilite,
+    quartiers_analyse_db } from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -12,7 +47,8 @@ export type ReponsePeriode = ApiResponse<periode[]>
 export type ReponseDbTerritoire = ApiResponse<territoire[]>
 export type ReponseTerritoire = ApiResponse<FeatureCollection<Geometry, territoireGeoJsonProperties>>
 // quartier analyse
-export type ReponseQuartiersAnalyse = ApiResponse<quartiers_analyse[]>
+export type ReponseQuartiersAnalyse = ApiResponse<FeatureCollection<Geometry,quartiers_analyse>>
+export type ReponseQuartierDBAnalyse = ApiResponse<quartiers_analyse_db[]>
 // inventaire
 export type ReponseDBInventaire = ApiResponse<inventaire_stationnement[]>
 export type ReponseInventaire = ApiResponse<inventaire_stationnement[]>

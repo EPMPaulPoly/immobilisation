@@ -1286,6 +1286,20 @@ api_response:
       success: false
       message: Item non trouvé
 # -------------------------------------------------------------------
+# ----------------------------- Reponse Quartiers -------------------
+# -------------------------------------------------------------------
+reponse_quartier_analyse:
+  allOf:
+    - $ref: '#/api_response'
+    - type: object
+      properties:
+        data:
+          oneOf:
+            - $ref: '#/quartier_analyse'
+            - type: array
+              items:
+                $ref: '#/quartier_analyse'
+# -------------------------------------------------------------------
 # ----------------------------- Reponse Règlements ------------------
 # -------------------------------------------------------------------
 reponse_reglement_ligne_def:

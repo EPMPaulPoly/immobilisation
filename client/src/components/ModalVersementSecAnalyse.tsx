@@ -57,7 +57,7 @@ const modalVersementSecAnalyse:React.FC<PropsVersSecAnalyse> = (props:PropsVersS
                             nom_quartier: feature.properties[nomQuartierCol],
                         };
                         if (superficieQuartierCol!==''){
-                            properties_out.superficie_quartier = feature.properties[superficieQuartierCol];
+                            properties_out.superf_quartier = feature.properties[superficieQuartierCol];
                         }
                         if (acronymeCol!==''){
                             properties_out.acro = feature.properties[acronymeCol];

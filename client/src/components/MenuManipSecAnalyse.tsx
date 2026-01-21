@@ -3,7 +3,22 @@ import { propsMenuSecAnalyse } from '../types/InterfaceTypes';
 import {Edit,Upload,FileOpen} from '@mui/icons-material';
 import {Select,MenuItem} from '@mui/material';
 import Button from '@mui/material/Button';
+import { serviceQuartiersAnalyse } from '../services';
+
 const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAnalyse) => {
+    const gereSauvegarde = async() => {  
+        const data = await serviceQuartiersAnalyse.ecraseSecteursAnalyse(props.secAnalyseNew);
+        if (data.success){
+            alert('Sauvegarde Réussie');
+            props.setSecAnalyseAct(props.secAnalyseNew);
+            props.setSecAnalyseNew({
+                type: "FeatureCollection",
+                features: []
+            });
+        } else{
+            alert('Erreur lors de la sauvegarde');
+        }
+    }
     return(
         <div className='menu-manip-sec-analyse'>
             <FileOpen onClick={() => props.setModalOuvert(!props.modalOuvert)}/>
@@ -57,7 +72,7 @@ const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAna
                     </MenuItem>
                 ))}
             </Select>
-            {props.optionsVis.idSecs === 1 && props.secAnalyseNew.features.length >0 ?<Button variant="outlined"> Écraser anciens Secteurs</Button>:<></>}
+            {props.optionsVis.idSecs === 1 && props.secAnalyseNew.features.length >0 ?<Button variant="outlined" onClick={() => gereSauvegarde()}> Écraser anciens Secteurs</Button>:<></>}
         </div>
     )
 }

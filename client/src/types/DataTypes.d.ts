@@ -254,9 +254,12 @@ export interface quartiers_analyse{
     id_quartier:number,
     nom_quartier:string,
     acro?:string,
-    superficie_quartier?:number,
+    superf_quartier?:number,
 }
 
+export interface quartiers_analyse_db extends quartiers_analyse{
+    geometry:string,
+}
 
 
 export interface informations_reglementaire_manuelle{

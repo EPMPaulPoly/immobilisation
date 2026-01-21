@@ -2,46 +2,98 @@ import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
 import { DbQuartierAnalyse } from '../../types/database';
 // Types pour les requêtes
-import { Polygon,MultiPolygon } from 'geojson';
+import { Polygon, MultiPolygon } from 'geojson';
 interface GeometryBody {
-  geometry: Polygon|MultiPolygon;  
+    geometry: Polygon | MultiPolygon;
 }
 
 export const creationRouteurQuartiersAnalyse = (pool: Pool): Router => {
-  const router = Router();
-  // Get all lines
-  // Get all lines
-  const obtiensTousQuartiers: RequestHandler = async (_req, res): Promise<void> => {
-    console.log('Serveur - obtentions tous quartiers analyse')
-    let client;
-    try {
-      const { geometry } = _req.body as GeometryBody;
-      client = await pool.connect();
-      const query = `
+    const router = Router();
+    // Get all lines
+    // Get all lines
+    const obtiensTousQuartiers: RequestHandler = async (_req, res): Promise<void> => {
+        console.log('Serveur - obtentions tous quartiers analyse')
+        let client;
+        try {
+            const { geometry } = _req.body as GeometryBody;
+            client = await pool.connect();
+            const query = `
         SELECT 
-          id_quartier,
+          id_quartier::int,
           nom_quartier,
           superf_quartier,
-          peri_quartier,
+          acro,
           ST_AsGeoJSON(geometry) AS geojson_geometry
         FROM public.sec_analyse
       `;
 
-      const result = await client.query<DbQuartierAnalyse>(query, );
-      res.json({ success: true, data: result.rows });
-    } catch (err) {
-      res.status(500).json({ success: false, error: 'Database error' });
-    } finally{
-      if (client){
-        client.release()
-      }
+            const result = await client.query<DbQuartierAnalyse>(query,);
+            const out = result.rows.map((row: any) => ({
+                id_quartier: row.id_quartier,
+                nom_quartier: row.nom_quartier,
+                superf_quartier: row.superf_quartier,
+                acro: row.acro,
+                geometry: JSON.parse(row.geojson_geometry)
+            }));
+            res.json({ success: true, data: out });
+        } catch (err) {
+            res.status(500).json({ success: false, error: 'Database error' });
+        } finally{
+            if (client){
+                client.release()
+            }
+        }
+    };
+
+
+    const ecraseSecteursAnalyse: RequestHandler = async (req, res): Promise<void> => {
+        console.log('Serveur - écrasement secteurs analyse')
+        let client;
+        try{
+            const data  = req.body ;
+            const queryValues: any[] = [];
+            const placeholders = data.map((item:any, idx:number) => {
+                const startIdx = idx * 5 + 1;
+                queryValues.push(
+                    item.id_quartier,
+                    item.nom_quartier,
+                    item.superf_quartier,
+                    item.acro,
+                    item.geometry
+                );
+                return `($${startIdx}, $${startIdx + 1}, $${startIdx + 2}, $${startIdx + 3}, ST_SetSRID(ST_GeomFromGeoJSON($${startIdx + 4}), 4326))`;
+            }).join(', ');
+            client = await pool.connect();
+            await client.query('BEGIN');
+
+            // DELETE d'abord
+            await client.query('DELETE FROM public.sec_analyse');
+
+            // INSERT ensuite
+            const query = `
+                INSERT INTO public.sec_analyse (id_quartier, nom_quartier, superf_quartier, acro, geometry)
+                VALUES ${placeholders}
+                RETURNING id_quartier, nom_quartier, superf_quartier, acro, ST_AsGeoJSON(geometry) as geometry;
+            `;
+            const result = await client.query(query, queryValues);
+
+            await client.query('COMMIT');
+            const out = result.rows.map((row: any) => ({
+                ...row,
+                geometry: JSON.parse(row.geometry)
+            }));
+            res.json({ success: true, data: out });
+        } catch (err) {
+            res.status(500).json({ success: false, error: 'Database error' });
+        } finally {
+            if (client) {
+                client.release()
+            }
+        }
     }
-  };
 
-
-
-  // Routes
-  router.get('/', obtiensTousQuartiers);
-
-  return router;
+    // Routes
+    router.get('/', obtiensTousQuartiers);
+    router.post('/bulk-replace', ecraseSecteursAnalyse);
+    return router;
 };

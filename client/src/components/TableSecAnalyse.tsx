@@ -47,7 +47,7 @@ const TableSecAnalyse: FC<propsParamSecAnalyse> = (props:propsParamSecAnalyse) =
                             <TableRow key={feature.properties.id_quartier}>
                                 <TableCell>{feature.properties.id_quartier}</TableCell>
                                 <TableCell><TextField value={feature.properties.nom_quartier??''} onChange={(e) => manipulerTexte(feature.properties.id_quartier, 'nom_quartier', e.target.value)}/></TableCell>
-                                <TableCell sx={{ verticalAlign: 'center'}}><Calculate/>{feature.properties.superficie_quartier??''}</TableCell>
+                                <TableCell sx={{ verticalAlign: 'center'}}><Calculate/>{feature.properties.superf_quartier??''}</TableCell>
                                 <TableCell><TextField value={feature.properties.acro??''} onChange={(e) => manipulerTexte(feature.properties.id_quartier, 'acro', e.target.value)}/></TableCell>
 
                             </TableRow>

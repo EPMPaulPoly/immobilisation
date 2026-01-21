@@ -45,7 +45,7 @@ COPY serveur_calcul_python ./serveur_calcul_python
 # Return to /app/serveur
 WORKDIR /app/serveur
 
-RUN npm run build
+# RUN npm run build
 EXPOSE 5000 9229 5678
 
-CMD ["nodemon", "dist/serveur.js"]
+CMD ["nodemon", "--inspect=0.0.0.0:9229", "-r", "ts-node/register", "src/serveur.ts"]

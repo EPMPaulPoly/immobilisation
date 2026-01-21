@@ -62,6 +62,19 @@
             "internalConsoleOptions": "neverOpen"
         },
         {
+            "name": "Debug Backend (nodemon + ts-node)",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}/serveur",
+            "remoteRoot": "/app/serveur",
+            "cwd": "${workspaceFolder}/serveur",
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "trace": true
+        },
+        {
             "name": "Attach to 3000",
             "type": "node",
             "request": "attach",

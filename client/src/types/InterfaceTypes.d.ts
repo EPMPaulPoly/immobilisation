@@ -84,8 +84,6 @@ export interface CarteSecAnalyseProps{
 export interface TableInventaireProps{
     quartier: number;
     defQuartier:  React.Dispatch<SetStateAction<number>>;
-    optionsQuartiers: quartiers_analyse[];
-    defOptionsQuartiers: React.Dispatch<SetStateAction<quartiers_analyse[]>>;
     inventaire: inventaire_stationnement[];
     defInventaire: React.Dispatch<SetStateAction<inventaire_stationnement[]>>
     lots:GeoJSON.FeatureCollection<GeoJSON.Geometry,lotCadastralAvecBoolInvGeoJsonProperties>,
@@ -204,7 +202,7 @@ export interface MenuInventaireProps{
     defPositionDepart:React.Dispatch<SetStateAction<LatLngExpression>>;
     zoomDepart: number;
     defZoomDepart: React.Dispatch<SetStateAction<number>>;
-    optionsQuartier:quartiers_analyse[];
+    optionsQuartier:FeatureCollection<Geometry,quartiers_analyse>;
     quartier:number,
     defQuartier:React.Dispatch<SetStateAction<number>>;
     defPanneauComparInventaireQuartierVis:React.Dispatch<SetStateAction<boolean>>;

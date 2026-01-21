@@ -6,10 +6,13 @@ import { serviceQuartiersAnalyse, servicePAV } from '../services';
 import { yellow } from '@mui/material/colors';
 import { Chart, registerables } from 'chart.js';
 import { ClimbingBoxLoader } from 'react-spinners';
+import { FeatureCollection, Geometry } from 'geojson';
+
+Chart.register(...registerables);
 
 const AnalyseProfilAccumulationVehiculeQuartiers: React.FC<AnalysePAVQuartierProps> = (props: AnalysePAVQuartierProps) => {
     const [quartierSelect, defQuartierSelect] = useState<number>(-1);
-    const [quartierOptions, defQuartierOptions] = useState<quartiers_analyse[]>([]);
+    const [quartierOptions, defQuartierOptions] = useState<FeatureCollection<Geometry,quartiers_analyse>>({type:"FeatureCollection",features:[]});
     const [PAVvalide, defPAVvalide] = useState<boolean>(false);
     const [PAVQuartier, defPAVQuartier] = useState<PAVQuartier>({ id_quartier: -1, capacite_stat_quartier: 0, PAV: [], nom_quartier: '' });
     const [PAVNouveau, defPAVNouveau] = useState<entreePAV[]>([]);
@@ -293,9 +296,9 @@ const AnalyseProfilAccumulationVehiculeQuartiers: React.FC<AnalysePAVQuartierPro
                     <select id="select-map-color" name="select-type" onChange={e => gestSelectQuartier(Number(e.target.value))} value={quartierSelect}>
                         <option value={-1}>Selection quartier</option>
                         <option value={0}>Ville complète</option>
-                        {quartierOptions.map(quartier => (
-                            <option key={quartier.id_quartier} value={quartier.id_quartier} >
-                                {quartier.nom_quartier}
+                        {quartierOptions.features.map((quartier) => (
+                            <option key={quartier.properties.id_quartier} value={quartier.properties.id_quartier} >
+                                {quartier.properties.nom_quartier}
                             </option>
                         ))}
                     </select>

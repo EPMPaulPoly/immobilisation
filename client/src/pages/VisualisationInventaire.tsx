@@ -23,7 +23,7 @@ const VisualisationInventaire: React.FC = () => {
     const [positionDepart, defPositionDepart] = useState<LatLngExpression>([46.85, -71]);// position depart
     const [zoomDepart, defZoomDepart] = useState<number>(10); // zoom depart
     const [quartier, defQuartierAnalyse] = useState<number>(-1); // quartier d'analyse pour aller chercher l'inventaire
-    const [optionsQuartier, defOptionsQuartiers] = useState<quartiers_analyse[]>([]);//quartiers selectionnable
+    const [optionsQuartier, defOptionsQuartiers] = useState<FeatureCollection<Geometry, quartiers_analyse>>({type:'FeatureCollection',features:[]});//quartiers selectionnable
     const [roleARegarder, defRoleARegarder] = useState<string>('');//état pour l'entrée du rôle à regarder dans le panneau de détails
     const [regARegarder, defRegARegarder] = useState<number>(-1);// état pour le règlement à regarder dans le panneau de détails
     const [ensRegARegarder, defEnsRegARegarder] = useState<number>(-1); // état pour l'ensemble de règlement à regarder dans le peannu de téail
@@ -193,8 +193,6 @@ const VisualisationInventaire: React.FC = () => {
                 : <TableInventaire
                     quartier={quartier}
                     defQuartier={defQuartierAnalyse}
-                    optionsQuartiers={optionsQuartier}
-                    defOptionsQuartiers={defOptionsQuartiers}
                     inventaire={inventaire}
                     defInventaire={defInventaire}
                     lots={lotSelect}

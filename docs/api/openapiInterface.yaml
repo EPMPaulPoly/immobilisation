@@ -7,6 +7,8 @@ tags: []
 paths:
   /api/quartiers-analyse:
     $ref: './paths/quartier/quartierNoId.yaml'
+  /api/quartiers-analyse/bulk-replace:
+    $ref: './paths/quartier/quartiersBulkReplace.yaml'
   /api/historique:
     $ref: './paths/historique/historiqueNoId.yaml'
   /api/historique/{id_periode}:
@@ -114,7 +116,7 @@ paths:
   /api/ana-var/obtiens-donnees-varia:
     $ref: './paths/analyse-variabilite/getVariaData.yaml'
   /api/ana-var/histo-varia:
-    $ref: './paths/analyse-variabilite/GetHistoGramVariabilite.yaml'
+    $ref: './paths/analyse-variabilite/getHistoGramVariabilite.yaml'
   /api/valid/strate:
     $ref: './paths/evaluation_perf/strateNoId.yaml'
   /api/valid/strate/{id_strate}:
