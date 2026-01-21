@@ -40,12 +40,12 @@ const CarteSecAnalyse: React.FC<CarteSecAnalyseProps> = (props:CarteSecAnalysePr
                 },
                 onEachFeature: (feature: any, layer: any) => {
                     if (feature.properties) {
-                      const { id_quartier, nom_quartier, superficie_quartier,acro } = feature.properties; // Destructure properties
+                      const { id_quartier, nom_quartier, superf_quartier,acro } = feature.properties; // Destructure properties
                       const formattedPopupContent = `
                         <strong>Feature ID:</strong> ${id_quartier} <br/>
                         <strong>Name:</strong> ${nom_quartier} <br/>
-                        <strong>Superficie:</strong> ${superficie_quartier}  m2<br/>
-                        <strong>Acronyme:</strong> ${acro}<br/>
+                        <strong>Superficie:</strong> ${superf_quartier}  m2<br/>
+                        <strong>Acronyme:</strong> ${acro??''}<br/>
                       `;
                       layer.bindPopup(formattedPopupContent);
                     }

@@ -25,6 +25,7 @@ export const creationRouteurQuartiersAnalyse = (pool: Pool): Router => {
           acro,
           ST_AsGeoJSON(geometry) AS geojson_geometry
         FROM public.sec_analyse
+        order by id_quartier;
       `;
 
             const result = await client.query<DbQuartierAnalyse>(query,);
@@ -91,9 +92,49 @@ export const creationRouteurQuartiersAnalyse = (pool: Pool): Router => {
             }
         }
     }
+    const modifieQuartierAnalyse: RequestHandler = async (req, res): Promise<void> => {
+        console.log('Serveur - modification quartier analyse')
+        let client;
+        try{
+            const { id_quartier } = req.params;
+            const { nom_quartier, superf_quartier, acro, geometry} = req.body;
+            const queryValues = [
+                id_quartier,
+                nom_quartier,
+                superf_quartier,
+                acro,
+                geometry
+            ];
+            client = await pool.connect();
+            await client.query('BEGIN');
+
+            // INSERT ensuite
+            const query = `
+                UPDATE public.sec_analyse
+                SET nom_quartier = $2, superf_quartier = $3, acro = $4, geometry = ST_SetSRID(ST_GeomFromGeoJSON($5), 4326)
+                WHERE id_quartier = $1  
+                RETURNING id_quartier, nom_quartier, superf_quartier, acro, ST_AsGeoJSON(geometry) as geometry;
+            `;
+            const result = await client.query(query, queryValues);
+
+            await client.query('COMMIT');
+            const out = result.rows.map((row: any) => ({
+                ...row,
+                geometry: JSON.parse(row.geometry)
+            }));
+            res.json({ success: true, data: out });
+        } catch (err) {
+            res.status(500).json({ success: false, error: 'Database error' });
+        } finally {
+            if (client) {
+                client.release()
+            }
+        }
+    }
 
     // Routes
     router.get('/', obtiensTousQuartiers);
     router.post('/bulk-replace', ecraseSecteursAnalyse);
+    router.put('/:id_quartier', modifieQuartierAnalyse);
     return router;
 };

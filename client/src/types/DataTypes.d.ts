@@ -258,7 +258,7 @@ export interface quartiers_analyse{
 }
 
 export interface quartiers_analyse_db extends quartiers_analyse{
-    geometry:string,
+    geometry:Geometry,
 }
 
 

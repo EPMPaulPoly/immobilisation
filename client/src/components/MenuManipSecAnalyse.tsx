@@ -21,7 +21,7 @@ const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAna
     }
     return(
         <div className='menu-manip-sec-analyse'>
-            <FileOpen onClick={() => props.setModalOuvert(!props.modalOuvert)}/>
+            
             <Select
                 value={props.optionsVis.idSecs}
                 onChange={(e) => {
@@ -72,6 +72,7 @@ const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAna
                     </MenuItem>
                 ))}
             </Select>
+            {props.optionsVis.idSecs === 1?<FileOpen onClick={() => props.setModalOuvert(!props.modalOuvert)}/>:<></>}
             {props.optionsVis.idSecs === 1 && props.secAnalyseNew.features.length >0 ?<Button variant="outlined" onClick={() => gereSauvegarde()}> Écraser anciens Secteurs</Button>:<></>}
         </div>
     )

@@ -22,6 +22,13 @@ const VersementSecAnalyse: React.FC = () => {
     const[zoomDepart,defZoomDepart] = useState<number>(10);
 
     const[territoireSelect,defTerritoireSelect] = useState<number>(-1);
+    useEffect( () => {
+        const fetchData = async () => {
+            const reponse = await serviceQuartiersAnalyse.chercheTousQuartiersAnalyse();
+            setSecAnalyseAct(reponse.data);
+        }
+        fetchData();
+    }, []);
     const optionsVisPoss: NouveauAncienSecteurAnalyse[] = [
         {
             idSecs: 0,

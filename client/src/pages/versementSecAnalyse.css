@@ -8,15 +8,18 @@
     .contenu-sec-analyse {
         flex: 1; /* Take up remaining space */
         overflow: hidden; /* Enable scrolling if content overflows */
-        padding: 20px;
+        
         color: #ffffff;
         flex-direction:row;
-        display:flex
-
+        display:flex;
     }
         .table-sec-analyse {
             width: 40vw;
             border-collapse: collapse;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-bottom: 20px;
+            flex-direction: column;
         }
 
     .menu-manip-sec-analyse {
