@@ -1,12 +1,15 @@
 import { Box, Button, Dialog, FormControl, InputLabel, MenuItem, Modal, Paper, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, useMediaQuery, useTheme } from "@mui/material"
-import { PropsModalRecomputeInventaire } from "../types/InterfaceTypes"
+import { PropsModalRecomputeInventaire } from "../types/InterfaceTypes.js"
 import { useEffect, useState } from "react";
 import { Save } from "@mui/icons-material";
-import { informations_reglementaire_manuelle, InputValues, inventaire_stationnement, methodeCalcul, requete_calcul_manuel_reg } from "../types/DataTypes";
-import { serviceEnsemblesReglements, serviceInventaire } from "../services";
-import obtRegManuel from "../utils/obtRegManuel";
-import TableauInventaireUnique from "./TableauInventaireUnique";
-import TableauApprobationInventaire from "./TableauApprobationInventaire";
+import { informations_reglementaire_manuelle, 
+    InputValues, 
+    inventaire_stationnement, 
+    methodeCalcul, 
+    requete_calcul_manuel_reg } from "../types/DataTypes.js";
+import { serviceInventaire } from '../services/serviceInventaire.js'
+import obtRegManuel from "../utils/obtRegManuel.js";
+import TableauApprobationInventaire from "./TableauApprobationInventaire.js";
 import { ClimbingBoxLoader } from "react-spinners";
 
 
@@ -109,7 +112,7 @@ const ModalRecomputeInventaire: React.FC<PropsModalRecomputeInventaire> = (props
         }
     const handleInputChange = (cubf: number, unite: number, id_reg_stat: number, id_er:number,value: string) => {
         const key = `${cubf}-${unite}-${id_reg_stat}-${id_er}`;
-        defEntreesDonneesPourCalcul((prevValues) => ({
+        defEntreesDonneesPourCalcul((prevValues:any) => ({
             ...prevValues,
             [key]: {
                 valeur: Number(value)

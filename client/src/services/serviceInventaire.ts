@@ -1,9 +1,13 @@
 
-import { ReponseInventaire,ReponseDBInventaire, ReponseDBCadastreGeoSeul, ReponseInventaireSeuil, RequeteInventaire} from '../types/serviceTypes';
-import api from './api';
+import { ReponseInventaire,
+    ReponseDBInventaire, 
+    ReponseDBCadastreGeoSeul, 
+    ReponseInventaireSeuil, 
+    RequeteInventaire} from '../types/serviceTypes.js';
+import api from './api.js';
 import axios,{AxiosResponse} from 'axios';
 import { FeatureCollection,Geometry,Feature } from 'geojson';
-import { inventaire_stationnement, requete_calcul_manuel_reg } from '../types/DataTypes';
+import { inventaire_stationnement, requete_calcul_manuel_reg } from '../types/DataTypes.js';
 import { isNumberObject } from 'util/types';
 
 export const serviceInventaire = {

@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import MenuBar from '../components/MenuBar';
+import MenuBar from '../components/MenuBar.js';
 import './common.css';
 import './validationStatistique.css'
-import ControlValStat from '../components/ControlValStat';
-import ModifStrates from '../components/modifStrates';
-import { EntreeValidation, FeuilleFinaleStrate, inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties, lotCadastralGeoJsonProperties, Strate } from '../types/DataTypes';
-import DefinitionStratesEchantionnage from '../components/definitionStratesEchantionnage';
-import serviceValidation from '../services/serviceValidation';
+import ControlValStat from '../components/ControlValStat.js';
+
+import { EntreeValidation, 
+    FeuilleFinaleStrate, 
+    inventaire_stationnement, 
+    lotCadastralAvecBoolInvGeoJsonProperties, 
+    lotCadastralGeoJsonProperties, 
+    Strate } from '../types/DataTypes.js';
+import DefinitionStratesEchantionnage from '../components/definitionStratesEchantionnage.js';
+import serviceValidation from '../services/serviceValidation.js';
 import { ClimbingBoxLoader } from 'react-spinners';
-import PanneauValidation from '../components/PanneauValidation';
+import PanneauValidation from '../components/PanneauValidation.js';
 import { FeatureCollection, Geometry } from 'geojson';
-import { serviceCadastre } from '../services';
+import { serviceCadastre } from '../services/serviceCadastre.js';
 import { LatLngExpression } from 'leaflet';
 
 const ValidationStatistique: React.FC = () => {

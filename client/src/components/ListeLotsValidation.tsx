@@ -1,10 +1,12 @@
 import { FormControl, List, ListItem, ListItemButton, ListItemText, ListSubheader, Box } from "@mui/material"
-import { PropsListeLotsValid } from "../types/InterfaceTypes"
-import { serviceCadastre, serviceInventaire } from "../services"
-import serviceValidation from "../services/serviceValidation"
-import { utiliserContexte } from "../contexte/ContexteImmobilisation"
+import { PropsListeLotsValid } from "../types/InterfaceTypes.js"
+import { serviceCadastre} from '../services/serviceCadastre.js';
+import serviceValidation from "../services/serviceValidation.js"
+import { serviceInventaire } from "../services/serviceInventaire.js";
+import { utiliserContexte } from "../contexte/ContexteImmobilisation.js"
 import { FeatureCollection, Geometry } from "geojson"
-import { inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties, lotCadastralGeoJsonProperties } from "../types/DataTypes"
+import { inventaire_stationnement, 
+    lotCadastralAvecBoolInvGeoJsonProperties } from "../types/DataTypes.js"
 
 
 const ListeLotsValidation: React.FC<PropsListeLotsValid> = (props: PropsListeLotsValid) => {

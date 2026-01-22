@@ -1,6 +1,6 @@
 import { useNavigate, } from "react-router";
 import { useState } from "react";
-import { SubMenuProps } from "../types/InterfaceTypes";
+import { SubMenuProps } from "../types/InterfaceTypes.js";
 import { FormControl,InputLabel,Select,MenuItem,SelectChangeEvent, Menu, Button } from "@mui/material";
 const SubMenuComponent: React.FC<SubMenuProps> = ({ label, options }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

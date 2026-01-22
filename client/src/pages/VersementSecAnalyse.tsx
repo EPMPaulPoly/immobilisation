@@ -1,17 +1,18 @@
 import React,{useEffect,useState} from 'react';
-import MenuBar from '../components/MenuBar';
+import MenuBar from '../components/MenuBar.js';
 
-import ModalVersementSecAnalyse from '../components/ModalVersementSecAnalyse';
+import ModalVersementSecAnalyse from '../components/ModalVersementSecAnalyse.js';
 import './versementSecAnalyse.css';
 import './common.css';
-import { quartiers_analyse } from '../types/DataTypes';
+import { quartiers_analyse } from '../types/DataTypes.js';
 import { FeatureCollection,Geometry } from 'geojson';
-import MenuManipSecAnalyse from '../components/MenuManipSecAnalyse';
-import TableSecAnalyse from '../components/TableSecAnalyse';    
-import { NouveauAncienSecteurAnalyse } from '../types/InterfaceTypes';
-import { serviceQuartiersAnalyse } from '../services';
-import CarteSecAnalyse from '../components/CarteSecAnalyse';
+import MenuManipSecAnalyse from '../components/MenuManipSecAnalyse.js';
+import TableSecAnalyse from '../components/TableSecAnalyse.js';    
+import { NouveauAncienSecteurAnalyse } from '../types/InterfaceTypes.js';
+import { serviceQuartiersAnalyse} from  '../services/serviceQuartiersAnalyse.js'
+import CarteSecAnalyse from '../components/CarteSecAnalyse.js';
 import { LatLngExpression } from 'leaflet';
+
 const VersementSecAnalyse: React.FC = () => {
     const [modal, setModal] = React.useState<boolean>(false);
     const [secAnalyseAct, setSecAnalyseAct] = React.useState<FeatureCollection<Geometry,quartiers_analyse>>({type:"FeatureCollection",features:[]});

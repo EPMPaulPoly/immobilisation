@@ -1,14 +1,16 @@
 import React from 'react';
-import MenuBar from '../components/MenuBar';
-import MenuCompQuartiers from '../components/MenuCompQuartiers';
+import MenuBar from '../components/MenuBar.js';
+import MenuCompQuartiers from '../components/MenuCompQuartiers.js';
 import { useState } from 'react';
-import {  TypesVisualisationAnalyseQuartier,PrioriteEstimeInventaire, VariablesPossibles } from '../types/AnalysisTypes';
+import {  TypesVisualisationAnalyseQuartier,
+    PrioriteEstimeInventaire, 
+    VariablesPossibles } from '../types/AnalysisTypes.js';
 import './common.css';
 import './analyseparquartiers.css'
-import AnalyseCartographiqueQuartiers from '../components/AnalyseCartographiqueQuartiers';
-import AnalyseProfilAccumulationVehiculeQuartiers from '../components/AnalyseProfilAccumulationVehicule';
-import AnalyseHistogrammeQuartier from '../components/AnalyseHistogrammeQuartier';
-import AnalyseXYQuartiers from '../components/AnalyseXYQuartiers';
+import AnalyseCartographiqueQuartiers from '../components/AnalyseCartographiqueQuartiers.js';
+import AnalyseProfilAccumulationVehiculeQuartiers from '../components/AnalyseProfilAccumulationVehicule.js';
+import AnalyseHistogrammeQuartier from '../components/AnalyseHistogrammeQuartier.js';
+import AnalyseXYQuartiers from '../components/AnalyseXYQuartiers.js';
 import { ClimbingBoxLoader } from 'react-spinners';
 
 

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import MenuBar from "../components/MenuBar";
-import MenuSommaireValidation from "../components/MenuSommaireValidation";
+import MenuBar from "../components/MenuBar.js";
+import MenuSommaireValidation from "../components/MenuSommaireValidation.js";
 import './common.css';
 import './SommaireValidation.css'
-import GraphiqueReglements from "../components/GraphiqueReglement";
-import GraphiqueSommaireValidation from "../components/GraphiqueSommaireValidation";
+import GraphiqueSommaireValidation from "../components/GraphiqueSommaireValidation.js";
 
 const SommaireValidation:React.FC=()=>{
     const [nGraphs,defNGraphs] = useState<number>(2);

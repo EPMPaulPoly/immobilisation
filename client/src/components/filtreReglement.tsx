@@ -1,7 +1,9 @@
-import { FiltreReglementProps } from "../types/InterfaceTypes";
+import { FiltreReglementProps } from "../types/InterfaceTypes.js";
 import React,{useEffect, useState} from 'react'
-import { serviceReglements } from "../services";
-import { parametres_requete_filtree_stationnement } from "../types/DataTypes";
+import { serviceReglements } from "../services/serviceReglements.js";
+import { parametres_requete_filtree_stationnement } from "../types/DataTypes.js";
+
+
 const FiltreReglement:React.FC<FiltreReglementProps>=(props:FiltreReglementProps)=>{
     {/* Annee debut */}
     const [anneeDebutActif,defAnneeDebutActif] = useState<boolean>(false);

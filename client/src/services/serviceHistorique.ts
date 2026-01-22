@@ -1,7 +1,7 @@
 
-import { ReponsePeriode } from '../types/serviceTypes';
-import { periode } from '../types/DataTypes';
-import api from './api';
+import { ReponsePeriode } from '../types/serviceTypes.js';
+import { periode } from '../types/DataTypes.js';
+import api from './api.js';
 import axios,{AxiosResponse} from 'axios';
 export const serviceHistorique = {
     obtientTous: async() : Promise<ReponsePeriode> => {

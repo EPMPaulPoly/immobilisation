@@ -1,7 +1,16 @@
 import axios,{ AxiosResponse } from 'axios';
-import {ReponseEnteteEnsembleReglementStationnement,ReponseEnsembleReglementComplet, ReponseEntetesEnsemblesReglement, ReponseEntetesReglements, ReponseComboERsRoleFoncier, ReponseAssociationEnsembleReglement,ReponseUnitesGraph, ReponseDataGraphique} from '../types/serviceTypes';
-import api from './api';
-import { association_util_reglement, entete_ensembles_reglement_stationnement, ProprietesRequetesER } from '../types/DataTypes';
+import {ReponseEnteteEnsembleReglementStationnement,
+    ReponseEnsembleReglementComplet, 
+    ReponseEntetesEnsemblesReglement, 
+    ReponseEntetesReglements, 
+    ReponseComboERsRoleFoncier, 
+    ReponseAssociationEnsembleReglement,
+    ReponseUnitesGraph, 
+    ReponseDataGraphique} from '../types/serviceTypes.js';
+import api from './api.js';
+import { association_util_reglement, 
+    entete_ensembles_reglement_stationnement, 
+    ProprietesRequetesER } from '../types/DataTypes.js';
 
 
 class ServiceEnsemblesReglements {

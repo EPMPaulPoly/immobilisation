@@ -1,9 +1,11 @@
 import React from 'react';
 import { LeafletEvent } from 'leaflet';
-import {  selectLotProps } from '../types/utilTypes';
+import {  selectLotProps } from '../types/utilTypes.js';
 import { Feature, FeatureCollection,Geometry } from 'geojson';
-import { inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
-import { serviceReglements,serviceCadastre, serviceEnsemblesReglements } from '../services';
+import { inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes.js';
+import { serviceReglements } from '../services/serviceReglements.js';
+import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
+import { serviceCadastre } from '../services/serviceCadastre.js';
 
 const checkAvailable = (inventaireComplet: inventaire_stationnement[],key:string) : boolean =>{
     const check = inventaireComplet.find((o)=>o.g_no_lot===key);

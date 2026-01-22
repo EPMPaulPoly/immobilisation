@@ -1,8 +1,8 @@
 import React,{useState,useRef} from 'react';
-import { entete_reglement_stationnement } from '../types/DataTypes';
-import { TableEnteteProps } from '../types/InterfaceTypes';
+import { entete_reglement_stationnement } from '../types/DataTypes.js';
+import { TableEnteteProps } from '../types/InterfaceTypes.js';
 
-const TableSSEnsemble:React.FC<TableEnteteProps> =(props) => {
+const TableSSEnsemble:React.FC<TableEnteteProps> =(props:TableEnteteProps) => {
     return (
         <table className="table-modif-reglements-entete">
             <thead>
@@ -19,7 +19,7 @@ const TableSSEnsemble:React.FC<TableEnteteProps> =(props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.entetes.map((entete) => (
+                {props.entetes.map((entete:entete_reglement_stationnement) => (
                     <tr key={entete.id_reg_stat}>
                         <td>{entete.id_reg_stat}</td>
                         <td>{entete.description}</td>

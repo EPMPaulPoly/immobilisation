@@ -1,13 +1,15 @@
-import MenuBar from "../components/MenuBar";
-import TableEnteteReglements from "../components/TableEnteteReglements";
-import TableVisModReglement from "../components/tableVisReglement";
+import MenuBar from "../components/MenuBar.js";
+import TableEnteteReglements from "../components/TableEnteteReglements.js";
+import TableVisModReglement from "../components/tableVisReglement.js";
 import { useState, useEffect, useRef } from "react";
-import { entete_reglement_stationnement, definition_reglement_stationnement, reglement_complet } from "../types/DataTypes";
+import { entete_reglement_stationnement, 
+    definition_reglement_stationnement, 
+    reglement_complet } from "../types/DataTypes.js";
 import { useSearchParams } from "react-router";
 import './reg.css';
 import './common.css';
-import { serviceReglements } from "../services";
-import FiltrerReglementDansLeurPage from "../components/filtrerReglementDansLeurPage";
+import { serviceReglements} from '../services/serviceReglements.js'
+import FiltrerReglementDansLeurPage from "../components/filtrerReglementDansLeurPage.js";
 
 
 const Reglements: React.FC = () => {

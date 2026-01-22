@@ -1,5 +1,5 @@
-import { ReponseCompteCUBF, ReponseCUBF } from '../types/serviceTypes';
-import api from './api';
+import { ReponseCompteCUBF, ReponseCUBF } from '../types/serviceTypes.js';
+import api from './api.js';
 import axios,{AxiosResponse} from 'axios';
 
 export const serviceUtilisationDuSol = {

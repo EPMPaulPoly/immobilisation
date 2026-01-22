@@ -1,11 +1,12 @@
 import React,{useState, useRef} from 'react';
-import { association_territoire_entete_ensemble_reglement, entete_ensembles_reglement_stationnement,associaion_territoire_ensemble_reglement } from '../types/DataTypes';
-import { EnsRegTerrDispTable } from '../types/InterfaceTypes';
+import { association_territoire_entete_ensemble_reglement, 
+    entete_ensembles_reglement_stationnement,
+    associaion_territoire_ensemble_reglement } from '../types/DataTypes.js';
+import { EnsRegTerrDispTable } from '../types/InterfaceTypes.js';
 import DeleteIcon from '@mui/icons-material/Delete'
-import CancelIcon from '@mui/icons-material/Cancel';
 import { Add, Cancel, Edit, Save } from '@mui/icons-material';
-import { serviceEnsemblesReglements } from '../services';
-import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr';
+import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
+import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr.js';
 
 const EnsRegTerrGantt:React.FC<EnsRegTerrDispTable> =(props:EnsRegTerrDispTable) =>{
 

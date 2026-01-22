@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import serviceValidation from "../services/serviceValidation";
-import { data_graphique, FeuilleFinaleStrate } from "../types/DataTypes";
+import serviceValidation from "../services/serviceValidation.js";
+import { data_graphique, FeuilleFinaleStrate } from "../types/DataTypes.js";
 import { ArrowBack, Settings } from "@mui/icons-material";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Bar, Scatter } from "react-chartjs-2";

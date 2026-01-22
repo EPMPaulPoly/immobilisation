@@ -1,6 +1,6 @@
 import { FC, useState,useEffect } from 'react';
-import  { PropsModalManipGraphiqueReg } from '../types/InterfaceTypes';
-import { informations_pour_graph_unite_er_reg, utilisation_sol } from '../types/DataTypes';
+import  { PropsModalManipGraphiqueReg } from '../types/InterfaceTypes.js';
+import { informations_pour_graph_unite_er_reg, utilisation_sol } from '../types/DataTypes.js';
 import {
     Modal,
     Box,
@@ -9,8 +9,10 @@ import {
     TextField,
     Select, MenuItem, InputLabel, FormControl
 } from '@mui/material';
-import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol';
-import { serviceEnsemblesReglements, serviceReglements } from '../services';
+import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol.js';
+import { serviceEnsemblesReglements
+ } from '../services/serviceEnsemblesReglements.js';
+import { serviceReglements } from '../services/serviceReglements.js';
 /**
  * Permet de mettre en places les options pour un graphique
  * @param props issu de  PropsModalManipGraphiqueReg qui comporte l'ouverture du modal et 

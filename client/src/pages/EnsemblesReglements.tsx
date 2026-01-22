@@ -1,14 +1,16 @@
-import MenuBar from "../components/MenuBar";
-import TableListeEnsReg from "../components/TableListeEnsReg";
-import TableVisModEnsReg from "../components/TableVisEnsReg";
+import MenuBar from "../components/MenuBar.js";
+import TableListeEnsReg from "../components/TableListeEnsReg.js";
+import TableVisModEnsReg from "../components/TableVisEnsReg.js";
 import { useState, useEffect, useRef } from "react";
 import {useSearchParams} from 'react-router'
-import {  association_util_reglement, ensemble_reglements_stationnement, entete_reglement_stationnement } from "../types/DataTypes";
-import { entete_ensembles_reglement_stationnement } from "../types/DataTypes";
-import CreationAssociationCubfRegEnsReg from "../components/CreationAssociationCubfRegEnsReg";
+import {  association_util_reglement, 
+    ensemble_reglements_stationnement, 
+    entete_reglement_stationnement } from "../types/DataTypes.js";
+import { entete_ensembles_reglement_stationnement } from "../types/DataTypes.js";
+import CreationAssociationCubfRegEnsReg from "../components/CreationAssociationCubfRegEnsReg.js";
 import './ensemblereg.css'
 import './common.css'
-import { serviceEnsemblesReglements } from "../services";
+import { serviceEnsemblesReglements } from "../services/serviceEnsemblesReglements.js";
 
 const EnsemblesReglements: React.FC = () => {
     const enteteEnsemblevide: entete_ensembles_reglement_stationnement = {

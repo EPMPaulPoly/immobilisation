@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { TableVisModEnsRegProps } from '../types/InterfaceTypes';
+import { TableVisModEnsRegProps } from '../types/InterfaceTypes.js';
 import AddIcon from '@mui/icons-material/AddOutlined';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Edit, Save } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ensemble_reglements_stationnement, entete_ensembles_reglement_stationnement } from '../types/DataTypes';
-import { serviceEnsemblesReglements } from '../services';
-import { ReponseEnteteEnsembleReglementStationnement } from '../types/serviceTypes';
+import { association_util_reglement, 
+    ensemble_reglements_stationnement, 
+    entete_ensembles_reglement_stationnement } from '../types/DataTypes.js';
+import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
+import { ReponseEnteteEnsembleReglementStationnement } from '../types/serviceTypes.js';
 
 const TableVisModEnsReg: React.FC<TableVisModEnsRegProps> = (props) => {
     const enteteEnsemblevide: entete_ensembles_reglement_stationnement = {
@@ -68,7 +70,7 @@ const TableVisModEnsReg: React.FC<TableVisModEnsRegProps> = (props) => {
             ];
         } else {
             newListeEnsembles = [
-                ...props.entetesEnsRegListe.map((item) => item.id_er === updatedEnsReg.entete.id_er ? ({
+                ...props.entetesEnsRegListe.map((item:entete_ensembles_reglement_stationnement) => item.id_er === updatedEnsReg.entete.id_er ? ({
                     id_er: updatedEnsReg.entete.id_er,
                     date_debut_er: updatedEnsReg.entete.date_debut_er,
                     date_fin_er: updatedEnsReg.entete.date_fin_er,
@@ -124,7 +126,7 @@ const TableVisModEnsReg: React.FC<TableVisModEnsRegProps> = (props) => {
     const gestSuppressionAssoc = async(idAssoc:number)=>{
         const reponse = await serviceEnsemblesReglements.supprimeAssoc(idAssoc)
         if (reponse){
-            const nouvelTableAssoc = props.ensembleReglement.assoc_util_reg.filter((o)=>o.id_assoc_er_reg!==idAssoc)
+            const nouvelTableAssoc = props.ensembleReglement.assoc_util_reg.filter((o:association_util_reglement)=>o.id_assoc_er_reg!==idAssoc)
             const nouvelEnsemble:ensemble_reglements_stationnement={
                 entete:props.ensembleReglement.entete,
                 table_etendue:props.ensembleReglement.table_etendue,
@@ -178,7 +180,7 @@ const TableVisModEnsReg: React.FC<TableVisModEnsRegProps> = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.ensembleReglement.assoc_util_reg.map((assoc) => {
+                    {props.ensembleReglement.assoc_util_reg.map((assoc:association_util_reglement) => {
                         //console.log('Printing relevant rules',props.entetesReglements)
                         const foundRule = Array.isArray(props.entetesReglements)
                             ? props.entetesReglements.find(item => {
@@ -187,7 +189,7 @@ const TableVisModEnsReg: React.FC<TableVisModEnsRegProps> = (props) => {
                             })
                             : null;
                         const foundLandUse = Array.isArray(props.ensembleReglement.table_util_sol) ?
-                            props.ensembleReglement.table_util_sol.find(item => {
+                            props.ensembleReglement.table_util_sol.find((item:any) => {
                                 return Number(item.cubf) === assoc.cubf
                             })
                             : null;

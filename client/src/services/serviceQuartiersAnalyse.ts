@@ -1,7 +1,7 @@
 import axios,{ AxiosResponse } from 'axios';
-import { quartiers_analyse, quartiers_analyse_db } from '../types/DataTypes';
-import { ReponseQuartierDBAnalyse, ReponseQuartiersAnalyse } from '../types/serviceTypes';
-import api from './api';
+import { quartiers_analyse, quartiers_analyse_db } from '../types/DataTypes.js';
+import { ReponseQuartierDBAnalyse, ReponseQuartiersAnalyse } from '../types/serviceTypes.js';
+import api from './api.js';
 
 
 class ServiceQuartiersAnalyse {

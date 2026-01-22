@@ -1,11 +1,11 @@
 import React, { useEffect, useState,useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON ,useMap} from 'react-leaflet';
-import { CarteHistoriqueProps } from '../types/InterfaceTypes';
-import { territoire } from '../types/DataTypes';
+import { CarteHistoriqueProps } from '../types/InterfaceTypes.js';
+
 import { FeatureCollection,Geometry } from 'geojson';
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
-import { utiliserContexte } from '../contexte/ContexteImmobilisation';
+import { utiliserContexte } from '../contexte/ContexteImmobilisation.js';
 
 const CarteHistorique: React.FC<CarteHistoriqueProps> = (props) => {
     

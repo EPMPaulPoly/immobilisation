@@ -1,8 +1,8 @@
 import React,{useRef,useEffect} from 'react';
-import { CarteEnsRegTerrProps } from '../types/InterfaceTypes';
+import { CarteEnsRegTerrProps } from '../types/InterfaceTypes.js';
 import { MapContainer, TileLayer,GeoJSON,useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { utiliserContexte } from '../contexte/ContexteImmobilisation';
+import { utiliserContexte } from '../contexte/ContexteImmobilisation.js';
 
 const CarteEnsRegTerr:React.FC<CarteEnsRegTerrProps>=(props:CarteEnsRegTerrProps)=>{
 

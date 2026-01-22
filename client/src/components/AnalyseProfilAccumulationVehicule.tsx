@@ -1,9 +1,9 @@
-import { AnalysePAVQuartierProps } from '../types/InterfaceTypes'
+import { AnalysePAVQuartierProps } from '../types/InterfaceTypes.js'
 import React, { useState, useEffect } from 'react';
 import { Chart as ChartPlot,Bar } from 'react-chartjs-2'
-import { PAVQuartier, quartiers_analyse, entreePAV, PAVDataVisOptions } from '../types/DataTypes';
-import { serviceQuartiersAnalyse, servicePAV } from '../services';
-import { yellow } from '@mui/material/colors';
+import { PAVQuartier, quartiers_analyse, entreePAV, PAVDataVisOptions } from '../types/DataTypes.js';
+import { serviceQuartiersAnalyse } from '../services/serviceQuartiersAnalyse.js';
+import { servicePAV } from '../services/servicePAV.js';
 import { Chart, registerables } from 'chart.js';
 import { ClimbingBoxLoader } from 'react-spinners';
 import { FeatureCollection, Geometry } from 'geojson';

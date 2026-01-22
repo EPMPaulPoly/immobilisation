@@ -1,5 +1,5 @@
-import { serviceAnalyseInventaire } from "../services/serviceAnalyseInventaire";
-import { MenuCompQuartiersProps } from "../types/InterfaceTypes";
+import { serviceAnalyseInventaire } from "../services/serviceAnalyseInventaire.js";
+import { MenuCompQuartiersProps } from "../types/InterfaceTypes.js";
 
 const MenuCompQuartiers:React.FC<MenuCompQuartiersProps>=(props:MenuCompQuartiersProps)=>{
     const gestSelectMethodeAnalyse=(idTypeAnalyse:number)=>{
@@ -32,7 +32,7 @@ const MenuCompQuartiers:React.FC<MenuCompQuartiersProps>=(props:MenuCompQuartier
             </select>
             <label htmlFor="select-inventory-priority">Sélectionner la priorité des estimés</label>
             <select id="select-type" name="select-type" onChange={e => gestSelectPrioriteEstime(Number(e.target.value))} value={props.prioriteInventaire}>
-                {props.prioriteInventairePossibles.map(priorite=>(
+                {props.prioriteInventairePossibles.map((priorite:any)=>(
                     <option key={priorite.idPriorite} value={priorite.idPriorite} >
                         {priorite.descriptionPriorite}
                     </option>

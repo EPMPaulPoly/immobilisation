@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { creationAssocCubfErRegStat } from '../types/InterfaceTypes';
+import { creationAssocCubfErRegStat } from '../types/InterfaceTypes.js';
 import { Modal,Box } from '@mui/material';
-import { association_util_reglement, ensemble_reglements_stationnement, entete_reglement_stationnement, utilisation_sol } from '../types/DataTypes';
-import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol';
-import { serviceEnsemblesReglements, serviceReglements } from '../services';
+import { association_util_reglement, 
+    ensemble_reglements_stationnement, 
+    entete_reglement_stationnement, 
+    utilisation_sol } from '../types/DataTypes.js';
+import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol.js';
+import { serviceEnsemblesReglements} from '../services/serviceEnsemblesReglements.js'
+import { serviceReglements } from '../services/serviceReglements.js';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
-import FiltreReglement from './filtreReglement';
-import TableVisResultatsFiltreAssoc from './TableVisResultatsFiltreAssoc';
+import FiltreReglement from './filtreReglement.js';
+import TableVisResultatsFiltreAssoc from './TableVisResultatsFiltreAssoc.js';
 import { DriveFileRenameOutlineTwoTone, Save } from '@mui/icons-material';
 const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (props) => {
     const [CUBFN1,defCUBFN1] = useState<number>(-1);
@@ -130,7 +134,7 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
                 const entete = props.ensembleReglement.entete
                 const table_util_sol = props.ensembleReglement.table_util_sol
                 const table_etendue = props.ensembleReglement.table_etendue
-                const nouvelleTableAssoc = props.ensembleReglement.assoc_util_reg.map((o)=>o.id_assoc_er_reg===props.idAssociationEnEdition?response.data:o)
+                const nouvelleTableAssoc = props.ensembleReglement.assoc_util_reg.map((o:association_util_reglement)=>o.id_assoc_er_reg===props.idAssociationEnEdition?response.data:o)
                 const nouvelEnsembleReglement:ensemble_reglements_stationnement={
                     entete:entete,
                     table_util_sol:table_util_sol,
@@ -160,8 +164,8 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
                         props.defTousReglement(reponseEntete.data)
                         defEntetesReglements(reponseEntete.data)
                     } else{
-                        const CUBFAssoc = props.ensembleReglement.assoc_util_reg.find((o)=>o.id_assoc_er_reg===props.idAssociationEnEdition)?.cubf??null;
-                        const idRegStatAssoc = props.ensembleReglement.assoc_util_reg.find((o)=>o.id_assoc_er_reg===props.idAssociationEnEdition)?.id_reg_stat??null;
+                        const CUBFAssoc = props.ensembleReglement.assoc_util_reg.find((o:association_util_reglement)=>o.id_assoc_er_reg===props.idAssociationEnEdition)?.cubf??null;
+                        const idRegStatAssoc = props.ensembleReglement.assoc_util_reg.find((o:association_util_reglement)=>o.id_assoc_er_reg===props.idAssociationEnEdition)?.id_reg_stat??null;
                         let niveau:number;
                         let CUBFN1Assoc:number=-1
                         let CUBFN2Assoc:number=-1

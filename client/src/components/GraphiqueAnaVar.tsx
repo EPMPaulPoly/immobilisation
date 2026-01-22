@@ -1,9 +1,9 @@
 import { FC, useState, useEffect } from 'react'
-import { GraphiqueReglementsProps, PropsGraphAnaVar } from '../types/InterfaceTypes'
+import { GraphiqueReglementsProps, PropsGraphAnaVar } from '../types/InterfaceTypes.js'
 import { Chart as ChartPlot, Bar, Line } from 'react-chartjs-2';
-import { data_graphique, utilisation_sol, data_box_plot, data_graphique_text_labels } from '../types/DataTypes';
-import { serviceAnaVariabilite } from '../services/serviceAnaVariabilite';
-import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol';
+import { data_graphique, utilisation_sol, data_box_plot, data_graphique_text_labels } from '../types/DataTypes.js';
+import { serviceAnaVariabilite } from '../services/serviceAnaVariabilite.js';
+import serviceUtilisationDuSol from '../services/serviceUtilisationDuSol.js';
 import { BoxPlotDataPoint } from '@sgratzl/chartjs-chart-boxplot';
 import { ChartData, ChartDataset } from 'chart.js';
 

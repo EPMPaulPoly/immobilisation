@@ -1,7 +1,15 @@
-import { ReponseCalculComplete, ReponseDataGraphique, ReponseDataGraphiqueText, ReponseResultatAnaVarBarre, ReponseResultatAnaVarHisto } from '../types/serviceTypes';
-import api from './api';
+import { ReponseCalculComplete, 
+    ReponseDataGraphique, 
+    ReponseDataGraphiqueText, 
+    ReponseResultatAnaVarBarre, 
+    ReponseResultatAnaVarHisto } from '../types/serviceTypes.js';
+import api from './api.js';
 import axios, { AxiosResponse } from 'axios';
-import { data_box_plot, data_graphique, data_graphique_text_labels, resultatAnalyseVariabilite } from '../types/DataTypes';
+import { data_box_plot, 
+    data_graphique, 
+    data_graphique_text_labels, 
+    resultatAnalyseVariabilite } from '../types/DataTypes.js';
+
 export const serviceAnaVariabilite = {
     recalculeInventairesFonciersAvecTousEnsRegs: async (): Promise<boolean> => {
         try {

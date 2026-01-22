@@ -1,20 +1,26 @@
-import MenuBar from '../components/MenuBar';
+import MenuBar from '../components/MenuBar.js';
 import { useState, useEffect, useRef } from 'react';
 import L, { LatLngExpression } from 'leaflet';
-import TableInventaire from '../components/TableInventaire';
-import { ensemble_reglements_stationnement, entete_ensembles_reglement_stationnement, inventaire_stationnement, quartiers_analyse, reglement_complet } from '../types/DataTypes';
-import { serviceQuartiersAnalyse, } from '../services/serviceQuartiersAnalyse';
-import { serviceInventaire } from '../services/serviceInventaire';
+import TableInventaire from '../components/TableInventaire.js';
+import { ensemble_reglements_stationnement, 
+    entete_ensembles_reglement_stationnement, 
+    inventaire_stationnement, 
+    quartiers_analyse, 
+    reglement_complet } from '../types/DataTypes.js';
+import { serviceQuartiersAnalyse, } from '../services/serviceQuartiersAnalyse.js';
+import { serviceInventaire } from '../services/serviceInventaire.js';
 import { FeatureCollection, Geometry, Feature } from 'geojson';
-import { lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps, lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
-import CarteInventaire from '../components/carteInventaire';
-import TableRevueInventaire from '../components/RevueInventaire';
+import { lotCadastralGeoJsonProperties, 
+    roleFoncierGeoJsonProps, 
+    lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes.js';
+import CarteInventaire from '../components/carteInventaire.js';
+import TableRevueInventaire from '../components/RevueInventaire.js';
 import './inventaire.css';
 import './common.css';
-import CompoModifInventaire from '../components/modifInventaire';
-import ComparaisonInventaireQuartier from '../components/ComparaisonInventaireQuartier';
-import MenuInventaire from '../components/MenuInventaire';
-import ModalRecomputeInventaire from '../components/ModalRecomputeInventaire';
+import CompoModifInventaire from '../components/modifInventaire.js';
+import ComparaisonInventaireQuartier from '../components/ComparaisonInventaireQuartier.js';
+import MenuInventaire from '../components/MenuInventaire.js';
+import ModalRecomputeInventaire from '../components/ModalRecomputeInventaire.js';
 
 const position: LatLngExpression = [45.5017, -73.5673]; // Montreal coordinates
 

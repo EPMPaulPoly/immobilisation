@@ -1,14 +1,14 @@
 import React from 'react';
-import { AnalyseCartoQuartierProps } from "../types/InterfaceTypes";
-import { GeoJSONPropsAnaQuartier, TypesAnalysesCartographiqueQuartier } from '../types/AnalysisTypes';
+import { AnalyseCartoQuartierProps } from "../types/InterfaceTypes.js";
+import { GeoJSONPropsAnaQuartier, TypesAnalysesCartographiqueQuartier } from '../types/AnalysisTypes.js';
 import { useState,useEffect,useRef } from 'react';
-import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire';
+import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire.js';
 import { Feature, FeatureCollection,Geometry } from 'geojson';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import L, { LeafletEvent,LatLngExpression } from 'leaflet';
 import chroma from 'chroma-js';
-import { utiliserContexte } from '../contexte/ContexteImmobilisation';
+import { utiliserContexte } from '../contexte/ContexteImmobilisation.js';
 import { Download } from '@mui/icons-material';
 const AnalyseCartographiqueQuartiers:React.FC<AnalyseCartoQuartierProps>=(props:AnalyseCartoQuartierProps)=>{
     const [typeCarto,defTypeCarto] = useState<number>(-1);

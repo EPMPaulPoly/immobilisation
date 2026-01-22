@@ -5,7 +5,7 @@
     "type": "module",
     "main": "dist/serveur.js",
     "scripts": {
-        "dev": "nodemon --legacy-watch",
+        "dev": "nodemon --exec ts-node src/serveur.ts",
         "build": "tsc",
         "start": "node dist/serveur.js"
     },
@@ -36,6 +36,7 @@
         "nodemon": "^3.1.7",
         "ts-jest": "latest",
         "ts-node": "latest",
+        "tsx": "^4.21.0",
         "typescript": "latest"
     }
 }

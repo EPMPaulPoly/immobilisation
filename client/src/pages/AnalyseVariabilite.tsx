@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import MenuBar from '../components/MenuBar';
+import MenuBar from '../components/MenuBar.js';
 import './analysevariabilite.css'
-import { comptes_utilisations_sol, methodeAnalyseVariabillite } from '../types/DataTypes';
-import ControlAnaVar from '../components/ControlAnaVar';
-import EditionParametresAnaVarFonc from '../components/EditionParametresAnaVarFonc';
-import EditionParametreAnaVarDistro from '../components/EditionParametreAnaVarDistro';
-import VisualisationResAnaVarFonc from '../components/VisualisationResAnaVarFonc';
+import { comptes_utilisations_sol, methodeAnalyseVariabillite } from '../types/DataTypes.js';
+import ControlAnaVar from '../components/ControlAnaVar.js';
+import EditionParametresAnaVarFonc from '../components/EditionParametresAnaVarFonc.js';
+import EditionParametreAnaVarDistro from '../components/EditionParametreAnaVarDistro.js';
+import VisualisationResAnaVarFonc from '../components/VisualisationResAnaVarFonc.js';
 import { ClimbingBoxLoader } from 'react-spinners';
 
 

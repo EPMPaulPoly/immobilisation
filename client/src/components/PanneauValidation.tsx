@@ -1,8 +1,8 @@
-import { PropsPanneauValid } from "../types/InterfaceTypes"
-import CarteValidation from "./CarteValidation";
-import GraphiqueValidation from "./GraphiqueValidation";
-import ListeLotsValidation from "./ListeLotsValidation";
-import TableRevisionValidation from "./TableRevisionValidation";
+import { PropsPanneauValid } from "../types/InterfaceTypes.js"
+import CarteValidation from "./CarteValidation.js";
+import GraphiqueValidation from "./GraphiqueValidation.js";
+import ListeLotsValidation from "./ListeLotsValidation.js";
+import TableRevisionValidation from "./TableRevisionValidation.js";
 
 const PanneauValidation:React.FC<PropsPanneauValid>=(props:PropsPanneauValid)=>{
     return(

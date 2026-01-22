@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react';
-import { TableRevueProps } from '../types/InterfaceTypes';
+import { TableRevueProps } from '../types/InterfaceTypes.js';
 
 const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =>{
     const panelRef = useRef<HTMLDivElement>(null);

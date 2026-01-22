@@ -1,9 +1,9 @@
 import React from 'react';
-import { propsMenuSecAnalyse } from '../types/InterfaceTypes';
+import { propsMenuSecAnalyse } from '../types/InterfaceTypes.js';
 import {Edit,Upload,FileOpen} from '@mui/icons-material';
 import {Select,MenuItem} from '@mui/material';
 import Button from '@mui/material/Button';
-import { serviceQuartiersAnalyse } from '../services';
+import { serviceQuartiersAnalyse } from '../services/serviceQuartiersAnalyse.js';
 
 const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAnalyse) => {
     const gereSauvegarde = async() => {  
@@ -24,7 +24,7 @@ const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAna
             
             <Select
                 value={props.optionsVis.idSecs}
-                onChange={(e) => {
+                onChange={(e:any) => {
                     const selectedOption = props.optionVisPoss.find(
                     (option) => option.idSecs === Number(e.target.value)
                     );
@@ -51,7 +51,7 @@ const MenuManipSecAnalyse:React.FC<propsMenuSecAnalyse> = (props:propsMenuSecAna
                     },
                 }}
             >
-                {props.optionVisPoss.map((option) => (
+                {props.optionVisPoss.map((option:any) => (
                     <MenuItem 
                         key={option.idSecs} 
                         value={option.idSecs}

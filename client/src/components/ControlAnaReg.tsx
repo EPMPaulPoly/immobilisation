@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react'
-import { serviceEnsemblesReglements } from '../services';
-import { ControlAnaRegProps } from '../types/InterfaceTypes';
-import { entete_ensembles_reglement_stationnement, ProprietesRequetesER } from '../types/DataTypes';
+import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
+import { ControlAnaRegProps } from '../types/InterfaceTypes.js';
+import { entete_ensembles_reglement_stationnement, ProprietesRequetesER } from '../types/DataTypes.js';
 import {
     Modal,
     Box,
@@ -16,7 +16,7 @@ import {
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { Marker } from 'react-leaflet';
 import L from 'leaflet';
-import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr';
+import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr.js';
 const ControlAnaReg: FC<ControlAnaRegProps> = (props: ControlAnaRegProps) => {
     const [tousEnsReg, defTousEnsRegs] = useState<entete_ensembles_reglement_stationnement[]>([])
     const [modalOpen, setModalOpen] = useState<boolean>(false);

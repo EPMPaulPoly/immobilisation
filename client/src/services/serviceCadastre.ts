@@ -1,7 +1,15 @@
 import axios,{ AxiosResponse } from 'axios';
-import { lotCadastralGeoJsonProperties, quartiers_analyse, roleFoncierGeoJsonProps,lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
-import { ReponseCadastre, ReponseRole,ReponseDBCadastre,ReponseDBRole, ReponseDBCadastreBoolInv,ReponseCadastreBoolInv, RequeteApiStrate, RequeteApiCadastre } from '../types/serviceTypes';
-import api from './api';
+import { roleFoncierGeoJsonProps,
+    lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes.js';
+import { ReponseCadastre, 
+    ReponseRole,
+    ReponseDBCadastre,
+    ReponseDBRole,
+    ReponseDBCadastreBoolInv,
+    ReponseCadastreBoolInv,
+    RequeteApiStrate, 
+    RequeteApiCadastre } from '../types/serviceTypes.js';
+import api from './api.js';
 import {FeatureCollection, Geometry } from 'geojson';
 
 

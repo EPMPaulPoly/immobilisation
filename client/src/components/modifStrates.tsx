@@ -1,13 +1,13 @@
 import { FormControl, FormLabel, Input, InputLabel, MenuItem, Select, TextField, } from "@mui/material"
-import { PropsModifStrate } from "../types/InterfaceTypes"
-import ArbreStrates from "./arbreStrates"
+import { PropsModifStrate } from "../types/InterfaceTypes.js"
+
 import { Delete, Edit, Save } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 import Cancel from "@mui/icons-material/Cancel"
-import manipStrates from "../utils/manipStrates"
-import serviceValidation from "../services/serviceValidation"
-import { Strate } from "../types/DataTypes"
-import { ReponseStrateValide } from "../types/serviceTypes"
+import manipStrates from "../utils/manipStrates.js"
+import serviceValidation from "../services/serviceValidation.js"
+
+import { ReponseStrateValide } from "../types/serviceTypes.js"
 
 const ModifStrates: React.FC<PropsModifStrate> = (props: PropsModifStrate) => {
     const [colonnesPossibles,defColonnesPossible] = useState<string[]>([]);

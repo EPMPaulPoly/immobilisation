@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { PropsInterfaceStrates } from "../types/InterfaceTypes"
-import ArbreStrates from "./arbreStrates"
-import ModifStrates from "./modifStrates"
+import { PropsInterfaceStrates } from "../types/InterfaceTypes.js"
+import ArbreStrates from "./arbreStrates.js"
+import ModifStrates from "./modifStrates.js"
 
 const DefinitionStratesEchantionnage:React.FC<PropsInterfaceStrates>=(props:PropsInterfaceStrates)=>{
     const [modif, defModif] = useState<boolean>(false)

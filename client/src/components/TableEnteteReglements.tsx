@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { definition_reglement_stationnement, entete_reglement_stationnement, reglement_complet } from '../types/DataTypes';
-import { TableEnteteProps } from '../types/InterfaceTypes';
-import { serviceReglements } from "../services";
+import { definition_reglement_stationnement, 
+    entete_reglement_stationnement, 
+    reglement_complet } from '../types/DataTypes.js';
+import { TableEnteteProps } from '../types/InterfaceTypes.js';
+import { serviceReglements} from '../services/serviceReglements.js'
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FilterAlt } from '@mui/icons-material';
-const TableEnteteReglements: React.FC<TableEnteteProps> = (props) => {
+const TableEnteteReglements: React.FC<TableEnteteProps> = (props:TableEnteteProps) => {
     const rowRefs = useRef<{ [key: string]: HTMLTableRowElement | null }>({});
     const enteteReglementVide: entete_reglement_stationnement = {
         id_reg_stat: 0,
@@ -102,7 +104,7 @@ const TableEnteteReglements: React.FC<TableEnteteProps> = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.entetes.map((entete) => (
+                        {props.entetes.map((entete:entete_reglement_stationnement) => (
                             <tr key={entete.id_reg_stat} 
                                 onClick={() => onLineSelect(entete.id_reg_stat)}
                                 ref={el => { rowRefs.current[entete.id_reg_stat] = el; }}

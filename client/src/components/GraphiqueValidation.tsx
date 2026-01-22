@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { data_graphique, FeuilleFinaleStrate, inventaire_stationnement } from "../types/DataTypes";
+import { data_graphique, FeuilleFinaleStrate, inventaire_stationnement } from "../types/DataTypes.js";
 import { ArrowBack, Settings } from "@mui/icons-material";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Bar, Scatter } from "react-chartjs-2";
-import serviceValidation from "../services/serviceValidation";
+import serviceValidation from "../services/serviceValidation.js";
 
 
 const GraphiqueValidation: React.FC<{ feuilleSelect: FeuilleFinaleStrate, inventairePert: inventaire_stationnement[] }> = (props: { feuilleSelect: FeuilleFinaleStrate, inventairePert: inventaire_stationnement[] }) => {
@@ -307,7 +307,7 @@ const GraphiqueValidation: React.FC<{ feuilleSelect: FeuilleFinaleStrate, invent
                     {typeGraphique !== 'bland_altman'?<Bar
                         data={{
                             ...data,
-                            datasets: data.datasets.map((ds, i) => {
+                            datasets: data.datasets.map((ds:any, i:any) => {
                                 return {
                                     ...ds,
                                     color: color[i],
@@ -334,7 +334,7 @@ const GraphiqueValidation: React.FC<{ feuilleSelect: FeuilleFinaleStrate, invent
                         }}
                     />:<Scatter data={{
                             ...data,
-                            datasets: data.datasets.map((ds, i) => {
+                            datasets: data.datasets.map((ds:any, i:any) => {
                                 return {
                                     ...ds,
                                     color: color[i],

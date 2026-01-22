@@ -1,12 +1,15 @@
 import React,{useState,useRef} from 'react';
-import { territoire } from '../types/DataTypes';
+import { territoire } from '../types/DataTypes.js';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Delete, Edit } from "@mui/icons-material";
-import { TableTerritoireProps } from '../types/InterfaceTypes';
+import { TableTerritoireProps } from '../types/InterfaceTypes.js';
+import {FeatureCollection,Geometry,Feature} from 'geojson';
+import { territoireGeoJsonProperties } from '../types/DataTypes.js';
+
 const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
     const panelRef = useRef<HTMLDivElement>(null);
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -55,7 +58,7 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.territoires.features.map((territoire) => (
+                    {props.territoires.features.map((territoire:any) => (
                         territoire.properties && (
                             <tr key={territoire.properties.id_periode_geo}>
                                 <td>{territoire.properties.id_periode}</td>
