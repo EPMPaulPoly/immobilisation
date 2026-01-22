@@ -24,6 +24,12 @@ Il est ensuite nécessaire d'installer le plugin Docker Compose selon la procéd
 
 Pour vérifier l'installation,  entrez la commande `docker compose --version`
 
+Ensuite ajouter votre utilsateur au groupe docker:
+```
+sudo usermod -aG docker $USER
+```
+
+
 [Retour au début](#ubuntu)
 
 ### Installation PostGreSQL
@@ -91,7 +97,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 Une fois conda installé naviguer au dossier serveur_calcul_python dans le dossier téléchargé à l'étape précédente. Entrez la commande suivante:
 ```
-conda env --file environment.yml
+conda env create --file environment.yml
 ```
 
 Cette commande crée un environnement virtuel à partir duquel il est possible d'importer les données pertinentes au besoin.
@@ -145,7 +151,7 @@ Pour installer miniconda, suivez les instructions données  sur  [le site web](h
 
 Une fois conda installé naviguer au dossier serveur_calcul_python dans le dossier téléchargé à l'étape précédente. Entrez la commande suivante:
 ```
-conda env --file environment.yml
+conda env create --file environment.yml
 ```
 
 Cette commande crée un environnement virtuel à partir duquel il est possible d'importer les données pertinentes au besoin.
