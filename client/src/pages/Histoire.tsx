@@ -9,6 +9,8 @@ import {LatLngExpression} from 'leaflet';
 import { serviceHistorique } from '../services';
 import { serviceTerritoires } from '../services';
 import { FeatureCollection,Geometry } from 'geojson';
+import ModalVersementTerritoires from '../components/ModalVersementTerritoires';
+
 import './common.css';
 import './histoire.css'
 
@@ -19,9 +21,16 @@ const Histoire: React.FC = () => {
         type: "FeatureCollection",
         features: []
     });
-    const[territoireSelect,defTerritoireSelect] = useState<number>(-1);
-    const[periodeSelect,defPeriodeSelect]= useState<number>(-1);
-    
+    const [territoireSelect,defTerritoireSelect] = useState<number>(-1);
+    const [periodeSelect,defPeriodeSelect]= useState<number>(-1);
+    const [modalVersermentOuver, defModalVersementOuvert] = useState<boolean>(false);
+    const [etatNouveauTerritoire, defEtatNouveauTerritoire] = useState<FeatureCollection<Geometry,territoireGeoJsonProperties>>({
+        type: "FeatureCollection",
+        features: []
+    });
+    const [nouvelleCartoDispo,defNouvelleCartoDispo] = useState<boolean>(false);
+
+
     const testGeoJSON:FeatureCollection<Geometry,territoireGeoJsonProperties> = {
             type: "FeatureCollection",
             features: [
@@ -60,21 +69,32 @@ const Histoire: React.FC = () => {
         <div className="page-histoire">
             <MenuBar/>
             <div className="histoire-dimensionnable">
+                <ModalVersementTerritoires 
+                    modalOuvert={modalVersermentOuver}
+                    setModalOuvert={defModalVersementOuvert}
+                    secTerritoireNew={etatNouveauTerritoire}
+                    setSecTerritoireNew={defEtatNouveauTerritoire}
+                    idPeriodeSelect={periodeSelect}
+                    nouvelleCartoDispo={nouvelleCartoDispo}
+                    defNouvelleCartoDispo={defNouvelleCartoDispo}
+                />
                 {/* Left Panel with the table */}
                 <div className="histoire-barre-historique">
                     <TableHistoire
                         periodeSelect={periodeSelect}
                         defPeriodeSelect={defPeriodeSelect}
                         territoires={etatTerritoire}
-                        defTerritoires={defTerritoire} />
+                        defTerritoires={defTerritoire}
+                        nouvelleCartoDispo={nouvelleCartoDispo} 
+                    />
                 </div>
 
                 {/* Right Panel with map and table */}
                 <div className="histoire-barre-droite">
                     <div className="histoire-carte-container">
                         <CarteHistorique 
-                            territoires={etatTerritoire}
-                            defTerritoires={defTerritoire}
+                            territoires={nouvelleCartoDispo?etatNouveauTerritoire:etatTerritoire}
+                            defTerritoires={nouvelleCartoDispo?defEtatNouveauTerritoire:defTerritoire}
                             territoireSelect={territoireSelect}
                             defTerritoireSelect={defTerritoireSelect}
                             startPosition={positionDepart}
@@ -85,7 +105,16 @@ const Histoire: React.FC = () => {
                     </div>
                     <TableTerritoire
                         territoires={etatTerritoire}
-                        defTerritoire={defTerritoire} />
+                        defTerritoire={defTerritoire} 
+                        modalOuvert={modalVersermentOuver}
+                        defModalVersementOuvert={defModalVersementOuvert}    
+                        nouvelleCartoDispo={nouvelleCartoDispo}
+                        defNouvelleCartoDispo={defNouvelleCartoDispo}
+                        secTerritoireNew={etatNouveauTerritoire}
+                        defSecTerritoireNew={defEtatNouveauTerritoire}
+                        periodeSelect={periodeSelect}
+                        defPeriodeSelect={defPeriodeSelect}
+                    />
                 </div>
             </div>
         </div>

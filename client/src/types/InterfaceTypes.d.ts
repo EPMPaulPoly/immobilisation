@@ -237,11 +237,30 @@ export interface TableHistoireProps{
     defPeriodeSelect:React.Dispatch<SetStateAction<number>>;
     territoires:GeoJSON.FeatureCollection<GeoJSON.Geometry>;
     defTerritoires: React.Dispatch<SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry,territoireGeoJsonProperties>>>;
+    nouvelleCartoDispo:boolean;
 }
 
 export interface TableTerritoireProps{
     territoires:GeoJSON.FeatureCollection<GeoJSON.Geometry>;
     defTerritoire:React.Dispatch<SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry,territoireGeoJsonProperties>>>;
+    modalOuvert:boolean;
+    defModalVersementOuvert:React.Dispatch<SetStateAction<boolean>>;
+    nouvelleCartoDispo:boolean;
+    defNouvelleCartoDispo:React.Dispatch<SetStateAction<boolean>>;
+    secTerritoireNew: FeatureCollection<Geometry,territoireGeoJsonProperties>,
+    defSecTerritoireNew:React.Dispatch<SetStateAction<FeatureCollection<Geometry,territoireGeoJsonProperties>>>,
+    periodeSelect:number,
+    defPeriodeSelect:React.Dispatch<SetStateAction<number>>;
+}
+
+export interface PropsVersTerritoires{
+    modalOuvert:boolean,
+    setModalOuvert:React.Dispatch<SetStateAction<boolean>>,
+    secTerritoireNew: FeatureCollection<Geometry,territoireGeoJsonProperties>,
+    setSecTerritoireNew:React.Dispatch<SetStateAction<FeatureCollection<Geometry,territoireGeoJsonProperties>>>,
+    idPeriodeSelect:number,
+    nouvelleCartoDispo:boolean,
+    defNouvelleCartoDispo:React.Dispatch<SetStateAction<boolean>>
 }
 
 // ---------------------------------------------------------------------------

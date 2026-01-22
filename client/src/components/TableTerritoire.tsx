@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Delete, Edit } from "@mui/icons-material";
+import {Button} from '@mui/material';
 import { TableTerritoireProps } from '../types/InterfaceTypes';
 const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
     const panelRef = useRef<HTMLDivElement>(null);
@@ -38,12 +39,46 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
         link.click();
         document.body.removeChild(link);
         };
+
+    const verseDonnees = () => {
+        // À implémenter : fonction pour verser les données
+    };
+    const annuleVersement = () => {
+        // À implémenter : fonction pour annuler le versement
+        props.defNouvelleCartoDispo(false);
+        props.defSecTerritoireNew({type: "FeatureCollection", features: []});
+    };
     return (
         <div className="panneau-bas-historique" ref={panelRef}>
             <div className="resize-handle" onMouseDown={handleMouseDown}></div>
             <h4>Table Territoire</h4>
-            <div className="upload-download-geopolitics">
-            <FileUploadIcon/><DownloadIcon onClick={()=>saveGeoJSON()} /></div>
+            <div className="upload-download-geopolitics" style={{gap:'10px'}}>
+                {props.periodeSelect === -1 ? (
+                    <span>Choisir une période</span>
+                ):(props.nouvelleCartoDispo ? (
+                        <>  
+                            <span>Periode: {props.periodeSelect}</span>
+                            <Button variant='outlined' sx={{backgroundColor:'green',color:'black'}}>Verser</Button>
+                            <Button 
+                                variant='outlined' 
+                                sx={{backgroundColor:'red', color:'black'}}
+                                onClick={()=>annuleVersement()}
+                            >
+                                Annuler
+                            </Button>
+                        </>
+                    ):(
+                        <>
+                        <FileUploadIcon
+                        onClick={() => props.defModalVersementOuvert(!props.modalOuvert)}
+                        />
+                        <DownloadIcon 
+                            onClick={()=>saveGeoJSON()} 
+                        />
+                        </>
+                    )
+                )}
+            </div>
             <table className="table-territoire-historique">
                 <thead>
                     <tr>

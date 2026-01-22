@@ -134,7 +134,9 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
 
     const renduBoutonsTableHistoire=() =>{
             return(<div className="bouton-modif-historique">
-                <AddIcon onClick={gestBoutonAjout}/>
+                <AddIcon 
+                    onClick={gestBoutonAjout}
+                />
             </div>)
     };
 
@@ -185,7 +187,7 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
                                     name="periode_a_editer"
                                     value={periode.id_periode}
                                     onClick={()=>gestSelectRadio(periode.id_periode)}
-                                    disabled = {edit}
+                                    disabled = {edit || props.nouvelleCartoDispo    }
                                     checked = {props.periodeSelect === periode.id_periode}
                                 />    
                             </td>
@@ -228,8 +230,8 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
                                                 id='end-present'
                                                 checked={periode.date_fin_periode===null}
                                         />:(periode.date_fin_periode===null? 'Oui':'Non')}</td>
-                            <td>{(props.periodeSelect === periode.id_periode) && (edit)?<SaveIcon onClick={gestBoutonSauv}/>:<Edit onClick={()=>gestBoutonEdit(periode.id_periode)}/>}</td>
-                            <td>{(props.periodeSelect === periode.id_periode) && (edit)?<CancelIcon onClick={gestBoutonAnnul}/>:<DeleteIcon onClick={()=> gestBoutonSuppr(periode.id_periode)}/>}</td>
+                            <td>{props.nouvelleCartoDispo ?<></>: (props.periodeSelect === periode.id_periode) && (edit)?<SaveIcon onClick={gestBoutonSauv}/>:<Edit onClick={()=>gestBoutonEdit(periode.id_periode)}/>}</td>
+                            <td>{props.nouvelleCartoDispo ?<></>:(props.periodeSelect === periode.id_periode) && (edit)?<CancelIcon onClick={gestBoutonAnnul}/>:<DeleteIcon onClick={()=> gestBoutonSuppr(periode.id_periode)}/>}</td>
                         </tr>
                     ))}
                 </tbody>
