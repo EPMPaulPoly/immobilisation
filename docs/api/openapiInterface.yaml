@@ -7,6 +7,8 @@ tags: []
 paths:
   /api/quartiers-analyse:
     $ref: './paths/quartier/quartierNoId.yaml'
+  /api/quartiers-analyse/{id_quartier}:
+    $ref: './paths/quartier/quartierWId.yaml'
   /api/quartiers-analyse/bulk-replace:
     $ref: './paths/quartier/quartiersBulkReplace.yaml'
   /api/historique:

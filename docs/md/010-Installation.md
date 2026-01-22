@@ -24,6 +24,11 @@ Il est ensuite nécessaire d'installer le plugin Docker Compose selon la procéd
 
 Pour vérifier l'installation,  entrez la commande `docker compose --version`
 
+Ensuite ajouter votre utilsateur au groupe docker:
+```
+sudo usermod -aG docker $USER
+```
+
 [Retour au début](#ubuntu)
 
 ### Installation PostGreSQL
