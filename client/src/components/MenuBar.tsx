@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router";
-import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobilisation.js';
-import { donneesCarteDeFond } from '../types/ContextTypes.js';
-import SubMenuComponent from './SubMenuComponent.js';
+import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobilisation';
+import { donneesCarteDeFond } from '../types/ContextTypes';
+import SubMenuComponent from './SubMenuComponent';
 const MenuBar: React.FC<{}> = () => {
 
     const contexte = utiliserContexte();

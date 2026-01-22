@@ -1,9 +1,11 @@
-import { AnalyseHistoQuartierProps } from '../types/InterfaceTypes.js'
+import { AnalyseHistoQuartierProps } from '../types/InterfaceTypes'
 import React, { useState } from 'react';
 import { Chart as ChartPlot,Bar } from 'react-chartjs-2'
-import { barChartDataSet } from '../types/DataTypes.js';
-import { TypesAnalysesCartographiqueQuartier } from '../types/AnalysisTypes.js';
-import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire.js';
+import { barChartDataSet } from '../types/DataTypes';
+import { TypesAnalysesCartographiqueQuartier } from '../types/AnalysisTypes';
+
+import { barChartData } from '../types/DataTypes';
+import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire';
 
 const AnalyseHistogrammeQuartier: React.FC<AnalyseHistoQuartierProps> = (props: AnalyseHistoQuartierProps) => {
     const [variableSelect,defVariableSelect] = useState<number>(-1);

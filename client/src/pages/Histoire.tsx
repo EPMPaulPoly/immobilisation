@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from 'react';
-import TableHistoire from '../components/TableHistoire.js';
-import TableTerritoire from '../components/TableTerritoire.js';
-import MenuBar from '../components/MenuBar.js';
-import CarteHistorique from '../components/carteHistorique.js';
-import { territoire ,territoireGeoJsonProperties} from '../types/DataTypes.js';
+import TableHistoire from '../components/TableHistoire';
+import TableTerritoire from '../components/TableTerritoire';
+import MenuBar from '../components/MenuBar';
+import { ResizableBox } from 'react-resizable';
+import CarteHistorique from '../components/carteHistorique';
+import { territoire ,territoireGeoJsonProperties} from '../types/DataTypes';
 import {LatLngExpression} from 'leaflet';
+import { serviceHistorique } from '../services';
+import { serviceTerritoires } from '../services';
 import { FeatureCollection,Geometry } from 'geojson';
 import './common.css';
 import './histoire.css'

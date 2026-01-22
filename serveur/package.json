@@ -2,10 +2,9 @@
     "name": "parking-inventory-backend",
     "version": "1.0.0",
     "description": "Backend for parking inventoery",
-    "type": "module",
     "main": "dist/serveur.js",
     "scripts": {
-        "dev": "nodemon --exec ts-node src/serveur.ts",
+        "dev": "nodemon --legacy-watch",
         "build": "tsc",
         "start": "node dist/serveur.js"
     },
@@ -36,7 +35,6 @@
         "nodemon": "^3.1.7",
         "ts-jest": "latest",
         "ts-node": "latest",
-        "tsx": "^4.21.0",
         "typescript": "latest"
     }
 }

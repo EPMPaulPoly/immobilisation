@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "nodenext",
+    "module": "commonjs",
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "sourceMap": true, // Make sure this is true
     "inlineSourceMap": false, // This should be false when sourceMap is true
     "inlineSources": false,
+    "baseUrl": ".",
     "paths": {
       "*": [
         "node_modules/*",

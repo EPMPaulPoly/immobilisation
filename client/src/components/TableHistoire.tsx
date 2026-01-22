@@ -1,14 +1,14 @@
 import React, { useState, useEffect,useRef } from 'react';
-import { periode } from '../types/DataTypes.js';
-import { serviceHistorique } from '../services/serviceHistorique.js';
-import { TableHistoireProps } from '../types/InterfaceTypes.js';
-import { serviceTerritoires } from '../services/serviceTerritoires.js';
+import { periode } from '../types/DataTypes';
+import { serviceHistorique } from '../services';
+import { TableHistoireProps } from '../types/InterfaceTypes';
+import { serviceTerritoires } from '../services';
 import { Add, Check, Edit } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { ReponsePeriode } from '../types/serviceTypes.js';
+import { ReponsePeriode } from '../types/serviceTypes';
 const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) => {
     const [etat_periodes, defPeriodes] = useState<periode[]>([]);
     const [charge, defCharg] = useState<boolean>(true);

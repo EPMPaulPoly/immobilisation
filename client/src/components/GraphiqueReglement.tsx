@@ -1,11 +1,10 @@
 import {FC,useState,useEffect} from 'react'
-import  { GraphiqueReglementsProps } from '../types/InterfaceTypes.js'
+import  { GraphiqueReglementsProps } from '../types/InterfaceTypes'
 import { Chart as ChartPlot,Bar,Line } from 'react-chartjs-2';
 import { Edit } from '@mui/icons-material';
-import ModalManipulationGraphiqueReg from './modalManipulationGraphiqueReg.js';
-import { data_graphique, informations_pour_graph_unite_er_reg, utilisation_sol } from '../types/DataTypes.js';
-import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
-import { serviceReglements } from '../services/serviceReglements.js';
+import ModalManipulationGraphiqueReg from './modalManipulationGraphiqueReg';
+import { data_graphique, informations_pour_graph_unite_er_reg, utilisation_sol } from '../types/DataTypes';
+import { serviceEnsemblesReglements, serviceReglements } from '../services';
 
 const GraphiqueReglements:FC<GraphiqueReglementsProps>=(props:GraphiqueReglementsProps)=>{
     const [modalParamsGraphOuvert,defModalParamsGraphOuvert] = useState<boolean>(false)

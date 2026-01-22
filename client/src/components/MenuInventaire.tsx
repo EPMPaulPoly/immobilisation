@@ -1,9 +1,9 @@
-import { MenuInventaireProps } from "../types/InterfaceTypes.js";
-import { serviceInventaire} from "../services/serviceInventaire.js";
+import { MenuInventaireProps } from "../types/InterfaceTypes";
+import { serviceInventaire, serviceCadastre } from "../services";
 import L, { LatLngExpression } from 'leaflet';
-import { inventaire_stationnement } from "../types/DataTypes.js";
-import { MAJLotsInventaireProps } from "../types/utilTypes.js";
-import metAJourLotsInventaire from "../utils/metAJourLotsInventaire.js";
+import { inventaire_stationnement } from "../types/DataTypes";
+import { MAJLotsInventaireProps } from "../types/utilTypes";
+import metAJourLotsInventaire from "../utils/metAJourLotsInventaire";
 const MenuInventaire: React.FC<MenuInventaireProps> = (props: MenuInventaireProps) => {
 
     // Gestion de selection de quartier

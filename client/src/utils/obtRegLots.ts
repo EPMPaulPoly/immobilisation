@@ -1,4 +1,4 @@
-import { serviceEnsemblesReglements } from "../services/serviceEnsemblesReglements.js";
+import { serviceEnsemblesReglements } from "../services";
 
 
 const ObtRegLots =(ids:string[]) =>{

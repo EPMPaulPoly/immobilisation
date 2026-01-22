@@ -1,13 +1,15 @@
-import { ComparaisonInventaireQuartierProps } from "../types/InterfaceTypes.js";
+import { ComparaisonInventaireQuartierProps } from "../types/InterfaceTypes";
+import { FaCheck } from "react-icons/fa";
 import React from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Delete } from "@mui/icons-material";
-import { inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties } from "../types/DataTypes.js";
-import { serviceInventaire } from "../services/serviceInventaire.js";
-import { MAJLotsInventaireProps } from "../types/utilTypes.js";
+import { inventaire_stationnement, lotCadastralAvecBoolInvGeoJsonProperties } from "../types/DataTypes";
+import { serviceInventaire } from "../services";
+import metAJourLotsInventaire from "../utils/metAJourLotsInventaire";
+import { MAJLotsInventaireProps } from "../types/utilTypes";
 import { Geometry } from "geojson";
-import { ApiResponse } from "../types/serviceTypes.js";
+import { ApiResponse } from "../types/serviceTypes";
 
 const ComparaisonInventaireQuartier: React.FC<ComparaisonInventaireQuartierProps> = (props: ComparaisonInventaireQuartierProps) => {
     const gestAnnulCalculQuartier = () => {

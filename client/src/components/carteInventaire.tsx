@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
-import { CarteInventaireProps } from '../types/InterfaceTypes.js';
+import { CarteInventaireProps } from '../types/InterfaceTypes';
 import "leaflet/dist/leaflet.css";
 import L, { LeafletEvent } from 'leaflet';
-import selectLotInventaire from '../utils/selectLotInventaire.js';
-import { selectLotProps } from '../types/utilTypes.js';
-import { lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes.js';
+import selectLotInventaire from '../utils/selectLotInventaire';
+import { selectLotProps } from '../types/utilTypes';
+import { lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
 import chroma from 'chroma-js';
-import { utiliserContexte } from '../contexte/ContexteImmobilisation.js';
+import { utiliserContexte } from '../contexte/ContexteImmobilisation';
 const CarteInventaire: React.FC<CarteInventaireProps> = (props) => {
     const handleLotClick = (e: LeafletEvent) => {
         const key = e.target.feature.properties.g_no_lot;

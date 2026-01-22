@@ -1,5 +1,5 @@
 import React from 'react';
-import { VisResultatFiltre } from '../types/InterfaceTypes.js';
+import { VisResultatFiltre } from '../types/InterfaceTypes';
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 const TableVisResultatsFiltreAssoc:React.FC<VisResultatFiltre>=(props)=>{
 

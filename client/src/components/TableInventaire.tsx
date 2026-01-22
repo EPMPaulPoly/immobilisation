@@ -1,9 +1,9 @@
 import React, {useState,useRef,useEffect} from 'react';
-
-import { TableInventaireProps } from '../types/InterfaceTypes.js';
-import { selectLotProps } from '../types/utilTypes.js';
-import { serviceInventaire } from '../services/serviceInventaire.js';
-import selectLotInventaire from '../utils/selectLotInventaire.js';
+import { inventaire_stationnement, quartiers_analyse } from '../types/DataTypes';
+import { TableInventaireProps } from '../types/InterfaceTypes';
+import { selectLotProps } from '../types/utilTypes';
+import { serviceInventaire } from '../services/serviceInventaire';
+import selectLotInventaire from '../utils/selectLotInventaire';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Delete } from "@mui/icons-material";

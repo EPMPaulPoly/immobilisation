@@ -1,6 +1,5 @@
-import { MAJLotsInventaireProps } from "../types/utilTypes.js";
-import { serviceInventaire } from "../services/serviceInventaire.js";
-import { serviceCadastre } from "../services/serviceCadastre.js";
+import { MAJLotsInventaireProps } from "../types/utilTypes";
+import { serviceInventaire,serviceCadastre } from "../services";
 
 const metAJourLotsInventaire = async(quartier_selection:number, props:MAJLotsInventaireProps)=>{
     const inventaire = await serviceInventaire.obtientInventaireParQuartier(quartier_selection)

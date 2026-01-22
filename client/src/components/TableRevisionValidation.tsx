@@ -1,11 +1,11 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material"
-import { PropsTableRevValid } from "../types/InterfaceTypes.js"
+import { PropsTableRevValid } from "../types/InterfaceTypes"
 import { Cancel, Edit, Save } from "@mui/icons-material"
 import { useState } from "react"
-import { EntreeValidation, methodeCalcul } from "../types/DataTypes.js"
-import { utiliserContexte } from "../contexte/ContexteImmobilisation.js"
-import serviceValidation from "../services/serviceValidation.js"
-import ModalRecomputeInventaire from "./ModalRecomputeInventaire.js"
+import { EntreeValidation, methodeCalcul } from "../types/DataTypes"
+import { utiliserContexte } from "../contexte/ContexteImmobilisation"
+import serviceValidation from "../services/serviceValidation"
+import ModalRecomputeInventaire from "./ModalRecomputeInventaire"
 
 const TableRevisionValidation: React.FC<PropsTableRevValid> = (props: PropsTableRevValid) => {
 
@@ -14,7 +14,7 @@ const TableRevisionValidation: React.FC<PropsTableRevValid> = (props: PropsTable
     const changerCarto = contexte?.changerCarto ?? (() => { });
     const optionsCartos = contexte?.optionsCartos ?? [];
 
-    const descriptionCarto = optionsCartos.find((entree:any) => entree.id === optionCartoChoisie)?.description ?? ''
+    const descriptionCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.description ?? ''
     const [modalOuvert,defModalOuvert] =useState<boolean>(false)
     const [modif, defModif] = useState<boolean>(false)
     const [ancienVal, defAncienVal] = useState<EntreeValidation>({

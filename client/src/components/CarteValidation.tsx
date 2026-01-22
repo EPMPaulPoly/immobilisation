@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { PropsCartoValidation } from "../types/InterfaceTypes.js"
+import { PropsCartoValidation } from "../types/InterfaceTypes"
 import {  MapContainer, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
-import { utiliserContexte } from "../contexte/ContexteImmobilisation.js";
+import { utiliserContexte } from "../contexte/ContexteImmobilisation";
 
 
 const CarteValidation: React.FC<PropsCartoValidation> = (props: PropsCartoValidation) => {

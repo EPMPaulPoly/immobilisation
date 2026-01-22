@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ensemble_reglements_stationnement, 
-    entete_ensembles_reglement_stationnement, 
-    entete_reglement_stationnement } from '../types/DataTypes.js';
-import { TableEnteteEnsembleProps } from '../types/InterfaceTypes.js';
-import { serviceEnsemblesReglements} from '../services/serviceEnsemblesReglements.js'
+import { ensemble_reglements_stationnement, entete_ensembles_reglement_stationnement, entete_reglement_stationnement } from '../types/DataTypes';
+import { TableEnteteEnsembleProps } from '../types/InterfaceTypes';
+import { serviceEnsemblesReglements } from "../services";
 import AddIcon from '@mui/icons-material/AddOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 const TableListeEnsReg: React.FC<TableEnteteEnsembleProps> = (props) => {

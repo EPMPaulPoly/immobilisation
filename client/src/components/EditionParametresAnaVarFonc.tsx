@@ -1,12 +1,10 @@
 import { ArrowBack } from "@mui/icons-material";
-import { PropsEditionParametresAnaVarFonc } from "../types/InterfaceTypes.js";
+import { PropsEditionParametresAnaVarFonc } from "../types/InterfaceTypes";
 import React, { useEffect, useState } from 'react'
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { comptes_utilisations_sol, 
-    entete_ensembles_reglement_stationnement, 
-    ProprietesRequetesER } from "../types/DataTypes.js";
-import { serviceEnsemblesReglements } from "../services/serviceEnsemblesReglements.js";
-
+import { comptes_utilisations_sol, entete_ensembles_reglement_stationnement, ProprietesRequetesER } from "../types/DataTypes";
+import { serviceEnsemblesReglements } from "../services/serviceEnsemblesReglements";
+import serviceUtilisationDuSol from "../services/serviceUtilisationDuSol";
 
 const EditionParametresAnaVarFonc: React.FC<PropsEditionParametresAnaVarFonc> = (props: PropsEditionParametresAnaVarFonc) => {
     const [entetesEnsRegAAnalyser, defEntetesEnsRegAAnalyser] = useState<entete_ensembles_reglement_stationnement[]>([])

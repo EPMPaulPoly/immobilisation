@@ -341,9 +341,13 @@ lot_cadastral:
 # ------------------------------------------------------------------------
 # -------------------------------- Quartiers analyse ---------------------
 # ------------------------------------------------------------------------
-quartier_analyse_sans_id:
+
+quartier_analyse:
   type: object
   properties:
+    id_quartier:
+      type: integer
+      description: Idenifant de quartier
     nom_quartier:
       type: string
       description: Nom complet de quartier
@@ -362,16 +366,6 @@ quartier_analyse_sans_id:
     - acro
     - superf_quartier
     - geometry
-quartier_analyse:
-  allOf:
-    - $ref: '#/quartier_analyse_sans_id'
-    - type: object
-      properties:
-        id_quartier:
-          type: integer
-          description: Identifiant unique du quartier
-      required:
-        - id_quartier
 # -------------------------------------------------------------------------
 # ------------------------ Territoire géopolitique ------------------------
 # -------------------------------------------------------------------------

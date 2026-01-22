@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { AnalyseXYQuartierProps } from '../types/InterfaceTypes.js';
-import {VariablesPossiblesGraphiqueXY,NhoodXYGraphDatasets} from '../types/AnalysisTypes.js';
-import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire.js';
+import { AnalyseXYQuartierProps } from '../types/InterfaceTypes';
+import {VariablesPossiblesGraphiqueXY,NhoodXYGraphDatasets} from '../types/AnalysisTypes';
+import { serviceAnalyseInventaire } from '../services/serviceAnalyseInventaire';
 import { Chart as ChartPlot,Bar } from 'react-chartjs-2';
 
 const AnalyseXYQuartiers:React.FC<AnalyseXYQuartierProps>=(props:AnalyseXYQuartierProps)=>{

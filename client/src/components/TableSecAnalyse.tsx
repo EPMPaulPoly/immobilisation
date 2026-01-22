@@ -1,11 +1,11 @@
 import React, { FC,useState,useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material"
-import { propsParamSecAnalyse } from '../types/InterfaceTypes.js';
+import { propsParamSecAnalyse } from '../types/InterfaceTypes';
 import { FeatureCollection, Geometry } from 'geojson';
-import { quartiers_analyse, quartiers_analyse_db } from '../types/DataTypes.js';
+import { quartiers_analyse, quartiers_analyse_db } from '../types/DataTypes';
 import { Edit,Calculate,Save, Delete,Cancel, SwapHoriz } from '@mui/icons-material';
-import { serviceQuartiersAnalyse } from '../services/serviceQuartiersAnalyse.js';
-
+import { serviceQuartiersAnalyse } from '../services';
+import { justifyContent, width } from '@mui/system';
 const TableSecAnalyse: FC<propsParamSecAnalyse> = (props:propsParamSecAnalyse) => {
     const [edit,setEdit] = React.useState<number>(-1);
     const [ancienSetup,setAncienSetup] = React.useState<FeatureCollection<Geometry,quartiers_analyse>>({type:"FeatureCollection",features:[]});

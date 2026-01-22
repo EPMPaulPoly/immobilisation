@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { EnsRegTerrControlProps } from '../types/InterfaceTypes.js';
-import { serviceHistorique } from '../services/serviceHistorique.js';
-import { serviceTerritoires } from '../services/serviceTerritoires.js';
-import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr.js';
+import { EnsRegTerrControlProps } from '../types/InterfaceTypes';
+import { serviceEnsemblesReglements, serviceHistorique, serviceTerritoires } from '../services';
+import { serviceEnsRegTerr } from '../services/serviceEnsRegTerr';
 import { useSearchParams } from 'react-router';
 
 

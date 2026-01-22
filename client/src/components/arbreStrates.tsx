@@ -1,9 +1,10 @@
 import { Add, Delete } from "@mui/icons-material";
-import { Strate } from "../types/DataTypes.js";
-import { PropsArbreStrates } from "../types/InterfaceTypes.js"
+import { Strate } from "../types/DataTypes";
+import { PropsArbreStrates } from "../types/InterfaceTypes"
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import React, { useEffect } from 'react';
-import manipStrates from "../utils/manipStrates.js";
+import serviceValidation from "../services/serviceValidation";
+import manipStrates from "../utils/manipStrates";
 
 const ArbreStrates: React.FC<PropsArbreStrates> = (props: PropsArbreStrates) => {
     const selectStrate = (nodeId: string) => {

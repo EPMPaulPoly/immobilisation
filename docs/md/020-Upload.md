@@ -43,11 +43,6 @@ Il faut mainenant faire un légère modification au format de base de données p
 ```
 sed '/CREATE DATABASE/,+6d' ~/Documents/format_bd_vide.sql > ~/Documents/format_db_sans_creation.sql
 ```
-On verse ensuite le format 
-```
-sudo -u postgres psql -d parking_regs < ~/Documents/format_db_sans_creation.sql
-```
-
 Vous pouvez valider le versement des données avec deux fonctions:
 ```
 sudo -u postgres psql -d parking_regs -c "\dt"

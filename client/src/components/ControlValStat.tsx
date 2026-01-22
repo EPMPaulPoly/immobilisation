@@ -1,9 +1,9 @@
 import { ArrowBack, PropaneSharp, Settings } from "@mui/icons-material";
-import { ControlValStatProps } from "../types/InterfaceTypes.js";
+import { ControlValStatProps } from "../types/InterfaceTypes";
 import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { width } from "@mui/system";
-import serviceValidation from "../services/serviceValidation.js";
-import { serviceCadastre } from "../services/serviceCadastre.js";
+import serviceValidation from "../services/serviceValidation";
+import { serviceCadastre } from "../services";
 
 
 

@@ -16,7 +16,6 @@
   "author": "Paul Charbonneau",
   "license": "MIT",
   "description": "Interface web pour gérer et valoriser les données d'un inventaire de stationnement",
-  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",

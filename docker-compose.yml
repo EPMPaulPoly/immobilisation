@@ -43,7 +43,6 @@ services:
       - ./serveur:/app/serveur 
       - ./serveur_calcul_python:/app/serveur_calcul_python
       - serveur_node_modules:/app/serveur/node_modules
-      - conda_cache:/opt/conda
     command: npm run dev 
     stdin_open: true
     tty: true
@@ -51,7 +50,6 @@ services:
 volumes:
   client_node_modules:
   serveur_node_modules:
-  conda_cache:
 networks:
   app-network:
     driver: bridge

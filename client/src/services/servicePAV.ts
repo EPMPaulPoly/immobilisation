@@ -1,9 +1,11 @@
-import { ReponsePAVQuartier, } from '../types/serviceTypes.js';
-import api from './api.js';
+import { ReponseInventaire,ReponseDBInventaire, ReponseDBInventaireAgregQuartTotal, ReponseInventaireAgregQuartParHab, ReponseDBInventaireAgregQuartParSuperf, ReponseInventaireAgregQuartParSuperf, ReponsePAVQuartier, } from '../types/serviceTypes';
+import api from './api';
 import axios,{AxiosResponse} from 'axios';
 import { FeatureCollection,Geometry,Feature } from 'geojson';
 import { isNumberObject } from 'util/types';
-import { entreePAV } from '../types/DataTypes.js';
+import { ReponseInventaireAgregQuartTotal } from '../types/serviceTypes';
+import { GeoJSONPropsAnaQuartier,  } from '../types/AnalysisTypes';
+import { entreePAV } from '../types/DataTypes';
 
 export const servicePAV = {
     obtientPAVQuartier: async(ordre:number[],quartier:number,type_pav:string,stat_comp:string) : Promise<ReponsePAVQuartier> => {

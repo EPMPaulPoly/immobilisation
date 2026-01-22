@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react'
-import { ControlAnaVarProps } from '../types/InterfaceTypes.js';
-import { entete_ensembles_reglement_stationnement } from '../types/DataTypes.js';
+import { ControlAnaVarProps } from '../types/InterfaceTypes';
+import { entete_ensembles_reglement_stationnement } from '../types/DataTypes';
 import {
     Modal,
     Box,
@@ -15,8 +15,8 @@ import {
     FormGroup,
     FormControlLabel
 } from '@mui/material';
-import { serviceEnsemblesReglements } from '../services/serviceEnsemblesReglements.js';
-import { serviceAnaVariabilite } from '../services/serviceAnaVariabilite.js';
+import { serviceEnsemblesReglements } from '../services';
+import { serviceAnaVariabilite } from '../services/serviceAnaVariabilite';
 
 const ControlAnaVar: FC<ControlAnaVarProps> = (props: ControlAnaVarProps) => {
     const [tousEnsReg, defTousEnsRegs] = useState<entete_ensembles_reglement_stationnement[]>([])

@@ -1,15 +1,11 @@
 import React, { useState, useRef,useEffect} from 'react';
-import { TableVisModRegProps } from '../types/InterfaceTypes.js';
-import { definition_reglement_stationnement, 
-    entete_reglement_stationnement, 
-    operation_reglement_stationnement, 
-    reglement_complet,
-     unites_reglement_stationnement } from '../types/DataTypes.js';
+import { TableVisModRegProps } from '../types/InterfaceTypes';
+import { definition_reglement_stationnement, entete_reglement_stationnement, operation_reglement_stationnement, reglement_complet, unites_reglement_stationnement } from '../types/DataTypes';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Add, Edit, Save } from '@mui/icons-material';
-import { serviceReglements } from '../services/serviceReglements.js';
+import { serviceReglements } from '../services';
 
 const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
     const enteteReglementVide: entete_reglement_stationnement = {
@@ -83,7 +79,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
         props.defRegSelect(newRegSelect);
     }
     const gestChangementLigneDef=(idLigne:number,champs:string,valeur:string|null)=>{
-        const oldLine = props.regSelect.definition.find((ligne:definition_reglement_stationnement)=>ligne.id_reg_stat_emp===idLigne)
+        const oldLine = props.regSelect.definition.find((ligne)=>ligne.id_reg_stat_emp===idLigne)
         if (!oldLine) return;
         const newLine: definition_reglement_stationnement = {
             id_reg_stat: oldLine.id_reg_stat,
@@ -99,7 +95,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
             [champs]: valeur !== null ? Number(valeur) : null
         };
         const oldHead = props.regSelect.entete;
-        const newStack:definition_reglement_stationnement[] = props.regSelect.definition.map((ligne:definition_reglement_stationnement)=>ligne.id_reg_stat_emp===idLigne?newLine:ligne);
+        const newStack:definition_reglement_stationnement[] = props.regSelect.definition.map((ligne)=>ligne.id_reg_stat_emp===idLigne?newLine:ligne);
         const newRegSelect: reglement_complet = { entete: oldHead, definition: newStack };
         props.defRegSelect(newRegSelect);
     }
@@ -146,7 +142,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
             result = await serviceReglements.modifieEnteteReglement(props.regSelect.entete.id_reg_stat,enteteASauver)
         }
         const newEntete:entete_reglement_stationnement = result.data[0]
-        const newDef:definition_reglement_stationnement[] = props.regSelect.definition.map((entree:definition_reglement_stationnement)=>({
+        const newDef:definition_reglement_stationnement[] = props.regSelect.definition.map((entree)=>({
             id_reg_stat:newEntete.id_reg_stat,
             id_reg_stat_emp:entree.id_reg_stat_emp,
             ss_ensemble:entree.ss_ensemble,
@@ -174,7 +170,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
         props.defCreationEnCours(false)
     }
     const gestSauvegardeLigne=async()=>{
-        const ligne = props.regSelect.definition.find((o:definition_reglement_stationnement) => o.id_reg_stat_emp === idLigneAModifier);
+        const ligne = props.regSelect.definition.find((o) => o.id_reg_stat_emp === idLigneAModifier);
         if (!ligne) {
             throw new Error(`Ligne avec id_reg_stat_emp=${idLigneAModifier} non trouvée`);
         }
@@ -198,7 +194,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
         }
         const ligneRetournee= lineOut.data;
         // Remplace la ligne modifiée dans le tableau definition par la ligne retournée par l'API
-        const updatedDefinitions = props.regSelect.definition.map((def:definition_reglement_stationnement) =>
+        const updatedDefinitions = props.regSelect.definition.map((def) =>
             def.id_reg_stat_emp === idLigneAModifier ? ligneRetournee[0] : def
         );
         props.defRegSelect({
@@ -212,7 +208,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
         const lineDeleted=await serviceReglements.supprimeLigneDefinition(idLigne)
         console.log('supprime ligne ',lineDeleted)
         if (lineDeleted){
-            const newStack = props.regSelect.definition.filter((o:definition_reglement_stationnement)=>o.id_reg_stat_emp!==idLigne)
+            const newStack = props.regSelect.definition.filter((o)=>o.id_reg_stat_emp!==idLigne)
             const oldHeader = props.regSelect.entete
             const newRegSelect:reglement_complet={entete:oldHeader,definition:newStack}
             props.defRegSelect(newRegSelect)
@@ -360,7 +356,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.regSelect.definition.map((ligneDef:definition_reglement_stationnement) => (
+                    {props.regSelect.definition.map((ligneDef) => (
                         <tr key={ligneDef.id_reg_stat_emp} >
                             {/* ss-ensemble */}
                             <td>{props.editionCorpsEnCours && idLigneAModifier===ligneDef.id_reg_stat_emp ? 

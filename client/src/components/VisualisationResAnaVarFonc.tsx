@@ -1,6 +1,6 @@
 import { Settings } from "@mui/icons-material"
-import { PropsVisualisationAnaVarFonc } from "../types/InterfaceTypes.js"
-import GraphiqueAnaVar from "./GraphiqueAnaVar.js"
+import { PropsVisualisationAnaVarFonc } from "../types/InterfaceTypes"
+import GraphiqueAnaVar from "./GraphiqueAnaVar"
 
 const VisualisationResAnaVarFonc:React.FC<PropsVisualisationAnaVarFonc>=(props: PropsVisualisationAnaVarFonc)=>{
     return(

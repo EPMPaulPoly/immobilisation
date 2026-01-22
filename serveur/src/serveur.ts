@@ -81,7 +81,7 @@ function extractMountPath(layer: any): string {
 }
 
 
-app.get('/api/routes', (req:any, res:any) => {
+app.get('/api/routes', (req, res) => {
   const allRoutes = extractRoutes(app);
   res.json(allRoutes);
 });

@@ -1,6 +1,6 @@
 import { SetStateAction,Dispatch } from "react";
-import { Strate } from "../types/DataTypes.js";
-import { strataManipProps } from "../types/utilTypes.js";
+import { Strate } from "../types/DataTypes";
+import { strataManipProps } from "../types/utilTypes";
 
 const manipStrates = {
     findStrateById: (tree: Strate[], id: number): Strate | null => {

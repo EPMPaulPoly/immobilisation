@@ -1,8 +1,8 @@
 import {Modal,Dialog,Box,Button} from '@mui/material'
-import { PropsVersSecAnalyse } from '../types/InterfaceTypes.js';
+import { PropsVersSecAnalyse } from '../types/InterfaceTypes';
 import React from 'react';
 import { FeatureCollection,Geometry } from 'geojson';
-import { quartiers_analyse } from '../types/DataTypes.js';
+import { quartiers_analyse } from '../types/DataTypes';
 const modalVersementSecAnalyse:React.FC<PropsVersSecAnalyse> = (props:PropsVersSecAnalyse) => {
     const [file, setFile] = React.useState<File | null>(null);
     const [columns, setColumns] = React.useState<string[]>([]);

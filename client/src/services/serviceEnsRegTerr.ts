@@ -1,8 +1,7 @@
-import { ReponseAssosTerritoireEnteteEnsembleReglement, 
-    ReponseAssoTerritoireEnsembleReglement } from "../types/serviceTypes.js";
+import { ReponseAssosTerritoireEnteteEnsembleReglement, ReponseAssoTerritoireEnsembleReglement } from "../types/serviceTypes";
 import axios,{ Axios, AxiosResponse } from 'axios';
-import api from './api.js';
-import { associaion_territoire_ensemble_reglement } from "../types/DataTypes.js";
+import api from './api';
+import { associaion_territoire_ensemble_reglement } from "../types/DataTypes";
 class ServiceEnsRegTerr{
     async obtiensEnsRegEtAssocParTerritoire(idPeriodeGeo:number):Promise<ReponseAssosTerritoireEnteteEnsembleReglement>{
         try{

@@ -1,7 +1,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { inventaire_stationnement } from "../types/DataTypes.js";
+import { inventaire_stationnement } from "../types/DataTypes";
 import { SetStateAction } from "react";
-import { serviceInventaire } from "../services/serviceInventaire.js";
+import { serviceInventaire } from "../services";
 
 
 const TableauApprobationInventaire: React.FC<{

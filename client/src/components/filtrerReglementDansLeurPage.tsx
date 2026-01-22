@@ -1,6 +1,6 @@
 import { Modal,Box } from "@mui/material"
-import FiltreReglement from "./filtreReglement.js"
-import { ModalFiltrageReglementProps } from "../types/InterfaceTypes.js"
+import FiltreReglement from "./filtreReglement"
+import { ModalFiltrageReglementProps } from "../types/InterfaceTypes"
 const FiltrerReglementDansLeurPage:React.FC<ModalFiltrageReglementProps>=(props)=>{
     const gestFermetureModal = ()=>{
         props.defModalOuvert(false)

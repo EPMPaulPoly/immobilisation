@@ -1,4 +1,4 @@
-import { TableauInventaireUniqueProps } from "../types/InterfaceTypes.js";
+import { TableauInventaireUniqueProps } from "../types/InterfaceTypes";
 const TableauInventaireUnique: React.FC<TableauInventaireUniqueProps> =(props:TableauInventaireUniqueProps) =>{
     return(
         <>

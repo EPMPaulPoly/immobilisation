@@ -1,16 +1,7 @@
 import axios,{ AxiosResponse } from 'axios';
-import { definition_reglement_stationnement, 
-    entete_reglement_stationnement, 
-    parametres_requete_filtree_stationnement,  } from '../types/DataTypes.js';
-import { ReponseEntetesReglements, 
-    ReponseReglementComplet,
-    ReponseDBInfoInventaireReglementManuel, 
-    ReponseEntetesEnsemblesReglement, 
-    ReponseOperationsReglements,
-    ReponseUnitesReglements, 
-    ReponseLigneDefReglement, 
-    ReponseDataGraphique} from '../types/serviceTypes.js';
-import api from './api.js';
+import { definition_reglement_stationnement, entete_reglement_stationnement, parametres_requete_filtree_stationnement,  } from '../types/DataTypes';
+import { ReponseEntetesReglements, ReponseReglementComplet,ReponseDBInfoInventaireReglementManuel, ReponseEntetesEnsemblesReglement, ReponseOperationsReglements,ReponseUnitesReglements, ReponseLigneDefReglement, ReponseDataGraphique} from '../types/serviceTypes';
+import api from './api';
 import { promises } from 'dns';
 
 class ServiceReglements {

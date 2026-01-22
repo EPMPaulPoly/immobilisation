@@ -1,7 +1,7 @@
 import axios,{ AxiosResponse } from 'axios';
-import { territoire, territoireGeoJsonProperties } from '../types/DataTypes.js';
-import { ReponseTerritoire,ReponseDbTerritoire, } from '../types/serviceTypes.js';
-import api from './api.js';
+import { territoire, territoireGeoJsonProperties } from '../types/DataTypes';
+import { ReponseTerritoire,ReponseDbTerritoire, } from '../types/serviceTypes';
+import api from './api';
 import { FeatureCollection,Geometry } from 'geojson';
 
 class ServiceTerritoires {

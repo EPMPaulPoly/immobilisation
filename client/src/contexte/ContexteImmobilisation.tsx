@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode, Dispatch, SetStateAction, useContext } from 'react';
-import { ContexteImmobilisationType, donneesCarteDeFond, FournisseurContexteProps } from '../types/ContextTypes.js';
+import { ContexteImmobilisationType, donneesCarteDeFond, FournisseurContexteProps } from '../types/ContextTypes';
 
 
 const ContexteImmobilisation = createContext<ContexteImmobilisationType | undefined>(undefined);

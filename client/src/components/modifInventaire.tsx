@@ -1,16 +1,12 @@
 import React, { useState, useEffect,useCallback } from 'react';
-import { calculateRegLotInventoryProps } from '../types/utilTypes.js';
-import { TableRevueProps } from '../types/InterfaceTypes.js';
-import { serviceInventaire } from '../services/serviceInventaire.js';
+import { calculateRegLotInventoryProps } from '../types/utilTypes';
+import { TableRevueProps } from '../types/InterfaceTypes';
+import { serviceInventaire } from '../services';
 import { FeatureCollection, Geometry,Feature } from 'geojson';
-import { ensemble_reglement_territoire, 
-    informations_reglementaire_manuelle, 
-    inventaire_stationnement, 
-     reglement_complet,
-     requete_calcul_manuel_reg } from '../types/DataTypes.js';
-import TableauInventaireUnique from './TableauInventaireUnique.js';
-import recalculeInventaireLot from '../utils/recalculeInventaireLot.js';
-import obtRegManuel from '../utils/obtRegManuel.js';
+import { ensemble_reglement_territoire, informations_reglementaire_manuelle, inventaire_stationnement,  reglement_complet,requete_calcul_manuel_reg } from '../types/DataTypes';
+import TableauInventaireUnique from './TableauInventaireUnique';
+import recalculeInventaireLot from '../utils/recalculeInventaireLot';
+import obtRegManuel from '../utils/obtRegManuel';
 
 // Define the structure of the input values state
 interface InputValues {
@@ -40,7 +36,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
     const [obtentionEnCoursReg,defObtentionEnCoursReg] = useState<boolean>(false);
 
     const renvoiInventaireReg = (methodeAMontrer:number): inventaire_stationnement => {
-        const foundItem = props.inventaire.find((item:inventaire_stationnement) => item.methode_estime === methodeAMontrer);
+        const foundItem = props.inventaire.find(item => item.methode_estime === methodeAMontrer);
         return foundItem ?? emptyFeature;
     }
     const [inputValues, setInputValues] = useState<InputValues>({});
@@ -95,9 +91,9 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
         const formData = new FormData(form);
         const inventaireASauvegarder = Number(formData.getAll("entree-manuelle-inventaire"));
         if (!isNaN(inventaireASauvegarder)) {
-            if (props.inventaire.find((o:inventaire_stationnement)=>o.methode_estime===1)){
+            if (props.inventaire.find((o)=>o.methode_estime===1)){
                 const featureASauvegarder:inventaire_stationnement={
-                    g_no_lot: props.inventaire.find((o:inventaire_stationnement)=>o.methode_estime===1)?.g_no_lot?? '',
+                    g_no_lot: props.inventaire.find((o)=>o.methode_estime===1)?.g_no_lot?? '',
                     n_places_min: 0,
                     n_places_max: 0,
                     n_places_mesure: inventaireASauvegarder,
@@ -107,7 +103,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
                     id_reg_stat: '',
                     cubf: '',
                     commentaire: 'Relevé manuel',
-                    id_inv:props.inventaire.find((o:inventaire_stationnement)=>o.methode_estime===1)?.id_inv??(-1)
+                    id_inv:props.inventaire.find((o)=>o.methode_estime===1)?.id_inv??(-1)
                 }
                 if (featureASauvegarder.id_inv!= -1 && featureASauvegarder.g_no_lot!=''){
                     const reussi = await serviceInventaire.modifieInventaire(featureASauvegarder.id_inv,featureASauvegarder)

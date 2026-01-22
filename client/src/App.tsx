@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
-import Histoire from './pages/Histoire.js';
-import VisualisationInventaire from './pages/VisualisationInventaire.js';
-import Reglements from './pages/Reglements.js';
-import EnsemblesReglements from './pages/EnsemblesReglements.js';
-import EnsRegTerritoire from './pages/EnsRegTerr.js';
-import AnalyseQuartiers from './pages/AnalyseQuartiers.js';
-import AnalyseReglements from './pages/AnalyseReglements.js';
-import AnalyseVariabilite from './pages/AnalyseVariabilite.js';
-import { FournisseurContexte } from './contexte/ContexteImmobilisation.js';
-import ValidationStatistique from './pages/validationStatistique.js';
-import SommaireValidation from './pages/SommaireValidation.js';
-import VersementSecAnalyse from './pages/VersementSecAnalyse.js';
+import Histoire from './pages/Histoire';
+import VisualisationInventaire from './pages/VisualisationInventaire';
+import Reglements from './pages/Reglements';
+import EnsemblesReglements from './pages/EnsemblesReglements';
+import EnsRegTerritoire from './pages/EnsRegTerr';
+import AnalyseQuartiers from './pages/AnalyseQuartiers';
+import AnalyseReglements from './pages/AnalyseReglements';
+import AnalyseVariabilite from './pages/AnalyseVariabilite';
+import { FournisseurContexte } from './contexte/ContexteImmobilisation';
+import ValidationStatistique from './pages/validationStatistique';
+import SommaireValidation from './pages/SommaireValidation';
+import VersementSecAnalyse from './pages/VersementSecAnalyse';
 const app: React.FC = () => {
   return (
     <FournisseurContexte>

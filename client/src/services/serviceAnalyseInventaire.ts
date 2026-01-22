@@ -1,15 +1,9 @@
-import { ReponseDBInventaireAgregQuartTotal,  
-    ReponseDBInventaireAgregQuartParSuperf, 
-    ReponseInventaireAgregQuartParSuperf, 
-    ReponseXYAnalyseQuartier,
-    ReponseInventaireAgregQuartTotal,
-    ReponseHistoAnalyse,
-    ReponseDBVariableAgregQuart } from '../types/serviceTypes.js';
-import api from './api.js';
+import { ReponseDBInventaireAgregQuartTotal,  ReponseDBInventaireAgregQuartParSuperf, ReponseInventaireAgregQuartParSuperf, ReponseXYAnalyseQuartier,ReponseInventaireAgregQuartTotal,ReponseHistoAnalyse,ReponseDBVariableAgregQuart } from '../types/serviceTypes';
+import api from './api';
 import axios,{AxiosResponse} from 'axios';
 import { FeatureCollection,Geometry } from 'geojson';
-import { GeoJSONPropsAnaQuartier,  } from '../types/AnalysisTypes.js';
-import { barChartDataSet } from '../types/DataTypes.js';
+import { GeoJSONPropsAnaQuartier,  } from '../types/AnalysisTypes';
+import { barChartDataSet } from '../types/DataTypes';
 export const serviceAnalyseInventaire = {
     recalculeInventaireBackend:async() :Promise<boolean>=>{
         try {

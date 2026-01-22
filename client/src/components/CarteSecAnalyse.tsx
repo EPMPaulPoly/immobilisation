@@ -1,10 +1,11 @@
 import React, { useEffect, useState,useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON ,useMap} from 'react-leaflet';
-import { CarteSecAnalyseProps } from '../types/InterfaceTypes.js';
+import { CarteSecAnalyseProps } from '../types/InterfaceTypes';
+import { territoire } from '../types/DataTypes';
 import { FeatureCollection,Geometry } from 'geojson';
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
-import { utiliserContexte } from '../contexte/ContexteImmobilisation.js';
+import { utiliserContexte } from '../contexte/ContexteImmobilisation';
 
 const CarteSecAnalyse: React.FC<CarteSecAnalyseProps> = (props:CarteSecAnalyseProps) => {
     
