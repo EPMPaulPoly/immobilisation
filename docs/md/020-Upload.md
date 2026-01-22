@@ -94,24 +94,24 @@ La fonction suivante donne les vues précompilées
 ```
 sudo -u postgres psql -d parking_regs -c "\dv"
 ```
-Schéma |              Nom               | Type | Propriétaire 
--------|--------------------------------|------|-------------
-public | association_er_reg_stat_etendu | vue  | postgres
-public | dens_pop_quartier              | vue  | postgres
-public | dens_stat_reg_quartier         | vue  | postgres
-public | geography_columns              | vue  | postgres
-public | geometry_columns               | vue  | postgres
-public | max_pav_all_data               | vue  | postgres
-public | pourcent_territoire            | vue  | postgres
-public | stat_corr_pub_res              | vue  | postgres
-public | stat_reg_tot_par_quartier      | vue  | postgres
-public | taux_occupation_max            | vue  | postgres
-public | taux_occupation_public         | vue  | postgres
-public | taux_occupation_res_max        | vue  | postgres
-public | visu_ens_a_reg                 | vue  | postgres
-public | visu_reg_tete_a_reg_empile_2   | vue  | postgres
-public | vue_parametres_reglements      | vue  | postgres
-public | vue_periode_terr_er            | vue  | postgres
+Schema  |              Name              | Type |  Owner   
+--------|--------------------------------|------|---------
+public | association_er_reg_stat_etendu  | view | postgres
+public | dens_pop_quartier               | view | postgres
+public | dens_stat_reg_quartier          | view | postgres
+public | geography_columns               | view | postgres
+public | geometry_columns                | view | postgres
+public | max_pav_all_data                | view | postgres
+public | pourcent_territoire             | view | postgres
+public | stat_corr_pub_res               | view | postgres
+public | stat_reg_tot_par_quartier       | view | postgres
+public | taux_occupation_max             | view | postgres
+public | taux_occupation_public          | view | postgres
+public | taux_occupation_res_max         | view | postgres
+public | visu_ens_a_reg                  | view | postgres
+public | visu_reg_tete_a_reg_empile_2    | view | postgres
+public | vue_parametres_reglements       | view | postgres
+public | vue_periode_terr_er             | view | postgres
 
 ### Versement des secteurs d'analyse
 
