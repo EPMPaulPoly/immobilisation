@@ -147,7 +147,8 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
                                         <></>
                                     }
                                 </td>
-                                <td>{props.nouvelleCartoDispo===false?
+                                <td>
+                                    {props.nouvelleCartoDispo===false?
                                         territoireEdit===territoire.properties.id_periode_geo?
                                         <Cancel onClick={()=>defTerritoireEdit(0)}/>:
                                         <DeleteIcon onClick={()=> gestSupprimeUnTerr(territoire.properties?.id_periode_geo??-1)}/>:
