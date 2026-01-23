@@ -11,6 +11,11 @@ export interface objetRequeteMAJTotaleSecteursPeriode{
     requeteConfirmation: string
 }
 
+export interface objetRequeteSuppressionTerritoire{
+    requete: string,
+    identifiantsRemp: any[]
+}
+
 
 export const ConstruitRequeteMAJTerritoiresPeriode = (id_periode:number,data: Omit<DbTerritoire,'id_periode_geo'>[]):objetRequeteMAJTotaleSecteursPeriode=> {
     const requete1 = 'BEGIN;'
@@ -39,7 +44,28 @@ export const ConstruitRequeteMAJTerritoiresPeriode = (id_periode:number,data: Om
     return output
 }
 
-
+export const construitRequeteSuppressionTerritoire = (id_periode:number|undefined,id_periode_geo:number|undefined):objetRequeteSuppressionTerritoire=>{
+    let conditions: string[] = []
+    let index: number = 1;
+    let values: number[]=[]
+    if (typeof id_periode === 'number'&& !Number.isNaN(id_periode)){
+        conditions.push(`id_periode = $${index}`)
+        values.push(id_periode)
+        index++
+    }
+    if (typeof id_periode_geo === 'number' && !Number.isNaN(id_periode_geo)){
+        conditions.push(`id_periode_geo = $${index}`)
+        values.push(id_periode_geo)
+        index++
+    }
+    let requete:string;
+    if (conditions.length >0){
+        requete = `DELETE FROM cartographie_secteurs WHERE ${conditions.join(' AND ')}`
+    }else{
+        throw ReferenceError('Need to provide either id_periode or id_periode_geo')
+    }
+    return {requete:requete,identifiantsRemp:values}
+}
 export const rouleRequeteSQLMAJTerritoiresPeriode = async (
     pool:Pool,
     objetsRequetes:objetRequeteMAJTotaleSecteursPeriode
@@ -69,6 +95,24 @@ export const rouleRequeteSQLMAJTerritoiresPeriode = async (
         
         if (client){
 
+            client.release()
+        }
+    }
+}
+
+export const rouletRequeteSuppressionTerritoire = async(pool:Pool,objetRequete:objetRequeteSuppressionTerritoire):Promise<RepoResponse> =>{
+    let client: PoolClient | undefined;
+    try{
+        client = await pool.connect()
+        const result = await client.query(objetRequete.requete,objetRequete.identifiantsRemp)
+        return {
+            success:true,
+            data:[]
+        }
+    }catch(err){
+        return {success: false, data:[]}
+    }finally{
+        if (client){
             client.release()
         }
     }

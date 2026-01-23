@@ -12,3 +12,13 @@ export const serviceMetAJourTerritoiresPeriodes = async (
     const result = await repo.rouleRequeteSQLMAJTerritoiresPeriode(pool,objetRequete);
     return result
 }
+
+export const serviceSupprimeTerritoire = async (
+    pool: Pool,
+    id_periode: number | undefined,
+    id_periode_geo: number | undefined,
+):Promise<RepoResponse> =>{
+    const objetRequete = repo.construitRequeteSuppressionTerritoire(id_periode,id_periode_geo)
+    const resultat  = await repo.rouletRequeteSuppressionTerritoire (pool,objetRequete)
+    return resultat
+}

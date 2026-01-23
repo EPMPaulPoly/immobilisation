@@ -1,14 +1,16 @@
 import React,{useState,useRef} from 'react';
-import { territoire } from '../types/DataTypes';
+import { territoire, territoireGeoJsonProperties } from '../types/DataTypes';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Delete, Edit } from "@mui/icons-material";
-import {Button} from '@mui/material';
+import { Delete, Edit,Save,Cancel } from "@mui/icons-material";
+import {Button,Input} from '@mui/material';
 import { TableTerritoireProps } from '../types/InterfaceTypes';
 import { serviceTerritoires } from '../services';
+import {FeatureCollection,Geometry,Feature} from 'geojson';
+
 const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProps) => {
     const panelRef = useRef<HTMLDivElement>(null);
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -30,7 +32,8 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
             document.addEventListener('mousemove', handleMouseMove);
             document.addEventListener('mouseup', handleMouseUp);
         };
-
+    const [territoireEdit,defTerritoireEdit] = useState<number>(0);
+    const [ancientTerritoires,defAncienTerritoires] = useState<FeatureCollection<Geometry,territoireGeoJsonProperties>>({type:'FeatureCollection',features:[]})
     const saveGeoJSON = ( filename = "data.geojson") => {
         const blob = new Blob([JSON.stringify(props.territoires)], { type: "application/json" });
         const link = document.createElement("a");
@@ -57,6 +60,28 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
         props.defNouvelleCartoDispo(false);
         props.defSecTerritoireNew({type: "FeatureCollection", features: []});
     };
+
+    const gestSupprimeUnTerr = async (id_periode_geo: number | null) => {
+        if (id_periode_geo && id_periode_geo > 0) {
+            const res = await serviceTerritoires.supprimeTerritoire(id_periode_geo);
+            if (res === true) {
+                const nouvTerr: FeatureCollection<Geometry, territoireGeoJsonProperties> = {
+                    type: 'FeatureCollection',
+                    features: props.territoires.features.filter(
+                        (item:any): item is Feature<Geometry, territoireGeoJsonProperties> =>
+                            (item.properties as territoireGeoJsonProperties).id_periode_geo !== id_periode_geo
+                    )
+                };
+                props.defTerritoire(nouvTerr);
+            } else {
+                alert('Erreur');
+            }
+        }
+    };
+
+    const gereEditionPropsTerr= (id_periode_geo:number,newValue:string)=>{
+        //implementer
+    }
     return (
         <div className="panneau-bas-historique" ref={panelRef}>
             <div className="resize-handle" onMouseDown={handleMouseDown}></div>
@@ -85,7 +110,7 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
                     ):(
                         <>
                         <FileUploadIcon
-                        onClick={() => props.defModalVersementOuvert(!props.modalOuvert)}
+                            onClick={() => props.defModalVersementOuvert(!props.modalOuvert)}
                         />
                         <DownloadIcon 
                             onClick={()=>saveGeoJSON()} 
@@ -109,10 +134,26 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
                         territoire.properties && (
                             <tr key={territoire.properties.id_periode_geo}>
                                 <td>{territoire.properties.id_periode}</td>
-                                <td>{territoire.properties.ville}</td>
+                                <td>
+                                    {territoireEdit===territoire.properties.id_periode_geo?
+                                    <Input value={territoire.properties.ville} onChange={(e)=>gereEditionPropsTerr(territoire.properties?.id_periode_geo??0,e.target.value)}/>:
+                                    territoire.properties.ville}
+                                </td>
                                 <td>{territoire.properties.secteur}</td>
-                                <td><Edit/></td>
-                                <td><DeleteIcon/></td>
+                                <td>{props.nouvelleCartoDispo===false?
+                                        territoireEdit===territoire.properties.id_periode_geo?
+                                        <Save/>:
+                                        <Edit onClick={()=>defTerritoireEdit(territoire.properties?.id_periode_geo??0)}/>:
+                                        <></>
+                                    }
+                                </td>
+                                <td>{props.nouvelleCartoDispo===false?
+                                        territoireEdit===territoire.properties.id_periode_geo?
+                                        <Cancel onClick={()=>defTerritoireEdit(0)}/>:
+                                        <DeleteIcon onClick={()=> gestSupprimeUnTerr(territoire.properties?.id_periode_geo??-1)}/>:
+                                        <></>
+                                    }
+                                </td>
                             </tr>
                         )
                     ))}

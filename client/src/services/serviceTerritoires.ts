@@ -112,6 +112,49 @@ class ServiceTerritoires {
             throw error; // Re-throw if necessary
         }
     }
+
+    async supprimeTerritoire(id_periode_geo:number):Promise<boolean>{
+        try {
+            const response: AxiosResponse= await api.delete(`/territoire?id_periode_geo=${id_periode_geo}`);
+            const data = response.data;
+            if (data.success ===true){
+                return true
+            }else{
+                return false
+            }
+        } catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.response?.data);
+                console.error('Axios Error Status:', error.response?.status);
+                console.error('Axios Error Data:', error.response?.data);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+            throw error; // Re-throw if necessary
+        }
+    }
+
+    async supprimeTerritoiresPeriode(id_periode:number):Promise<boolean>{
+
+        try {
+            const response: AxiosResponse<ReponseDbTerritoire> = await api.delete(`/territoire?id_periode=${id_periode}`);
+            const data = response.data;
+            if (data.success ===true){
+                return true
+            }else{
+                return false
+            }
+        } catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.response?.data);
+                console.error('Axios Error Status:', error.response?.status);
+                console.error('Axios Error Data:', error.response?.data);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+            throw error; // Re-throw if necessary
+        }
+    }
 }
 
 export const serviceTerritoires =  new ServiceTerritoires();

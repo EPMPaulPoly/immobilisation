@@ -3,7 +3,7 @@ import { Pool } from 'pg';
 import { DbTerritoire, ParamsPeriode } from '../../types/database';
 // Types pour les requêtes
 import { Polygon, MultiPolygon } from 'geojson';
-import { serviceMetAJourTerritoiresPeriodes } from '../services/territoire.service';
+import { serviceMetAJourTerritoiresPeriodes,serviceSupprimeTerritoire } from '../services/territoire.service';
 interface GeometryBody {
     geometry: Polygon | MultiPolygon;
 }
@@ -68,7 +68,7 @@ export const creationRouteurTerritoires = (pool: Pool): Router => {
         }
     };
     const metAJourTerritoiresPeriode: RequestHandler<ParamsPeriode> = async (req, res): Promise<void> => {
-        console.log('obtention territoire')
+        console.log('Mise a jour territoires pour une période')
         let client;
         try{
             const {id_periode} = req.params
@@ -83,9 +83,27 @@ export const creationRouteurTerritoires = (pool: Pool): Router => {
             res.status(500).json({ success: false, error: 'Database error' });
         } 
     }
+
+    const supprimeTerritoires: RequestHandler = async(req:any,res:any) : Promise<void> =>{
+        try{
+        const {id_periode, id_periode_geo} = req.query
+        const results = await serviceSupprimeTerritoire(pool,Number(id_periode),Number(id_periode_geo))
+        if (results.success === true){
+            res.status(200).json({success:true})
+        }else{
+            throw Error('Erreur dans la suppression')
+        }}catch(err:any){
+            if (err.message === 'Need to provide either id_periode or id_periode_geo'){
+                res.status(404).json({success:false,message: 'Need to provide either id_periode or id_periode_geo'})
+            }else{
+                res.status(500).json({success:false, message:'Erreur interne serveur'})
+            }
+        }
+    }
     // Routes
     router.get('/periode/:id', obtiensTerritoiresParPeriode)
     router.get('/periode-geo/:id', obtiensTerritoiresParId)
     router.post('/bulk-replace/:id_periode',metAJourTerritoiresPeriode)
+    router.delete('/',supprimeTerritoires)
     return router;
 };
