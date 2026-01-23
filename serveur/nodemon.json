@@ -1,8 +1,11 @@
 {
-    "watch": ["src"],
-    "ignore": ["src/**/*.spec.ts"],
-    "ext": ".js,.json,.ts",
-    "exec": "node --inspect=0.0.0.0:9229 -r ts-node/register src/serveur.ts",
-    "verbose": true,
-    "legacyWatch": false
-  }
+  "watch": ["src"],
+  "ext": "ts,json",
+  "execMap": {
+    "ts": "node --inspect=0.0.0.0:9229 -r ts-node/register"
+  },
+  "delay": "300",
+  "signal": "SIGTERM",
+  "legacyWatch": true,
+  "verbose": true
+}

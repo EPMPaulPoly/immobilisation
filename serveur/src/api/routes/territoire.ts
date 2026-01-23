@@ -73,16 +73,15 @@ export const creationRouteurTerritoires = (pool: Pool): Router => {
         try{
             const {id_periode} = req.params
             const territoire: Omit<DbTerritoire,'id_periode_geo'>[] = req.body
-            client = await pool.connect()
             const result = await serviceMetAJourTerritoiresPeriodes(pool,Number(id_periode),territoire)
-            res.status(200).json({success:true, data: result})
+            if (result.success === true){
+                res.status(200).json({success:true, data: result.data})
+            }else{
+                throw Error('Erreur dans la mise à jour des territoire')
+            }
         }catch (err) {
             res.status(500).json({ success: false, error: 'Database error' });
-        } finally {
-            if (client) {
-                client.release()
-            }
-        }
+        } 
     }
     // Routes
     router.get('/periode/:id', obtiensTerritoiresParPeriode)

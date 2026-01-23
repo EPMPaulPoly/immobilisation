@@ -1,6 +1,12 @@
 import { ParamsDictionary } from 'express-serve-static-core';
 import GeoJSON from 'geojson';
 
+
+export interface RepoResponse{
+    success:boolean,
+    data: any[]
+}
+
 export interface DbQuartierAnalyse{
     id_quartier:number,
     nom_quartier:string,

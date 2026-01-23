@@ -69,9 +69,9 @@
             "address": "localhost",
             "localRoot": "${workspaceFolder}/serveur",
             "remoteRoot": "/app/serveur",
-            "cwd": "${workspaceFolder}/serveur",
             "skipFiles": ["<node_internals>/**"],
             "restart": true,
+            "timeout":3000,
             "trace": true
         },
         {

@@ -8,7 +8,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { Delete, Edit } from "@mui/icons-material";
 import {Button} from '@mui/material';
 import { TableTerritoireProps } from '../types/InterfaceTypes';
-const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
+import { serviceTerritoires } from '../services';
+const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProps) => {
     const panelRef = useRef<HTMLDivElement>(null);
     const handleMouseDown = (e: React.MouseEvent) => {
             const startY = e.clientY;
@@ -40,8 +41,16 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
         document.body.removeChild(link);
         };
 
-    const verseDonnees = () => {
+    const verseDonnees = async() => {
         // À implémenter : fonction pour verser les données
+        const dataReturn = await serviceTerritoires.ajouteTerritoiresEnBloc(props.periodeSelect,props.secTerritoireNew)
+        if (dataReturn.success===true){
+            props.defTerritoire(dataReturn.data)
+            props.defSecTerritoireNew({type:'FeatureCollection',features:[]})
+            props.defNouvelleCartoDispo(false)
+        } else{
+            alert('Échec')
+        }
     };
     const annuleVersement = () => {
         // À implémenter : fonction pour annuler le versement
@@ -58,7 +67,13 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props) => {
                 ):(props.nouvelleCartoDispo ? (
                         <>  
                             <span>Periode: {props.periodeSelect}</span>
-                            <Button variant='outlined' sx={{backgroundColor:'green',color:'black'}}>Verser</Button>
+                            <Button 
+                                variant='outlined' 
+                                sx={{backgroundColor:'green',color:'black'}}
+                                onClick={()=>verseDonnees()}
+                            >
+                                Verser
+                            </Button>
                             <Button 
                                 variant='outlined' 
                                 sx={{backgroundColor:'red', color:'black'}}
