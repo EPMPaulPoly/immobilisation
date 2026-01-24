@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     height: 200px; /* Initial height */
-    overflow-y: auto; /* Prevent overflow */
+    overflow: hidden; /* Prevent overflow */
     width: 100%; /* Ensure it takes the full width of its container */
     border: 1px solid #ccc; /* Add a border for visibility */
     position: relative; /* Ensure the handle is positioned correctly */
@@ -64,41 +64,15 @@
     justify-content: flex-start;
     align-content: flex-start;
     flex-shrink: 0; /* Prevent shrinking */
-    overflow-y: auto; /* Allow scrolling if necessary within this section */
     background-color: #1f1f1f;
     color:white;
 }
 
-.table-territoire {
+.table-territoire-historique {
     width: 100%;
     border-collapse: collapse;
-    display: grid;
-    overflow-y: auto;
+    overflow: hidden;
+    padding:10px;
+    flex:1;
 }
 
-.table-territoire th,
-.table-territoire td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.table-territoire th {
-    background-color: #f2f2f2;
-    color: black;
-}
-
-.table-territoire th:nth-child(1),
-.table-territoire td:nth-child(1) {
-    min-width: 150px; /* Minimum width for the first column */
-}
-
-.table-territoire th:nth-child(2),
-.table-territoire td:nth-child(2) {
-    min-width: 200px; /* Minimum width for the second column */
-}
-
-.table-territoire th:nth-child(3),
-.table-territoire td:nth-child(3) {
-    min-width: 250px; /* Minimum width for the third column */
-}

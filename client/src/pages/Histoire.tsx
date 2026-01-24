@@ -29,6 +29,7 @@ const Histoire: React.FC = () => {
         features: []
     });
     const [nouvelleCartoDispo,defNouvelleCartoDispo] = useState<boolean>(false);
+    const [editionEnCours, defEditionEnCours] = useState<boolean>(false);
 
 
     const testGeoJSON:FeatureCollection<Geometry,territoireGeoJsonProperties> = {
@@ -86,6 +87,8 @@ const Histoire: React.FC = () => {
                         territoires={etatTerritoire}
                         defTerritoires={defTerritoire}
                         nouvelleCartoDispo={nouvelleCartoDispo} 
+                        editionEnCours={editionEnCours}
+                        defEditionEnCours={defEditionEnCours}
                     />
                 </div>
 
@@ -114,6 +117,8 @@ const Histoire: React.FC = () => {
                         defSecTerritoireNew={defEtatNouveauTerritoire}
                         periodeSelect={periodeSelect}
                         defPeriodeSelect={defPeriodeSelect}
+                        editionEnCours={editionEnCours}
+                        defEditionEnCours={defEditionEnCours}
                     />
                 </div>
             </div>

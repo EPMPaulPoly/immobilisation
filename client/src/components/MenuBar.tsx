@@ -14,9 +14,18 @@ const MenuBar: React.FC<{}> = () => {
         <div className="menu-bar">
             <h1>Immobilisation</h1>
             <SubMenuComponent
-                label={"Entrée Règlementation"}
+                label={"Entrée Données Départ"}
                 options={[
                     {label:"Secteurs d'analyse",path:"/sec-analyse-verse"},
+                    {label:"Conversion unité", path:"/unites"},
+                    {label:"Rôle Foncier",path:"/role-foncier"},
+                    {label:"Cadastre", path:"/cadastre"},
+                    {label:"Associations Cadastre-rôle",path:"/assoc-cadastre-role"}
+                ]}
+            />
+            <SubMenuComponent
+                label={"Entrée Règlementation"}
+                options={[
                     {label:"Historique",path:"/historique"},
                     {label:"Règlements",path:"/reg"},
                     {label:"Ensembles de règlements",path:"/ens-reg"},

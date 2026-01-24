@@ -6,12 +6,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Delete, Edit,Save,Cancel } from "@mui/icons-material";
-import {Button,Input} from '@mui/material';
+import {Button,TextField, TableCell, TableContainer,TableRow,Table,TableHead,TableBody,Paper} from '@mui/material';
 import { TableTerritoireProps } from '../types/InterfaceTypes';
 import { serviceTerritoires } from '../services';
 import {FeatureCollection,Geometry,Feature} from 'geojson';
 
-const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProps) => {
+const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProps)=> {
     const panelRef = useRef<HTMLDivElement>(null);
     const handleMouseDown = (e: React.MouseEvent) => {
             const startY = e.clientY;
@@ -43,7 +43,13 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
         link.click();
         document.body.removeChild(link);
         };
-
+    const gestDebutModifTerritoires =(id_periode_geo:number)=>{
+        if (id_periode_geo >0){
+            defTerritoireEdit(id_periode_geo??0)
+            defAncienTerritoires(props.territoires as FeatureCollection<Geometry,territoireGeoJsonProperties>)
+            props.defEditionEnCours(true)
+        }
+    }
     const verseDonnees = async() => {
         // À implémenter : fonction pour verser les données
         const dataReturn = await serviceTerritoires.ajouteTerritoiresEnBloc(props.periodeSelect,props.secTerritoireNew)
@@ -79,9 +85,34 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
         }
     };
 
-    const gereEditionPropsTerr= (id_periode_geo:number,newValue:string)=>{
+    const gereEditionPropsTerr= (id_periode_geo:number,newValue:string,field:string)=>{
         //implementer
+        const updatedFeature ={
+            type:'FeatureCollection',
+            features:props.territoires.features.map((feature)=>{
+                if (feature.properties?.id_periode_geo===id_periode_geo){
+                    return {
+                        type:'Feature',
+                        geometry:feature.geometry,
+                        properties:{
+                            ...feature.properties,
+                            [field]:newValue
+                        }
+                    }
+                } else{
+                    return feature
+                }
+            })
+        } as FeatureCollection<Geometry,territoireGeoJsonProperties>;
+        props.defTerritoire(updatedFeature)
     }
+
+    const gestAnnulationEdition = ()=>{
+        defTerritoireEdit(0);
+        props.defTerritoire(ancientTerritoires)
+        props.defEditionEnCours(false)
+    }
+
     return (
         <div className="panneau-bas-historique" ref={panelRef}>
             <div className="resize-handle" onMouseDown={handleMouseDown}></div>
@@ -89,7 +120,7 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
             <div className="upload-download-geopolitics" style={{gap:'10px'}}>
                 {props.periodeSelect === -1 ? (
                     <span>Choisir une période</span>
-                ):(props.nouvelleCartoDispo ? (
+                ):(props.nouvelleCartoDispo  ? (
                         <>  
                             <span>Periode: {props.periodeSelect}</span>
                             <Button 
@@ -108,58 +139,85 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
                             </Button>
                         </>
                     ):(
-                        <>
-                        <FileUploadIcon
+                        !props.editionEnCours?
+                            <><FileUploadIcon
                             onClick={() => props.defModalVersementOuvert(!props.modalOuvert)}
                         />
                         <DownloadIcon 
                             onClick={()=>saveGeoJSON()} 
-                        />
-                        </>
+                        /></>:<></>
                     )
                 )}
             </div>
-            <table className="table-territoire-historique">
-                <thead>
-                    <tr>
-                        <th>ID période</th>
-                        <th>Ville</th>
-                        <th>Secteur</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.territoires.features.map((territoire) => (
-                        territoire.properties && (
-                            <tr key={territoire.properties.id_periode_geo}>
-                                <td>{territoire.properties.id_periode}</td>
-                                <td>
-                                    {territoireEdit===territoire.properties.id_periode_geo?
-                                    <Input value={territoire.properties.ville} onChange={(e)=>gereEditionPropsTerr(territoire.properties?.id_periode_geo??0,e.target.value)}/>:
-                                    territoire.properties.ville}
-                                </td>
-                                <td>{territoire.properties.secteur}</td>
-                                <td>{props.nouvelleCartoDispo===false?
-                                        territoireEdit===territoire.properties.id_periode_geo?
-                                        <Save/>:
-                                        <Edit onClick={()=>defTerritoireEdit(territoire.properties?.id_periode_geo??0)}/>:
-                                        <></>
-                                    }
-                                </td>
-                                <td>
-                                    {props.nouvelleCartoDispo===false?
-                                        territoireEdit===territoire.properties.id_periode_geo?
-                                        <Cancel onClick={()=>defTerritoireEdit(0)}/>:
-                                        <DeleteIcon onClick={()=> gestSupprimeUnTerr(territoire.properties?.id_periode_geo??-1)}/>:
-                                        <></>
-                                    }
-                                </td>
-                            </tr>
-                        )
-                    ))}
-                </tbody>
-            </table>
+            <div className="table-territoire-historique" style={{width:'97.5%'}}>
+                <TableContainer 
+                    component={Paper} 
+                    sx={{
+                        height: '100%',
+                        overflowY: 'auto',
+                        overflowX:'hidden',
+                        width:'100%',
+                        tableLayout:'fixed'
+                    }}
+                >
+                    <Table stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID période</TableCell>
+                                <TableCell>Ville</TableCell>
+                                <TableCell>Secteur</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        {props.territoires.features.map((territoire) => (
+                            territoire.properties && (
+                                <TableRow key={territoire.properties.id_periode_geo}>
+                                    <TableCell sx={{width:120}}>
+                                        {territoire.properties.id_periode}
+                                    </TableCell>
+                                    <TableCell>
+                                        {territoireEdit===territoire.properties.id_periode_geo?
+                                        <TextField value={territoire.properties.ville} onChange={(e)=>gereEditionPropsTerr(territoire.properties?.id_periode_geo??0,e.target.value,'ville')}/>:
+                                        territoire.properties.ville}
+                                    </TableCell>
+                                    <TableCell >
+                                        {territoireEdit===territoire.properties.id_periode_geo?
+                                        <TextField 
+                                            value={territoire.properties.secteur} 
+                                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>gereEditionPropsTerr(territoire.properties?.id_periode_geo??0,e.target.value,'secteur')}
+                                        />:
+                                        territoire.properties.secteur
+                                        }   
+                                    </TableCell>
+                                    <TableCell sx={{width:48}}>
+                                        {props.nouvelleCartoDispo===true||
+                                            (territoireEdit !== territoire.properties.id_periode_geo && 
+                                            props.editionEnCours===true)?
+                                            <></>:
+                                            territoireEdit===territoire.properties.id_periode_geo?
+                                            <Save/>:
+                                            <Edit onClick={()=>gestDebutModifTerritoires(territoire.properties?.id_periode_geo??0)}/>
+                                        }
+                                    </TableCell>
+                                    <TableCell sx={{width:48}}>
+                                        {props.nouvelleCartoDispo===true||
+                                            (territoireEdit !== territoire.properties.id_periode_geo && 
+                                            props.editionEnCours===true)?
+                                            <></>:
+                                            territoireEdit===territoire.properties.id_periode_geo?
+                                            <Cancel onClick={()=>gestAnnulationEdition()}/>:
+                                            <DeleteIcon onClick={()=> gestSupprimeUnTerr(territoire.properties?.id_periode_geo??-1)}/>
+                                        }
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        ))}
+                    </TableBody>
+                    </Table>    
+                </TableContainer>
+            </div>
         </div>
     );
 };

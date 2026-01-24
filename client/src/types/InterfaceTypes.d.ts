@@ -238,6 +238,8 @@ export interface TableHistoireProps{
     territoires:GeoJSON.FeatureCollection<GeoJSON.Geometry>;
     defTerritoires: React.Dispatch<SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry,territoireGeoJsonProperties>>>;
     nouvelleCartoDispo:boolean;
+    editionEnCours:boolean;
+    defEditionEnCours: React.Dispatch<SetStateAction<boolean>>
 }
 
 export interface TableTerritoireProps{
@@ -251,6 +253,8 @@ export interface TableTerritoireProps{
     defSecTerritoireNew:React.Dispatch<SetStateAction<FeatureCollection<Geometry,territoireGeoJsonProperties>>>,
     periodeSelect:number,
     defPeriodeSelect:React.Dispatch<SetStateAction<number>>;
+    editionEnCours: boolean,
+    defEditionEnCours: React.Dispatch<SetStateAction<boolean>>
 }
 
 export interface PropsVersTerritoires{
