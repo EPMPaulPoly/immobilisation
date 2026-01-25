@@ -1,6 +1,6 @@
 import axios,{ AxiosResponse } from 'axios';
 import { territoire, territoireGeoJsonProperties } from '../types/DataTypes';
-import { ReponseTerritoire,ReponseDbTerritoire, } from '../types/serviceTypes';
+import { ReponseTerritoire,ReponseDbTerritoire, ReponseTerritoireUnique, } from '../types/serviceTypes';
 import api from './api';
 import { FeatureCollection,Geometry,Feature } from 'geojson';
 
@@ -13,7 +13,7 @@ class ServiceTerritoires {
                 type: "FeatureCollection",
                 features: data_res.map((item) => ({
                     type: "Feature",
-                    geometry: JSON.parse(item.geojson_geometry),
+                    geometry: item.geometry,
                     properties: {
                         id_periode_geo: item.id_periode_geo,
                         id_periode: item.id_periode,
@@ -22,11 +22,7 @@ class ServiceTerritoires {
                     }
                 }))
             };
-            const territoires = data_res.map((item: any) => ({
-                ...item,
-                geojson_geometry: JSON.parse(item.geojson_geometry), // Parse the GeoJSON string
-            }));
-            console.log(territoires)
+            
             return {success:response.data.success,data:featureCollection};
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -48,7 +44,7 @@ class ServiceTerritoires {
                 type: "FeatureCollection",
                 features: data_res.map((item) => ({
                     type: "Feature",
-                    geometry: JSON.parse(item.geojson_geometry),
+                    geometry: item.geometry,
                     properties: {
                         id_periode_geo: item.id_periode_geo,
                         id_periode: item.id_periode,
@@ -56,12 +52,8 @@ class ServiceTerritoires {
                         secteur: item.secteur
                     }
                 }))
-            };
-            const territoires = data_res.map((item: any) => ({
-                ...item,
-                geojson_geometry: JSON.parse(item.geojson_geometry), // Parse the GeoJSON string
-            }));
-            console.log(territoires)
+            } as FeatureCollection<Geometry,territoireGeoJsonProperties>;
+
             return {success:response.data.success,data:featureCollection};
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -154,6 +146,41 @@ class ServiceTerritoires {
             }
             throw error; // Re-throw if necessary
         }
+    }
+
+    async modifieTerritoire(id_periode_geo:number,donnee: Feature<Geometry,territoireGeoJsonProperties>):Promise<ReponseTerritoireUnique>{
+        try{
+            const reformattedSecteurs = {
+                id_periode:donnee.properties.id_periode,
+                ville:donnee.properties.ville,
+                secteur:donnee.properties.secteur,
+                geometry: JSON.stringify(donnee.geometry)
+            }
+            const response: AxiosResponse<ReponseDbTerritoire> = await api.put(`territoire/${id_periode_geo}`,reformattedSecteurs)
+            const quartierModif = response.data.data[0]
+            const quartierModifFormat = {
+                type:'Feature',
+                properties:{
+                    id_periode_geo:quartierModif.id_periode_geo,
+                    ville: quartierModif.ville,
+                    secteur: quartierModif.secteur,
+                    id_periode: quartierModif.id_periode
+                },
+                geometry: quartierModif.geometry
+            } as Feature<Geometry,territoireGeoJsonProperties>
+            return{success:true,data: quartierModifFormat}
+        }catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.response?.data);
+                console.error('Axios Error Status:', error.response?.status);
+                console.error('Axios Error Data:', error.response?.data);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+            throw error; // Re-throw if necessary
+        }
+        
+        
     }
 }
 

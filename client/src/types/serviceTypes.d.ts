@@ -46,6 +46,7 @@ export interface ApiResponse<T> {
 export type ReponsePeriode = ApiResponse<periode[]>
 export type ReponseDbTerritoire = ApiResponse<territoire[]>
 export type ReponseTerritoire = ApiResponse<FeatureCollection<Geometry, territoireGeoJsonProperties>>
+export type ReponseTerritoireUnique = ApiResponse<Feature<Geometry, territoireGeoJsonProperties>>
 // quartier analyse
 export type ReponseQuartiersAnalyse = ApiResponse<FeatureCollection<Geometry,quartiers_analyse>>
 export type ReponseQuartierDBAnalyse = ApiResponse<quartiers_analyse_db[]>

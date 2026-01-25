@@ -16,6 +16,10 @@ export interface objetRequeteSuppressionTerritoire{
     identifiantsRemp: any[]
 }
 
+export interface objetRequeteModifieTerritoire{
+    requeteModifie:string,
+    donneesModif: any[]
+}
 
 export const ConstruitRequeteMAJTerritoiresPeriode = (id_periode:number,data: Omit<DbTerritoire,'id_periode_geo'>[]):objetRequeteMAJTotaleSecteursPeriode=> {
     const requete1 = 'BEGIN;'
@@ -32,8 +36,10 @@ export const ConstruitRequeteMAJTerritoiresPeriode = (id_periode:number,data: Om
                     item.geometry
                 );
                 return `($${startIdx}, $${startIdx + 1}, $${startIdx + 2}, $${startIdx + 3}, ST_SetSRID(ST_GeomFromGeoJSON($${startIdx + 4}), 4326))`;
-            }).join(', ');
-    const requeteAddition = `INSERT INTO cartographie_secteurs (id_periode,ville,secteur,ville_sec,geometry) VALUES ${placeholders} RETURNING id_periode_geo,ville,secteur,ville_sec,ST_AsGeoJSON(geometry)as geometry;`;
+            }).join(', \n');
+    const requeteAddition = `INSERT INTO cartographie_secteurs (id_periode,ville,secteur,ville_sec,geometry) 
+    VALUES ${placeholders} 
+    RETURNING id_periode_geo,ville,secteur,ville_sec,id_periode,ST_AsGeoJSON(geometry)as geometry;`;
     const output: objetRequeteMAJTotaleSecteursPeriode = {
         requeteCommence: requete1,
         requeteSuppression: requeteSuppression,
@@ -113,6 +119,48 @@ export const rouletRequeteSuppressionTerritoire = async(pool:Pool,objetRequete:o
         return {success: false, data:[]}
     }finally{
         if (client){
+            client.release()
+        }
+    }
+}
+
+export const construitRequeteModif = (id_periode_geo:number,data:any):objetRequeteModifieTerritoire=>{
+    const query = `UPDATE cartographie_secteurs 
+    SET
+        id_periode = $1,
+        ville = $2,
+        secteur = $3,
+        ville_sec = $4,
+        geometry = ST_SetSRID(ST_GeomFromGeoJSON($5), 4326)
+    WHERE 
+        id_periode_geo = $6 
+    RETURNING id_periode_geo,ville,secteur,ville_sec,id_periode,ST_AsGeoJSON(geometry)as geometry`
+    const donnees: any[] = [data.id_periode,data.ville,data.secteur,`${data.ville} - ${data.secteur}`,data.geometry,id_periode_geo]
+    return {requeteModifie:query,donneesModif:donnees}
+}
+
+export const rouleRequeteModifTerritoire = async(
+    pool:Pool,
+    objet: objetRequeteModifieTerritoire
+):Promise<RepoResponse>=>{
+    let client: PoolClient | undefined;
+    try{
+        client = await pool.connect()
+        const result = await client.query(objet.requeteModifie,objet.donneesModif)
+        const output = result.rows.map((item:any)=>({
+            ...item,
+            geometry: JSON.parse(item.geometry)
+        }
+        ))
+        return {
+            success:true,
+            data:output
+        }
+    }catch(err){
+        return {success: false, data:[]}
+    }finally{
+        if (client){
+
             client.release()
         }
     }

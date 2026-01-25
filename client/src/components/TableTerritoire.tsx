@@ -113,6 +113,27 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
         props.defEditionEnCours(false)
     }
 
+    const gestModifTerritoire = async()=>{
+        const dataASauver = props.territoires.features.find((feature): feature is Feature<Geometry, territoireGeoJsonProperties>=>feature.properties?.id_periode_geo === territoireEdit)
+        if (typeof dataASauver!== 'undefined'){
+            const resultat = await serviceTerritoires.modifieTerritoire(territoireEdit,dataASauver)
+            const filterOld = {
+                type:'FeatureCollection',
+                features: props.territoires.features.map((feature)=>{
+                    if(feature.properties?.id_periode_geo!== territoireEdit){
+                        return feature
+                    } else{
+                        return resultat.data
+                    }
+                } )
+            }
+            props.defTerritoire(filterOld as FeatureCollection<Geometry,territoireGeoJsonProperties>)
+            defAncienTerritoires({type:'FeatureCollection',features:[]})
+            defTerritoireEdit(0)
+            props.defEditionEnCours(false)
+        }
+    }
+
     return (
         <div className="panneau-bas-historique" ref={panelRef}>
             <div className="resize-handle" onMouseDown={handleMouseDown}></div>
@@ -197,7 +218,7 @@ const TableTerritoire:React.FC<TableTerritoireProps> =(props:TableTerritoireProp
                                             props.editionEnCours===true)?
                                             <></>:
                                             territoireEdit===territoire.properties.id_periode_geo?
-                                            <Save/>:
+                                            <Save onClick={()=>gestModifTerritoire()}/>:
                                             <Edit onClick={()=>gestDebutModifTerritoires(territoire.properties?.id_periode_geo??0)}/>
                                         }
                                     </TableCell>

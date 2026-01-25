@@ -22,3 +22,13 @@ export const serviceSupprimeTerritoire = async (
     const resultat  = await repo.rouletRequeteSuppressionTerritoire (pool,objetRequete)
     return resultat
 }
+
+export const serviceModifieTerritoire = async (
+    pool:Pool,
+    id_periode_geo: number|undefined,
+    data:any
+):Promise<RepoResponse> =>{
+    const objetRequete = repo.construitRequeteModif(Number(id_periode_geo),data)
+    const resultat = await repo.rouleRequeteModifTerritoire(pool,objetRequete)
+    return resultat
+}

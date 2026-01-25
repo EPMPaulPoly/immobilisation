@@ -116,12 +116,8 @@ export interface periode{
     date_fin_periode: number,
 }
 
-export interface territoire{
-    id_periode_geo: number,
-    id_periode: number,
-    ville: string|null,
-    secteur: string|null,
-    geojson_geometry: Geometry
+export interface territoire extends territoireGeoJsonProperties{
+    geometry: Geometry
 }
 
 export interface territoireGeoJsonProperties {
