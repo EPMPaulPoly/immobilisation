@@ -1,7 +1,7 @@
 # Téléversement de données
 ---
 [<Installation](010-Installation.md)| 
-[Création des règlements>](020-Upload.md)
+[Démarrage du serveur>](021-Demarrage.md)
 ---
 
 Deux solutions sont disponibles pour téléverser les données dans la base de données. La première consiste à téléverser le rôle et le cadastre dans un format de base de données vide par exemple pour un nouveau projet. La deuxième consiste à téléverser une base de données créée par un autre utilisateur. 
@@ -10,6 +10,15 @@ Deux solutions sont disponibles pour téléverser les données dans la base de d
 La première étape est d'aller chercher le [format de base de données](../../db_template/format_bd_vide.sql) dans le dépôt github du projet. Vous pouvez utiliser ce format directement. La base de données étant créé sous windows une étape supplémentaire est nécessaire sous Ubuntu pour mettre en place le format.
 
 ## Versement sous Windows
+### Versement du format et création de la base de données
+
+Dans le cas de windows, le format fourni peut directement être utilisé. Il créera la base de données parking_regs_test qui contient le format et les différentes vue utilisées. Les étapes sont les suivantes:
+1. Naviguez au dossier immobilisation/db_template dans l'explorateur de fichier
+2. Faites un clic droit et cliquer sur ouvrir le terminal dans ce dossier
+3. Entrez la commande suivante:
+```
+psql -f format_bd_vide.sql
+```
 
 ## Versement sous Ubuntu
 
@@ -113,8 +122,5 @@ public | visu_reg_tete_a_reg_empile_2    | view | postgres
 public | vue_parametres_reglements       | view | postgres
 public | vue_periode_terr_er             | view | postgres
 
-### Versement des secteurs d'analyse
-
-Maintenant que les relations de la base de données sont mises en place, on peut commencer à verser les données géospatiales pertinentes
-La première étape sera de téléverser les données de secteurs d'analyse
+Une fois le format versé vous pouvez procéder aux étapes de téléversement des données une à une [en commençant par les secteurs d'analyse](021-UploadSecteurs.md)
 # Téléversement d'un projet pré-existant

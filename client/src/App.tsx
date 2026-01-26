@@ -12,6 +12,7 @@ import { FournisseurContexte } from './contexte/ContexteImmobilisation';
 import ValidationStatistique from './pages/validationStatistique';
 import SommaireValidation from './pages/SommaireValidation';
 import VersementSecAnalyse from './pages/VersementSecAnalyse';
+import ModificationUnites from './pages/ModificationUnites';
 const app: React.FC = () => {
   return (
     <FournisseurContexte>
@@ -29,6 +30,7 @@ const app: React.FC = () => {
           <Route path="/valid-stat" element ={<ValidationStatistique/>}/>
           <Route path="/sommaire-valid" element={<SommaireValidation/>}/>
           <Route path="/sec-analyse-verse" element={<VersementSecAnalyse/>}/>
+          <Route path="/unites" element={<ModificationUnites/>}/>
         </Routes>
       </Router>
     </FournisseurContexte>

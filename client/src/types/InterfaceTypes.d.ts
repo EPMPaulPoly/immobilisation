@@ -1,6 +1,6 @@
 import {LatLng, LatLngExpression} from "leaflet";
 import React, { SetStateAction } from "react";
-import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul } from "./DataTypes";
+import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion } from "./DataTypes";
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { PrioriteEstimeQuartier, TypesVisualisationAnalyseQuartier, VariablesPossibles } from "./AnalysisTypes";
 import { N } from "react-router/dist/development/register-BkDIKxVz";
@@ -78,6 +78,35 @@ export interface CarteSecAnalyseProps{
     startZoom: number;
     setStartZoom: React.Dispatch<SetStateAction<number>>;
 }
+// ---------------------------------------------------------------
+// --------------------------- Unites ----------------------------
+// ---------------------------------------------------------------
+
+export interface PropsListeUnite{
+    unites: unites_reglement_stationnement[]
+    defUnites: React.Dispatch<SetStateAction<unites_reglement_stationnement[]>>
+    uniteSelect: unites_reglement_stationnement
+    defUniteSelect: React.Dispatch<SetStateAction<unites_reglement_stationnement>>
+    anciennesUnites: unites_reglement_stationnement[]
+    defAnciennesUnites: React.Dispatch<SetStateAction<unites_reglement_stationnement[]>>
+    editionEnCours:boolean,
+    defEditionEnCours:React.Dispatch<SetStateAction<boolean>>,
+    colonnesPossibles:colonnes_possibles_conversion[],
+    defColonnesPossibles: React.Dispatch<SetStateAction<colonnes_possibles_conversion[]>>
+}
+export interface PropsModifUnites{
+    unites: unites_reglement_stationnement[]
+    defUnites: React.Dispatch<SetStateAction<unites_reglement_stationnement[]>>
+    uniteSelect: unites_reglement_stationnement
+    defUniteSelect: React.Dispatch<SetStateAction<unites_reglement_stationnement>>
+    editionEnCours:boolean,
+    defEditionEnCours:React.Dispatch<SetStateAction<boolean>>,
+    colonnesPossibles:colonnes_possibles_conversion[],
+    defColonnesPossibles: React.Dispatch<SetStateAction<colonnes_possibles_conversion[]>>,
+    anciennesUnites: unites_reglement_stationnement[]
+    defAnciennesUnites: React.Dispatch<SetStateAction<unites_reglement_stationnement[]>>
+}
+
 // ---------------------------------------------------------------
 // --------------------------- Inventaire ------------------------
 // ---------------------------------------------------------------

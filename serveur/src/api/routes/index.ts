@@ -13,6 +13,7 @@ import { creationRouteurEnsRegTerr } from './ensRegTerr';
 import { creationRouteurUtilsationDuSol } from './utilisationDuSol';
 import { creationRouteurAnalyseVariabilite } from './analyseVariabilite';
 import { creationRouteurValidation } from './validation';
+import { CreationRouteurUnites } from './unites';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -30,5 +31,6 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/cubf',creationRouteurUtilsationDuSol(pool))
     router.use('/ana-var',creationRouteurAnalyseVariabilite(pool))
     router.use('/valid',creationRouteurValidation(pool))
+    router.use('/unites',CreationRouteurUnites(pool))
     return router;
 }

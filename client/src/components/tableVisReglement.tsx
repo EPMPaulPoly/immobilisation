@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Add, Edit, Save } from '@mui/icons-material';
-import { serviceReglements } from '../services';
+import { serviceReglements, serviceUnites } from '../services';
 
 const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
     const enteteReglementVide: entete_reglement_stationnement = {
@@ -36,7 +36,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
             try {
                 const [resOperations, resUnites] = await Promise.all([
                     serviceReglements.obtiensOperationsPossibles(),
-                    serviceReglements.obtiensUnitesPossibles()
+                    serviceUnites.obtiensUnitesPossibles()
                 ]);
                 console.log('Recu les operations', resOperations.data);
                 console.log('recu les unites',resUnites.data)

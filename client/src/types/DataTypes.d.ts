@@ -48,6 +48,11 @@ export interface unites_reglement_stationnement{
     abscisse_correction?:number
 }
 
+export interface colonnes_possibles_conversion{
+    nom_colonne:string,
+    description_colonne:string
+}
+
 export interface reglement_complet{
     entete: entete_reglement_stationnement,
     definition:definition_reglement_stationnement[]

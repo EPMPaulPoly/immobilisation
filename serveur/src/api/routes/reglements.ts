@@ -116,59 +116,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         }
     };
 
-    const obtiensUnitesParLot: RequestHandler = async (req, res): Promise<void> => {
 
-        const { id } = req.params;
-        const decipheredId = typeof id === 'string' ? id.replace(/_/g, " ") : id[0].replace(/_/g, " ");
-        console.log(`obtention des unités pour les règlements s'appliquant au lot : ${decipheredId}`)
-        const scriptPath = path.resolve(__dirname, "../../../../serveur_calcul_python/obtention_reglements_lot.py");
-
-        // Chemin direct vers l'interpréteur Python dans l'environnement Conda
-        const pythonExecutable = '/opt/conda/envs/serveur_calcul_python/bin/python3';
-
-        // Exécuter le script Python avec l'interpréteur de l'environnement
-        const pythonProcess = spawn(pythonExecutable, [scriptPath, decipheredId]);
-        let outputData = '';
-        let errorData = '';
-
-        // Capturer l'output standard
-        pythonProcess.stdout.on('data', (data:string) => {
-            outputData += data.toString();
-        });
-
-        // Capturer les erreurs standard
-        pythonProcess.stderr.on('data', (data:string) => {
-            errorData += data.toString();
-        });
-
-        // Capturer la fin du processus
-        pythonProcess.on('close', (code) => {
-            if (code === 0) {
-                //console.log(`Output: ${outputData}`)
-                console.log(`Processus enfant terminé avec succès.`);
-                try {
-                    // 🔹 Extract JSON by finding the first `{` (start of JSON)
-                    const jsonStartIndex = outputData.indexOf('[');
-                    if (jsonStartIndex !== -1) {
-                        const jsonString = outputData.slice(jsonStartIndex).trim();
-                        const jsonData = JSON.parse(jsonString);
-
-                        //console.log('Parsed JSON:', jsonData);
-                        return res.status(200).json({ success: true, data: jsonData });  //  Send JSON response
-                    } else {
-                        console.error('No JSON found in output:', outputData);
-                        return res.status(500).send('Erreur: No valid JSON found in output.');
-                    }
-                } catch (err) {
-                    console.error('Failed to parse JSON:', err);
-                    return res.status(500).send('Erreur: JSON parsing failed.');
-                }
-            } else {
-                console.error(`Processus enfant échoué avec le code : ${code}`);
-                return res.status(500).send(`Erreur: ${errorData}`);
-            }
-        });
-    };
 
     const nouvelEnteteReglement: RequestHandler = async (req, res, next): Promise<void> => {
         let client;
@@ -289,27 +237,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         }
     };
 
-    const obtiensToutesUnites: RequestHandler = async (_req, res): Promise<void> => {
-        console.log('Serveur - Obtention toutes unites')
-        let client;
-        try {
-            client = await pool.connect();
-            const query = `
-        SELECT *
-        FROM public.multiplicateur_facteurs_colonnes
-        order by id_unite
-      `;
 
-            const result = await client.query(query);
-            res.json({ success: true, data: result.rows });
-        } catch (err) {
-            res.status(500).json({ success: false, error: 'Database error' });
-        } finally {
-            if (client) {
-                client.release(); // Release the connection back to the pool
-            }
-        }
-    };
 
     const nouvelleLigneDefinition: RequestHandler = async (req, res, next): Promise<void> => {
         let client;
@@ -451,8 +379,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
     //router.get('/entete', obtiensTousEntetesReglements);
     //router.get('/complet/:idToSplit', obtiensReglementCompletParId);
     router.get('/operations', obtiensToutesOperations)
-    router.get('/unites', obtiensToutesUnites)
-    router.get('/unites/:id', obtiensUnitesParLot)
+    
     router.post('/entete', nouvelEnteteReglement)
     router.put('/entete/:id', modifieEnteteReglement)
     router.delete('/:id', supprimeReglement)

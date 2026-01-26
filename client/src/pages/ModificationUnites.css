@@ -1,0 +1,16 @@
+.page-modification-unites {
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+
+.liste-unites-possibles{
+    width: 20%;
+}
+.panneau-modif-unites{
+    flex:1;
+    flex-direction:row;
+    display:flex
+}

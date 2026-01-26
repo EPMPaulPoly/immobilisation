@@ -100,22 +100,7 @@ class ServiceReglements {
         }
     }
 
-    async obtiensUnitesReglementsParLot(id:string):Promise<ReponseDBInfoInventaireReglementManuel>{
-        try{
-            const parseId = id.replace(/ /g, "_");
-            const response:AxiosResponse<ReponseDBInfoInventaireReglementManuel> = await api.get(`/reglements/unites/${parseId}`)
-            return{success:response.data.success,data:response.data.data}
-        }catch(error){
-            if (axios.isAxiosError(error)) {
-                console.error('Axios Error:', error.response?.data);
-                console.error('Axios Error Status:', error.response?.status);
-                console.error('Axios Error Data:', error.response?.data);
-            } else {
-                console.error('Unexpected Error:', error);
-            }
-            throw error; // Re-throw if necessary
-        }
-    }
+
 
     async nouvelEnteteReglement(enteteASauvegarder:Omit<entete_reglement_stationnement,'id_reg_stat'>):Promise<ReponseEntetesReglements>{
         try{
@@ -200,22 +185,7 @@ class ServiceReglements {
         }
     }
 
-    async obtiensUnitesPossibles():Promise<ReponseUnitesReglements>{
-        try {
-            const response: AxiosResponse<ReponseUnitesReglements> = await api.get(`/reglements/unites`);
-            const data_res = response.data.data;
-            return {success:response.data.success,data:data_res};
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.error('Axios Error:', error.response?.data);
-                console.error('Axios Error Status:', error.response?.status);
-                console.error('Axios Error Data:', error.response?.data);
-            } else {
-                console.error('Unexpected Error:', error);
-            }
-            throw error; // Re-throw if necessary
-        }
-    }
+
 
     async nouvelleLigneDefinition(definition:Partial<definition_reglement_stationnement>):Promise<ReponseLigneDefReglement>{
         try{

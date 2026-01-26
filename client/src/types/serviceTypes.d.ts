@@ -33,7 +33,8 @@ import {
     data_graphique_text_labels,
     resultatAnalyseVariabilite, 
     resultatHistoVariabilite,
-    quartiers_analyse_db } from './DataTypes'
+    quartiers_analyse_db, 
+    colonnes_possibles_conversion} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -58,8 +59,10 @@ export type ReponseInventaireSeuil = ApiResponse<inventaire_stationnement>
 export type ReponseEntetesReglements = ApiResponse<entete_reglement_stationnement[]>
 export type ReponseReglementComplet = ApiResponse<reglement_complet[]>
 export type ReponseOperationsReglements = ApiResponse<operation_reglement_stationnement[]>
-export type ReponseUnitesReglements = ApiResponse<unites_reglement_stationnement[]>
 export type ReponseLigneDefReglement = ApiReponse<definition_reglement_stationnement>
+// unites
+export type ReponseUnitesReglements = ApiResponse<unites_reglement_stationnement[]>
+export type ReponseColonnesConversionUnites = ApiResponse<colonnes_possibles_conversion[]>
 // ensemble reglements
 export type ReponseEnteteEnsembleReglementStationnement = ApiResponse<entete_ensembles_reglement_stationnement>
 export type ReponseEntetesEnsemblesReglement = ApiResponse<entete_ensembles_reglement_stationnement[]>
