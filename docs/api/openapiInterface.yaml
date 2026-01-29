@@ -37,12 +37,16 @@ paths:
     $ref: './paths/territoire/getTerritoirePeriode.yaml'
   /api/territoire/periode-geo/{id_periode_geo}:
     $ref: './paths/territoire/getTerritoireId.yaml'
+  /api/unites:
+    $ref: './paths/unites/getUnitesReg.yaml'
+  /api/unites/{id_unite}:
+    $ref: './paths/unites/unitesWid.yaml'
+  /api/unites/par-lot/{g_no_lot}:
+    $ref: './paths/unites/getInputsByLot.yaml'
+  /api/unites/colonnes-possibles:
+    $ref: './paths/unites/colonnes.yaml'
   /api/reglements/operations:
     $ref: './paths/reglements/getOperations.yaml'
-  /api/reglements/unites:
-    $ref: './paths/reglements/getUnitesReg.yaml'
-  /api/reglements/unites/{g_no_lot}:
-    $ref: './paths/reglements/getInputsByLot.yaml'
   /api/reglements:
     $ref: './paths/reglements/getRegs.yaml'
   /api/reglements/entete:

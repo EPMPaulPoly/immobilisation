@@ -1,0 +1,24 @@
+get:
+  summary: Obtiens les colonnes du rôle qui peuvent être utilisées comme intrants de conversion
+  tags: ['Unités']
+  responses:
+    '200':
+      summary: Succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/reponse_colonnes_possibles'
+          example:
+            success: true
+            data:
+              - nom_colonne: 'rl0301a'
+                description_colonne: 'Mesure Frontale'  
+    '500':
+      summary: Erreur Interne serveur
+      content: 
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: false
+            message: Erreur interne serveur

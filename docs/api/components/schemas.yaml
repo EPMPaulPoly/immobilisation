@@ -164,12 +164,10 @@ reglement:
         $ref: '#/entete_reglement/examples/full'
       definition:
         $ref: '#/definition_reglement/examples/OneSpotPerTwentySquareMeter'
-unite:
+
+unite_sans_id:
   type: object
   properties:
-    id_unite:
-      type: integer
-      description: Identifiant de l'unité
     colonne_role_foncier:
       type: string
       description: |
@@ -186,11 +184,28 @@ unite:
       type: string
       description: Description de l'unité
   required:
-    - id_unite
     - colonne_role_foncier
     - facteur_correction
     - abscisse_correction
     - desc_unite
+unite:
+  allOf:
+    - $ref: '#/unite_sans_id'
+    - type: object
+      properties:
+        id_unite:
+          type: integer
+          description: Identifiant de l'unité
+
+colonne_conversion_unite:
+  type: object
+  properties:
+    nom_colonne:
+      type: string
+      description: Identifiant de colonne dans le rôle selon le guide des données ouvertes
+    description_colonne:
+      type: string
+      description: Description de la colonne
 operation_reglement:
   type: object
   properties:
@@ -1319,7 +1334,26 @@ reponse_reglement_ligne_def:
             - type: array
               items:
                 $ref: '#/definition_reglement'
-
+reponse_colonnes_possibles:
+  allOf:
+    - ref: '#/api_response'
+    - type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/colonnes_possibles'
+reponse_unite:
+  allOf:
+    - $ref: '#/api_response'
+    - type: object
+      properties:
+        data: 
+          allOf:
+            - $ref: '#/unite'
+            - type: array
+              items:
+                $ref: '#/unite'
 reponse_entete_array:
   allOf:
     - $ref: '#/api_response'

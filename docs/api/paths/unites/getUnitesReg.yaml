@@ -4,7 +4,7 @@ get:
   description: >-
     Obtiens l'ensemble des unités utilisées dans les règlements de
     stationnement
-  tags: ['Règlement']
+  tags: ['Unités']
   parameters: []
   responses:
     '200':
@@ -60,3 +60,35 @@ get:
             message: Erreur interne serveur
       headers: {}
   security: []
+post:
+  summary: Ajoute une unité à la bd
+  deprecated: false
+  description: Permet de créer une nouvelle conversion d'unité
+  tags: ['Unités']
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/unite_sans_id'
+        example:
+          desc_unite: logement
+          facteur_correction: 1
+          colonne_role_foncier: rl0308a
+          abscisse_correction: 0
+      required: true
+  responses:
+    '200':
+      description: Succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/reponse_unite'
+          example:
+            success: true
+            data: 
+              - id_unite: 1
+                desc_unite: logement
+                facteur_correction: 1
+                colonne_role_foncier: rl0308a
+                abscisse_correction: 0
