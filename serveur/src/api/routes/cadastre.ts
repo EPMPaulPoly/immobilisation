@@ -202,13 +202,11 @@ export const creationRouteurCadastre = (pool: Pool): Router => {
                     methode_estime as estime
                   FROM
                     public.inventaire_stationnement
+                    where methode_estime =2
                 )`)
-                values.push(2)
                 extraVariables.push('inventory.inv')
                 extraVariables.push('inventory.estime')
-                conditions.push(`inventory.estime = $${replaceCount}`)
                 joins.push('LEFT JOIN inventory ON inventory.g_no_lot=cad.g_no_lot')
-                replaceCount++
             }
             if (typeof inv_plus_grand === 'string') {
                 conditions.push(`inventory.inv>$${replaceCount}`)

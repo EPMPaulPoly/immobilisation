@@ -3,13 +3,16 @@ import { Link } from "react-router";
 import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobilisation';
 import { donneesCarteDeFond } from '../types/ContextTypes';
 import SubMenuComponent from './SubMenuComponent';
+import { latLng, LatLng } from 'leaflet';
 const MenuBar: React.FC<{}> = () => {
 
     const contexte = utiliserContexte();
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
     const changerCarto = contexte?.changerCarto ?? (() => {});
     const optionsCartos = contexte?.optionsCartos ?? [];
-
+    const optionCentreChoisie = contexte?.optionCentreChoisie??1
+    const optionsCentres = contexte?.optionsCentres??[{idLieu:1,nomLieu:'Quebec',zoomDebut:12,centreDebut:latLng([45.5017, -73.5673])}];
+    const changerCentre = contexte?.changerCentre??(()=>{})
     return(
         <div className="menu-bar">
             <h1>Immobilisation</h1>
@@ -55,10 +58,16 @@ const MenuBar: React.FC<{}> = () => {
                         className="label-ville-control">
                             Centre
                     </label>
-                    <select className="ville-control-dd" id="select-quartier" name="select-quartier">
-                        <option value="">Selection RMR</option>
-                        <option value="1">Québec</option>
-                        <option value="2">Montréal</option>
+                    <select 
+                        className="ville-control-dd" 
+                        id="select-quartier" 
+                        name="select-quartier"
+                        value={optionCentreChoisie}
+                    >
+                        {
+                            optionsCentres.map((entree)=><option value={entree.idLieu}>{entree.nomLieu}</option>)
+            
+                        }
                     </select>
                 </div>
                 <div className="map-bground-control">

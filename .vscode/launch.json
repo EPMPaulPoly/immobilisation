@@ -39,6 +39,9 @@
                 "--user-data-dir=${workspaceFolder}/.vscode/chrome",   // profil séparé
                 "--remote-debugging-port=9222"                          // port pour debugger
             ],
+            "breakOnLoad": true,
+            "sourceMaps": true,
+            "smartStep": true,
             "sourceMapPathOverrides": {
                 "/app/*": "${workspaceFolder}/client/*"
             }

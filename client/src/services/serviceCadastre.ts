@@ -210,7 +210,7 @@ class ServiceCadastre {
                 onProgress?.(percent); // call the callback if provided
             },
         });
-        return response.data; // { tempFileId: "xyz123.tmp" }   
+        return response.data; // { tempFileId: "xyz123.tmp" ,['colonne_1','colonne_2']}   
     }
     async confirmeMajBDTemp(fileId:string,mapping:Record<string,string>):Promise<{success:boolean,data:number}>{
         try{
