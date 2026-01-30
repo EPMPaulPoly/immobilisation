@@ -41,3 +41,7 @@ export type UseViewportDataOptions<T> = {
 export type CadastreLayerProps = {
   data: FeatureCollection<Geometry, lotCadastralGeoJsonProperties>;
 };
+
+export interface MapToURLProps{
+    
+}

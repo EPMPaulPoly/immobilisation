@@ -16,7 +16,7 @@ const CarteVisionnementCadastre = () => {
         <div className="map-container">
             <MapShell 
                 onViewportChange={handleViewportChange} 
-                zoom={16}>
+            >
                 {data && 
                     <CadastreLayer data={data} />
                 }

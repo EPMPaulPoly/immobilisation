@@ -10,9 +10,6 @@ const MenuBar: React.FC<{}> = () => {
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
     const changerCarto = contexte?.changerCarto ?? (() => {});
     const optionsCartos = contexte?.optionsCartos ?? [];
-    const optionCentreChoisie = contexte?.optionCentreChoisie??1
-    const optionsCentres = contexte?.optionsCentres??[{idLieu:1,nomLieu:'Quebec',zoomDebut:12,centreDebut:latLng([45.5017, -73.5673])}];
-    const changerCentre = contexte?.changerCentre??(()=>{})
     return(
         <div className="menu-bar">
             <h1>Immobilisation</h1>

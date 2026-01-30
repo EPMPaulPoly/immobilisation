@@ -7,6 +7,8 @@ import { MapShellProps } from "../types/MapTypes";
 import { latLng, LatLng } from "leaflet";
 import { ZoomHint } from "./utils/minZoomPopup";
 import RecentrerCarte from "./utils/recentrerCarte";
+import { MapToUrl } from "./utils/mapToURL";
+import { URLToMap } from "./utils/URLToMap";
 
 
 
@@ -19,16 +21,13 @@ const MapShell = ({
     const contexte = utiliserContexte();
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
     const optionsCartos = contexte?.optionsCartos ?? [];
-    const optionCentreChoisie = contexte?.optionCentreChoisie??"";
-    const optionsCentres = contexte?.optionsCentres??[];
 
 
     const urlCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.URL ?? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     const attributionCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.attribution ?? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    const zoomCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.zoomMax ?? 18
 
-    const DEFAULT_CENTER: LatLng = optionsCentres.find((entree)=>entree.idLieu === optionCentreChoisie)?.centreDebut ??latLng([45.5017, -73.5673])
-    const DEFAULT_ZOOM:number = optionsCentres.find((entree)=>entree.idLieu===optionCentreChoisie)?.zoomDebut ?? 12;
+    const DEFAULT_CENTER: LatLng = latLng([45.5017, -73.5673])
+    const DEFAULT_ZOOM:number =  8;
     if (!DEFAULT_CENTER || !DEFAULT_ZOOM) {
         return <div>Loading map...</div>;
     }
@@ -56,10 +55,8 @@ const MapShell = ({
                 center={mapCenter}
                 minZoom={16}
             />
-            <RecentrerCarte
-                center={DEFAULT_CENTER}
-                zoom={DEFAULT_ZOOM}
-            />
+            <MapToUrl/>
+            <URLToMap/>
         </MapContainer>
         {}
         </>

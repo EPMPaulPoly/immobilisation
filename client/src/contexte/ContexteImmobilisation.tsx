@@ -38,25 +38,6 @@ const FournisseurContexte = ({ children }: FournisseurContexteProps) => {
         defOptionCartoChoisie(idAUtiliser)
     }
 
-    const lieuxPossibles: CentreDeCarte[] =[
-        {
-            idLieu:1,
-            nomLieu: 'Montréal',
-            zoomDebut:12,
-            centreDebut:latLng([45.5017, -73.5673])
-        },
-        {
-            idLieu:2,
-            nomLieu:'Québec',
-            zoomDebut:12,
-            centreDebut:latLng([46.839438,-71.243762])
-        }
-    ]
-    const [optionsCentres,defOptionCentre] = useState<CentreDeCarte[]>(lieuxPossibles)
-    const [optionCentreChoisie,defOptionCentreChoisie] = useState<number>(1);
-    const changerCentre = (idAUtiliser:number)=>{
-        defOptionCentreChoisie(idAUtiliser)
-    }
 
     return (
         <ContexteImmobilisation.Provider 
@@ -64,9 +45,6 @@ const FournisseurContexte = ({ children }: FournisseurContexteProps) => {
                 optionCartoChoisie, 
                 changerCarto, 
                 optionsCartos,
-                optionCentreChoisie,
-                changerCentre,
-                optionsCentres
              }}
         >
             {children}

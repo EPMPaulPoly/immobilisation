@@ -12,9 +12,6 @@ export type ContexteImmobilisationType = {
     optionCartoChoisie: number;
     changerCarto: (idAUtiliser: number) => void;
     optionsCartos: donneesCarteDeFond[],
-    optionCentreChoisie:number;
-    changerCentre: (idAUtiliser:number)=>void;
-    optionsCentres: CentreDeCarte[]
 };
 
 export type FournisseurContexteProps = {
