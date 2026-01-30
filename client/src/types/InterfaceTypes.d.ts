@@ -106,7 +106,17 @@ export interface PropsModifUnites{
     anciennesUnites: unites_reglement_stationnement[]
     defAnciennesUnites: React.Dispatch<SetStateAction<unites_reglement_stationnement[]>>
 }
-
+// ---------------------------------------------------------------
+// ------------------------ Versement Cadastre -------------------
+// ---------------------------------------------------------------
+export interface PropsVersementCadastre{
+    modalOuvert:boolean,
+    defModalOuvert: React.Dispatch<SetStateAction<boolean>>
+}
+export interface PropsMenuVersementCadastre{
+    modalOuvert:boolean,
+    defModalOuvert: React.Dispatch<SetStateAction<boolean>>
+}
 // ---------------------------------------------------------------
 // --------------------------- Inventaire ------------------------
 // ---------------------------------------------------------------

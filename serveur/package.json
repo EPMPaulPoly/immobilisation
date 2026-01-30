@@ -4,7 +4,7 @@
     "description": "Backend for parking inventoery",
     "main": "dist/serveur.js",
     "scripts": {
-        "dev":  "nodemon --watch src --ext ts,json --exec \"node --inspect=0.0.0.0:9229 -r ts-node/register src/serveur.ts\"",
+        "dev": "nodemon --watch src --ext ts,json --exec \"node --inspect=0.0.0.0:9229 -r ts-node/register src/serveur.ts\"",
         "build": "tsc",
         "start": "node dist/serveur.js"
     },
@@ -17,7 +17,9 @@
         "express-list-endpoints": "^7.1.1",
         "geojson": "0.5.0",
         "leaflet": "1.9.4",
+        "multer": "^2.0.2",
         "pg": "8.13.1",
+        "stream-json": "^1.9.1",
         "zod": "3.24.1"
     },
     "devDependencies": {
@@ -26,8 +28,10 @@
         "@types/express": "5.0.0",
         "@types/geojson": "7946.0.15",
         "@types/leaflet": "1.9.16",
+        "@types/multer": "^2.0.0",
         "@types/node": "22.10.7",
         "@types/pg": "8.11.10",
+        "@types/stream-json": "^1.7.8",
         "@typescript-eslint/eslint-plugin": "8.20.0",
         "@typescript-eslint/parser": "8.20.0",
         "eslint": "9.18.0",

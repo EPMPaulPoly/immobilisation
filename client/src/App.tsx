@@ -13,6 +13,7 @@ import ValidationStatistique from './pages/validationStatistique';
 import SommaireValidation from './pages/SommaireValidation';
 import VersementSecAnalyse from './pages/VersementSecAnalyse';
 import ModificationUnites from './pages/ModificationUnites';
+import VersementCadastre from './pages/VersementCadastre';
 const app: React.FC = () => {
   return (
     <FournisseurContexte>
@@ -31,6 +32,7 @@ const app: React.FC = () => {
           <Route path="/sommaire-valid" element={<SommaireValidation/>}/>
           <Route path="/sec-analyse-verse" element={<VersementSecAnalyse/>}/>
           <Route path="/unites" element={<ModificationUnites/>}/>
+          <Route path="/cadastre" element={<VersementCadastre/>}/>
         </Routes>
       </Router>
     </FournisseurContexte>

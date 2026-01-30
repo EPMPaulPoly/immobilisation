@@ -3,7 +3,7 @@ import { lotCadastralGeoJsonProperties, quartiers_analyse, roleFoncierGeoJsonPro
 import { ReponseCadastre, ReponseRole,ReponseDBCadastre,ReponseDBRole, ReponseDBCadastreBoolInv,ReponseCadastreBoolInv, RequeteApiStrate, RequeteApiCadastre } from '../types/serviceTypes';
 import api from './api';
 import {FeatureCollection, Geometry } from 'geojson';
-
+import { Dispatch,SetStateAction } from 'react';
 
 class ServiceCadastre {
     async chercheTousCadastres():Promise<ReponseCadastre> {
@@ -195,6 +195,43 @@ class ServiceCadastre {
             throw error; // Re-throw if necessary
         }
     }
+    async verseCadastreFlux(
+        fichier:File,
+        onProgress?: Dispatch<SetStateAction<number>>
+    ):Promise<{ tempFileId: string, columns:string[] }>{
+        const formData = new FormData();
+        formData.append("file", fichier);
+
+        const response = await api.post("/cadastre/temp-upload", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+            onUploadProgress: (e) => {
+                if (!e.total) return;
+                const percent = Math.round((e.loaded / e.total) * 100);
+                onProgress?.(percent); // call the callback if provided
+            },
+        });
+        return response.data; // { tempFileId: "xyz123.tmp" }   
+    }
+    async confirmeMajBDTemp(fileId:string,mapping:Record<string,string>):Promise<{success:boolean,data:number}>{
+        try{
+            const body = {
+                mapping: mapping,
+                file_id: fileId
+            }
+            const response = await api.post('/cadastre/import',body)
+            return{success:response.data.success,data: response.data.data}
+        }catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.response?.data);
+                console.error('Axios Error Status:', error.response?.status);
+                console.error('Axios Error Data:', error.response?.data);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+            throw error; // Re-throw if necessary
+        }
+    }
+
 }
 
 export const serviceCadastre =  new ServiceCadastre();
