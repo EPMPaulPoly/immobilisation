@@ -5,6 +5,8 @@ import { utiliserContexte } from "../contexte/ContexteImmobilisation";
 import MapEvents from "./MapEvents";
 import { MapShellProps } from "../types/MapTypes";
 import { latLng, LatLng } from "leaflet";
+import { ZoomHint } from "./utils/minZoomPopup";
+import RecentrerCarte from "./utils/recentrerCarte";
 
 
 
@@ -33,7 +35,7 @@ const MapShell = ({
     
     const mapCenter = center ?? DEFAULT_CENTER;
     const mapZoom = zoom ?? DEFAULT_ZOOM;
-    return (
+    return (<>
         <MapContainer
             center={mapCenter}
             zoom={mapZoom}
@@ -50,7 +52,17 @@ const MapShell = ({
             )}
 
             {children}
+            <ZoomHint
+                center={mapCenter}
+                minZoom={16}
+            />
+            <RecentrerCarte
+                center={DEFAULT_CENTER}
+                zoom={DEFAULT_ZOOM}
+            />
         </MapContainer>
+        {}
+        </>
     );
 };
 

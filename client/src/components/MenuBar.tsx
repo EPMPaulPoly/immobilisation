@@ -63,6 +63,7 @@ const MenuBar: React.FC<{}> = () => {
                         id="select-quartier" 
                         name="select-quartier"
                         value={optionCentreChoisie}
+                        onChange={(e)=>changerCentre(Number(e.target.value))}
                     >
                         {
                             optionsCentres.map((entree)=><option value={entree.idLieu}>{entree.nomLieu}</option>)

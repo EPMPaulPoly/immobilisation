@@ -131,7 +131,7 @@ const ModalVersementCadastre:FC<PropsVersementCadastre> = (props:PropsVersementC
                     </div>
                 </>
                 )}
-                {
+                {gNoLotCol!=='' && gLatCol!=='' && gLonCol!=='' &&gGSuprfCol &&
                     <Button variant="outlined" onClick={handleFileInsert}>Importer le fichier dans la BD</Button>
                 }
             </Box>

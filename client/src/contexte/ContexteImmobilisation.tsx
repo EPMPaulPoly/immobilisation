@@ -46,7 +46,7 @@ const FournisseurContexte = ({ children }: FournisseurContexteProps) => {
             centreDebut:latLng([45.5017, -73.5673])
         },
         {
-            idLieu:1,
+            idLieu:2,
             nomLieu:'Québec',
             zoomDebut:12,
             centreDebut:latLng([46.839438,-71.243762])
