@@ -50,8 +50,9 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Analyse agrégée quartiers",path:"/ana-quartiers"}
                 ]}
             />
-            
             <div className="control-dds">
+            {/*
+            
                 <div className="ville-control">
                     <label 
                         htmlFor="ville-control-dd" 
@@ -70,7 +71,7 @@ const MenuBar: React.FC<{}> = () => {
             
                         }
                     </select>
-                </div>
+                </div>*/}
                 <div className="map-bground-control">
                     <label 
                         htmlFor="fond-de-carte" 
