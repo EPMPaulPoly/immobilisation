@@ -1,5 +1,12 @@
 import Geometry from 'geojson';
 
+export type EquivalenceVersementCarto ={
+    colonne_db:string,
+    description:string,
+    colonne_fichier:string
+}
+
+
 export interface entete_reglement_stationnement{
     id_reg_stat: number,
     description: string,
