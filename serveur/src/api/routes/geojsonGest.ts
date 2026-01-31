@@ -1,16 +1,9 @@
 import { RequestHandler, Router } from "express";
 import { Pool } from "pg";
-import multer,{ Multer ,} from "multer";
-import fs from'fs';
-import path from 'path';
-import { handleCadastreUpload, } from "../services/cadastre.services"
-import{cleanupOldTempFiles, MulterRequest} from '../repositories/geojsonTemp.repositories'
+
 import { runFileUpload } from "../services/geojsonGest.services";
 export const creationRouteurDonnees = (pool: Pool): Router => {
     const router = Router();
-
-
-
     // main upload handler
     const versementTemp: RequestHandler = async(req, res) => {
         console.log('Entering file upload')
