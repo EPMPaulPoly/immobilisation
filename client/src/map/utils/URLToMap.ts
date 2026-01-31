@@ -22,9 +22,7 @@ export function URLToMap() {
     // Apply again on browser back/forward
     window.addEventListener("popstate", applyFromURL);
 
-    return () => {
-      window.removeEventListener("popstate", applyFromURL);
-    };
+ 
   }, [map]);
 
   return null;
