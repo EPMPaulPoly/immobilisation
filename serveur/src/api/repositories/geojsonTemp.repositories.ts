@@ -7,8 +7,11 @@ import { streamArray } from "stream-json/streamers/StreamArray";
 import {Client, PoolClient} from 'pg';
 export const TMP_DIR = "/app/data/tmp";
 export const MAX_AGE_MS = 6 * 60 * 60 * 1000; // 6 hours
+export type MulterRequest = Request & {
+  file?: Express.Multer.File;
+};
 
-type ColumnMapping = Record<string, string>;
+export type ColumnMapping = Record<string, string>;
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
 export async function cleanupOldTempFiles() {

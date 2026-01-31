@@ -14,6 +14,7 @@ import { creationRouteurUtilsationDuSol } from './utilisationDuSol';
 import { creationRouteurAnalyseVariabilite } from './analyseVariabilite';
 import { creationRouteurValidation } from './validation';
 import { CreationRouteurUnites } from './unites';
+import { creationRouteurDonnees } from './geojsonGest';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -32,5 +33,6 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/ana-var',creationRouteurAnalyseVariabilite(pool))
     router.use('/valid',creationRouteurValidation(pool))
     router.use('/unites',CreationRouteurUnites(pool))
+    router.use('/geojson',creationRouteurDonnees(pool))
     return router;
 }

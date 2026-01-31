@@ -7,10 +7,8 @@ import { validateBboxQuery } from '../validators/cadastreValidator';
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import { handleCadastreUpload,importFile } from '../services/cadastre.services';
-type MulterRequest = Request & {
-  file?: Express.Multer.File;
-};
+import { handleCadastreUpload, importFileCadastre } from '../services/cadastre.services';
+import { importFile } from '../services/geojsonGest.services';
 
 interface GeometryBody {
     geometry: Polygon | MultiPolygon;
@@ -280,76 +278,10 @@ export const creationRouteurCadastre = (pool: Pool): Router => {
         }
     }
 
-
-
-    const MAX_AGE_MS = 0.1 * 60 * 60 * 1000; // 6 hours (tune as needed)
-    const tmpDir = "/app/data/tmp"; // container-local temp folder
-    if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
-
-    const storage = multer.diskStorage({
-        destination: tmpDir,
-        filename: (req:any, file:any, cb:any) => {
-            cb(null, `${Date.now()}-${file.originalname}`);
-        },
-    });
-
-
-
-    const upload = multer({ storage });
-
-    const  cleanupOldTempFiles =async(req:any,res:any,next:any)=> {
-        console.log('entering File deletion')
-        try {
-            const files = await fs.promises.readdir(tmpDir);
-            const now = Date.now();
-
-            await Promise.all(
-            files.map(async (file) => {
-                const fullPath = path.join(tmpDir, file);
-                const stat = await fs.promises.stat(fullPath);
-
-                if (now - stat.mtimeMs > MAX_AGE_MS) {
-                    await fs.promises.unlink(fullPath);
-                    console.log("Deleted old temp file:", fullPath);
-                }
-            })
-            );
-        } catch (err) {
-            // IMPORTANT: never fail the upload because cleanup failed
-            console.warn("Temp cleanup skipped:", err);
-        }
-        next()
-    }
-
-    // main upload handler
-    const versementTemp: RequestHandler = async(req, res) => {
-        console.log('Entering file upload')
-        // run multer
-        upload.single("file")(req, res, async (err) => {
-            if (err) return res.status(500).json({ error: err.message });
-
-            const r = req as MulterRequest;
-            if (!r.file) return res.status(400).json({ error: "No file uploaded" });
-
-            const tempFileId = r.file.filename;
-            const tempPath = r.file.path;
-
-            console.log("Temp file saved at:", tempPath);
-
-            try {
-                const { columns } = await handleCadastreUpload(tempPath);
-                res.json({ tempFileId, columns });
-            } catch (err) {
-                console.error("Upload error:", err);
-                res.status(500).json({ error: "Failed to process file" });
-            }
-        });
-    };
-
     const importBD:RequestHandler= async(req, res) => {
         try {
             const { file_id, mapping } = req.body;
-            const insertedCount = await importFile(pool,file_id, mapping);
+            const insertedCount = await importFileCadastre(pool,file_id, mapping);
             console.log(`Inserted ${insertedCount}`)
             res.json({ success: true,data: insertedCount });
         } catch (err:any) {
@@ -361,7 +293,6 @@ export const creationRouteurCadastre = (pool: Pool): Router => {
     router.get('/lot-query', validateBboxQuery, obtiensLots)
     router.get('/lot/:id', obtiensLotParId)
     router.get('/role-associe/:id', obtiensRoleParIdLot)
-    router.post('/temp-upload',cleanupOldTempFiles,versementTemp)
     router.post('/import',importBD)
     return router;
 };

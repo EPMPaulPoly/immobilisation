@@ -1,9 +1,20 @@
 import axios,{ AxiosResponse } from 'axios';
-import { lotCadastralGeoJsonProperties, quartiers_analyse, roleFoncierGeoJsonProps,lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
-import { ReponseCadastre, ReponseRole,ReponseDBCadastre,ReponseDBRole, ReponseDBCadastreBoolInv,ReponseCadastreBoolInv, RequeteApiStrate, RequeteApiCadastre } from '../types/serviceTypes';
+import { 
+    roleFoncierGeoJsonProps,
+    lotCadastralAvecBoolInvGeoJsonProperties 
+} from '../types/DataTypes';
+import { 
+    ReponseCadastre, 
+    ReponseRole,
+    ReponseDBRole, 
+    ReponseDBCadastreBoolInv,
+    ReponseCadastreBoolInv, 
+    RequeteApiCadastre } from '../types/serviceTypes';
 import api from './api';
-import {FeatureCollection, Geometry } from 'geojson';
-import { Dispatch,SetStateAction } from 'react';
+import {
+    FeatureCollection, 
+    Geometry 
+} from 'geojson';
 
 class ServiceCadastre {
     async chercheTousCadastres():Promise<ReponseCadastre> {
@@ -195,23 +206,6 @@ class ServiceCadastre {
             throw error; // Re-throw if necessary
         }
     }
-    async verseCadastreFlux(
-        fichier:File,
-        onProgress?: Dispatch<SetStateAction<number>>
-    ):Promise<{ tempFileId: string, columns:string[] }>{
-        const formData = new FormData();
-        formData.append("file", fichier);
-
-        const response = await api.post("/cadastre/temp-upload", formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-            onUploadProgress: (e) => {
-                if (!e.total) return;
-                const percent = Math.round((e.loaded / e.total) * 100);
-                onProgress?.(percent); // call the callback if provided
-            },
-        });
-        return response.data; // { tempFileId: "xyz123.tmp" ,['colonne_1','colonne_2']}   
-    }
     async confirmeMajBDTemp(fileId:string,mapping:Record<string,string>):Promise<{success:boolean,data:number}>{
         try{
             const body = {
@@ -231,7 +225,6 @@ class ServiceCadastre {
             throw error; // Re-throw if necessary
         }
     }
-
 }
 
 export const serviceCadastre =  new ServiceCadastre();

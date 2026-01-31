@@ -3,6 +3,7 @@ import { PropsVersement } from '../types/InterfaceTypes';
 import {useState,FC,ChangeEvent} from 'react';
 import { serviceCadastre } from '../services';
 import LinearProgress from '@mui/material/LinearProgress';
+import { ServiceGeoJson } from '../services/serviceGeoJson';
 
 const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
     const [columns, setColumns] = useState<string[]>([]);
@@ -24,7 +25,7 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
 
     const handleFileLoad = async(fileLoad:File) => {
         if (!fileLoad) return;
-        const {tempFileId,columns} = await serviceCadastre.verseCadastreFlux(fileLoad,setProgress)
+        const {tempFileId,columns} = await ServiceGeoJson.verseFichierFlux(fileLoad,setProgress)
         console.log(tempFileId)
         setServerFileId(tempFileId)
         setColumns(columns)

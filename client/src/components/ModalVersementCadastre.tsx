@@ -5,6 +5,7 @@ import { FeatureCollection,Geometry } from 'geojson';
 import { lotCadastralGeoJsonProperties, quartiers_analyse } from '../types/DataTypes';
 import { serviceCadastre } from '../services';
 import LinearProgress from '@mui/material/LinearProgress';
+import { ServiceGeoJson } from '../services/serviceGeoJson';
 
 const ModalVersementCadastre:FC<PropsVersementCadastre> = (props:PropsVersementCadastre) => {
     const [columns, setColumns] = useState<string[]>([]);
@@ -28,7 +29,7 @@ const ModalVersementCadastre:FC<PropsVersementCadastre> = (props:PropsVersementC
 
     const handleFileLoad = async(fileLoad:File) => {
         if (!fileLoad) return;
-        const {tempFileId,columns} = await serviceCadastre.verseCadastreFlux(fileLoad,setProgress)
+        const {tempFileId,columns} = await ServiceGeoJson.verseFichierFlux(fileLoad,setProgress)
         console.log(tempFileId)
         setServerFileId(tempFileId)
         setColumns(columns)
