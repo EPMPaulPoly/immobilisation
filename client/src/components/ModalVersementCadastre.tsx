@@ -43,7 +43,7 @@ const ModalVersementCadastre:FC<PropsVersementCadastre> = (props:PropsVersementC
             'g_va_suprf':gGSuprfCol
         }
         try{
-            const response = await serviceCadastre.confirmeMajBDTemp(serverFileId,mapping)
+            const response = await ServiceGeoJson.confirmeMajBDTemp(serverFileId,mapping,'cadastre')
             alert(`Inseré ${response.data} entrées cadastrales`)
         }catch(err:any){
             console.log(err)

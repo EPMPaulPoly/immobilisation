@@ -41,10 +41,13 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
     }
 
     const handleFileInsert = async()=>{
-        
+        const mappingColonnes = Object.values(props.champsARemplir).reduce((acc, item) => {
+        acc[item.colonne_db] = item.colonne_fichier;
+        return acc;
+        }, {} as Record<string, string>);
         try{
-            //const response = await serviceCadastre.confirmeMajBDTemp(serverFileId,mappingColonnes)
-            //alert(`Inseré ${response.data} entrées cadastrales`)
+            const response = await ServiceGeoJson.confirmeMajBDTemp(serverFileId,mappingColonnes,props.table)
+            alert(`Inseré ${response.data} entrées `)
         }catch(err:any){
             console.log(err)
             alert('Échec d insertion')

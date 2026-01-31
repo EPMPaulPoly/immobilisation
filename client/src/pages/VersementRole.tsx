@@ -7,11 +7,17 @@ import ModalVersementCadastre from "../components/ModalVersementCadastre";
 import CarteVisionnementCadastre from "../components/CarteVisionnementCadastre";
 import ModalVersementGen from "../components/ModalVersement";
 import { EquivalenceVersementCarto } from "../types/DataTypes";
+import CarteVisionnementRole from "../components/CarteVisionnementRole";
 
 const VersementRole:React.FC =() =>{
     const [modalOuvert,defModalOuvert] = useState<boolean>(false);
     const [equivalenceFDB, defEquivalenceFBD] = useState<EquivalenceVersementCarto[]>(
         [
+            {
+                colonne_db:'id_provinc',
+                description:'Identifiant du rôle',
+                colonne_fichier:''
+            },
             {
                 colonne_db:'rl0101a',
                 description:'Numéro de rue',
@@ -71,6 +77,16 @@ const VersementRole:React.FC =() =>{
                 colonne_db:'rl0313a',
                 description:'Nombre de locaux non res',
                 colonne_fichier:''
+            },
+            {
+                colonne_db:'rl0402a',
+                description:'Valeur de la terre',
+                colonne_fichier:''
+            },
+            {
+                colonne_db:'rl0404a',
+                description:"Valeur de l'immeuble (terrain + batiment)",
+                colonne_fichier:''
             }
         ]
     )
@@ -88,10 +104,11 @@ const VersementRole:React.FC =() =>{
                 champsARemplir={equivalenceFDB}
                 defChampsARemplir={defEquivalenceFBD}
                 title="Modal versement Role"
+                table='role_foncier'
             />
             <>
             {
-                <CarteVisionnementCadastre/>
+                <CarteVisionnementRole/>
             }
             </>
             

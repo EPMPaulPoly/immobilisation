@@ -135,14 +135,7 @@ export const creationRouteurCadastre = (pool: Pool): Router => {
     }
 
     const obtiensLots: RequestHandler<{}> = async (req, res, next): Promise<void> => {
-        let client;
-        let query: string = '';
-        let ctePot = [];
-        let conditions = [];
-        let extraVariables = []
-        let values = [];
-        let joins = [];
-        let replaceCount = 1;
+        
         try {
             const params = processRequestConversions(req.query)
             const response = await obtiensLotRequete(pool,params)
@@ -152,21 +145,11 @@ export const creationRouteurCadastre = (pool: Pool): Router => {
         }
     }
 
-    const importBD:RequestHandler= async(req, res) => {
-        try {
-            const { file_id, mapping } = req.body;
-            const insertedCount = await importFileCadastre(pool,file_id, mapping);
-            console.log(`Inserted ${insertedCount}`)
-            res.json({ success: true,data: insertedCount });
-        } catch (err:any) {
-            res.status(500).json({ success: false, error: err.message });
-        }
-    }
+    
     // Routes
     router.get('/lot/quartier-ana/:id', obtiensLotsParIdQuartier)
     router.get('/lot-query', validateBboxQuery, obtiensLots)
     router.get('/lot/:id', obtiensLotParId)
     router.get('/role-associe/:id', obtiensRoleParIdLot)
-    router.post('/import',importBD)
     return router;
 };

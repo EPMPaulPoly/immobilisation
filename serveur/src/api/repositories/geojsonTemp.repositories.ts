@@ -76,7 +76,7 @@ export async function insertGeojsonFile(
         let insertedCount = 0;
         let batch: Record<string, any>[] = [];
 
-        await dbClient.query('DELETE from cadastre');
+        await dbClient.query(`DELETE from ${tableName}`);
         fileStream = fs.createReadStream(filePath);
         const jsonParser = parser();
         const pickFeatures = pick({ filter: "features" });

@@ -235,6 +235,7 @@ export interface roleFoncierGeoJsonProps{
 
 export interface roleFoncierDB extends roleFoncierGeoJsonProps{
     geojson_geometry:string;
+    geometry?:Geometry
 }
 
 export interface comboERRoleFoncier{

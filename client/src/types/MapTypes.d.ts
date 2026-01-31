@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { roleFoncierGeoJsonProps } from "./DataTypes";
 
 export interface MapShellProps {
     children?: ReactNode;
@@ -41,6 +42,10 @@ export type UseViewportDataOptions<T> = {
 export type CadastreLayerProps = {
   data: FeatureCollection<Geometry, lotCadastralGeoJsonProperties>;
 };
+
+export type RoleLayerProps = {
+  data: FeatureCollection<Geometry, roleFoncierGeoJsonProps>;
+}
 
 export interface MapToURLProps{
     

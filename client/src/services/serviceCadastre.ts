@@ -206,25 +206,6 @@ class ServiceCadastre {
             throw error; // Re-throw if necessary
         }
     }
-    async confirmeMajBDTemp(fileId:string,mapping:Record<string,string>):Promise<{success:boolean,data:number}>{
-        try{
-            const body = {
-                mapping: mapping,
-                file_id: fileId
-            }
-            const response = await api.post('/cadastre/import',body)
-            return{success:response.data.success,data: response.data.data}
-        }catch (error: any) {
-            if (axios.isAxiosError(error)) {
-                console.error('Axios Error:', error.response?.data);
-                console.error('Axios Error Status:', error.response?.status);
-                console.error('Axios Error Data:', error.response?.data);
-            } else {
-                console.error('Unexpected Error:', error);
-            }
-            throw error; // Re-throw if necessary
-        }
-    }
 }
 
 export const serviceCadastre =  new ServiceCadastre();

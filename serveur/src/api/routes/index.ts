@@ -15,6 +15,7 @@ import { creationRouteurAnalyseVariabilite } from './analyseVariabilite';
 import { creationRouteurValidation } from './validation';
 import { CreationRouteurUnites } from './unites';
 import { creationRouteurDonnees } from './geojsonGest';
+import { creationRouteurRoleFoncier } from './roleFoncier';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -34,5 +35,6 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/valid',creationRouteurValidation(pool))
     router.use('/unites',CreationRouteurUnites(pool))
     router.use('/geojson',creationRouteurDonnees(pool))
+    router.use('/role-foncier',creationRouteurRoleFoncier(pool))
     return router;
 }

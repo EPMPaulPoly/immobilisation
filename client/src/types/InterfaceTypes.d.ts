@@ -115,6 +115,7 @@ export interface PropsVersement{
     champsARemplir: EquivalenceVersementCarto[]
     defChampsARemplir:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
     title:string
+    table:'cadastre'|'role_foncier'
 }
 
 // ---------------------------------------------------------------
