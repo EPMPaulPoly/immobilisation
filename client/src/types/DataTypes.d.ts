@@ -215,6 +215,7 @@ export interface lotCadastralAvecBoolInvGeoJsonProperties extends lotCadastralGe
 
 export interface lotCadastralBoolInvDB extends lotCadastralAvecBoolInvGeoJsonProperties{
     geojson_geometry:string;
+    geometry?: Geometry
 }
 
 export interface roleFoncierGeoJsonProps{

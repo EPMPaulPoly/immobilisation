@@ -84,7 +84,7 @@ class ServiceCadastre {
                 type: "FeatureCollection",
                 features: data_res.map((item) => ({
                     type: "Feature",
-                    geometry: JSON.parse(item.geojson_geometry),
+                    geometry: item.geometry??JSON.parse(item.geojson_geometry),
                     properties: {
                         g_no_lot:item.g_no_lot,
                         g_va_suprf:item.g_va_suprf,
