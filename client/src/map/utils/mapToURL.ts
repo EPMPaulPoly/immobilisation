@@ -1,31 +1,40 @@
+import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
-import { useEffect } from "react";
+
 export function MapToUrl() {
-  const map = useMap(); // map: L.Map
+    const map = useMap();
+    const isProgrammatic = useRef(false);
 
-  useEffect(() => {
-    const updateUrl = () => {
-      const center = map.getCenter();
-      const zoom = map.getZoom();
+    useEffect(() => {
+        let lastPush = 0;
 
-      // Build query string
-      const params = new URLSearchParams();
-      params.set("lat", center.lat.toFixed(5));
-      params.set("lng", center.lng.toFixed(5));
-      params.set("zoom", zoom.toString());
+        const updateUrl = () => {
+            const now = Date.now();
+            if (now - lastPush < 1000) return; // skip small changes
+            lastPush = now;
 
-      // Update browser URL without reloading
-      const newUrl = `${window.location.pathname}?${params.toString()}`;
-      window.history.replaceState(null, "", newUrl); 
+            const center = map.getCenter();
+            const zoom = map.getZoom();
+
+            const params = new URLSearchParams();
+            params.set("lat", center.lat.toFixed(5));
+            params.set("lng", center.lng.toFixed(5));
+            params.set("zoom", zoom.toString());
+
+            window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+        };
+        map.on("moveend", updateUrl);
+        return () => {
+            map.off("moveend", updateUrl);
+        };
+    }, [map]);
+
+    // Helper to programmatically set view
+    const setViewProgrammatic = (lat: number, lng: number, zoom: number) => {
+        isProgrammatic.current = true;
+        map.setView([lat, lng], zoom, { animate: false });
     };
 
-    map.on("moveend", updateUrl);
-
-    // Cleanup on unmount
-    return () => {
-      map.off("moveend", updateUrl);
-    };
-  }, [map]); // only run once after map is ready
-
-  return null;
+    // Expose globally if needed, or via context, but still render nothing
+    return null;
 }
