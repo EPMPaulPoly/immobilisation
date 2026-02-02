@@ -14,7 +14,7 @@ const CarteVisionnementRole = () => {
     return (
         <div className="map-container">
             <MapShell 
-                onViewportChange={handleViewportChange} 
+                onViewportChange={[handleViewportChange]} 
             >
                 {data && 
                     <RoleLayer data={data} />

@@ -3,7 +3,7 @@ import { roleFoncierGeoJsonProps } from "./DataTypes";
 
 export interface MapShellProps {
     children?: ReactNode;
-    onViewportChange?: (viewport: {
+    onViewportChange?: ((viewport: {
         zoom: number;
         bounds: {
             minx: number;
@@ -11,7 +11,7 @@ export interface MapShellProps {
             maxx: number;
             maxy: number;
         };
-    }) => void;
+    }) => void)[];
     center?: LatLng;
     zoom?: number;
 };
@@ -22,7 +22,7 @@ export interface Bounds {
     maxy: number;
 };
 export interface MapEventsProps {
-    onViewportChange?: (viewport: { zoom: number; bounds: Bounds }) => void;
+    onViewportChange?: ((viewport: { zoom: number; bounds: Bounds }) => void)[];
 };
 
 

@@ -2,7 +2,11 @@ import { useMapEvents } from "react-leaflet";
 import { useEffect, useRef } from "react";
 import { MapEventsProps } from "../types/MapTypes";
 
-const MapEvents = ({ onViewportChange }: MapEventsProps) => {
+const MapEvents = (
+    { 
+        onViewportChange 
+    }: MapEventsProps
+) => {
     const prevBounds = useRef<string | null>(null);
     const map = useMapEvents({
         moveend: () => triggerViewportChange(),
@@ -26,7 +30,7 @@ const MapEvents = ({ onViewportChange }: MapEventsProps) => {
         // Only call if bounds actually changed
         if (prevBounds.current !== boundsKey) {
             prevBounds.current = boundsKey;
-            onViewportChange(viewport);
+            onViewportChange.forEach(fn => fn(viewport));
         }
     };
 

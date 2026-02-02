@@ -9,7 +9,7 @@ const RoleLayer = ({ data }: RoleLayerProps) => {
     const map = useMap();
     // Style function
     const style = () => ({
-        color: "#0074D9",
+        color: "#d90000",
         weight: 1,
         fillOpacity: 0.4,
     });
@@ -23,7 +23,10 @@ const RoleLayer = ({ data }: RoleLayerProps) => {
             layer.bindPopup(
                 `<div>
           <strong>ID:</strong> ${feature.properties.id_provinc}<br/>
-          <strong>Valeur:</strong> ${feature.properties.rl0404a || "N/A"}
+          <strong>Valeur:</strong> ${feature.properties.rl0404a || "N/A"}<br/>
+          <strong>CUBF:</strong> ${feature.properties.rl0105a || "N/A"}<br/>
+          <strong>Aire étages:</strong> ${feature.properties.rl0308a|| "N/A"}<br/>
+          <strong>Nombre de logements:</strong> ${feature.properties.rl0311a||"N/A"}
         </div>`
             );
         }
@@ -36,6 +39,7 @@ const RoleLayer = ({ data }: RoleLayerProps) => {
                 data={data} 
                 pointToLayer={(feature, latlng) => L.circleMarker(latlng)} 
                 onEachFeature={onEachFeature} 
+                style={style}
             />;
 };
 

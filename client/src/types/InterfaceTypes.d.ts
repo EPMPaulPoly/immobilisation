@@ -1,5 +1,5 @@
 import {LatLng, LatLngExpression} from "leaflet";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction,Dispatch } from "react";
 import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion, EquivalenceVersementCarto } from "./DataTypes";
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { PrioriteEstimeQuartier, TypesVisualisationAnalyseQuartier, VariablesPossibles } from "./AnalysisTypes";
@@ -129,6 +129,15 @@ export interface PropsMenuVersementCadastre{
     modalOuvert:boolean,
     defModalOuvert: React.Dispatch<SetStateAction<boolean>>
 }
+// ---------------------------------------------------------------
+// ----------------- Association Cadastre Role -------------------
+// ---------------------------------------------------------------
+
+export interface PropsAssocCadastreRole{
+    modalOuvert:boolean,
+    defModalOuvert: Dispatch<SetStateAction<boolean>>
+}
+
 // ---------------------------------------------------------------
 // --------------------------- Inventaire ------------------------
 // ---------------------------------------------------------------

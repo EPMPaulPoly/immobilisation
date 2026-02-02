@@ -5,8 +5,8 @@ import { Feature, FeatureCollection, Geometry } from "geojson";
 import { lotCadastralGeoJsonProperties } from "../../types/DataTypes";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
-export function useCadastreViewport(
-    setData:Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
+export function useAssocRoleCadastreViewport(
+    setCadastre:Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
     data?:FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null
 ) {
     const { handleViewportChange } = useViewportData({
@@ -17,19 +17,19 @@ export function useCadastreViewport(
                     bbox: [bounds.minx, bounds.miny, bounds.maxx, bounds.maxy],
                 });
                 const out = response.data as FeatureCollection<Geometry,lotCadastralGeoJsonProperties>
-                setData(out);
+                setCadastre(out);
             } catch(err:any){
                 console.log(err)
-                setData(null); // fallback
+                setCadastre(null); // fallback
             }
         },
         onClear: () => {
             try{
-                setData(null);
+                setCadastre(null);
             }catch(err:any){
                 console.log(err)
-                setData(null)
-            }  
+                setCadastre(null)
+            }
         },
     });
     return handleViewportChange;
