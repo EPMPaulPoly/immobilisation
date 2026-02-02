@@ -38,19 +38,24 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
     }
 
     const gestSelectInventaire = (e:number)=>{
+        if (props.defMethodeEstimeRegard){
+
         props.defMethodeEstimeRegard(e)
+        }
     }
 
     const gestSelectRule = (e:number) =>{
-        props.defRegRegard(e)
+        if (props.defRegRegard) props.defRegRegard(e)
     }
 
     const gestSelectRuleSet = (e:number) =>{
-        props.defEnsRegRegard(e)
+        if (props.defEnsRegRegard) props.defEnsRegRegard(e)
     }
 
     const gestModifInventaire  =() =>{
+
         if (!props.panneauModifVisible){
+            if (props.defPanneauModifVisible)
             props.defPanneauModifVisible(true)
         }
     }
@@ -71,19 +76,19 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                         <tbody>
                             <tr>
                                 <td>Id Lot</td>
-                                <td>{props.lots.features[0].properties.g_no_lot}</td>
+                                <td>{props.lots?.features[0].properties.g_no_lot}</td>
                             </tr>
                             <tr>
                                 <td>Superficie</td>
-                                <td>{props.lots.features[0].properties.g_va_suprf}</td>
+                                <td>{props.lots?.features[0].properties.g_va_suprf}</td>
                             </tr>
                             <tr>
                                 <td>Latitude</td>
-                                <td>{props.lots.features[0].properties.g_nb_coo_1}</td>
+                                <td>{props.lots?.features[0].properties.g_nb_coo_1}</td>
                             </tr>
                             <tr>
                                 <td>Longitude</td>
-                                <td>{props.lots.features[0].properties.g_nb_coord}</td>
+                                <td>{props.lots?.features[0].properties.g_nb_coord}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,7 +104,7 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                         onChange={e => gestSelectRole(e.target.value)}
                     >
                         <option value={""} key={""}>Selection Role</option>
-                        {props.donneesRole.features.map(role=>(
+                        {props.donneesRole?.features.map(role=>(
                             <option 
                                 key={role.properties.id_provinc} 
                                 value={role.properties.id_provinc} 
@@ -119,49 +124,49 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                        <tbody>
                            <tr>
                                <td>Id Provinc</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.id_provinc}</td>
                            </tr>
                            <tr>
                                <td>Util Pred (RL0105A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0105a}</td>
                            </tr>
                            <tr>
                                <td>Nb Étages (RL0306A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0306a}</td>
                            </tr>
                            <tr>
                                <td>Année Construction(RL0307A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0307a}</td>
                            </tr>
                            <tr>
                                <td>Metres Carres(RL0308A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0308a}</td>
                            </tr>
                            <tr>
                                <td>Nb logements(RL0311A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties.rl0311a}</td>
                            </tr>
                            <tr>
                                <td>Nb chambres loc(RL0312A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0312a}</td>
                            </tr>
                            <tr>
                                <td>Valeur Immeuble(RL0404A)</td>
-                               <td>{props.donneesRole.features.find(item => 
+                               <td>{props.donneesRole?.features.find(item => 
                                    item.properties.id_provinc===props.roleRegard
                                )?.properties?.rl0404a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                            </tr>
@@ -169,6 +174,7 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                    </table>
                    </div>)
            }
+           {props.inventaire?<>
             <h4 onClick={()=>clickTableCollapse(3)}className="table-lot-title">Inventaire</h4>
             { visibleTable===3 && (<div className="lot-data-table" >
                 <div className="table-inventaire-control">
@@ -239,7 +245,9 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                            </tr>
                        </tbody>
                    </table>
-                   </div>)}
+                   </div>)}</>:<></>
+            }
+            {props.reglements?<>
             <h4 onClick={()=>clickTableCollapse(4)}className="table-lot-title">Reglements</h4>
             { visibleTable===4 && (<div className="lot-data-table" >
                 <div className="table-inventaire-control">
@@ -320,6 +328,8 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                        </tbody>
                    </table>
                    </div>)}
+                   </>:<></>}
+            {props.ensemblesReglements?<>
             <h4 onClick={()=>clickTableCollapse(5)}className="table-lot-title">Ensembles Reglements</h4>
             { visibleTable===5 && (<div className="lot-data-table" >
                 <div className="table-inventaire-control">
@@ -368,7 +378,7 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                            </tr>
                        </tbody>
                    </table>
-                   </div>)}
+                   </div>)}</>:<></>}
         </div>
     )
 }

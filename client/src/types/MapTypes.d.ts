@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
-import { roleFoncierGeoJsonProps } from "./DataTypes";
+import { ReactNode, SetStateAction } from "react";
+import { lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
+import { FeatureCollection, Geometry } from "geojson";
 
 export interface MapShellProps {
     children?: ReactNode;
@@ -41,10 +42,20 @@ export type UseViewportDataOptions<T> = {
 
 export type CadastreLayerProps = {
   data: FeatureCollection<Geometry, lotCadastralGeoJsonProperties>;
+  lotSelect?: Feature<Geometry,lotCadastralGeoJsonProperties>|null;
+  defLotSelect?: Dispatch<SetStateAction<Feature<Geometry,lotCadastralGeoJsonProperties>|null>>
+  roleSelect?:FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null
+  defRoleSelect?:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null >>
+  defRoleRegard?:Dispatch<SetStateAction<string>>
 };
 
 export type RoleLayerProps = {
   data: FeatureCollection<Geometry, roleFoncierGeoJsonProps>;
+  lotSelect?: Feature<Geometry,lotCadastralGeoJsonProperties>|null;
+  defLotSelect?: Dispatch<SetStateAction<Feature<Geometry,lotCadastralGeoJsonProperties>|null>>
+  roleSelect?:FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null
+  defRoleSelect?:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>
+  defRoleRegard?:Dispatch<SetStateAction<string>>
 }
 
 export interface MapToURLProps{

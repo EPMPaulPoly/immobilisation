@@ -46,7 +46,10 @@ const ModalRecomputeInventaire: React.FC<PropsModalRecomputeInventaire> = (props
         const fetchData = async () => {
             if (props.modalOuvert == true) {
                 try {
-                    defAncienInventaire(props.inventairePert.find((row)=>row.methode_estime===methodeCalculSelect&&row.g_no_lot===props.lotPert.features[0].properties.g_no_lot)??inventaireVide);
+                    if (props.lotPert) {defAncienInventaire(
+                        props.inventairePert.find(
+                            (row)=>row.methode_estime===methodeCalculSelect&&row.g_no_lot===props.lotPert?.features[0].properties.g_no_lot)??inventaireVide);
+                    }
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 } finally {
@@ -63,6 +66,7 @@ const ModalRecomputeInventaire: React.FC<PropsModalRecomputeInventaire> = (props
         props.defModalOuvert(false)
     }
     const gestRelancerCalculLot = async () => {
+        if (props.lotPert){
         switch (methodeCalculSelect) {
             case 1:
                 console.log('Non implémenté')
@@ -83,14 +87,14 @@ const ModalRecomputeInventaire: React.FC<PropsModalRecomputeInventaire> = (props
             default:
                 console.log('Cas inconnu')
                 break;
-        }
+        }}
     }
 
     const gestLancementCalculRegEntManuelle=async()=>{
             const matchCalcul: requete_calcul_manuel_reg[] = entreesInventaireSemiManuel.map((item) => {
                 const key:string = `${item.cubf}-${item.unite}-${item.id_reg_stat}-${item.id_er}`;
                 return {
-                    g_no_lot:props.lotPert.features[0].properties.g_no_lot,
+                    g_no_lot:props.lotPert?.features[0].properties.g_no_lot??"",
                     cubf: item.cubf,
                     id_reg_stat: item.id_reg_stat,
                     id_er:item.id_er,
@@ -118,16 +122,19 @@ const ModalRecomputeInventaire: React.FC<PropsModalRecomputeInventaire> = (props
         console.log(entreesDonneesPourCalcul)
     };
     const gestChangementMethodeCalcul = (idMethode:number)=>{
+        if (props.lotPert){
         defMethodeCalculSelect(Number(idMethode))
-        const ancienInventairePot = props.inventairePert.find((row)=>row.methode_estime===Number(idMethode)&&row.g_no_lot===props.lotPert.features[0].properties.g_no_lot)??{...inventaireVide,g_no_lot:props.lotPert.features[0].properties.g_no_lot,methode_estime:Number(idMethode)}
-        defAncienInventaire(ancienInventairePot)
+        const ancienInventairePot = props.inventairePert.find((row)=>row.methode_estime===Number(idMethode)&&row.g_no_lot===props.lotPert?.features[0].properties.g_no_lot)??{...inventaireVide,g_no_lot:props.lotPert.features[0].properties.g_no_lot,methode_estime:Number(idMethode)}
+        defAncienInventaire(ancienInventairePot)}
     }
     const gestObtentionReglements=async()=>{
-        defCalculEnCours(true)
-        const donnees = await obtRegManuel(props.lotPert.features[0].properties.g_no_lot)
-        defEntreesInventaireSemiManuel(donnees)
-        defEntreeManuelleRequise(true)
-        defCalculEnCours(false)
+        if (props.lotPert){
+            defCalculEnCours(true)
+            const donnees = await obtRegManuel(props.lotPert.features[0].properties.g_no_lot)
+            defEntreesInventaireSemiManuel(donnees)
+            defEntreeManuelleRequise(true)
+            defCalculEnCours(false)
+        }
     }
     const gestEntreeComptageManuel=()=>{
         defNouvelInventaire({...ancienInventaire,n_places_mesure:nombrePlaces,commentaire:commentaire})

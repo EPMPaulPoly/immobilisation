@@ -9,7 +9,7 @@ import { FeatureCollection, Geometry, Feature } from 'geojson';
 import { lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps, lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
 import CarteInventaire from '../components/carteInventaire';
 import TableRevueInventaire from '../components/RevueInventaire';
-import './inventaire.css';
+import './visualisationInventaire.css';
 import './common.css';
 import CompoModifInventaire from '../components/modifInventaire';
 import ComparaisonInventaireQuartier from '../components/ComparaisonInventaireQuartier';
@@ -35,7 +35,7 @@ const VisualisationInventaire: React.FC = () => {
     const [inventaire, defInventaire] = useState<inventaire_stationnement[]>([]);
     const [inventaireSelect, defInventaireSelect] = useState<inventaire_stationnement[]>([]);
 
-    const [lotSelect, defLotSelect] = useState<FeatureCollection<Geometry, lotCadastralAvecBoolInvGeoJsonProperties>>({//lot selectionné
+    const [lotSelect, defLotSelect] = useState<FeatureCollection<Geometry, lotCadastralAvecBoolInvGeoJsonProperties>|null>({//lot selectionné
         type: "FeatureCollection",
         features: [{
             type: 'Feature',
@@ -53,7 +53,7 @@ const VisualisationInventaire: React.FC = () => {
         }]
 
     });
-    const [roleSelect, defRoleSelect] = useState<FeatureCollection<Geometry, roleFoncierGeoJsonProps>>({//items du role
+    const [roleSelect, defRoleSelect] = useState<FeatureCollection<Geometry, roleFoncierGeoJsonProps>|null>({//items du role
         type: "FeatureCollection",
         features: []
     });

@@ -143,7 +143,7 @@ const ValidationStatistique: React.FC = () => {
             }
         ]
     })
-    const [lotSelect, defLotSelect] = useState<FeatureCollection<Geometry, lotCadastralAvecBoolInvGeoJsonProperties>>({
+    const [lotSelect, defLotSelect] = useState<FeatureCollection<Geometry, lotCadastralAvecBoolInvGeoJsonProperties>|null>({
         type: 'FeatureCollection',
         features: [
             {

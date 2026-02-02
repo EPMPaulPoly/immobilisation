@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import MapShell from "../map/MapShell";
 import type { FeatureCollection, Geometry } from "geojson";
 import type { roleFoncierGeoJsonProps } from "../types/DataTypes";
-import RoleLayer from "../map/layers/RoleLayers";
+import RoleLayer from "../map/layers/RoleLayer";
 import { useRoleViewport } from "../map/hooks/useRoleViewport";
 
 const CarteVisionnementRole = () => {
