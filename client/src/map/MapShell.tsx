@@ -10,8 +10,6 @@ import RecentrerCarte from "./utils/recentrerCarte";
 import { MapToUrl } from "./utils/mapToURL";
 import { URLToMap } from "./utils/URLToMap";
 
-
-
 const MapShell = ({
     children,
     onViewportChange,

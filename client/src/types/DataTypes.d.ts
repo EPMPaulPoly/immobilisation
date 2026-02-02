@@ -243,7 +243,9 @@ export interface comboERRoleFoncier{
     TDs: roleFoncierGeoJsonProps[]
 }
 
-
+export interface insertCount{
+    insert_rows:number
+}
 
 export interface inventaire_stationnement{
     g_no_lot:string,
