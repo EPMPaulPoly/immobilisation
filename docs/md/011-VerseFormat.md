@@ -1,7 +1,8 @@
 # Téléversement de données
 ---
+[^Tables des matières](../../README.md)|
 [<Installation](010-Installation.md)| 
-[Démarrage du serveur>](021-Demarrage.md)
+[Démarrage du serveur>](012-Demarrage.md)
 ---
 
 Deux solutions sont disponibles pour téléverser les données dans la base de données. La première consiste à téléverser le rôle et le cadastre dans un format de base de données vide par exemple pour un nouveau projet. La deuxième consiste à téléverser une base de données créée par un autre utilisateur. 

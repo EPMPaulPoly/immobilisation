@@ -1,8 +1,9 @@
 # Entrée des facteurs de conversions d'unités
 
 ---
-[<Téléversement Secteurs](022-UploadSecteurs)| 
-[Versement des données cadastrales>](024-VerseDonneesCadastre.md)
+[^Tables des matières](../../README.md)|
+[<Téléversement Secteurs](020-VerseSecteurs)| 
+[Versement des données cadastrales>](022-VerseDonneesCadastre.md)
 ---
 
 On peut ensuite utiliser le menu pour naviguer à la page d'entrée des [facteurs de conversion](http://localhost:3000/unites). L'interface de cette page est montrée à la figure ci-dessous:

@@ -1,6 +1,8 @@
 # Instructions d'installation
 ---
-[<Lisez-moi](../../README.md)|[Téléversement>](020-Upload.md)
+[^Tables des matières](../../README.md)|
+[<Survol du logigramme](000-Procedure.md)|
+[Versement format BD>](011-VerseFormat.md)
 ---
 La procédure d'installation sera détaillée pour windows et Ubuntu
 

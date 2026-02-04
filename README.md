@@ -8,12 +8,68 @@ Ce projet a pour but de créer l'interface et le backend pour prédire la capaci
 
 Mémoire(À venir)
 
-[Installation](/docs/md/010-Installation.md)
+En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter la création et l'analyse dans le futur
 
-[Téléversement des données](/docs/md/020-Upload.md)
+### Survol
+[Logigramme de l'analyse](/docs/md/000-Procedure.md)
+### Installation des logiciels et mise en place de la BD
+[Installations requises](/docs/md/010-Installation.md)
 
-[Logigramme de l'analyste](/docs/md/012-Procedure.md)
+[Création de la BD](/docs/md/011-VerseFormat.md)
 
+[Demarrage du serveur pour opérer l'interface](/docs/md/012-Demarrage.md)
+
+### Téléversement des données
+
+[Secteurs d'analyse](/docs/md/020-VerseSecteurs.md)
+
+[Conversions d'unités](docs/md/021-EntreeConversions.md)
+
+[Données Cadastrales](docs/md/022-VerseDonneesCadastre.md)
+
+[Données du rôle foncier](docs/md/023-VerseDonneesRole.md)
+
+[Association cadastre-rôle](docs/md/024-CreationAssocRoleCadastre.md)
+
+[Données Recensement](docs/md/025-VersementDonneesPopu.md)
+
+[Données OD](docs/md/026-VerseDonneesOD.md)
+
+[Données de l'historique de la ville](docs/md/027-VersementModifHistorique.md)
+### Création de la réglementation
+
+[Création des règlements](docs/md/030-RegCreation.md)
+
+[Création des ensembles de règlements](docs/md)
+
+### Imputation de l'offre de stationnement
+[Prédiction automatique par les minimums](docs/md/040-Prediction.md)
+
+[Méthodes alternatives supportées](docs/md/041-MethodesAlternatives.md)
+
+### Évaluation de la performance
+[Survol](docs/md/050-EvaluationPerformance.md)
+
+[Création des catégories](docs/md/051-CreationCateg.md)
+
+[Collecte des données](docs/md/052-CollecteDonnees.md)
+
+[Méthodes d'évaluation](docs/md/053-MethodesEvaluation.md)
+
+### Méthodes d'analyse
+[Survol](docs/md/060-Analyse.md)
+
+[Diagrammes à Barres](docs/md/061-Barres.md)
+
+[Diagrammes XY](docs/md/062-XY.md)
+
+[Cartes](docs/md/063-Carto.md)
+
+[Profils d'accumulation de véhicules](docs/md/064-ProfilAccumulationVeh.md)
+
+[Analyse de variabilité](docs/md/065-AnalyseVariabilite.md)
+
+### Informations sur l'API
 [Information API](/docs/md/070-APIIntro.md)
 
 ## Références utiles pour la compréhension
@@ -41,7 +97,7 @@ Ces trois parties sont implémentées dans une instance [Docker](https://fr.wiki
   - DB_PORT
   - SERVER_PORT
 
-Un [dump psql](/db_template/format_bd_vide.sql) peut être utilisé pour rapidement mettre en place la structure de la base de données sur l'ordinateur de l'utilsateur. Du fait de la nature confidentielle des données. Les données sont disponible sur requête.
+Un [dump psql](/db_template/format_bd_vide.sql) peut être utilisé pour rapidement mettre en place la structure de la base de données sur l'ordinateur de l'utilsateur. Du fait de la nature confidentielle des données de l'enquête OD, les données utilisées dans le mémoire sont disponible sur requête.
 
 ## Perspectives futures
 

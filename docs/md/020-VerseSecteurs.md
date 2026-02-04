@@ -1,7 +1,8 @@
 # Téléversement des secteurs d'analyse
 ---
-[<Démarrage](020-UploadFormat.md)| 
-[Entrée des facteurs de conversion d'unités>](023-EntreeConversions.md)
+[^Tables des matières](../../README.md)|
+[<Démarrage](012-Demarrage.md)| 
+[Entrée des facteurs de conversion d'unités>](021-EntreeConversions.md)
 ---
 
 

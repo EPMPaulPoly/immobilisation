@@ -1,11 +1,12 @@
 # Versement des données cadastrales
 
 ---
-[<Téléversement unite](023-EntreeConversions.md)| 
-[Versement des données du rôle>](025-VerseDonneesRole.md)
+[^Tables des matières](../../README.md)|
+[<Téléversement unite](021-EntreeConversions.md)| 
+[Versement des données du rôle>](023-VerseDonneesRole.md)
 ---
 
-On peut maintenant verser les [données cadastrales](http://localhost:3000/cadastre). Si des données existent la page montrera la division cadastrale actuelle. L'utilisateur doit zoomer pour voir les données pour limiter la quantité de données chargées. 
+On peut maintenant verser les [données cadastrales](http://localhost:3000/cadastre). Si des données existent la page montrera la division cadastrale actuelle. L'utilisateur doit zoomer pour voir les données pour limiter la quantité de données chargées dans le fureteur. L'analyste peut obenir les donées cadastrales à partir de [GéoIndex](https://geoapp.bibl.ulaval.ca/Home/Index). Alternativement, le fichier peut être obtenu auprès du ministère des affaire municipales ou de la municipalité concernée
 
 ![Cadastre vide](images/VerseCadastre/verseCadastreVide.png)
 ![Cadastre Zoom](images/VerseCadastre/verseCadastreZoom.png)

@@ -1,7 +1,8 @@
 # Démarrage du serveur
 ---
-[<Téléversement BD](020-UploadFormat.md)| 
-[Versement des secteurs>](021-UploadSecteurs.md)
+[^Tables des matières](../../README.md)|
+[<Téléversement BD](011-VerseFormat.md)| 
+[Versement des secteurs>](020-VerseSecteurs.md)
 ---
 
 # Comment démarrer le serveur?
