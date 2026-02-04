@@ -47,6 +47,7 @@ const selectLotRole = async(
             props.defRoleSelect({type:'FeatureCollection',features:[]})
             props.defLotSelect({type:'FeatureCollection',features:[]})
             props.defRoleRegard('')
+            alert('Aucune entrée du rôle associée à ce lot')
         }
         
 }
