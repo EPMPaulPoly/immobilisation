@@ -8,7 +8,7 @@ import api from "./api";
 class ServiceRole {
     async obtiensRoleFonciers(params
         :{
-            id_provinc?:string,
+            id_provinc?:string|string[],
             g_no_lot?:string,
             cubf?:number
             bbox?:number[]
@@ -17,7 +17,11 @@ class ServiceRole {
         try{
             let queries:string[]=[]
             if(params.id_provinc!==undefined){
-                queries.push(`id_province=${params.id_provinc}`)
+                if (Array.isArray(params.id_provinc)){
+                    queries.push(`id_provinc=${params.id_provinc.join(',')}`)
+                }else{
+                    queries.push(`id_provinc=${params.id_provinc}`)
+                }
             }
             if (params.g_no_lot!==undefined){
                 queries.push(`g_no_lot=${params.g_no_lot}`)

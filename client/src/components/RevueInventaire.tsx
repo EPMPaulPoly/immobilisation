@@ -76,19 +76,19 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                         <tbody>
                             <tr>
                                 <td>Id Lot</td>
-                                <td>{props.lots?.features[0].properties.g_no_lot}</td>
+                                <td>{props.lots?.features[0]?.properties.g_no_lot}</td>
                             </tr>
                             <tr>
                                 <td>Superficie</td>
-                                <td>{props.lots?.features[0].properties.g_va_suprf}</td>
+                                <td>{props.lots?.features[0]?.properties.g_va_suprf}</td>
                             </tr>
                             <tr>
                                 <td>Latitude</td>
-                                <td>{props.lots?.features[0].properties.g_nb_coo_1}</td>
+                                <td>{props.lots?.features[0]?.properties.g_nb_coo_1}</td>
                             </tr>
                             <tr>
                                 <td>Longitude</td>
-                                <td>{props.lots?.features[0].properties.g_nb_coord}</td>
+                                <td>{props.lots?.features[0]?.properties.g_nb_coord}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,6 +102,7 @@ const TableRevueInventaire: React.FC<TableRevueProps> =(props:TableRevueProps) =
                         id="select-role" 
                         name="select-role" 
                         onChange={e => gestSelectRole(e.target.value)}
+                        value={props.roleRegard}
                     >
                         <option value={""} key={""}>Selection Role</option>
                         {props.donneesRole?.features.map(role=>(

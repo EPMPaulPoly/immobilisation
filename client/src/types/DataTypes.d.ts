@@ -219,7 +219,7 @@ export interface lotCadastralBoolInvDB extends lotCadastralAvecBoolInvGeoJsonPro
 }
 
 export interface roleFoncierGeoJsonProps{
-    id_provinc:number,
+    id_provinc:string,
     rl0105a:number,
     rl0306a:number,
     rl0307a:number,
@@ -241,6 +241,13 @@ export interface roleFoncierDB extends roleFoncierGeoJsonProps{
 export interface comboERRoleFoncier{
     ERs:ensemble_reglement_territoire,
     TDs: roleFoncierGeoJsonProps[]
+}
+
+
+export interface assocRoleCadastre{
+    id_provinc:string,
+    g_no_lot:string,
+    id_assoc_cad_role?:number
 }
 
 export interface insertCount{

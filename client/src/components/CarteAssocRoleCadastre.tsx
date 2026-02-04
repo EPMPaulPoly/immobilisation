@@ -19,8 +19,8 @@ const CarteAssocRoleCadastre = (props:PropsCarteAssoc) => {
     const [role,defRole] = useState<FeatureCollection<Geometry, roleFoncierGeoJsonProps> | null>(null);
     const { Overlay } = LayersControl;
     // Returns a debounced, zoom-gated handler
-    const handleViewportChange = useCadastreViewport(defCadastre);
-    const handleRoleViewportChange = useRoleViewport(defRole)
+    const handleViewportChange = useCadastreViewport(defCadastre,cadastre,props.defLotSelect);
+    const handleRoleViewportChange = useRoleViewport(defRole,role,props.defRoleSelect,props.defRoleRegard)
     return (
             <MapShell 
                 onViewportChange={[handleViewportChange,handleRoleViewportChange]} 
@@ -36,6 +36,7 @@ const CarteAssocRoleCadastre = (props:PropsCarteAssoc) => {
                                 roleSelect={props.roleSelect}
                                 defRoleSelect={props.defRoleSelect}
                                 defRoleRegard={props.defRoleRegard}
+                                roleRegard={props.roleRegard}
                             />
                         </Overlay>
                         <Overlay name={"Cadastre"} checked>

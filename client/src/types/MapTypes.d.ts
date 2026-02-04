@@ -55,6 +55,7 @@ export type RoleLayerProps = {
   defLotSelect?: Dispatch<SetStateAction<Feature<Geometry,lotCadastralGeoJsonProperties>|null>>
   roleSelect?:FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null
   defRoleSelect?:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>
+  roleRegard?:string
   defRoleRegard?:Dispatch<SetStateAction<string>>
 }
 

@@ -66,6 +66,7 @@ export type ReponseUnitesReglements = ApiResponse<unites_reglement_stationnement
 export type ReponseColonnesConversionUnites = ApiResponse<colonnes_possibles_conversion[]>
 // Assocaiations cadastreRole
 export type ReponseInsertionAuto = ApiResponse<insertCount>
+export type ReponseAssocRoleCad = ApiResponse<assocRoleCadastre[]>
 // ensemble reglements
 export type ReponseEnteteEnsembleReglementStationnement = ApiResponse<entete_ensembles_reglement_stationnement>
 export type ReponseEntetesEnsemblesReglement = ApiResponse<entete_ensembles_reglement_stationnement[]>

@@ -4,7 +4,7 @@ import { DbRole } from "database";
 export interface paramsRequeteRole{
     g_no_lot?:string, 
     bbox?:number[], 
-    id_provinc?:string,
+    id_provinc?:string|string[],
     cubf?:number
 }
 
@@ -36,9 +36,19 @@ export const creationRequeteObtentionRole=(params:paramsRequeteRole):{requete:st
         replaceCount++
     }
      if (typeof params.id_provinc !== 'undefined') {
-        conditions.push(`rf.id_provinc = $${replaceCount} `)
-        values.push(params.id_provinc)
-        replaceCount++
+        if (Array.isArray(params.id_provinc)){
+            const placeholdersloc:string[]=[]
+            params.id_provinc.map((id)=>{
+                values.push(id)
+                placeholdersloc.push(`$${replaceCount}`)
+                replaceCount++
+            })
+            conditions.push(`rf.id_provinc IN (${placeholdersloc.join(' , ')})`)
+        }else{
+            conditions.push(`rf.id_provinc = $${replaceCount} `)
+            values.push(params.id_provinc)
+            replaceCount++
+        }
     }
     if (typeof params.cubf !== 'undefined') {
         conditions.push(`rf.rl0105a::int = $${replaceCount} `)
@@ -82,7 +92,7 @@ export const creationRequeteObtentionRole=(params:paramsRequeteRole):{requete:st
     if (conditions.length > 0) {
         query += ' \n WHERE ' + conditions.join(' AND ')
     }
-    query += ';'    
+    query += 'ORDER BY rf.id_provinc ASC;'    
     return {requete:query,values:values}
 }
 

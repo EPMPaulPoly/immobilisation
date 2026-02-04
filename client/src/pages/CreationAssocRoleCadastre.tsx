@@ -25,6 +25,7 @@ const CreationAssocRoleCadastre:FC =()=>{
                     roleSelect={roleSelect}
                     defRoleSelect={defRoleSelect}
                     defRoleRegard={defRoleRegard}
+                    roleRegard={roleRegard}
                 />   
                 </div>
                 <div className='barre-details-inventaire'>

@@ -26,7 +26,12 @@ export function processRequestConversions(req:any):paramsRequeteRole{
     }
     let id_provinc_out= undefined
     if (typeof id_provinc === 'string') {
-        id_provinc_out  =id_provinc;
+        const split = id_provinc.split(',')
+        if (split.length>1){
+            id_provinc_out = split
+        }else{
+            id_provinc_out  =id_provinc;
+        }
     } 
 
     return {

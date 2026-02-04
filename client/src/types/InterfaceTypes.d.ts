@@ -144,6 +144,7 @@ export interface PropsCarteAssoc{
     roleSelect: FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null
     defRoleSelect:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>
     defRoleRegard:Dispatch<SetStateAction<string>>
+    roleRegard:string
 }
 
 // ---------------------------------------------------------------
