@@ -1,0 +1,116 @@
+import { FC, useState } from "react";
+import MenuBar from "../components/MenuBar";
+import ModalVersementGen from "../components/ModalVersement";
+import { EquivalenceVersementCarto } from "../types/DataTypes";
+import MenuManipRecensement from "../components/MenuManipRecensement";
+import CarteVisionnementRecensement from "../components/CarteVisionnementRecensement";
+import './common.css'
+import './versementRecensement.css'
+
+
+const VersementRecensement:FC =()=>{
+    const [modalSelectionCadastreOuvert,defModalSelectionCadastreOuvert] = useState<boolean>(false);
+
+    const equivOptions:Record<2016|2021,EquivalenceVersementCarto[]>={
+        2016:[
+            {
+                colonne_db:'ADIDU',
+                description:'Identifiant de l aire de diffusion',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'pop_2016',
+                description:'Population secteur',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'habitats_2016',
+                description:'Nombre de logements 2016',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'habitats_occup_2016',
+                description:'Nombre de logements 2016',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'superf_2016',
+                description:'Superficie 2016',
+                colonne_fichier:'',
+                obligatoire:true
+            }],
+        2021:[
+            {
+                colonne_db:'ADIDU',
+                description:'Identifiant de l aire de diffusion',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'pop_2021',
+                description:'Population secteur',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'habitats_2021',
+                description:'Nombre de logements 2021',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'habitats_occup_2021',
+                description:'Nombre de logements occupes2021',
+                colonne_fichier:'',
+                obligatoire:true
+            },
+            {
+                colonne_db:'superf',
+                description:'Superficie',
+                colonne_fichier:'',
+                obligatoire:true
+            }]
+        }
+    const [equivalenceFDB, defEquivalenceFBD] = useState<EquivalenceVersementCarto[]>(equivOptions[2016]
+        )
+    const [table,defTable] = useState<'census_population'|'census_population_2016'>('census_population_2016')
+    const [anneeRecens,defAnneeRecense] = useState<2016|2021>(2016)
+    return(
+        <div className='page-versement-visu-cadastre'>
+            <MenuBar/>
+            <MenuManipRecensement
+                modalOuvert={modalSelectionCadastreOuvert}
+                defModalOuvert={defModalSelectionCadastreOuvert}
+                anneeRecens={anneeRecens}
+                defAnneeRecens={defAnneeRecense}
+                tableModif={table}
+                defTableModif={defTable}
+                Equiv={equivalenceFDB}
+                defEquiv={defEquivalenceFBD}
+                equivOptions={equivOptions}
+            />
+            <ModalVersementGen
+                modalOuvert={modalSelectionCadastreOuvert}
+                defModalOuvert={defModalSelectionCadastreOuvert}
+                table={table}
+                title="Versement des données de recensement"
+                champsARemplir={equivalenceFDB}
+                defChampsARemplir={defEquivalenceFBD}
+            />
+            <>
+            {
+                <CarteVisionnementRecensement
+                    annee={anneeRecens}
+                />
+            }
+            </>
+            
+        </div>
+    )
+}
+
+export default VersementRecensement

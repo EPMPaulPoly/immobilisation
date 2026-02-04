@@ -115,7 +115,7 @@ export interface PropsVersement{
     champsARemplir: EquivalenceVersementCarto[]
     defChampsARemplir:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
     title:string
-    table:'cadastre'|'role_foncier'
+    table:'cadastre'|'role_foncier'|'census_population'|'census_population_2016'
 }
 
 // ---------------------------------------------------------------
@@ -145,6 +145,21 @@ export interface PropsCarteAssoc{
     defRoleSelect:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>
     defRoleRegard:Dispatch<SetStateAction<string>>
     roleRegard:string
+}
+
+// ---------------------------------------------------------------
+// ----------------- Recensement -------------------
+// ---------------------------------------------------------------
+export interface PropsMenuVersementRecens{
+    modalOuvert:boolean,
+    defModalOuvert: React.Dispatch<SetStateAction<boolean>>
+    anneeRecens:2016|2021
+    defAnneeRecens:Dispatch<SetStateAction<2016|2021>>,
+    tableModif:'census_population'|'census_population_2016'
+    defTableModif: Dispatch<SetStateAction<'census_population'|'census_population_2016'>>
+    Equiv:EquivalenceVersementCarto[]
+    defEquiv:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
+    equivOptions:Record<2016|2021,EquivalenceVersementCarto[]>
 }
 
 // ---------------------------------------------------------------

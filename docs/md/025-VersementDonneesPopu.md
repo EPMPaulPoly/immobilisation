@@ -17,6 +17,22 @@ Il est fortement suggéré d'extraire seulement les aires de diffusions apparten
 
 Le script fourni peut alors être utilisé pour traiter les données de [2021](../../serveur_calcul_python/utilitaires/1_recensement_2021.py) et [2016](../../serveur_calcul_python/utilitaires/2_recensement_2016.py). Ces deux fichiers joignent les données du CHASS aux données de statistique Canada selon l'identifiant d'aire de diffusion et assure que les données sont dans le référentiel 4326 qui est utilisé dans la base de données.
 
+Prenons l'exemple de 2016. On modifie les entrées pour avoir les chemins voulus:
+```
+path_ad = r"~/Documents/exemple/ad_recensement_2016_vdq_4326.geojson"
+path_pop_data = r'~/Documents/exemple/population recensement canadien 2016.xlsx'
+path_out = '~/Documents/exemple/out_recensement_2016.geojson'
+```
+
+Le fichier Geojson est le fichier des limites avec seulement les aires de diffusion de la municipalité converti en Geojson. Le fichier excel prend la sortie de CHASS et est légèrement reconfigurée:
+
+![alt text](images/recensement/fichierExcel.png)
+
+On peut ensuite lancer le script python. Un exemple est donné ici pour ubuntu. Le script peut être lancé plus facilement à partir de VSCode
+```
+/home/paul-charbonneau/miniconda3/envs/python_import/bin/python /home/paul-charbonneau/Documents/dev/immobilisation/serveur_calcul_python/utilitaires/2_recensement_2016.py
+```
+s
 ## Versement
 
 Le versement s'opère de manière similaire aux autres données géographiques. Si des données existent actuellement elles sont montrées dans la carte si l'utilisateur zoom assez proche. Autrement, l'utilisateur peut sélectionner l'icone en haut à gauche pour verser des données sur le serveur

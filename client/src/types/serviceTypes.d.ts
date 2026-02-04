@@ -35,7 +35,8 @@ import {
     resultatHistoVariabilite,
     quartiers_analyse_db, 
     colonnes_possibles_conversion,
-    insertCount} from './DataTypes'
+    insertCount,
+    recensementGeoJsonProperties} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -67,6 +68,8 @@ export type ReponseColonnesConversionUnites = ApiResponse<colonnes_possibles_con
 // Assocaiations cadastreRole
 export type ReponseInsertionAuto = ApiResponse<insertCount>
 export type ReponseAssocRoleCad = ApiResponse<assocRoleCadastre[]>
+// Recensement
+export type ReponseRecensement = ApiResponse<FeatureCollection<Geometry,recensementGeoJsonProperties>>
 // ensemble reglements
 export type ReponseEnteteEnsembleReglementStationnement = ApiResponse<entete_ensembles_reglement_stationnement>
 export type ReponseEntetesEnsemblesReglement = ApiResponse<entete_ensembles_reglement_stationnement[]>

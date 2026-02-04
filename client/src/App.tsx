@@ -16,6 +16,7 @@ import ModificationUnites from './pages/ModificationUnites';
 import VersementCadastre from './pages/VersementCadastre';
 import VersementRole from './pages/VersementRole';
 import CreationAssocRoleCadastre from './pages/CreationAssocRoleCadastre';
+import VersementRecensement from './pages/VersementRecensement';
 
 const app: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ const app: React.FC = () => {
           <Route path="/cadastre" element={<VersementCadastre/>}/>
           <Route path='/role-foncier' element={<VersementRole/>}/>
           <Route path='/assoc-cadastre-role' element={<CreationAssocRoleCadastre/>}/>
+          <Route path='/recensement' element={<VersementRecensement/>}/>
         </Routes>
       </Router>
     </FournisseurContexte>

@@ -3,7 +3,8 @@ import Geometry from 'geojson';
 export type EquivalenceVersementCarto ={
     colonne_db:string,
     description:string,
-    colonne_fichier:string
+    colonne_fichier:string,
+    obligatoire:boolean
 }
 
 
@@ -411,3 +412,13 @@ export type methodeCalcul = {
     methode_estime:number,
     description:string
 }
+
+export type recensementGeoJsonProperties ={
+    ADIDU:number,
+    pop_2021?:number,
+    pop_2016?:number,
+    habitats_2016?:number,
+    habitats_2021?:number
+}
+
+export type recensementDB =recensementGeoJsonProperties & {geometry: Geometry}

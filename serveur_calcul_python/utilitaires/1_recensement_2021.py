@@ -3,12 +3,11 @@
 import geopandas as gpd
 import pandas as pd
 import os
-import dotenv
 
 
-path_ad = "~/Documents/SIG/ad_recensement_2021_vdq_4326.geojson"
-path_pop_data = '~/Documents/SIG/population recensement canadien 2021.xlsx'
-path_output = "~/Documents/SIG/recensement_2021.geojson"
+path_ad = "~/Documents/exemple/ad_recensement_2021_vdq_4326.geojson"
+path_pop_data = '~/Documents/exemple/population recensement canadien 2021.xlsx'
+path_output = "~/Documents/exemple/out_recensement_2021.geojson"
 
 ad = gpd.read_file(path_ad)
 pop = pd.read_excel(path_pop_data)
@@ -24,4 +23,4 @@ ad['ADIDU'] = ad['ADIDU'].astype(str)
 pop['GEO UID'] = pop['GEO UID'].astype(str)
 fused_data = ad.merge(pop,how='left',left_on='ADIDU',right_on='GEO UID')
 fused_data = fused_data.to_crs(epsg=4326)
-fused_data.to_file("sortie_recensement2021.json", driver="GeoJSON")
+fused_data[['ADIDU','pop_2021','pop_2016','habitats_2021','habitats_occup_2021','superf','geometry']].to_file(path_output, driver="GeoJSON")

@@ -4,6 +4,7 @@ import {useState,FC,ChangeEvent} from 'react';
 import { serviceCadastre } from '../services';
 import LinearProgress from '@mui/material/LinearProgress';
 import { ServiceGeoJson } from '../services/serviceGeoJson';
+import { EquivalenceVersementCarto } from '../types/DataTypes';
 
 const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
     const [columns, setColumns] = useState<string[]>([]);
@@ -41,9 +42,11 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
     }
 
     const handleFileInsert = async()=>{
-        const mappingColonnes = Object.values(props.champsARemplir).reduce((acc, item) => {
-        acc[item.colonne_db] = item.colonne_fichier;
-        return acc;
+        const mappingColonnes = Object.values(props.champsARemplir)
+        .filter(i => i.obligatoire || i.colonne_fichier !== '')
+        .reduce((acc, i) => {
+            acc[i.colonne_db] = i.colonne_fichier;
+            return acc;
         }, {} as Record<string, string>);
         try{
             const response = await ServiceGeoJson.confirmeMajBDTemp(serverFileId,mappingColonnes,props.table)
@@ -97,7 +100,7 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
                 </div>
                 ))}
                             
-                { props.champsARemplir.every(val => val.colonne_fichier !== '') &&
+                { props.champsARemplir.every(val => val.colonne_fichier !== ''||val.obligatoire===false) &&
                     <Button variant="outlined" onClick={handleFileInsert}>Importer le fichier dans la BD</Button>
                 }
             </Box>

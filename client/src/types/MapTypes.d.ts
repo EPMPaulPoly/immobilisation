@@ -1,5 +1,5 @@
 import { ReactNode, SetStateAction } from "react";
-import { lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
+import { lotCadastralGeoJsonProperties, recensementGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
 import { FeatureCollection, Geometry } from "geojson";
 
 export interface MapShellProps {
@@ -57,6 +57,10 @@ export type RoleLayerProps = {
   defRoleSelect?:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>
   roleRegard?:string
   defRoleRegard?:Dispatch<SetStateAction<string>>
+}
+
+export type RecensementLayerProps={
+  data: FeatureCollection<Geometry,recensementGeoJsonProperties>
 }
 
 export interface MapToURLProps{
