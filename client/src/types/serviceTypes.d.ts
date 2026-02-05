@@ -37,7 +37,8 @@ import {
     colonnes_possibles_conversion,
     insertCount,
     recensementGeoJsonProperties,
-    recensementDB} from './DataTypes'
+    recensementDB,
+    ODFeatureCollection} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -121,6 +122,10 @@ export type ReponseStrateUnique = ApiResponse<Strate>
 export type ReponseFeuilles = ApiResponse<FeuilleFinaleStrate[]>
 export type ReponseResultatValidation = ApiResponse<EntreeValidation[]>
 
+
+//Types pour les données d'enquête
+export type ReponseOD = ApiResponse<ODFeatureCollection>
+export type ReponseODDB = ApiResponse<ODDBType>
 // Requetes
 export interface RequeteApiStrate {
     id_strate?: number | null,

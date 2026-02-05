@@ -4,6 +4,7 @@ import { lotCadastralGeoJsonProperties, recensementGeoJsonProperties } from "../
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { serviceRecensement } from "../../services/serviceRecensement";
 import { LatLngBounds } from "leaflet";
+import { BoundsToArray } from "../utils/LatLngBndsToBounds";
 
 export function useRecensementViewPort(
     setData:Dispatch<SetStateAction<FeatureCollection<Geometry,recensementGeoJsonProperties>|null>>,
@@ -23,7 +24,7 @@ export function useRecensementViewPort(
                 );
                 const response = await serviceRecensement.chercheRecensementQuery({
                     annee:annee,   
-                    bbox: [bounds.minx, bounds.miny, bounds.maxx, bounds.maxy],
+                    bbox: BoundsToArray(bounds),
                 });
                 const out = response.data as unknown as FeatureCollection<Geometry,recensementGeoJsonProperties>
                 setData(out);

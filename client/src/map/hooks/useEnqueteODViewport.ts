@@ -1,18 +1,18 @@
 import { useViewportData } from "./useViewPortData";
 import { serviceCadastre } from "../../services";
-import { Bounds } from '../../types/MapTypes';
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { lotCadastralGeoJsonProperties } from "../../types/DataTypes";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { BoundsToArray } from "../utils/LatLngBndsToBounds";
+import { ODGeomTypes } from "../../types/EnumTypes";
 
-export function useCadastreViewport(
+export function useEnqueteODViewPort(
     setData:Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
-    data?:FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null,
-    setCadaSelect?:Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
+    view:ODGeomTypes,
+    minZoom:number
 ) {
     const { handleViewportChange } = useViewportData({
-        minZoom: 16,
+        minZoom: minZoom,
         onFetch: async ({ bounds }) => {
             try{
                 const response = await serviceCadastre.chercheCadastreQuery({
@@ -20,29 +20,17 @@ export function useCadastreViewport(
                 });
                 const out = response.data as FeatureCollection<Geometry,lotCadastralGeoJsonProperties>
                 setData(out);
-                if (setCadaSelect){
-                    setCadaSelect({type:'FeatureCollection',features:[]})
-                }
             } catch(err:any){
                 console.log(err)
                 setData(null); // fallback
-                if (setCadaSelect){
-                    setCadaSelect({type:'FeatureCollection',features:[]})
-                }
             }
         },
         onClear: () => {
             try{
                 setData(null);
-                if (setCadaSelect){
-                    setCadaSelect({type:'FeatureCollection',features:[]})
-                }
             }catch(err:any){
                 console.log(err)
                 setData(null)
-                if (setCadaSelect){
-                    setCadaSelect({type:'FeatureCollection',features:[]})
-                }
             }  
         },
     });

@@ -4,6 +4,7 @@ import { Bounds } from '../../types/MapTypes';
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { lotCadastralGeoJsonProperties } from "../../types/DataTypes";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { BoundsToArray } from "../utils/LatLngBndsToBounds";
 
 export function useAssocRoleCadastreViewport(
     setCadastre:Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
@@ -14,7 +15,7 @@ export function useAssocRoleCadastreViewport(
         onFetch: async ({ bounds }) => {
             try{
                 const response = await serviceCadastre.chercheCadastreQuery({
-                    bbox: [bounds.minx, bounds.miny, bounds.maxx, bounds.maxy],
+                    bbox: BoundsToArray(bounds),
                 });
                 const out = response.data as FeatureCollection<Geometry,lotCadastralGeoJsonProperties>
                 setCadastre(out);

@@ -1,4 +1,4 @@
-import Geometry from 'geojson';
+import Geometry, { FeatureCollection } from 'geojson';
 
 export type EquivalenceVersementCarto ={
     colonne_db:string,
@@ -422,3 +422,54 @@ export type recensementGeoJsonProperties ={
 }
 
 export type recensementDB =recensementGeoJsonProperties & {geometry: Geometry}
+
+export type menGeoJSONProperties ={
+    nolog:string,
+    tlog:boolean,
+    nbper:number,
+    nbveh:number,
+    facmen:number
+}
+
+export type menPropertiesDB =menGeoJSONProperties&{geom_logis:Geometry}
+
+export type persGeoJSONProperties={
+    clepersonne:string,
+    tper:boolean,
+    sexe:number,
+    age:number,
+    grpage:number,
+    percond:number,
+    occper:number,
+    mobil:number,
+    facper:number,
+    facpermc:number
+}
+
+export type persPropertiesDB = persGeoJSONProperties&{geom_occ:Geometry}
+
+export type depGeoJSONProperties={
+    cledeplacement:string,
+    nodep:number,
+    hredep:string,
+    heure:number,
+    motif:number,
+    motif_gr:number,
+    mode1:number,
+    mode2:number,
+    mode3:number,
+    mode4:number,
+    stat:number,
+    cout_stat:number,
+    term_stat:number,
+}
+
+export type depPropertiesOriDB=depGeoJSONProperties&{geom_ori}
+export type depPropertiesDesDB=depGeoJSONProperties&{geom_des}
+export type depPropertiesLigDB=depGeoJSONProperties&{trip_lines}
+
+export type ODFeatureCollection=FeatureCollection<Geometry,menGeoJSONProperties>|
+FeatureCollection<Geometry,persGeoJSONProperties>|
+FeatureCollection<Geometry,depGeoJSONProperties>
+
+export type ODDBType = menPropertiesDB|persPropertiesDB|depPropertiesOriDB|depPropertiesDesDB|depPropertiesLigDB

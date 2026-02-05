@@ -5,6 +5,7 @@ import { Feature, FeatureCollection, Geometry } from "geojson";
 import { lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps } from "../../types/DataTypes";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { serviceRole } from "../../services/serviceRoleFoncier";
+import { BoundsToArray } from "../utils/LatLngBndsToBounds";
 
 export function useRoleViewport(
     setData:Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>,
@@ -17,7 +18,7 @@ export function useRoleViewport(
         onFetch: async ({ bounds }) => {
             try{
                 const response = await serviceRole.obtiensRoleFonciers({
-                    bbox: [bounds.minx, bounds.miny, bounds.maxx, bounds.maxy],
+                    bbox: BoundsToArray(bounds),
                 });
                 const out = response.data as FeatureCollection<Geometry,roleFoncierGeoJsonProps>
                 

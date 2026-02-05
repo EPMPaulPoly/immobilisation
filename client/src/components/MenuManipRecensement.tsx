@@ -1,10 +1,9 @@
 import React from 'react';
-import { propsMenuSecAnalyse, PropsMenuVersementCadastre, PropsMenuVersementRecens } from '../types/InterfaceTypes';
-import {Edit,Upload,FileOpen} from '@mui/icons-material';
+import { PropsMenuVersementRecens } from '../types/InterfaceTypes';
+import {FileOpen} from '@mui/icons-material';
 import {Select,MenuItem, Menu} from '@mui/material';
-import Button from '@mui/material/Button';
-import { serviceQuartiersAnalyse } from '../services';
 import { serviceRecensement } from '../services/serviceRecensement';
+import { BoundsToArray, LatLngBoundsToBounds } from '../map/utils/LatLngBndsToBounds';
 
 const MenuManipRecensement:React.FC<PropsMenuVersementRecens> = (props:PropsMenuVersementRecens) => {
     const gestionChangementAnnee =async (nouvelleValeur:2016|2021)=>{
@@ -13,16 +12,10 @@ const MenuManipRecensement:React.FC<PropsMenuVersementRecens> = (props:PropsMenu
             props.defAnneeRecens(nouvelleValeur)
             props.defTableModif('census_population_2016')
             props.defEquiv(props.equivOptions[2016])
-            const bbox = props.limites
-            ? (() => {
-                const sw = props.limites.getSouthWest();
-                const ne = props.limites.getNorthEast();
-                return { minx: sw.lng, miny: sw.lat, maxx: ne.lng, maxy: ne.lat };
-                })()
-            : null;
-            if (bbox!==null){
+            const bounds = LatLngBoundsToBounds(props.limites)
+            if (bounds!==null){
                 console.log('bbox dispo')
-                const resultat = await serviceRecensement.chercheRecensementQuery({annee:nouvelleValeur,bbox:[bbox.minx, bbox.miny, bbox.maxx, bbox.maxy]})
+                const resultat = await serviceRecensement.chercheRecensementQuery({annee:nouvelleValeur,bbox:BoundsToArray(bounds)})
                 props.defDonnees(resultat.data)
             }else{
                 console.log('bbox non dispo')
@@ -32,16 +25,10 @@ const MenuManipRecensement:React.FC<PropsMenuVersementRecens> = (props:PropsMenu
             props.defAnneeRecens(nouvelleValeur)
             props.defTableModif('census_population')
             props.defEquiv(props.equivOptions[2021])
-            const bbox = props.limites
-            ? (() => {
-                const sw = props.limites.getSouthWest();
-                const ne = props.limites.getNorthEast();
-                return { minx: sw.lng, miny: sw.lat, maxx: ne.lng, maxy: ne.lat };
-                })()
-            : null;
-            if (bbox!==null){
+            const bounds = LatLngBoundsToBounds(props.limites)
+            if (bounds!==null){
                 console.log('bbox dispo')
-                const resultat = await serviceRecensement.chercheRecensementQuery({annee:nouvelleValeur,bbox:[bbox.minx, bbox.miny, bbox.maxx, bbox.maxy]})
+                const resultat = await serviceRecensement.chercheRecensementQuery({annee:nouvelleValeur,bbox:BoundsToArray(bounds)})
                 props.defDonnees(resultat.data)
             }else{
                 console.log('bbox non dispo')
