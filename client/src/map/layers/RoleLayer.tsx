@@ -16,11 +16,12 @@ const RoleLayer = (props: RoleLayerProps) => {
         weight: 1,
         fillOpacity: 0.4,
     });
+    const { defLotSelect, defRoleSelect, defRoleRegard } = props;
     const onEachFeature = (feature: Feature<any, any>, layer: Layer) => {
         if (feature.properties) {
             // Create a div for React to render into
             const popupDiv = document.createElement('div');
-
+            
             // Create a React root and render your popup content
             const root = createRoot(popupDiv);
             root.render(
@@ -30,26 +31,22 @@ const RoleLayer = (props: RoleLayerProps) => {
                     <div><strong>CUBF:</strong> {feature.properties.rl0105a || "N/A"}</div>
                     <div><strong>Aire étages:</strong> {feature.properties.rl0308a || "N/A"}</div>
                     <div><strong>Nombre de logements:</strong> {feature.properties.rl0311a || "N/A"}</div>
-                    {props.defLotSelect && 
-                    props.defRoleSelect && 
-                    props.defRoleRegard?
+                    {defLotSelect && defRoleSelect && defRoleRegard ? (
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={() => {selectLotRole({
                                     id_provinc:feature.properties.id_provinc??'',
-                                    defLotSelect:props.defLotSelect,
-                                    defRoleSelect:props.defRoleSelect,
-                                    defRoleRegard:props.defRoleRegard
+                                    defLotSelect:defLotSelect,
+                                    defRoleSelect:defRoleSelect,
+                                    defRoleRegard:defRoleRegard
                                 })
                                 layer.closePopup();
                             }
                             }
                     >
                         Voir détails
-                    </Button>:<>
-                    
-                    </>}
+                    </Button>):null}
                     
                 </div>
             );

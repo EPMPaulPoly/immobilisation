@@ -12,7 +12,8 @@ import {
     ReponseDBCadastreBoolInv,
     ReponseCadastreBoolInv, 
     RequeteApiCadastre, 
-    ReponseRecensement} from '../types/serviceTypes';
+    ReponseRecensement,
+    ReponseRecensementDB} from '../types/serviceTypes';
 import api from './api';
 import {
     FeatureCollection, 
@@ -33,11 +34,11 @@ class ServiceRecensement {
             if (queries.length>0){
                 final_query+='?'+queries.join('&')
             } 
-            const response: AxiosResponse<recensementDB[]> = await api.get(final_query);
-            const data_res = response.data;
+            const response: AxiosResponse<ReponseRecensementDB> = await api.get(final_query);
+            const data_res = response.data.data;
             const featureCollection: FeatureCollection<Geometry, recensementGeoJsonProperties> = {
                 type: "FeatureCollection",
-                features: data_res.map((item) => ({
+                features: data_res.map((item:recensementDB) => ({
                     type: "Feature",
                     geometry: item.geometry??{},
                     properties: {

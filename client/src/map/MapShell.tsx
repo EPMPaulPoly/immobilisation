@@ -24,8 +24,8 @@ const MapShell = ({
     const urlCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.URL ?? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     const attributionCarto = optionsCartos.find((entree) => entree.id === optionCartoChoisie)?.attribution ?? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
-    const DEFAULT_CENTER: LatLng = latLng([45.5017, -73.5673])
-    const DEFAULT_ZOOM:number =  8;
+    const DEFAULT_CENTER: LatLng = latLng([46.91805, -71.03210])
+    const DEFAULT_ZOOM:number =  7;
     if (!DEFAULT_CENTER || !DEFAULT_ZOOM) {
         return <div>Loading map...</div>;
     }

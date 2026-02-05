@@ -1,6 +1,7 @@
-import { ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { lotCadastralGeoJsonProperties, recensementGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
 import { FeatureCollection, Geometry } from "geojson";
+import { LatLngBounds } from "leaflet";
 
 export interface MapShellProps {
     children?: ReactNode;

@@ -1,6 +1,6 @@
-import {LatLng, LatLngExpression} from "leaflet";
+import {LatLng, LatLngBounds, LatLngExpression} from "leaflet";
 import React, { SetStateAction,Dispatch } from "react";
-import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion, EquivalenceVersementCarto } from "./DataTypes";
+import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion, EquivalenceVersementCarto, recensementGeoJsonProperties } from "./DataTypes";
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { PrioriteEstimeQuartier, TypesVisualisationAnalyseQuartier, VariablesPossibles } from "./AnalysisTypes";
 import { N } from "react-router/dist/development/register-BkDIKxVz";
@@ -160,6 +160,8 @@ export interface PropsMenuVersementRecens{
     Equiv:EquivalenceVersementCarto[]
     defEquiv:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
     equivOptions:Record<2016|2021,EquivalenceVersementCarto[]>
+    limites:LatLngBounds|null
+    defDonnees: Dispatch<SetStateAction<FeatureCollection<Geometry,recensementGeoJsonProperties>|null>>
 }
 
 // ---------------------------------------------------------------

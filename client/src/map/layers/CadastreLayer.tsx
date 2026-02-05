@@ -17,6 +17,7 @@ const CadastreLayer = (props: CadastreLayerProps) => {
             fillOpacity: 0.4,
         });
     // Popups
+    const { defLotSelect, defRoleSelect, defRoleRegard } = props;
     const onEachFeature = (feature: Feature<Geometry, lotCadastralGeoJsonProperties>, layer: Layer) => {
         if (feature.properties) {
             // Create a div for React to render into
@@ -30,17 +31,17 @@ const CadastreLayer = (props: CadastreLayerProps) => {
                     <div><strong>Superficie:</strong> {feature.properties.g_va_suprf || "N/A"}</div>
                     <div><strong>Longitude:</strong> {feature.properties.g_nb_coord || "N/A"}</div>
                     <div><strong>Latitude:</strong> {feature.properties.g_nb_coo_1 || "N/A"}</div>
-                    {props.defLotSelect!==undefined && 
-                    props.defRoleSelect!==undefined && 
-                    props.defRoleRegard!==undefined?
+                    {defLotSelect&& 
+                    defRoleSelect&& 
+                    defRoleRegard&&(
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={() => {selectLotRole({
                                     g_no_lot:feature.properties.g_no_lot??'',
-                                    defLotSelect:props.defLotSelect,
-                                    defRoleSelect:props.defRoleSelect,
-                                    defRoleRegard:props.defRoleRegard
+                                    defLotSelect:defLotSelect,
+                                    defRoleSelect:defRoleSelect,
+                                    defRoleRegard:defRoleRegard
                                 }
                             )
                             layer.closePopup();
@@ -48,9 +49,7 @@ const CadastreLayer = (props: CadastreLayerProps) => {
                         }
                     >
                         Voir détails
-                    </Button>:<>
-                    
-                    </>}
+                    </Button>)}
                     
                 </div>
             );

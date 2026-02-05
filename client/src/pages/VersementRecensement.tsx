@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
 import MenuBar from "../components/MenuBar";
 import ModalVersementGen from "../components/ModalVersement";
-import { EquivalenceVersementCarto } from "../types/DataTypes";
+import { EquivalenceVersementCarto, recensementGeoJsonProperties } from "../types/DataTypes";
 import MenuManipRecensement from "../components/MenuManipRecensement";
 import CarteVisionnementRecensement from "../components/CarteVisionnementRecensement";
 import './common.css'
 import './versementRecensement.css'
+import { useRecensementViewPort } from "../map/hooks/useRecensementViewport";
+import { FeatureCollection, Geometry } from "geojson";
+import { LatLngBounds } from "leaflet";
 
 
 const VersementRecensement:FC =()=>{
@@ -79,6 +82,11 @@ const VersementRecensement:FC =()=>{
         )
     const [table,defTable] = useState<'census_population'|'census_population_2016'>('census_population_2016')
     const [anneeRecens,defAnneeRecense] = useState<2016|2021>(2016)
+    const [carteRecensement, defCarteRecensement] = useState<FeatureCollection<Geometry, recensementGeoJsonProperties> | null>(null);
+    const [limites,defLimites] = useState<LatLngBounds|null>(null)
+    // Returns a debounced, zoom-gated handler
+    const handleViewportChange = useRecensementViewPort(defCarteRecensement,anneeRecens,defLimites);
+
     return(
         <div className='page-versement-visu-cadastre'>
             <MenuBar/>
@@ -92,6 +100,8 @@ const VersementRecensement:FC =()=>{
                 Equiv={equivalenceFDB}
                 defEquiv={defEquivalenceFBD}
                 equivOptions={equivOptions}
+                limites={limites}
+                defDonnees={defCarteRecensement}
             />
             <ModalVersementGen
                 modalOuvert={modalSelectionCadastreOuvert}
@@ -105,6 +115,8 @@ const VersementRecensement:FC =()=>{
             {
                 <CarteVisionnementRecensement
                     annee={anneeRecens}
+                    viewPortChange={handleViewportChange}
+                    carteRecensement={carteRecensement}
                 />
             }
             </>

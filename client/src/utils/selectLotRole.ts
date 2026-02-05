@@ -10,8 +10,8 @@ const selectLotRole = async(
     props:{
         id_provinc?:string,
         g_no_lot?:string,
-        defRoleSelect: Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>>>,
-        defLotSelect: Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>>>,
+        defRoleSelect: Dispatch<SetStateAction<FeatureCollection<Geometry,roleFoncierGeoJsonProps>|null>>,
+        defLotSelect: Dispatch<SetStateAction<FeatureCollection<Geometry,lotCadastralGeoJsonProperties>|null>>,
         defRoleRegard: Dispatch<SetStateAction<string>>
     }
     )=>{

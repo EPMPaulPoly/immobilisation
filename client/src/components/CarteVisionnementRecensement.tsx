@@ -7,20 +7,24 @@ import type { lotCadastralGeoJsonProperties, recensementGeoJsonProperties } from
 import { useMap } from "react-leaflet";
 import RecensementLayer from "../map/layers/RecensementLayer";
 import { useRecensementViewPort } from "../map/hooks/useRecensementViewport";
+import { Viewport } from "../types/MapTypes";
 
-const CarteVisionnementRecensement = (props:{annee:2016|2021}) => {
-    const [data, setData] = useState<FeatureCollection<Geometry, recensementGeoJsonProperties> | null>(null);
-
-    // Returns a debounced, zoom-gated handler
-    const handleViewportChange = useRecensementViewPort(setData,props.annee);
+const CarteVisionnementRecensement = (
+    props:{
+        annee:2016|2021,
+        viewPortChange:((viewport: Viewport) => void),
+        carteRecensement: FeatureCollection<Geometry,recensementGeoJsonProperties>|null
+    }
+) => {
+    
     
     return (
         <div className="map-container">
             <MapShell 
-                onViewportChange={[handleViewportChange]} 
+                onViewportChange={[props.viewPortChange]} 
             >
-                {data && 
-                    <RecensementLayer data={data} />
+                {props.carteRecensement && 
+                    <RecensementLayer data={props.carteRecensement} />
                 }
                 
             </MapShell>
