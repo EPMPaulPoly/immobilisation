@@ -13,7 +13,8 @@ const CarteVisionnementRecensement = (
     props:{
         annee:2016|2021,
         viewPortChange:((viewport: Viewport) => void),
-        carteRecensement: FeatureCollection<Geometry,recensementGeoJsonProperties>|null
+        carteRecensement: FeatureCollection<Geometry,recensementGeoJsonProperties>|null,
+        minZoom:number
     }
 ) => {
     
@@ -22,6 +23,7 @@ const CarteVisionnementRecensement = (
         <div className="map-container">
             <MapShell 
                 onViewportChange={[props.viewPortChange]} 
+                minZoom={props.minZoom}
             >
                 {props.carteRecensement && 
                     <RecensementLayer data={props.carteRecensement} />

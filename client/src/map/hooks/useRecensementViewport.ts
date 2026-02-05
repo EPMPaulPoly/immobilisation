@@ -9,10 +9,10 @@ export function useRecensementViewPort(
     setData:Dispatch<SetStateAction<FeatureCollection<Geometry,recensementGeoJsonProperties>|null>>,
     annee:2016|2021,
     defLimites:Dispatch<SetStateAction<LatLngBounds|null>>,
-    data?:FeatureCollection<Geometry,recensementGeoJsonProperties>|null,
+    minZoom?:number
 ) {
     const { handleViewportChange } = useViewportData({
-        minZoom: 12,
+        minZoom: minZoom?minZoom:16,
         onFetch: async ({ bounds }) => {
             try{
                 defLimites(

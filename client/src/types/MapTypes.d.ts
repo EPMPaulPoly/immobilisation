@@ -16,6 +16,7 @@ export interface MapShellProps {
     }) => void)[];
     center?: LatLng;
     zoom?: number;
+    minZoom?:number;
 };
 export interface Bounds {
     minx: number;

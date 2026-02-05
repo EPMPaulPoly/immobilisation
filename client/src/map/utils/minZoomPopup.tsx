@@ -2,7 +2,7 @@ import { useMap, Marker, Popup } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { useEffect, useState } from 'react';
 
-export function ZoomHint({ minZoom = 12, center }: { minZoom: number, center: LatLng }) {
+export function   ZoomHint({ minZoom = 12, center }: { minZoom: number, center: LatLng }) {
     const map = useMap();
   const [show, setShow] = useState(map.getZoom() < minZoom);
 

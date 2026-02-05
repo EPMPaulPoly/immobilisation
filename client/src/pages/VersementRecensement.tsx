@@ -85,7 +85,8 @@ const VersementRecensement:FC =()=>{
     const [carteRecensement, defCarteRecensement] = useState<FeatureCollection<Geometry, recensementGeoJsonProperties> | null>(null);
     const [limites,defLimites] = useState<LatLngBounds|null>(null)
     // Returns a debounced, zoom-gated handler
-    const handleViewportChange = useRecensementViewPort(defCarteRecensement,anneeRecens,defLimites);
+    const minZoom=12
+    const handleViewportChange = useRecensementViewPort(defCarteRecensement,anneeRecens,defLimites,minZoom);
 
     return(
         <div className='page-versement-visu-cadastre'>
@@ -117,6 +118,7 @@ const VersementRecensement:FC =()=>{
                     annee={anneeRecens}
                     viewPortChange={handleViewportChange}
                     carteRecensement={carteRecensement}
+                    minZoom={minZoom}
                 />
             }
             </>

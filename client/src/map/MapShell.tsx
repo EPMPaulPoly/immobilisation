@@ -15,6 +15,7 @@ const MapShell = ({
     onViewportChange,
     center ,
     zoom ,
+    minZoom
 }: MapShellProps) => {
     const contexte = utiliserContexte();
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
@@ -51,7 +52,7 @@ const MapShell = ({
             {children}
             <ZoomHint
                 center={mapCenter}
-                minZoom={16}
+                minZoom={minZoom?minZoom:16}
             />
             <MapToUrl/>
             <URLToMap/>
