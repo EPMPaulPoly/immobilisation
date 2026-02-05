@@ -26,22 +26,23 @@ path_out = '~/Documents/exemple/out_recensement_2016.geojson'
 
 Le fichier Geojson est le fichier des limites avec seulement les aires de diffusion de la municipalité converti en Geojson. Le fichier excel prend la sortie de CHASS et est légèrement reconfigurée:
 
-![alt text](images/recensement/fichierExcel.png)
+![Format du fichier excel](images/recensement/fichierExcel.png)
 
 On peut ensuite lancer le script python. Un exemple est donné ici pour ubuntu. Le script peut être lancé plus facilement à partir de VSCode
 ```
 /home/paul-charbonneau/miniconda3/envs/python_import/bin/python /home/paul-charbonneau/Documents/dev/immobilisation/serveur_calcul_python/utilitaires/2_recensement_2016.py
 ```
-s
 ## Versement
 
-Le versement s'opère de manière similaire aux autres données géographiques. Si des données existent actuellement elles sont montrées dans la carte si l'utilisateur zoom assez proche. Autrement, l'utilisateur peut sélectionner l'icone en haut à gauche pour verser des données sur le serveur
+Le versement s'opère de manière similaire aux autres données géographiques. Si des données existent actuellement elles sont montrées dans la carte si l'utilisateur zoom assez. 
 
-L'utilisateur choisit tout d'abord le fichier
+![page versement](images/recensement/VersementDonneesRecensement.png)
+Autrement, l'utilisateur peut sélectionner l'icone en haut à gauche pour verser des données sur le serveur, ouvrant le modal de versement pour l'année sélectionnée. L'utilisateur choisit tout d'abord le fichier en cliquant sur le bouton:
 
-
-Puis il affecte les noms de colonnes du fichier au nom de colonnes de la base de donnée.
-
+![Sélection du fichier](images/recensement/SelectionFichierLimitesRecensement.png)
+Une fois le fichier choisi, l'utilsateur pourra affecter les colonnes du fichier aux colonnes de la BD
+![Apparition des affectations de colonnes](images/recensement/AffectationColonnesRecensement.png)
 Une fois l'affectation complétée, le bouton permettant de charger les données est montré et l'utilisateur verse les donnnées sur la BD en cliquant dessus. 
-
-Une fois le modal fermé, les secteurs de recensement devrait apparaitre dans la carte montrée à l'écran
+![Apparition du bouton versé](images/recensement/ApparitionBoutonVersementRecensement.png)
+Une fois le modal fermé, les secteurs de recensement devrait apparaitre dans la carte montrée à l'écran:
+![Résultat du versement](images/recensement/ApparitionDonneesRecensement.png)
