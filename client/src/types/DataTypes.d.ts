@@ -470,6 +470,10 @@ export type depPropertiesLigDB=depGeoJSONProperties&{trip_lines}
 
 export type ODFeatureCollection=FeatureCollection<Geometry,menGeoJSONProperties>|
 FeatureCollection<Geometry,persGeoJSONProperties>|
-FeatureCollection<Geometry,depGeoJSONProperties>
+FeatureCollection<Geometry,depGeoJSONProperties>|null
+
+export type ODFeature = Feature<Geometry,menGeoJSONProperties>|
+Feature<Geometry,persGeoJSONProperties>|
+Feature<Geometry,depGeoJSONProperties>|null
 
 export type ODDBType = menPropertiesDB|persPropertiesDB|depPropertiesOriDB|depPropertiesDesDB|depPropertiesLigDB

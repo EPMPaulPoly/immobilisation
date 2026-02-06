@@ -1,24 +1,24 @@
 import { GeoJSON as LGeoJson, useMap,  } from "react-leaflet";
-import { GeoJSON,FeatureCollection,Geometry, Feature } from "geojson";
-import { CadastreLayerProps } from "../../types/MapTypes";
+import { Geometry, Feature } from "geojson";
+import { ODLayerProps } from "../../types/MapTypes";
 import L, { Bounds, Layer, PathOptions } from "leaflet";
-import { lotCadastralGeoJsonProperties } from "../../types/DataTypes";
+import { lotCadastralGeoJsonProperties, ODFeature } from "../../types/DataTypes";
 import { useGeoJSONKeyFromBounds } from "../utils/useGeoJSONKeyFromBounds";
 import { createRoot } from "react-dom/client";
 import { Button } from "@mui/material";
 import selectLotRole from "../../utils/selectLotRole";
 
-const ODLayer = (props: CadastreLayerProps) => {
+const ODLayer = (props: ODLayerProps) => {
     const map = useMap();
     // Style function
     const style = (feature?: Feature<any, any>): PathOptions => ({
-            color: feature?.properties?.g_no_lot === props.lotSelect?.features[0]?.properties?.g_no_lot ? "#48ef11" : "#0074D9",
+            color: "#0074D9",
             weight: 1,
             fillOpacity: 0.4,
         });
     // Popups
-    const { defLotSelect, defRoleSelect, defRoleRegard } = props;
-    const onEachFeature = (feature: Feature<Geometry, lotCadastralGeoJsonProperties>, layer: Layer) => {
+
+    const onEachFeature = (feature: ODFeature, layer: Layer) => {
         if (feature.properties) {
             // Create a div for React to render into
             const popupDiv = document.createElement('div');
@@ -26,12 +26,19 @@ const ODLayer = (props: CadastreLayerProps) => {
             // Create a React root and render your popup content
             const root = createRoot(popupDiv);
             root.render(
+                props.vue ==='men'?
                 <div>
-                    <div><strong>G No Lot:</strong> {feature.properties.g_no_lot}</div>
-                    <div><strong>Superficie:</strong> {feature.properties.g_va_suprf || "N/A"}</div>
-                    <div><strong>Longitude:</strong> {feature.properties.g_nb_coord || "N/A"}</div>
-                    <div><strong>Latitude:</strong> {feature.properties.g_nb_coo_1 || "N/A"}</div>
-                </div>
+                    <div><strong>Identifiant:</strong> {feature.properties.nolog}</div>
+                    <div><strong>Nb Personnes:</strong> {feature.properties.nbper || "N/A"}</div>
+                    <div><strong>Nb Veh:</strong> {feature.properties.nbveh || "N/A"}</div>
+                    <div><strong>Facteur Ménage:</strong> {feature.properties.facmen || "N/A"}</div>
+                </div>:props.vue ==='dep'?<div>
+                    <div><strong>Identifiant:</strong> {feature.properties.cledeplacement}</div>
+                    <div><strong>Déplacement de la personne:</strong> {feature.properties.nodep || "N/A"}</div>
+                    <div><strong>Motif:</strong> {feature.properties.motif || "N/A"}</div>
+                    <div><strong>Mode 1:</strong> {feature.properties.mode1 || "N/A"}</div>
+                    <div><strong>Mode 2:</strong> {feature.properties.mode2 || "N/A"}</div>
+                </div>:<></>
             );
 
             // Bind the div as popup content

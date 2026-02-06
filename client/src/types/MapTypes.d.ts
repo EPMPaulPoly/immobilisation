@@ -1,7 +1,8 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { lotCadastralGeoJsonProperties, recensementGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
+import { lotCadastralGeoJsonProperties, ODFeatureCollection, recensementGeoJsonProperties, roleFoncierGeoJsonProps } from "./DataTypes";
 import { FeatureCollection, Geometry } from "geojson";
 import { LatLngBounds } from "leaflet";
+import { ODGeomTypes } from "./EnumTypes";
 
 export interface MapShellProps {
     children?: ReactNode;
@@ -63,6 +64,11 @@ export type RoleLayerProps = {
 
 export type RecensementLayerProps={
   data: FeatureCollection<Geometry,recensementGeoJsonProperties>
+}
+
+export type ODLayerProps={
+  data:ODFeatureCollection
+  vue:ODGeomTypes
 }
 
 export interface MapToURLProps{
