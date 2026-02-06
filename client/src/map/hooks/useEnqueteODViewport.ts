@@ -16,10 +16,25 @@ export function useEnqueteODViewPort(
         minZoom: minZoom,
         onFetch: async ({ bounds }) => {
             try{
-                const response = await ServiceEnqueteOD.obtiensDonneesEnquete(view,
-                    BoundsToArray(bounds));
-                const out = response.data as ODFeatureCollection
-                setData(out);
+                if (view==='men'){
+                    const response = await ServiceEnqueteOD.obtiensMenagesEnquete(
+                        BoundsToArray(bounds));
+                    const out = response.data as ODFeatureCollection
+                    setData(out);
+                }
+                if (view==='pers'){
+                    const response = await ServiceEnqueteOD.obtiensPersEnquete(
+                        BoundsToArray(bounds));
+                    const out = response.data as ODFeatureCollection
+                    setData(out);
+                }
+                if(view ==='dep'){
+                    const response = await ServiceEnqueteOD.obtiensDepEnquete(
+                        BoundsToArray(bounds));
+                    const out = response.data as ODFeatureCollection
+                    setData(out);
+                }
+                
             } catch(err:any){
                 console.log(err)
                 setData(null); // fallback

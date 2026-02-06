@@ -38,6 +38,12 @@ const ODLayer = (props: ODLayerProps) => {
                     <div><strong>Motif:</strong> {feature.properties.motif || "N/A"}</div>
                     <div><strong>Mode 1:</strong> {feature.properties.mode1 || "N/A"}</div>
                     <div><strong>Mode 2:</strong> {feature.properties.mode2 || "N/A"}</div>
+                </div>:props.vue ==='pers'?<div>
+                    <div><strong>Identifiant:</strong> {feature.properties.clepersonne}</div>
+                    <div><strong>Age:</strong> {feature.properties.age || "N/A"}</div>
+                    <div><strong>Motif:</strong> {feature.properties.motif || "N/A"}</div>
+                    <div><strong>Mode 1:</strong> {feature.properties.mode1 || "N/A"}</div>
+                    <div><strong>Mode 2:</strong> {feature.properties.mode2 || "N/A"}</div>
                 </div>:<></>
             );
 

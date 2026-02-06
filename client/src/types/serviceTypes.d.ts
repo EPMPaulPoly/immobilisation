@@ -38,7 +38,12 @@ import {
     insertCount,
     recensementGeoJsonProperties,
     recensementDB,
-    ODFeatureCollection} from './DataTypes'
+    ODFeatureCollection,
+    menFeatureCol,
+    persFeatureCol,
+    depFeatureCol,
+    persPropertiesDB,
+    depPropertiesLigDB} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -125,6 +130,12 @@ export type ReponseResultatValidation = ApiResponse<EntreeValidation[]>
 
 //Types pour les données d'enquête
 export type ReponseOD = ApiResponse<ODFeatureCollection>
+export type ReponseMenOD = ApiResponse<menFeatureCol>
+export type ReponsePersOD = ApiResponse<persFeatureCol>
+export type ReponseDepOD = ApiResponse<depFeatureCol>
+export type ReponseMenODDB = ApiResponse<menPropertiesDB[]>
+export type ReponsePersODDB = ApiReponse<persPropertiesDB[]>
+export type ReponseDepODDB = ApiResponse<depPropertiesLigDB[]>
 export type ReponseODDB = ApiResponse<ODDBType>
 // Requetes
 export interface RequeteApiStrate {

@@ -462,6 +462,7 @@ export type depGeoJSONProperties={
     stat:number,
     cout_stat:number,
     term_stat:number,
+    clepersonne:string
 }
 
 export type depPropertiesOriDB=depGeoJSONProperties&{geom_ori}
@@ -471,6 +472,10 @@ export type depPropertiesLigDB=depGeoJSONProperties&{trip_lines}
 export type ODFeatureCollection=FeatureCollection<Geometry,menGeoJSONProperties>|
 FeatureCollection<Geometry,persGeoJSONProperties>|
 FeatureCollection<Geometry,depGeoJSONProperties>|null
+
+export type menFeatureCol = FeatureCollection<Geometry,menGeoJSONProperties>|null
+export type persFeatureCol = FeatureCollection<Geometry,persGeoJSONProperties>|null
+export type depFeatureCol = FeatureCollection<Geometry,depGeoJSONProperties>|null
 
 export type ODFeature = Feature<Geometry,menGeoJSONProperties>|
 Feature<Geometry,persGeoJSONProperties>|

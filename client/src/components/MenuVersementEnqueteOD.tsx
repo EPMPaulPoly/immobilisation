@@ -148,6 +148,46 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                             ))}
                         </Select>
                     </FormControl>
+                    <FormControl variant="outlined" size="small" style={{ minWidth: 120 }}>
+                        <InputLabel id="select-mode-label"
+                            sx={{
+                                color: 'white',
+                                '&.Mui-focused': { color: 'white' },
+                                '&.MuiInputLabel-shrink': { color: 'white' },
+                            }}
+                        >
+                            Mode Déplacements
+                        </InputLabel>
+                        <Select
+                            labelId="select-mode-label"
+                            id="select-mode"
+                            value={props.mode}
+                            //onChange={(e) => handleChange(Number(e.target.value))}
+                            label="N Graphes"
+                            sx={{
+                                backgroundColor: 'black',
+                                color: 'white',
+                                '& .MuiSvgIcon-root': { color: 'white' }, // arrow
+                                '& .MuiOutlinedInput-notchedOutline': { borderColor: '#666' },
+                                '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#888' },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#aaa' },
+                            }}
+                            MenuProps={{
+                                PaperProps: {
+                                    sx: {
+                                        bgcolor: 'black',
+                                        color: 'white',
+                                    },
+                                },
+                            }}
+                        >
+                            {Array.from({ length: 17 }, (_, i) => (
+                                <MenuItem key={i} value={i+1}>
+                                    {i+1}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </>:<></>
             }
             
