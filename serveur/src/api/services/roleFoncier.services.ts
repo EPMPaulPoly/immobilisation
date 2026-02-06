@@ -1,7 +1,7 @@
-import { ApiResponse } from "api";
+import { ApiResponse } from "api.types";
 import {  creationRequeteObtentionRole, paramsRequeteRole, rouleRequeteRole } from "../repositories/roleFoncier.repositories";
 import { handleTempUpload } from "./geojsonGest.services";
-import { DbRole } from "database";
+import { DbRole } from "../../types";
 import { Pool } from "pg";
 
 export async function handleRoleFoncierUpload(filePath: string) {

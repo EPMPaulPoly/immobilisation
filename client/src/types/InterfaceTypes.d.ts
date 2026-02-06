@@ -5,6 +5,7 @@ import { Feature, FeatureCollection, Geometry } from "geojson";
 import { PrioriteEstimeQuartier, TypesVisualisationAnalyseQuartier, VariablesPossibles } from "./AnalysisTypes";
 import { N } from "react-router/dist/development/register-BkDIKxVz";
 import { SpeedDialActionStaticTooltipLabelSlotPropsOverrides } from "@mui/material";
+import { ODGeomTypes } from "./EnumTypes";
 // --------------------------------------------------------------------------
 // ------------------------- Interface --------------------------------------
 // --------------------------------------------------------------------------
@@ -162,6 +163,22 @@ export interface PropsMenuVersementRecens{
     equivOptions:Record<2016|2021,EquivalenceVersementCarto[]>
     limites:LatLngBounds|null
     defDonnees: Dispatch<SetStateAction<FeatureCollection<Geometry,recensementGeoJsonProperties>|null>>
+}
+// ---------------------------------------------------------------
+// ----------------- Enquete OD -------------------
+// ---------------------------------------------------------------
+export interface PropsMenuEnqueteOD{
+    modalOuvert:boolean,
+    defModalOuvert:Dispatch<SetStateAction<boolean>>
+    typeObjetOD:ODGeomTypes
+    defTypeObjetOd: Dispatch<SetStateAction<ODGeomTypes>>,
+    heure:number|null
+    defHeure:Dispatch<SetStateAction<number|null>>,
+    motif: number|null,
+    defMotif:Dispatch<SetStateAction<number|null>>,
+    mode:number|null
+    defMode:Dispatch<SetStateAction<number|null>>
+
 }
 
 // ---------------------------------------------------------------

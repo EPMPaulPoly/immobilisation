@@ -1,6 +1,6 @@
-import { DbTerritoire } from "database"
+import { DbTerritoire } from "historique.types"
 import { Pool,PoolClient } from 'pg'
-import { RepoResponse } from "database"
+import { RepoResponse } from "database.types"
 
 export interface objetRequeteMAJTotaleSecteursPeriode{
     requeteCommence: string,

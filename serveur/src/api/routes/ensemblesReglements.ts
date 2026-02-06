@@ -1,6 +1,14 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbAssociationReglementUtilSol, DbEnteteEnsembleReglement, DbUtilisationSol, DbEnteteReglement, ParamsTerritoire, ParamsRole, DbReglementComplet, ParamsEnsReg, DbCountAssoc, ParamsAssocEnsReg, unit_reg_reg_set_land_use_query, unit_reg_reg_set_land_use_output } from '../../types/database';
+import { 
+  unit_reg_reg_set_land_use_query, 
+  unit_reg_reg_set_land_use_output } from 'inventaire.types';
+import { DbAssociationReglementUtilSol,DbEnteteEnsembleReglement,DbCountAssoc } from 'ensembleReglements.types';
+import { DbUtilisationSol } from 'utilisationDuSol.types';
+import { DbEnteteReglement,DbReglementComplet } from 'reglements.types';
+import {ParamsTerritoire} from 'historique.types'
+import { ParamsRole } from 'role.types';
+import { ParamsEnsReg, ParamsAssocEnsReg } from 'ensembleReglements.types';
 import path from 'path';
 import { spawn } from 'child_process';
 

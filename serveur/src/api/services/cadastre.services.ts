@@ -1,8 +1,12 @@
-import { Client, Pool, PoolClient,  } from "pg";
+import { Pool } from "pg";
 import { handleTempUpload, importFile } from "./geojsonGest.services";
-import { creationRequeteObtention, paramsRequeteLot, rouleRequeteLots } from "../repositories/cadastre.repositories";
-import { DbCadastre } from "database";
-import { ApiResponse } from "api";
+import { 
+    creationRequeteObtention, 
+    paramsRequeteLot, 
+    rouleRequeteLots 
+} from "../repositories/cadastre.repositories";
+import { DbCadastre } from "cadastre.types";
+import { ApiResponse } from "api.types";
 
 // wrappers for each data type
 export async function handleCadastreUpload(filePath: string) {

@@ -3,7 +3,14 @@ import { Pool } from 'pg';
 // Types pour les requêtes
 import { Polygon, MultiPolygon } from 'geojson';
 import path from 'path';
-import { dataBoxPlotVariabilite, dataHistogrammeVariabilite, RequeteAnalyseFacteurEchelle, RequeteAnalyseVariabilite, RequeteHistoVariabilite, RetourBDAnalyseVariabilite, RetourBDHistoVariabilite } from 'database';
+import { 
+    dataBoxPlotVariabilite, 
+    dataHistogrammeVariabilite, 
+    RequeteAnalyseFacteurEchelle, 
+    RequeteAnalyseVariabilite, 
+    RequeteHistoVariabilite, 
+    RetourBDAnalyseVariabilite, 
+    RetourBDHistoVariabilite } from '../../types/analyseVariabilite.types';
 import { spawn } from 'child_process';
 import {bin,Bin} from 'd3-array';
 import { gereObtentionAnaVar } from '../services/analyseVariabilite.services';

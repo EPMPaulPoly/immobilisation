@@ -1,12 +1,8 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbQuartierAnalyse } from '../../types/database';
 // Types pour les requêtes
-import { Polygon, MultiPolygon } from 'geojson';
 import { gereRequeteRecensement, nettoieParametresRequete } from '../services/recensement.services';
-interface GeometryBody {
-    geometry: Polygon | MultiPolygon;
-}
+
 
 export const creationRouteurRecensement = (pool: Pool): Router => {
     const router = Router();

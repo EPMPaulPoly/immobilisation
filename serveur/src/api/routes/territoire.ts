@@ -1,9 +1,10 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbTerritoire, ParamsPeriode } from '../../types/database';
+import { DbTerritoire,ParamsPeriode } from 'historique.types';
 // Types pour les requêtes
 import { Polygon, MultiPolygon } from 'geojson';
-import { serviceMetAJourTerritoiresPeriodes,serviceSupprimeTerritoire,serviceModifieTerritoire } from '../services/territoire.service';
+import { serviceMetAJourTerritoiresPeriodes,
+    serviceSupprimeTerritoire,serviceModifieTerritoire } from '../services/territoire.service';
 interface GeometryBody {
     geometry: Polygon | MultiPolygon;
 }

@@ -1,4 +1,4 @@
-import { RepoResponse } from 'database'
+import { RepoResponse } from 'database.types'
 import * as repo from '../repositories/unites.repositories'
 import { Pool } from 'pg'
 

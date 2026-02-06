@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { DbRole } from "database";
+import { DbRole } from "role.types";
 
 export interface paramsRequeteRole{
     g_no_lot?:string, 

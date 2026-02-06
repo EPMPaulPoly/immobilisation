@@ -1,14 +1,7 @@
-import { Router, Request, Response, RequestHandler } from 'express';
+import { Router,  RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbTerritoire, ParamsCadastre, ParamsPeriode, DbRole, DbCadastre, ParamsQuartier, DbCadastreGeomIdOnly } from '../../types/database';
-// Types pour les requêtes
 import { Polygon, MultiPolygon } from 'geojson';
-import { validateBboxQuery } from '../validators/cadastreValidator';
-import multer from "multer";
-import path from "path";
-import fs from "fs";
 import { obtiensLotRequete, processRequestConversions } from '../services/roleFoncier.services';
-import { importFile } from '../services/geojsonGest.services';
 
 interface GeometryBody {
     geometry: Polygon | MultiPolygon;
