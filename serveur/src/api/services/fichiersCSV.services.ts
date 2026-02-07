@@ -1,5 +1,7 @@
+
 import multer from "multer";
 import { peekGeojsonColumns,  insertGeojsonFile,MulterRequest } from "../repositories/geojsonTemp.repositories";
+import { insertCSVFile, peekCSVColumns } from "../repositories/fichiersCSV.repositories";
 import { 
     cleanupOldTempFiles,
     TMP_DIR
@@ -18,28 +20,25 @@ export const upload = multer({ storage });
 
 export async function handleTempUpload(filePath: string) {
     // peek columns
-    const columns = await peekGeojsonColumns(filePath);
+    const columns = await peekCSVColumns(filePath);
     // cleanup old files
     await cleanupOldTempFiles();
     return columns;
 }
 
 
-export async function importFile(pool:Pool,fileId:string,Mapping:Record<string,string>,table:string){
+export async function importCSVFile(pool:Pool,fileId:string,Mapping:Record<string,string>,table:string,mapping_geom?:Record<string,any>){
     let client:PoolClient;
     const tmpDir = TMP_DIR;
     const tempFilePath = path.join(tmpDir, fileId);
     client = await pool.connect()
     // DEBUG: check for duplicates
-    const geojson = JSON.parse(fs.readFileSync(tempFilePath, "utf-8"));
-    console.log("Total features:", geojson.features.length);
-    console.log("Unique IDs:", new Set(geojson.features.map((f:any) => f.properties?.g_no_lot)).size);
-    const insertCount = await insertGeojsonFile(tempFilePath,Mapping,table,client)
+    const insertCount = await insertCSVFile(tempFilePath,Mapping,table,client,mapping_geom)
     return insertCount
 }
 
 
-export const  runFileUpload=async(req:Request<any>,res:Response)=>{
+export const  runCSVFileUpload=async(req:Request<any>,res:Response)=>{
     upload.single("file")(req, res, async (err:any) => {
         if (err) return res.status(500).json({ error: err.message });
 

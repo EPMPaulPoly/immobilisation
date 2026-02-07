@@ -8,6 +8,7 @@ import CarteVisionnementCadastre from "../components/CarteVisionnementCadastre";
 import ModalVersementGen from "../components/ModalVersement";
 import { EquivalenceVersementCarto } from "../types/DataTypes";
 import CarteVisionnementRole from "../components/CarteVisionnementRole";
+import { ServiceGeoJson } from "../services/serviceGeoJson";
 
 const VersementRole:React.FC =() =>{
     const [modalOuvert,defModalOuvert] = useState<boolean>(false);
@@ -120,6 +121,8 @@ const VersementRole:React.FC =() =>{
                 defChampsARemplir={defEquivalenceFBD}
                 title="Modal versement Role"
                 table='role_foncier'
+                serviceUploadPeak={ServiceGeoJson.verseFichierFlux}
+                serviceMAJ={ServiceGeoJson.confirmeMajBDTemp}
             />
             <>
             {

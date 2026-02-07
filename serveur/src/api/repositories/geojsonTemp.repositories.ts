@@ -5,8 +5,7 @@ import { parser,} from "stream-json";
 import{pick} from "stream-json/filters/Pick";
 import { streamArray } from "stream-json/streamers/StreamArray";
 import {Client, PoolClient} from 'pg';
-export const TMP_DIR = "/app/data/tmp";
-export const MAX_AGE_MS = 6 * 60 * 60 * 1000; // 6 hours
+import { TMP_DIR,MAX_AGE_MS } from "./fileOptions.repositories";
 export type MulterRequest = Request & {
   file?: Express.Multer.File;
 };
@@ -14,24 +13,7 @@ export type MulterRequest = Request & {
 export type ColumnMapping = Record<string, string>;
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
-export async function cleanupOldTempFiles() {
-    try {
-        const files = await fs.promises.readdir(TMP_DIR);
-        const now = Date.now();
-        await Promise.all(
-            files.map(async (file) => {
-                const fullPath = path.join(TMP_DIR, file);
-                const stat = await fs.promises.stat(fullPath);
-                if (now - stat.mtimeMs > MAX_AGE_MS) {
-                    await fs.promises.unlink(fullPath);
-                    console.log("Deleted old temp file:", fullPath);
-                }
-            })
-        );
-    } catch (err) {
-        console.warn("Temp cleanup skipped:", err);
-    }
-}
+
 
 export async function peekGeojsonColumns(filePath: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
@@ -90,7 +72,7 @@ export async function insertGeojsonFile(
             const row: Record<string, any> = {};
 
             // Map columns from user mapping
-            for (const [fileCol, dbCol] of Object.entries(mapping)) {
+            for (const [dbCol, fileCol] of Object.entries(mapping)) {
                 row[dbCol] = value.properties[fileCol] ?? null;
             }
 

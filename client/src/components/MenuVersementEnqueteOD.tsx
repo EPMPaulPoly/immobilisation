@@ -82,7 +82,7 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                             labelId="select-heure-label"
                             id="select-heure"
                             value={props.heure}
-                            //onChange={(e) => handleChange(Number(e.target.value))}
+                            onChange={(e) => props.defHeure(Number(e.target.value))}
                             label="Heure"
                             sx={{
                                 backgroundColor: 'black',
@@ -101,6 +101,7 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
+                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 28 - 4 + 1 }, (_, i) => (
                                 <MenuItem key={i} value={i + 4}>
                                     {i + 4}
@@ -121,8 +122,8 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                         <Select
                             labelId="select-motif"
                             id="select-n-charts"
-                            value={props.heure}
-                            //onChange={(e) => handleChange(Number(e.target.value))}
+                            value={props.motif}
+                            onChange={(e) => props.defMotif(Number(e.target.value))}
                             label="N Graphes"
                             sx={{
                                 backgroundColor: 'black',
@@ -141,6 +142,7 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
+                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 14 }, (_, i) => (
                                 <MenuItem key={i} value={i+1}>
                                     {i+1}
@@ -181,6 +183,7 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
+                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 17 }, (_, i) => (
                                 <MenuItem key={i} value={i+1}>
                                     {i+1}

@@ -9,6 +9,7 @@ import './versementRecensement.css'
 import { useRecensementViewPort } from "../map/hooks/useRecensementViewport";
 import { FeatureCollection, Geometry } from "geojson";
 import { LatLngBounds } from "leaflet";
+import { ServiceGeoJson } from "../services/serviceGeoJson";
 
 
 const VersementRecensement:FC =()=>{
@@ -111,6 +112,8 @@ const VersementRecensement:FC =()=>{
                 title="Versement des données de recensement"
                 champsARemplir={equivalenceFDB}
                 defChampsARemplir={defEquivalenceFBD}
+                serviceUploadPeak={ServiceGeoJson.verseFichierFlux}
+                serviceMAJ={ServiceGeoJson.confirmeMajBDTemp}
             />
             <>
             {

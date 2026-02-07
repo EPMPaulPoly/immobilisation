@@ -18,6 +18,8 @@ import { creationRouteurDonnees } from './geojsonGest';
 import { creationRouteurRoleFoncier } from './roleFoncier';
 import { creationRouteurAssocCadRole } from './assocCadRole';
 import { creationRouteurRecensement } from './recensement';
+import { creationRouteurEnqueteOD } from './enqueteOD';
+import { creationRouteurDonneesCSV } from './fichiersCSV';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -40,5 +42,7 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/role-foncier',creationRouteurRoleFoncier(pool))
     router.use('/assoc-cad-role',creationRouteurAssocCadRole(pool))
     router.use('/recensement',creationRouteurRecensement(pool))
+    router.use('/enqueteOD',creationRouteurEnqueteOD(pool))
+    router.use('/fichier-csv',creationRouteurDonneesCSV(pool))
     return router;
 }

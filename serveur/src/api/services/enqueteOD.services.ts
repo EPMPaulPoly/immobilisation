@@ -1,14 +1,49 @@
 import { Pool } from "pg";
-import { paramsRequeteOD } from "../repositories/enqueteOD.repositories";
+import { 
+    construitRequeteDep,
+    construitRequeteMenage,
+    construitRequetePers,
+    paramsRequeteDepOD, 
+    paramsRequeteMenageOD, 
+    paramsRequetePersOD,
+    rouleRequeteOD
+} from "../repositories/enqueteOD.repositories";
 import { ApiResponse } from "api.types";
+import { depODOut, menageODOut, persODOut } from "enqueteOD.types";
 
 
-export function nettoyageParametresRequeteOD(req:any):paramsRequeteOD{ 
+export function nettoyageParametresRequeteMenageOD(req:any):paramsRequeteMenageOD{ 
     return{
-        type:'dep'
+        bbox:[0,0,0,0]
     }
 }
 
-export async function RequeteObtiensEnqueteOD(pool:Pool,params:any):Promise<ApiResponse<boolean>>{
-    return{success:true,data: false}
+export function nettoyageParametresRequetePersOD(req:any):paramsRequetePersOD{
+    return{
+        bbox:[0,0,0,0]
+    }
+}
+
+export function nettoyageParametresRequeteDepOD(req:any):paramsRequeteDepOD{
+    return{
+        bbox:[0,0,0,0]
+    }
+}
+
+export async function RequeteObtiensMenagesOd(pool:Pool,params:paramsRequeteMenageOD):Promise<ApiResponse<menageODOut>>{
+    const requete = construitRequeteMenage(params)
+    const resultat = await rouleRequeteOD(pool,requete) 
+    return{success:true,data: resultat as unknown as menageODOut}
+}
+
+export async function RequeteObtiensPersOd(pool:Pool,params:paramsRequetePersOD):Promise<ApiResponse<persODOut>>{
+    const requete = construitRequetePers(params)
+    const resultat = await rouleRequeteOD(pool,requete) 
+    return{success:true,data: resultat as unknown as persODOut}
+}
+
+export async function RequeteObtiensDepOd(pool:Pool,params:paramsRequeteDepOD):Promise<ApiResponse<depODOut>>{
+    const requete = construitRequeteDep(params)
+    const resultat = await rouleRequeteOD(pool,requete) 
+    return{success:true,data: resultat as unknown as depODOut}
 }

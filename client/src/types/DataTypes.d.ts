@@ -4,7 +4,30 @@ export type EquivalenceVersementCarto ={
     colonne_db:string,
     description:string,
     colonne_fichier:string,
-    obligatoire:boolean
+    obligatoire:boolean,
+    page?:string
+}
+
+export type EquivalenceCSVCoordPoint={
+    colonne_db:string,
+    description:string,
+    page?:string,
+    obligatoire:boolean,
+    desc_geometrie:ColonneGeometriePoint|ColonneGeometrieLigne
+}
+
+export type ColonneGeometriePoint={
+    type:'Point'
+    descriptionXLon:string,
+    colonneXLon:string,
+    descriptionYLat:string,
+    colonneYLat:string
+}
+
+export type ColonneGeometrieLigne={
+    type:'Ligne'
+    pointDeb:ColonneGeometriePoint,
+    pointFin:ColonneGeometriePoint
 }
 
 
@@ -431,7 +454,7 @@ export type menGeoJSONProperties ={
     facmen:number
 }
 
-export type menPropertiesDB =menGeoJSONProperties&{geom_logis:Geometry}
+export type menPropertiesDB =menGeoJSONProperties&{geometry:Geometry}
 
 export type persGeoJSONProperties={
     clepersonne:string,
@@ -443,10 +466,11 @@ export type persGeoJSONProperties={
     occper:number,
     mobil:number,
     facper:number,
-    facpermc:number
+    facpermc:number,
+    nolog:string
 }
 
-export type persPropertiesDB = persGeoJSONProperties&{geom_occ:Geometry}
+export type persPropertiesDB = persGeoJSONProperties&{geometry:Geometry}
 
 export type depGeoJSONProperties={
     cledeplacement:string,
@@ -465,9 +489,9 @@ export type depGeoJSONProperties={
     clepersonne:string
 }
 
-export type depPropertiesOriDB=depGeoJSONProperties&{geom_ori}
-export type depPropertiesDesDB=depGeoJSONProperties&{geom_des}
-export type depPropertiesLigDB=depGeoJSONProperties&{trip_lines}
+export type depPropertiesOriDB=depGeoJSONProperties&{geometry}
+export type depPropertiesDesDB=depGeoJSONProperties&{geometry}
+export type depPropertiesLigDB=depGeoJSONProperties&{geometry}
 
 export type ODFeatureCollection=FeatureCollection<Geometry,menGeoJSONProperties>|
 FeatureCollection<Geometry,persGeoJSONProperties>|

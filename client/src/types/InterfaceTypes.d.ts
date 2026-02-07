@@ -1,6 +1,6 @@
 import {LatLng, LatLngBounds, LatLngExpression} from "leaflet";
 import React, { SetStateAction,Dispatch } from "react";
-import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion, EquivalenceVersementCarto, recensementGeoJsonProperties } from "./DataTypes";
+import { inventaire_stationnement,quartiers_analyse, territoire,entete_reglement_stationnement,definition_reglement_stationnement, reglement_complet, entete_ensemble_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties,roleFoncierGeoJsonProps, territoireGeoJsonProperties, lotCadastralAvecBoolInvGeoJsonProperties, informations_reglementaire_manuelle, utilisation_sol, data_graphique, methodeAnalyseVariabillite, comptes_utilisations_sol, Strate, FeuilleFinaleStrate, EntreeValidation, methodeCalcul, unites_reglement_stationnement, colonnes_possibles_conversion, EquivalenceVersementCarto, recensementGeoJsonProperties, EquivalenceCSVCoordPoint } from "./DataTypes";
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { PrioriteEstimeQuartier, TypesVisualisationAnalyseQuartier, VariablesPossibles } from "./AnalysisTypes";
 import { N } from "react-router/dist/development/register-BkDIKxVz";
@@ -110,15 +110,98 @@ export interface PropsModifUnites{
 // --------------------------------------------------------------
 // ------------------- Versement --------------------------------
 // --------------------------------------------------------------
+export interface mappingLigne{
+    type:'Ligne',
+    data:string[][]
+}
+export interface mappingPoint{
+    type:'Point'
+    data:string[]
+}
+
+
+
 export interface PropsVersement{
     modalOuvert:boolean,
     defModalOuvert: React.Dispatch<SetStateAction<boolean>>
     champsARemplir: EquivalenceVersementCarto[]
     defChampsARemplir:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
     title:string
-    table:'cadastre'|'role_foncier'|'census_population'|'census_population_2016'
+    table:'cadastre'|'role_foncier'|'census_population'|'census_population_2016'|'od_data',
+    champsGeomARemplir?: EquivalenceCSVCoordPoint[]
+    defChampsGeomARemplir?:Dispatch<SetStateAction<EquivalenceCSVCoordPoint[]>>
+    serviceUploadPeak: (
+        file:File,
+        setProgress:Dispatch<SetStateAction<number>>
+    )=>Promise<{
+        tempFileId:string,
+        columns:string[]
+    }>
+    serviceMAJ:(
+        fileID:string,
+        regularMapping:Record<string,string>,
+        table:string,
+        mappingCarto?:Record<string,mappingLigne|mappingPoint>
+    )=>Promise<{
+        success:boolean,
+        data:number
+    }>
 }
 
+export interface PropsFileUploadBox{
+    colonnesFichier:string[],
+    defColonnesFichier:Dispatch<SetStateAction<string[]>>,
+    idFichier:string,
+    defIdFichier:Dispatch<SetStateAction<string>>,
+    accept:string,
+    title:string,
+    serviceUploadPeak: (file:File,setProgress:Dispatch<SetStateAction<number>>)=>Promise<{tempFileId:string,columns:string[]}>
+}
+export interface PropsPageSelect{
+    colonnesFichier:string[],
+    defColonnesFichier:Dispatch<SetStateAction<string[]>>
+    pages:string[],
+    pageAct:string,
+    defPageAct:Dispatch<SetStateAction<string>>
+}
+export interface PropsStdColumnsDropDown{
+    colonnesFichier:string[],
+    defColonnesFichier:Dispatch<SetStateAction<string[]>>
+    champsARemplir: EquivalenceVersementCarto[]
+    defChampsARemplir:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>,
+    pageAct:string
+}
+export interface PropsGeomColumnsDropDown{
+    colonnesFichier:string[],
+    defColonnesFichier:Dispatch<SetStateAction<string[]>>
+    champsgeomARemplir: EquivalenceCSVCoordPoint[]
+    defChampsGeomARemplir:Dispatch<SetStateAction<EquivalenceCSVCoordPoint[]>>,
+    pageAct:string
+}
+
+export interface PropsDropDownListGeom{
+    geometrieActuelle:EquivalenceCSVCoordPoint
+    colonnesFichier:string[],
+    defColonnesFichier:Dispatch<SetStateAction<string[]>>
+    champsGeomARemplir: EquivalenceCSVCoordPoint[]
+    defChampsGeomARemplir:Dispatch<SetStateAction<EquivalenceCSVCoordPoint[]>>,
+    pageAct:string
+}
+export interface PropsBoutApprobVersement{
+    champsARemplir: EquivalenceVersementCarto[]
+    champsGeomARemplir?: EquivalenceCSVCoordPoint[],
+    idFichier:string,
+    table:string,
+    serviceMAJ:(
+        fileID:string,
+        regularMapping:Record<string,string>,
+        table:string,
+        mappingCarto?:Record<string,mappingLigne|mappingPoint>
+    )=>Promise<{
+        success:boolean,
+        data:number
+    }>
+}
 // ---------------------------------------------------------------
 // ------------------------ Versement Cadastre -------------------
 // ---------------------------------------------------------------

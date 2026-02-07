@@ -8,8 +8,6 @@ import { EquivalenceVersementCarto } from '../types/DataTypes';
 
 const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
     const [columns, setColumns] = useState<string[]>([]);
-
-
     const [progress, setProgress] = useState<number>(0);
     const [serverFileId, setServerFileId] = useState<string>('')
     const sxBox = {
@@ -26,7 +24,7 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
 
     const handleFileLoad = async(fileLoad:File) => {
         if (!fileLoad) return;
-        const {tempFileId,columns} = await ServiceGeoJson.verseFichierFlux(fileLoad,setProgress)
+        const {tempFileId,columns} = await props.serviceUploadPeak(fileLoad,setProgress)
         console.log(tempFileId)
         setServerFileId(tempFileId)
         setColumns(columns)
@@ -49,7 +47,7 @@ const ModalVersementGen:FC<PropsVersement> = (props:PropsVersement) => {
             return acc;
         }, {} as Record<string, string>);
         try{
-            const response = await ServiceGeoJson.confirmeMajBDTemp(serverFileId,mappingColonnes,props.table)
+            const response = await props.serviceMAJ(serverFileId,mappingColonnes,props.table)
             alert(`Inseré ${response.data} entrées `)
         }catch(err:any){
             console.log(err)
