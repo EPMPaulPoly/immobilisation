@@ -71,25 +71,47 @@ export async function insertCSVFile(
             // Map columns from user mapping
             for (const [dbCol, fileCol] of Object.entries(mapping)) {
                 const raw = value[fileCol];
-                row[dbCol] = raw === "" ? null : raw;
+                if (raw ===""){
+                    row[dbCol]=null
+                }else{
+                    row[dbCol]= raw
+                }
+                
             }
 
             // Add geometry as GeoJSON string
             if (geomMapping){
                 for (const [dbCol,fileData] of Object.entries(geomMapping)){
                     if (fileData.type==='Ligne'){
-                        row[dbCol] ={type:'Ligne',data:[
-                                [
-                                    value[fileData.data[0][0]],
-                                    value[fileData.data[0][1]]
-                                ],[
-                                    value[fileData.data[1][0]],
-                                    value[fileData.data[1][1]]
-                                ]
-                            ]}
+                        if(
+                            value[fileData.data[0][0]] !== undefined &&
+                            value[fileData.data[0][0]] !== '' && 
+                            value[fileData.data[0][1]] !== undefined&& 
+                            value[fileData.data[0][1]] !== ''  &&
+                            value[fileData.data[1][0]] !== undefined &&
+                            value[fileData.data[1][0]] !== '' &&
+                            value[fileData.data[1][1]] !== undefined&&
+                            value[fileData.data[1][1]] !== ''
+                        ){
+                            row[dbCol] ={type:'Ligne',data:[
+                                    [
+                                        value[fileData.data[0][0]],
+                                        value[fileData.data[0][1]]
+                                    ],[
+                                        value[fileData.data[1][0]],
+                                        value[fileData.data[1][1]]
+                                    ]
+                                ]}
+                        }else{
+                            row[dbCol] = null
+                        }
                         console.log(dbCol,row[dbCol])
                     }else{
-                        row[dbCol] ={type:'Point',data:[value[fileData.data[0]],value[fileData.data[1]]]}
+                        if(value[fileData.data[0]]!== undefined && value[fileData.data[0]]!== '' && value[fileData.data[1]]!==undefined&& value[fileData.data[1]]!==''){
+                            row[dbCol] ={type:'Point',data:[value[fileData.data[0]],value[fileData.data[1]]]}
+                        }else{
+                            row[dbCol] =null
+                        }
                         console.log(dbCol,row[dbCol])
                     }
                 }

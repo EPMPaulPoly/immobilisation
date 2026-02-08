@@ -12,9 +12,15 @@ import { ApiResponse } from "api.types";
 import { depODOut, menageODOut, persODOut } from "enqueteOD.types";
 
 
-export function nettoyageParametresRequeteMenageOD(req:any):paramsRequeteMenageOD{ 
+export function nettoyageParametresRequeteMenageOD(query:any):paramsRequeteMenageOD{ 
+    const{bbox} = query
+    let bboxLimitsNum = undefined;
+    if (typeof bbox === 'string') {
+        const bboxLimitsString = bbox.split(',')
+        bboxLimitsNum = bboxLimitsString.map((item) => Number(item))
+    }
     return{
-        bbox:[0,0,0,0]
+        bbox:bboxLimitsNum
     }
 }
 

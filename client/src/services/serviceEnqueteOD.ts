@@ -29,7 +29,7 @@ export const ServiceEnqueteOD ={
             }
             let out:ODFeatureCollection
             if (queries.length>0){
-                const query = '/enqueteOD/menage?' + queries.join('&')
+                const query = '/enquete-od/mena?' + queries.join('&')
                 const response: AxiosResponse<ReponseMenODDB> = await api.get(query);
                 let features;
                 features = response.data.data.map((item:menPropertiesDB)=>{
@@ -41,7 +41,7 @@ export const ServiceEnqueteOD ={
                         facmen:item.facmen
                     }
                     const geometry =item.geometry
-                    return {properties:properties,geometry:geometry}
+                    return {properties:properties,geometry:geometry,type:'Feature'}
                 })
                 out = {type:'FeatureCollection',features:features} as FeatureCollection<Geometry,menGeoJSONProperties>
             }else{
@@ -68,7 +68,7 @@ export const ServiceEnqueteOD ={
             }
             let out:ODFeatureCollection
             if (queries.length>0){
-                const query = '/enqueteOD/pers?' + queries.join('&')
+                const query = '/enquete-od/pers?' + queries.join('&')
                 const response: AxiosResponse<ReponseODDB> = await api.get(query);
                 let features;
                 features = response.data.data.map((item:persPropertiesDB)=>{
@@ -123,7 +123,7 @@ export const ServiceEnqueteOD ={
             }
             let out:ODFeatureCollection
             if (queries.length>0){
-                const query = '/enqueteOD?' + queries.join('&')
+                const query = '/enquete-od/depl?' + queries.join('&')
                 const response: AxiosResponse<ReponseDepODDB> = await api.get(query);
                 let features;
                 features = response.data.data.map((item:depPropertiesLigDB)=>{

@@ -7,7 +7,7 @@ import { u } from "react-router/dist/development/index-react-server-client-1TI9M
 
 
 const BoutonApprobationVerse:FC<PropsBoutApprobVersement>=(props:PropsBoutApprobVersement)=>{
-    const handleFileInsert=()=>{
+    const handleFileInsert=async ()=>{
         try{
             const regularMapping = Object.values(props.champsARemplir)
             .filter(entree=>entree.obligatoire ||entree.colonne_fichier!=='')
@@ -58,9 +58,16 @@ const BoutonApprobationVerse:FC<PropsBoutApprobVersement>=(props:PropsBoutApprob
                     return accumulator
                 },{} as Record<string,any>)
 
-                response = props.serviceMAJ(props.idFichier,regularMapping,props.table,cartoMapping)
+                response = await props.serviceMAJ(props.idFichier,regularMapping,props.table,cartoMapping)
+                if (response.success=== true){
+                    alert(`Inséré ${response.data}`)
+                    props.defModalOuvert(false)
+                } else{
+                    alert(`Erreur inconnue`)
+                }
+
             }else{
-                response = props.serviceMAJ(props.idFichier,regularMapping,props.table)
+                alert("Échec d'insertion")
             }
 
         } catch(err:any){

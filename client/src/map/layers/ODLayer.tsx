@@ -1,7 +1,7 @@
 import { GeoJSON as LGeoJson, useMap,  } from "react-leaflet";
-import { Geometry, Feature } from "geojson";
+import { Geometry, Feature, Point } from "geojson";
 import { ODLayerProps } from "../../types/MapTypes";
-import L, { Bounds, Layer, PathOptions } from "leaflet";
+import L, { Bounds, LatLng, Layer, PathOptions } from "leaflet";
 import { lotCadastralGeoJsonProperties, ODFeature } from "../../types/DataTypes";
 import { useGeoJSONKeyFromBounds } from "../utils/useGeoJSONKeyFromBounds";
 import { createRoot } from "react-dom/client";
@@ -54,12 +54,28 @@ const ODLayer = (props: ODLayerProps) => {
 
     if (!props.data) return null;
     const key = useGeoJSONKeyFromBounds(props.data);
-    return <LGeoJson 
+    if (props.data.features[0].geometry.type ==="Point")
+        return <LGeoJson 
+        key={key}
+        data={props.data} 
+        pointToLayer={(feature: Feature<Point>, latlng: LatLng) => {
+                    return L.circleMarker(latlng, {
+                        radius: 6,          // selected points are bigger
+                        color: "#d90000",
+                        weight: 2,
+                        fillOpacity:  0.6 ,
+                    });
+                }}
+        onEachFeature={onEachFeature} 
+        />;
+    else{
+        return <LGeoJson 
         key={key}
         data={props.data} 
         style={style} 
         onEachFeature={onEachFeature} 
         />;
+    }
 };
 
 export default ODLayer;

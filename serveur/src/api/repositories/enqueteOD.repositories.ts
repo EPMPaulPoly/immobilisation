@@ -26,14 +26,14 @@ export function construitRequeteMenage(params:paramsRequeteMenageOD):requeteObte
     let replaceCount=1
     conditions.push('tlog=1')
     if (typeof params.bbox !== 'undefined') {
-        conditions.push(`odd.geometry && ST_MakeEnvelope($${replaceCount}, $${replaceCount + 1},  $${replaceCount + 2}, $${replaceCount + 3}, 4326)`)
+        conditions.push(`odd.geom_logis && ST_MakeEnvelope($${replaceCount}, $${replaceCount + 1},  $${replaceCount + 2}, $${replaceCount + 3}, 4326)`)
         values.push(params.bbox[0])
         values.push(params.bbox[1])
         values.push(params.bbox[2])
         values.push(params.bbox[3])
         replaceCount += 4
     }
-    const base_query = 'SELECT nolog, tlog,nbper,nbveh,facmen,geom_logis as geometry FROM od_data odd'
+    const base_query = 'SELECT nolog, tlog,nbper,nbveh,facmen,ST_AsGeoJSON(geom_logis) as geometry FROM od_data odd'
     let final_query=''
     if (conditions.length>0){
         final_query = base_query + ' WHERE ' + conditions.join(' AND ')
@@ -59,7 +59,7 @@ export function construitRequetePers(params:paramsRequetePersOD):requeteObtenion
         values.push(params.bbox[3])
         replaceCount += 4
     }
-    const base_query = 'SELECT clepersonne, tper, sexe, age, grpage, percond, occper,mobil,facper,facpermc,nolog, geom_logis as geometry FROM od_data odd'
+    const base_query = 'SELECT clepersonne, tper, sexe, age, grpage, percond, occper,mobil,facper,facpermc,nolog, ST_AsGeoJSON(geom_logis) as geometry FROM od_data odd'
     let final_query=''
     if (conditions.length>0){
         final_query = base_query + ' WHERE ' + conditions.join(' AND ')
@@ -98,7 +98,7 @@ export function construitRequeteDep(params:paramsRequeteDepOD):requeteObtenionSQ
         values.push(params.motif)
         replaceCount++
     }
-    const base_query = 'SELECT cledeplacement:string, nodep,hredep, heure,motif,motif_gr,mode1,mode2,mode3,mode4,stat,cout_stat,term_stat,clepersonne, trip_lines as geometry  FROM od_data odd'
+    const base_query = 'SELECT cledeplacement:string, nodep,hredep, heure,motif,motif_gr,mode1,mode2,mode3,mode4,stat,cout_stat,term_stat,clepersonne, ST_AsGeoJSON(trip_lines) as geometry  FROM od_data odd'
     let final_query=''
     if (conditions.length>0){
         final_query = base_query + ' WHERE ' + conditions.join(' AND ')

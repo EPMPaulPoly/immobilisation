@@ -14,6 +14,7 @@ export const creationRouteurEnqueteOD = (pool: Pool): Router => {
     const router = Router();
     const obtiensMenages: RequestHandler<{}> = async (req,res,next):Promise<void>=>{
         try {
+            console.log('Obtention ménage zone')
             const params = nettoyageParametresRequeteMenageOD(req.query)
             const response = await RequeteObtiensMenagesOd(pool,params)
             res.json({ success: true, data: response.data});
@@ -39,8 +40,8 @@ export const creationRouteurEnqueteOD = (pool: Pool): Router => {
             res.status(500).json({ success: false, error: 'Database error' });
         }
     }
-    router.get('/menages', obtiensMenages)
-    router.get('/personnes',obtiensPersonnes)
-    router.get('/deplacements',obtiensDeplacements)
+    router.get('/mena', obtiensMenages)
+    router.get('/pers',obtiensPersonnes)
+    router.get('/depl',obtiensDeplacements)
     return router;
 }

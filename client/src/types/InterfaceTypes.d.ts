@@ -188,6 +188,8 @@ export interface PropsDropDownListGeom{
     pageAct:string
 }
 export interface PropsBoutApprobVersement{
+    modalOuvert: boolean,
+    defModalOuvert:Dispatch<SetStateAction<boolean>>,
     champsARemplir: EquivalenceVersementCarto[]
     champsGeomARemplir?: EquivalenceCSVCoordPoint[],
     idFichier:string,

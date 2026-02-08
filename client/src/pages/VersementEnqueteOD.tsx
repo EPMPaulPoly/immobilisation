@@ -131,6 +131,13 @@ const VersementEnqueteOD:FC=()=>{
                     page:'Déplacement'
                 },
                 {
+                    colonne_db:'facdep',
+                    description:'Facteur de pondération du déplacement',
+                    colonne_fichier:'',
+                    obligatoire:true,
+                    page:'Déplacement'
+                },
+                {
                     colonne_db:'nodep',
                     description:'Identifiant de déplacement pour la personne',
                     colonne_fichier:'',

@@ -79,6 +79,8 @@ const ModalVersementOD:FC<PropsVersement> = (props:PropsVersement)=>{
                     </>
                 }
                 <BoutonApprobationVerse
+                    modalOuvert={props.modalOuvert}
+                    defModalOuvert={props.defModalOuvert}
                     champsARemplir={props.champsARemplir}
                     champsGeomARemplir={props.champsGeomARemplir}
                     serviceMAJ={props.serviceMAJ}
