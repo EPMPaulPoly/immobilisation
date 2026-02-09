@@ -2,6 +2,6 @@
 
 ---
 [^Tables des matières](../../README.md)|
-[<Création des Ensembles de règlements](031-EnsRegCreation.md)| 
-[Visualisation Règlements>](033-VisualisationReg.md)
+[<Création des ensembles de règlements](032-EnsRegCreation.md)| 
+[Visualisation Règlements>](034-VisualisationReg.md)
 ---
