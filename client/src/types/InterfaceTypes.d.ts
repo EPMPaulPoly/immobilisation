@@ -257,13 +257,13 @@ export interface PropsMenuEnqueteOD{
     defModalOuvert:Dispatch<SetStateAction<boolean>>
     typeObjetOD:ODGeomTypes
     defTypeObjetOd: Dispatch<SetStateAction<ODGeomTypes>>,
-    heure:number|null
-    defHeure:Dispatch<SetStateAction<number|null>>,
-    motif: number|null,
-    defMotif:Dispatch<SetStateAction<number|null>>,
-    mode:number|null
-    defMode:Dispatch<SetStateAction<number|null>>
-
+    heure:number[]|null
+    defHeure:Dispatch<SetStateAction<number[]|null>>,
+    motif: number[]|null,
+    defMotif:Dispatch<SetStateAction<number[]|null>>,
+    mode:number[]|null
+    defMode:Dispatch<SetStateAction<number[]|null>>
+    limites:LatLngBounds|null
 }
 
 // ---------------------------------------------------------------

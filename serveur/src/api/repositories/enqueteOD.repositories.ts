@@ -15,9 +15,9 @@ export interface paramsRequetePersOD{
 
 export interface paramsRequeteDepOD{
    bbox?:number[]
-   motif?:number,
-   mode?:number,
-   heure?:number
+   motif?:number[],
+   mode?:number[],
+   heure?:number[]
 }
 
 export function construitRequeteMenage(params:paramsRequeteMenageOD):requeteObtenionSQL{
@@ -76,7 +76,8 @@ export function construitRequeteDep(params:paramsRequeteDepOD):requeteObtenionSQ
     let values:any[]=[]
     let replaceCount=1
     if (typeof params.bbox !== 'undefined') {
-        conditions.push(`odd.trip_lines && ST_MakeEnvelope($${replaceCount}, $${replaceCount + 1},  $${replaceCount + 2}, $${replaceCount + 3}, 4326)`)
+        conditions.push(`((odd.geom_ori IS NOT NULL AND odd.geom_ori && ST_MakeEnvelope($${replaceCount}, $${replaceCount + 1},  $${replaceCount + 2}, $${replaceCount + 3}, 4326)) OR 
+                        (odd.geom_des IS NOT NULL AND odd.geom_des   && ST_MakeEnvelope($${replaceCount}, $${replaceCount + 1},  $${replaceCount + 2}, $${replaceCount + 3}, 4326)) )`)
         values.push(params.bbox[0])
         values.push(params.bbox[1])
         values.push(params.bbox[2])
@@ -84,21 +85,33 @@ export function construitRequeteDep(params:paramsRequeteDepOD):requeteObtenionSQ
         replaceCount += 4
     }
     if (typeof params.heure!=='undefined'){
-        conditions.push(`heure=$${replaceCount}`)
-        values.push(params.heure)
-        replaceCount++
+        let opt:string[]=[]
+        params.heure.map((item)=>{
+            opt.push(`$${replaceCount}`)
+            values.push(item)
+            replaceCount++
+        })
+        conditions.push(`heure IN (${opt.join(',')})`)
     }
     if (typeof params.mode!=='undefined'){
-        conditions.push(`(mode1=$${replaceCount} OR mode2= $${replaceCount} OR mode3=$${replaceCount} OR mode4=$${replaceCount})`)
-        values.push(params.mode)
-        replaceCount++
+        let opt:string[]=[]
+        params.mode.map((item)=>{
+            opt.push(`$${replaceCount}`)
+            values.push(item)
+            replaceCount++
+        })
+        conditions.push(`(mode1 IN (${opt.join(',')}) OR mode2 IN (${opt.join(',')}) OR mode3 IN (${opt.join(',')}) OR mode4 IN (${opt.join(',')})) `)
     }
     if (typeof params.motif!=='undefined'){
-        conditions.push(`motif=$${replaceCount}`)
-        values.push(params.motif)
-        replaceCount++
+        let opt:string[]=[]
+        params.motif.map((item)=>{
+            opt.push(`$${replaceCount}`)
+            values.push(item)
+            replaceCount++
+        })
+        conditions.push(`motif IN (${opt.join(',')})`)
     }
-    const base_query = 'SELECT cledeplacement:string, nodep,hredep, heure,motif,motif_gr,mode1,mode2,mode3,mode4,stat,cout_stat,term_stat,clepersonne, ST_AsGeoJSON(trip_lines) as geometry  FROM od_data odd'
+    const base_query = 'SELECT cledeplacement, nodep,hredep, heure,motif,motif_gr,mode1,mode2,mode3,mode4,stat,coutstat,termstat,clepersonne, ST_AsGeoJSON(trip_line) as geometry  FROM od_data odd'
     let final_query=''
     if (conditions.length>0){
         final_query = base_query + ' WHERE ' + conditions.join(' AND ')
@@ -115,9 +128,12 @@ export async function rouleRequeteOD(pool:Pool,requete:requeteObtenionSQL):Promi
     let client
     try{
         client = await pool.connect()
-        const  data = await client.query(requete.requete,requete.valeurs)
+        const  data = await client. query(requete.requete,requete.valeurs)
         const out = data.rows.map((item)=>{return{...item,geometry:JSON.parse(item.geometry)}})
         return out
+    }catch(err:any){
+        console.log(err)
+        throw err
     }finally{
         if(client){
             client.release()

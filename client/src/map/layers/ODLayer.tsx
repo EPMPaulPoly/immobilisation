@@ -34,16 +34,17 @@ const ODLayer = (props: ODLayerProps) => {
                     <div><strong>Facteur Ménage:</strong> {feature.properties.facmen || "N/A"}</div>
                 </div>:props.vue ==='dep'?<div>
                     <div><strong>Identifiant:</strong> {feature.properties.cledeplacement}</div>
-                    <div><strong>Déplacement de la personne:</strong> {feature.properties.nodep || "N/A"}</div>
+                    <div><strong>Heure:</strong> {feature.properties.heure || "N/A"}</div>
                     <div><strong>Motif:</strong> {feature.properties.motif || "N/A"}</div>
                     <div><strong>Mode 1:</strong> {feature.properties.mode1 || "N/A"}</div>
                     <div><strong>Mode 2:</strong> {feature.properties.mode2 || "N/A"}</div>
                 </div>:props.vue ==='pers'?<div>
                     <div><strong>Identifiant:</strong> {feature.properties.clepersonne}</div>
                     <div><strong>Age:</strong> {feature.properties.age || "N/A"}</div>
-                    <div><strong>Motif:</strong> {feature.properties.motif || "N/A"}</div>
-                    <div><strong>Mode 1:</strong> {feature.properties.mode1 || "N/A"}</div>
+                    <div><strong>Sexe:</strong> {feature.properties.sexe || "N/A"}</div>
+                    <div><strong>Statut permis:</strong> {feature.properties.percond || "N/A"}</div>
                     <div><strong>Mode 2:</strong> {feature.properties.mode2 || "N/A"}</div>
+                    
                 </div>:<></>
             );
 
@@ -54,7 +55,7 @@ const ODLayer = (props: ODLayerProps) => {
 
     if (!props.data) return null;
     const key = useGeoJSONKeyFromBounds(props.data);
-    if (props.data.features[0].geometry.type ==="Point")
+    if (props.data.features[0]?.geometry.type ==="Point")
         return <LGeoJson 
         key={key}
         data={props.data} 

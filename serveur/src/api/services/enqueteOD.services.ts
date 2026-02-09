@@ -24,15 +24,46 @@ export function nettoyageParametresRequeteMenageOD(query:any):paramsRequeteMenag
     }
 }
 
-export function nettoyageParametresRequetePersOD(req:any):paramsRequetePersOD{
+export function nettoyageParametresRequetePersOD(query:any):paramsRequetePersOD{
+    const{bbox} = query
+    let bboxLimitsNum = undefined;
+    if (typeof bbox === 'string') {
+        const bboxLimitsString = bbox.split(',')
+        bboxLimitsNum = bboxLimitsString.map((item) => Number(item))
+    }
     return{
-        bbox:[0,0,0,0]
+        bbox:bboxLimitsNum
     }
 }
 
-export function nettoyageParametresRequeteDepOD(req:any):paramsRequeteDepOD{
+
+export function nettoyageParametresRequeteDepOD(query:any):paramsRequeteDepOD{
+    const{bbox,mode,motif,heure} = query
+    let bboxLimitsNum = undefined;
+    if (typeof bbox === 'string') {
+        const bboxLimitsString = bbox.split(',')
+        bboxLimitsNum = bboxLimitsString.map((item) => Number(item))
+    }
+    let ModeNum:number[]=[]
+    if (typeof mode ==='string'){
+        const modestring = mode.split(',')
+        ModeNum = modestring.map(item=> Number(item))
+    }
+    let MotifNum:number[]=[]
+    if (typeof motif ==='string'){
+        const motstring = motif.split(',')
+        MotifNum = motstring.map(item=> Number(item))
+    }
+    let HeureNum:number[]=[]
+    if(typeof heure==='string'){
+        const heurestring = heure.split(',');
+        HeureNum = heurestring.map(item=>Number(item))
+    }
     return{
-        bbox:[0,0,0,0]
+        bbox:bboxLimitsNum,
+        mode: ModeNum.length>0?ModeNum:undefined,
+        motif: MotifNum.length>0?MotifNum:undefined,
+        heure: HeureNum.length>0?HeureNum:undefined
     }
 }
 

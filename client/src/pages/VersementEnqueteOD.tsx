@@ -9,12 +9,13 @@ import ModalVersementOD from "../components/ModalVersementOD";
 import { EquivalenceCSVCoordPoint, EquivalenceVersementCarto } from "../types/DataTypes";
 import BoutonApprobationVerse from "../components/BoutonApprobationVerse";
 import { ServiceEnqueteOD } from "../services/serviceEnqueteOD";
+import { LatLngBounds } from "leaflet";
 
 const VersementEnqueteOD:FC=()=>{
     const [modalOuvert,defModalOuvert] = useState<boolean>(false);
-    const [heure,defHeure] = useState<number|null>(-1)
-    const [mode,defMode] = useState<number|null>(-1);
-    const [motif,defMotif] = useState<number|null>(-1);
+    const [heure,defHeure] = useState<number[]|null>(Array.from({ length: 28 - 4 + 1 }, (_, i) => 4 + i))
+    const [mode,defMode] = useState<number[]|null>(Array.from({ length: 17 - 1 + 1 }, (_, i) => 1 + i));
+    const [motif,defMotif] = useState<number[]|null>(Array.from({ length: 14 - 1 + 1 }, (_, i) => 1 + i));
     const [vueOD,defVueOD] = useState<ODGeomTypes>(ODGeomTypes.dep)
     const [equivalenceFDB, defEquivalenceFBD] = useState<EquivalenceVersementCarto[]>(
             [
@@ -289,6 +290,7 @@ const VersementEnqueteOD:FC=()=>{
             }
         ]
     )
+    const [bounds,defBounds] = useState<LatLngBounds|null>(null)
     
     return (
         <div className='page-versement-od'>
@@ -304,6 +306,7 @@ const VersementEnqueteOD:FC=()=>{
                 defMode={defMode}
                 motif={motif}
                 defMotif={defMotif}
+                limites={bounds}
             />
             <ModalVersementOD
                 modalOuvert={modalOuvert}
@@ -318,7 +321,12 @@ const VersementEnqueteOD:FC=()=>{
                 serviceMAJ={ServiceEnqueteOD.confirmeMAJBDTemp}
             />
             <CarteVerseEnqueteOD
+                limites={bounds}
+                defLimites={defBounds}
                 vue={vueOD}
+                mode={mode}
+                motif={motif}
+                heure={heure}
             />
 
         </div>

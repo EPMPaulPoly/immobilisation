@@ -21,7 +21,7 @@ import { Dispatch, SetStateAction } from "react";
 
 
 export const ServiceEnqueteOD ={
-    obtiensMenagesEnquete: async (bbox:number[]):Promise<ReponseOD>=>{
+    obtiensMenagesEnquete: async (bbox:number[],sexe?:number[]|null,age?:number[]|null,percond?:number[]|null):Promise<ReponseOD>=>{
         try{
             let queries:string[]=[];
             if (bbox){
@@ -60,11 +60,25 @@ export const ServiceEnqueteOD ={
             throw error; // Re-throw if necessary
         }
     },
-    obtiensPersEnquete: async (bbox:number[],heure?:number,mode1?:number,motif_gr?:number):Promise<ReponseOD>=>{
+    obtiensPersEnquete: async (
+        bbox:number[],
+        heure?:number[]|null,
+        mode?:number[]|null,
+        motif?:number[]|null
+    ):Promise<ReponseOD>=>{
         try{
             let queries:string[]=[];
             if (bbox){
                 queries.push(`bbox=${bbox.join(',')}`)
+            }
+            if (heure){
+                queries.push(`heure=${heure.join(',')}`)
+            }
+            if (mode){
+                queries.push(`mode=${mode.join(',')}`)
+            }
+            if (motif){
+                queries.push(`motif=${motif.join(',')}`)
             }
             let out:ODFeatureCollection
             if (queries.length>0){
@@ -86,7 +100,7 @@ export const ServiceEnqueteOD ={
                         nolog:item.nolog
                     }
                     const geometry =item.geometry
-                    return {properties:properties,geometry:geometry}
+                    return {properties:properties,geometry:geometry,type:'Feature'}
                 })
 
                 out = {type:'FeatureCollection',features:features}
@@ -106,20 +120,20 @@ export const ServiceEnqueteOD ={
             throw error; // Re-throw if necessary
         }
     },
-    obtiensDepEnquete: async (bbox:number[],heure?:number,mode1?:number,motif_gr?:number):Promise<ReponseDepOD>=>{
+    obtiensDepEnquete: async (bbox:number[],heure?:number[]|null,mode?:number[]|null,motif?:number[]|null):Promise<ReponseDepOD>=>{
         try{
             let queries:string[]=[];
             if (bbox){
                 queries.push(`bbox=${bbox.join(',')}`)
             }
             if (heure){
-                queries.push(`heure=${heure}`)
+                queries.push(`heure=${heure.join(',')}`)
             }
-            if (mode1){
-                queries.push(`mode1=${mode1}`)
+            if (mode){
+                queries.push(`mode=${mode.join(',')}`)
             }
-            if (motif_gr){
-                queries.push(`motif_gr=${motif_gr}`)
+            if (motif){
+                queries.push(`motif=${motif.join(',')}`)
             }
             let out:ODFeatureCollection
             if (queries.length>0){
@@ -144,7 +158,7 @@ export const ServiceEnqueteOD ={
                         clepersonne:item.clepersonne
                     }
                     const geometry =item.geometry
-                    return {properties:properties,geometry:geometry}
+                    return {properties:properties,geometry:geometry,type:'Feature'}
                 })
 
                 out = {type:'FeatureCollection',features:features} as FeatureCollection<Geometry,depGeoJSONProperties>
@@ -192,7 +206,7 @@ export const ServiceEnqueteOD ={
                 table:table
             }
             const response = await api.post('/fichier-csv/import',body)
-            return{success:response.data.succes,data:response.data.data}
+            return{success:response.data.success,data:response.data.data}
         }catch(error:any){
             if (axios.isAxiosError(error)) {
                 console.error('Axios Error:', error.response?.data);

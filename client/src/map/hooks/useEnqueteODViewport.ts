@@ -6,16 +6,27 @@ import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { BoundsToArray } from "../utils/LatLngBndsToBounds";
 import { ODGeomTypes } from "../../types/EnumTypes";
 import { ServiceEnqueteOD } from "../../services/serviceEnqueteOD";
+import { LatLngBounds } from "leaflet";
 
 export function useEnqueteODViewPort(
     setData:Dispatch<SetStateAction<ODFeatureCollection>>,
     view:ODGeomTypes,
-    minZoom:number
+    minZoom:number,
+    defLimites:Dispatch<SetStateAction<LatLngBounds|null>>,
+    mode?:number[]|null,
+    motif?:number[]|null,
+    heure?:number[]|null
 ) {
     const { handleViewportChange } = useViewportData({
         minZoom: minZoom,
         onFetch: async ({ bounds }) => {
             try{
+                defLimites(
+                    new LatLngBounds(
+                        [bounds.miny, bounds.minx], // southWest
+                        [bounds.maxy, bounds.maxx]  // northEast
+                    )
+                );
                 if (view==='men'){
                     const response = await ServiceEnqueteOD.obtiensMenagesEnquete(
                         BoundsToArray(bounds));
@@ -30,7 +41,7 @@ export function useEnqueteODViewPort(
                 }
                 if(view ==='dep'){
                     const response = await ServiceEnqueteOD.obtiensDepEnquete(
-                        BoundsToArray(bounds));
+                        BoundsToArray(bounds),heure,mode,motif);
                     const out = response.data as ODFeatureCollection
                     setData(out);
                 }
@@ -42,6 +53,7 @@ export function useEnqueteODViewPort(
         },
         onClear: () => {
             try{
+                defLimites(null)
                 setData(null);
             }catch(err:any){
                 console.log(err)

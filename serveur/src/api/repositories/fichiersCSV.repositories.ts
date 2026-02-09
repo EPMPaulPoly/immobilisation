@@ -105,14 +105,14 @@ export async function insertCSVFile(
                         }else{
                             row[dbCol] = null
                         }
-                        console.log(dbCol,row[dbCol])
+                        //console.log(dbCol,row[dbCol])
                     }else{
                         if(value[fileData.data[0]]!== undefined && value[fileData.data[0]]!== '' && value[fileData.data[1]]!==undefined&& value[fileData.data[1]]!==''){
                             row[dbCol] ={type:'Point',data:[value[fileData.data[0]],value[fileData.data[1]]]}
                         }else{
                             row[dbCol] =null
                         }
-                        console.log(dbCol,row[dbCol])
+                        //console.log(dbCol,row[dbCol])
                     }
                 }
 

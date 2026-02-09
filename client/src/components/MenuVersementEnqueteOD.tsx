@@ -36,7 +36,7 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                     id="select-n-charts"
                     value={props.typeObjetOD}
                     onChange={(e) => gereChangementObjet(String(e.target.value))}
-                    label="N Graphes"
+                    label="Men/Pers/Depl"
                     sx={{
                         backgroundColor: 'black',
                         color: 'white',
@@ -79,10 +79,14 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                             Heure Déplacement
                         </InputLabel>
                         <Select
+                            multiple
                             labelId="select-heure-label"
                             id="select-heure"
                             value={props.heure}
-                            onChange={(e) => props.defHeure(Number(e.target.value))}
+                            onChange={(e) => {
+                                const v = e.target.value ;
+                                props.defHeure(typeof v === "string" ? v.split(",").map(Number) : v);
+                            }}
                             label="Heure"
                             sx={{
                                 backgroundColor: 'black',
@@ -101,9 +105,19 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
-                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 28 - 4 + 1 }, (_, i) => (
-                                <MenuItem key={i} value={i + 4}>
+                                <MenuItem 
+                                    key={i} 
+                                    value={i + 4} 
+                                    sx={{
+                                        "&.Mui-selected": {
+                                            bgcolor: "#333",
+                                            color: "#fff",
+                                        },
+                                            "&.Mui-selected:hover": {
+                                            bgcolor: "#444",
+                                        },
+                                    }}>
                                     {i + 4}
                                 </MenuItem>
                             ))}
@@ -120,10 +134,14 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                             Motif Déplacement
                         </InputLabel>
                         <Select
+                            multiple
                             labelId="select-motif"
                             id="select-n-charts"
                             value={props.motif}
-                            onChange={(e) => props.defMotif(Number(e.target.value))}
+                            onChange={(e) => {
+                                const v = e.target.value ;
+                                props.defMotif(typeof v === "string" ? v.split(",").map(Number) : v);
+                            }}
                             label="N Graphes"
                             sx={{
                                 backgroundColor: 'black',
@@ -142,9 +160,20 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
-                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 14 }, (_, i) => (
-                                <MenuItem key={i} value={i+1}>
+                                <MenuItem 
+                                    key={i} 
+                                    value={i+1} 
+                                    sx={{
+                                        "&.Mui-selected": {
+                                            bgcolor: "#333",
+                                            color: "#fff",
+                                        },
+                                            "&.Mui-selected:hover": {
+                                            bgcolor: "#444",
+                                        },
+                                    }}
+                                >
                                     {i+1}
                                 </MenuItem>
                             ))}
@@ -161,10 +190,14 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                             Mode Déplacements
                         </InputLabel>
                         <Select
+                            multiple
                             labelId="select-mode-label"
                             id="select-mode"
                             value={props.mode}
-                            //onChange={(e) => handleChange(Number(e.target.value))}
+                            onChange={(e) => {
+                                const v = e.target.value ;
+                                props.defMode(typeof v === "string" ? v.split(",").map(Number) : v);
+                            }}
                             label="N Graphes"
                             sx={{
                                 backgroundColor: 'black',
@@ -183,9 +216,16 @@ const MenuVerseEnqueteOD:FC<PropsMenuEnqueteOD> = (props:PropsMenuEnqueteOD)=>{
                                 },
                             }}
                         >
-                            <MenuItem value={-1}>Sans Filtre</MenuItem>
                             {Array.from({ length: 17 }, (_, i) => (
-                                <MenuItem key={i} value={i+1}>
+                                <MenuItem key={i} value={i+1} sx={{
+                                        "&.Mui-selected": {
+                                        bgcolor: "#333",
+                                        color: "#fff",
+                                        },
+                                        "&.Mui-selected:hover": {
+                                        bgcolor: "#444",
+                                        },
+                                    }}>
                                     {i+1}
                                 </MenuItem>
                             ))}
