@@ -3,7 +3,7 @@
 ---
 [^Tables des matières](../../README.md)|
 [<Téléversement du rôle](023-VerseDonneesCadastre.md)| 
-[Versement des données de recensement>](025-VerseDonneesPopu.md)
+[Versement des données de recensement>](025-VersementDonneesPopu.md)
 ---
 
 La méthode de calcul utilise un méthode de jointure spatiale entre entre le rôle foncier et le cadastre. Cette approche est possible puisque le rôle foncier contient un point qui est généralement localisé au centre du lot. Cette approche est relativement simple. Pour faire ces associations, l'analyse navigue à la [page pertinente](http://localhost:3000/assoc-cadastre-role). En zoomant assez, l'analyste devrait voir les lots.
