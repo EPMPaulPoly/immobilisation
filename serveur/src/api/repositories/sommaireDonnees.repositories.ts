@@ -19,7 +19,8 @@ export function creeRequeteSommaire():string{
                     'census_population_2016',
                     'sec_analyse',
                     'od_data',
-                    'multiplicateur_facteurs_colonnes'
+                    'multiplicateur_facteurs_colonnes',
+                    'cubf'
                 ) AND Table_Schema IN ('public')
         )
         SELECT  
