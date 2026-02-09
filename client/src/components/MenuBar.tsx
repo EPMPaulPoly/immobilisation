@@ -22,7 +22,9 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Cadastre", path:"/cadastre"},
                     {label:"Associations Cadastre-rôle",path:"/assoc-cadastre-role"},
                     {label:"Données Recensement", path:"/recensement"},
-                    {label:'Enquête OD', path:'/enquete-od'}
+                    {label:'Enquête OD', path:'/enquete-od'},
+                    {label:'CUBF', path:'/cubf'},
+                    {label:'Sommaire Données', path:'/sommaire-versement'}
                 ]}
             />
             <SubMenuComponent

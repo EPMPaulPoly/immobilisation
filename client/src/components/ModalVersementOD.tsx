@@ -48,7 +48,7 @@ const ModalVersementOD:FC<PropsVersement> = (props:PropsVersement)=>{
                     defIdFichier={defIdFichier}
                     accept='.csv'
                     title='Fichier CSV'
-                    serviceUploadPeak={ServiceEnqueteOD.verseFichierFlux}
+                    serviceUploadPeak={props.serviceUploadPeak}
                 />
                 
                 <ColumnDropDownListPageSelector

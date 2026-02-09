@@ -43,7 +43,8 @@ import {
     persFeatureCol,
     depFeatureCol,
     persPropertiesDB,
-    depPropertiesLigDB} from './DataTypes'
+    depPropertiesLigDB,
+    sommaireDonnee} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -137,6 +138,10 @@ export type ReponseMenODDB = ApiResponse<menPropertiesDB[]>
 export type ReponsePersODDB = ApiReponse<persPropertiesDB[]>
 export type ReponseDepODDB = ApiResponse<depPropertiesLigDB[]>
 export type ReponseODDB = ApiResponse<ODDBType>
+
+// Types pour le seommaire de données
+
+export type ReponseSommaireDonnees = ApiResponse<sommaireDonnee[]>
 // Requetes
 export interface RequeteApiStrate {
     id_strate?: number | null,

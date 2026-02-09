@@ -67,7 +67,13 @@ const BoutonApprobationVerse:FC<PropsBoutApprobVersement>=(props:PropsBoutApprob
                 }
 
             }else{
-                alert("Échec d'insertion")
+                response = await props.serviceMAJ(props.idFichier,regularMapping,props.table)
+                if (response.success=== true){
+                    alert(`Inséré ${response.data}`)
+                    props.defModalOuvert(false)
+                } else{
+                    alert(`Erreur inconnue`)
+                }
             }
 
         } catch(err:any){

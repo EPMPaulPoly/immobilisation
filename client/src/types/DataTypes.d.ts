@@ -506,3 +506,10 @@ Feature<Geometry,persGeoJSONProperties>|
 Feature<Geometry,depGeoJSONProperties>|null
 
 export type ODDBType = menPropertiesDB|persPropertiesDB|depPropertiesOriDB|depPropertiesDesDB|depPropertiesLigDB
+
+
+export type sommaireDonnee={
+    table:string,
+    description:string,
+    nombre_entrees:string
+}

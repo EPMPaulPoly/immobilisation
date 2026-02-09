@@ -20,6 +20,7 @@ import { creationRouteurAssocCadRole } from './assocCadRole';
 import { creationRouteurRecensement } from './recensement';
 import { creationRouteurEnqueteOD } from './enqueteOD';
 import { creationRouteurDonneesCSV } from './fichiersCSV';
+import { CreationRouteurSommaireDonnee } from './sommaireVersement';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -44,5 +45,6 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/recensement',creationRouteurRecensement(pool))
     router.use('/enquete-od',creationRouteurEnqueteOD(pool))
     router.use('/fichier-csv',creationRouteurDonneesCSV(pool))
+    router.use('/sommaire-donnees',CreationRouteurSommaireDonnee(pool))
     return router;
 }

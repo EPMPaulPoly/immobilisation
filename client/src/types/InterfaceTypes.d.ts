@@ -127,7 +127,7 @@ export interface PropsVersement{
     champsARemplir: EquivalenceVersementCarto[]
     defChampsARemplir:Dispatch<SetStateAction<EquivalenceVersementCarto[]>>
     title:string
-    table:'cadastre'|'role_foncier'|'census_population'|'census_population_2016'|'od_data',
+    table:'cadastre'|'role_foncier'|'census_population'|'census_population_2016'|'od_data'|'cubf',
     champsGeomARemplir?: EquivalenceCSVCoordPoint[]
     defChampsGeomARemplir?:Dispatch<SetStateAction<EquivalenceCSVCoordPoint[]>>
     serviceUploadPeak: (

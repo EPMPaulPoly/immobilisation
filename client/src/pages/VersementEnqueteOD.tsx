@@ -10,13 +10,14 @@ import { EquivalenceCSVCoordPoint, EquivalenceVersementCarto } from "../types/Da
 import BoutonApprobationVerse from "../components/BoutonApprobationVerse";
 import { ServiceEnqueteOD } from "../services/serviceEnqueteOD";
 import { LatLngBounds } from "leaflet";
+import { ServiceFichierCSV } from "../services/serviceFichierCSV";
 
 const VersementEnqueteOD:FC=()=>{
     const [modalOuvert,defModalOuvert] = useState<boolean>(false);
     const [heure,defHeure] = useState<number[]|null>(Array.from({ length: 28 - 4 + 1 }, (_, i) => 4 + i))
     const [mode,defMode] = useState<number[]|null>(Array.from({ length: 17 - 1 + 1 }, (_, i) => 1 + i));
     const [motif,defMotif] = useState<number[]|null>(Array.from({ length: 14 - 1 + 1 }, (_, i) => 1 + i));
-    const [vueOD,defVueOD] = useState<ODGeomTypes>(ODGeomTypes.dep)
+    const [vueOD,defVueOD] = useState<ODGeomTypes>(ODGeomTypes.men)
     const [equivalenceFDB, defEquivalenceFBD] = useState<EquivalenceVersementCarto[]>(
             [
                 {
@@ -317,8 +318,8 @@ const VersementEnqueteOD:FC=()=>{
                 table='od_data'
                 champsGeomARemplir={equivalenceGeom}
                 defChampsGeomARemplir={defEquivalenceGeom}
-                serviceUploadPeak={ServiceEnqueteOD.verseFichierFlux}
-                serviceMAJ={ServiceEnqueteOD.confirmeMAJBDTemp}
+                serviceUploadPeak={ServiceFichierCSV.verseFichierFlux}
+                serviceMAJ={ServiceFichierCSV.confirmeMAJBDTemp}
             />
             <CarteVerseEnqueteOD
                 limites={bounds}

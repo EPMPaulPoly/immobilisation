@@ -1,0 +1,22 @@
+.page-versement-cubf{
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+
+.table-cubf{
+    padding:10px;
+    flex:1;
+    overflow:hidden;
+}
+
+
+.menu-verse-cubf{
+    flex-direction: row;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+}
