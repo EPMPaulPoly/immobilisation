@@ -1,4 +1,50 @@
-import { periode, territoire, quartiers_analyse, inventaire_stationnement, territoireGeoJsonProperties, entete_reglement_stationnement, reglement_complet, entete_ensembles_reglement_stationnement, ensemble_reglements_stationnement, inventaireGeoJSONProps, lotCadastralGeoJsonProperties, roleFoncierGeoJsonProps, lotCadastralDB, roleFoncierDB, lotCadastralGeomSeulDb, comboERRoleFoncier, lotCadastralBoolInvDB, lotCadastralAvecBoolInvGeoJsonProperties, PAV_quartier, entreePAV, operation_reglement_stationnement, unites_reglement_stationnement, definition_reglement_stationnement, association_territoire_entete_ensemble_reglement, association_util_reglement, utilisation_sol, associaion_territoire_ensemble_reglement, data_graphique, comptes_utilisations_sol, FeuilleFinaleStrate, EntreeValidation, data_graphique_text_labels,resultatAnalyseVariabilite, resultatHistoVariabilite } from './DataTypes'
+import { 
+    periode, 
+    territoire, 
+    quartiers_analyse, 
+    inventaire_stationnement, 
+    territoireGeoJsonProperties, 
+    entete_reglement_stationnement, 
+    reglement_complet, 
+    entete_ensembles_reglement_stationnement, 
+    ensemble_reglements_stationnement, 
+    inventaireGeoJSONProps, 
+    lotCadastralGeoJsonProperties, 
+    roleFoncierGeoJsonProps, 
+    lotCadastralDB, 
+    roleFoncierDB, 
+    lotCadastralGeomSeulDb, 
+    comboERRoleFoncier, 
+    lotCadastralBoolInvDB, 
+    lotCadastralAvecBoolInvGeoJsonProperties, 
+    PAV_quartier, 
+    entreePAV, 
+    operation_reglement_stationnement, 
+    unites_reglement_stationnement, 
+    definition_reglement_stationnement, 
+    association_territoire_entete_ensemble_reglement, 
+    association_util_reglement, 
+    utilisation_sol, 
+    associaion_territoire_ensemble_reglement, 
+    data_graphique, 
+    comptes_utilisations_sol, 
+    FeuilleFinaleStrate, 
+    EntreeValidation, 
+    data_graphique_text_labels,
+    resultatAnalyseVariabilite, 
+    resultatHistoVariabilite,
+    quartiers_analyse_db, 
+    colonnes_possibles_conversion,
+    insertCount,
+    recensementGeoJsonProperties,
+    recensementDB,
+    ODFeatureCollection,
+    menFeatureCol,
+    persFeatureCol,
+    depFeatureCol,
+    persPropertiesDB,
+    depPropertiesLigDB,
+    sommaireDonnee} from './DataTypes'
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import { GeoJSONPropsAnaQuartierTotal, GeoJSONPropsAnaQuartierTotalParHab, GeoJSONPropsAnaQuartierTotalParSuperf, NhoodXYGraphDatasets, StatTotalDBAnaQuartier, StatTotalParSuperfDBAnaQuartier, VariableCartoDBAnaQuartier } from './AnalysisTypes';
 export interface ApiResponse<T> {
@@ -11,8 +57,10 @@ export interface ApiResponse<T> {
 export type ReponsePeriode = ApiResponse<periode[]>
 export type ReponseDbTerritoire = ApiResponse<territoire[]>
 export type ReponseTerritoire = ApiResponse<FeatureCollection<Geometry, territoireGeoJsonProperties>>
+export type ReponseTerritoireUnique = ApiResponse<Feature<Geometry, territoireGeoJsonProperties>>
 // quartier analyse
-export type ReponseQuartiersAnalyse = ApiResponse<quartiers_analyse[]>
+export type ReponseQuartiersAnalyse = ApiResponse<FeatureCollection<Geometry,quartiers_analyse>>
+export type ReponseQuartierDBAnalyse = ApiResponse<quartiers_analyse_db[]>
 // inventaire
 export type ReponseDBInventaire = ApiResponse<inventaire_stationnement[]>
 export type ReponseInventaire = ApiResponse<inventaire_stationnement[]>
@@ -21,8 +69,16 @@ export type ReponseInventaireSeuil = ApiResponse<inventaire_stationnement>
 export type ReponseEntetesReglements = ApiResponse<entete_reglement_stationnement[]>
 export type ReponseReglementComplet = ApiResponse<reglement_complet[]>
 export type ReponseOperationsReglements = ApiResponse<operation_reglement_stationnement[]>
-export type ReponseUnitesReglements = ApiResponse<unites_reglement_stationnement[]>
 export type ReponseLigneDefReglement = ApiReponse<definition_reglement_stationnement>
+// unites
+export type ReponseUnitesReglements = ApiResponse<unites_reglement_stationnement[]>
+export type ReponseColonnesConversionUnites = ApiResponse<colonnes_possibles_conversion[]>
+// Assocaiations cadastreRole
+export type ReponseInsertionAuto = ApiResponse<insertCount>
+export type ReponseAssocRoleCad = ApiResponse<assocRoleCadastre[]>
+// Recensement
+export type ReponseRecensement = ApiResponse<FeatureCollection<Geometry,recensementGeoJsonProperties>>
+export type ReponseRecensementDB = ApiResponse<recensementDB[]>
 // ensemble reglements
 export type ReponseEnteteEnsembleReglementStationnement = ApiResponse<entete_ensembles_reglement_stationnement>
 export type ReponseEntetesEnsemblesReglement = ApiResponse<entete_ensembles_reglement_stationnement[]>
@@ -72,6 +128,20 @@ export type ReponseStrateUnique = ApiResponse<Strate>
 export type ReponseFeuilles = ApiResponse<FeuilleFinaleStrate[]>
 export type ReponseResultatValidation = ApiResponse<EntreeValidation[]>
 
+
+//Types pour les données d'enquête
+export type ReponseOD = ApiResponse<ODFeatureCollection>
+export type ReponseMenOD = ApiResponse<menFeatureCol>
+export type ReponsePersOD = ApiResponse<persFeatureCol>
+export type ReponseDepOD = ApiResponse<depFeatureCol>
+export type ReponseMenODDB = ApiResponse<menPropertiesDB[]>
+export type ReponsePersODDB = ApiReponse<persPropertiesDB[]>
+export type ReponseDepODDB = ApiResponse<depPropertiesLigDB[]>
+export type ReponseODDB = ApiResponse<ODDBType>
+
+// Types pour le seommaire de données
+
+export type ReponseSommaireDonnees = ApiResponse<sommaireDonnee[]>
 // Requetes
 export interface RequeteApiStrate {
     id_strate?: number | null,

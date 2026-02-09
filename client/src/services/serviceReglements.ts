@@ -7,7 +7,7 @@ import { promises } from 'dns';
 class ServiceReglements {
     async chercheTousEntetesReglements():Promise<ReponseEntetesReglements> {
         try {
-            const response: AxiosResponse<ReponseEntetesReglements> = await api.get(`/reglements/entete`);
+            const response: AxiosResponse<ReponseEntetesReglements> = await api.get(`/reglements`);
             const data_res = response.data.data;
             return {success:response.data.success,data:data_res};
         } catch (error) {
@@ -29,7 +29,7 @@ class ServiceReglements {
                 return stringOut
             }
             let queryString;
-            queryString = `/reglements/entete`;
+            queryString = `/reglements`;
             const params = [];
             if(requete.annee_debut_apres!==undefined){
                 params.push(`annee_debut_apres=${requete.annee_debut_apres}`)
@@ -79,11 +79,11 @@ class ServiceReglements {
     async chercheReglementComplet(id:number|number[]):Promise<ReponseReglementComplet>{
         try {
             if (typeof(id)==='number'){
-                const response: AxiosResponse<ReponseReglementComplet> = await api.get(`/reglements/complet/${id}`);
+                const response: AxiosResponse<ReponseReglementComplet> = await api.get(`/reglements?id_reg_stat=${id}&format=c`);
                 const data_res = response.data.data;
                 return {success:response.data.success,data:data_res};
             } else{
-                const response: AxiosResponse<ReponseReglementComplet> = await api.get(`/reglements/complet/${id.join(',')}`);
+                const response: AxiosResponse<ReponseReglementComplet> = await api.get(`/reglements?id_reg_stat=${id.join(',')}&format=c`);
                 const data_res = response.data.data;
                 return {success:response.data.success,data:data_res};
             }
@@ -100,22 +100,7 @@ class ServiceReglements {
         }
     }
 
-    async obtiensUnitesReglementsParLot(id:string):Promise<ReponseDBInfoInventaireReglementManuel>{
-        try{
-            const parseId = id.replace(/ /g, "_");
-            const response:AxiosResponse<ReponseDBInfoInventaireReglementManuel> = await api.get(`/reglements/unites/${parseId}`)
-            return{success:response.data.success,data:response.data.data}
-        }catch(error){
-            if (axios.isAxiosError(error)) {
-                console.error('Axios Error:', error.response?.data);
-                console.error('Axios Error Status:', error.response?.status);
-                console.error('Axios Error Data:', error.response?.data);
-            } else {
-                console.error('Unexpected Error:', error);
-            }
-            throw error; // Re-throw if necessary
-        }
-    }
+
 
     async nouvelEnteteReglement(enteteASauvegarder:Omit<entete_reglement_stationnement,'id_reg_stat'>):Promise<ReponseEntetesReglements>{
         try{
@@ -200,22 +185,7 @@ class ServiceReglements {
         }
     }
 
-    async obtiensUnitesPossibles():Promise<ReponseUnitesReglements>{
-        try {
-            const response: AxiosResponse<ReponseUnitesReglements> = await api.get(`/reglements/unites`);
-            const data_res = response.data.data;
-            return {success:response.data.success,data:data_res};
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.error('Axios Error:', error.response?.data);
-                console.error('Axios Error Status:', error.response?.status);
-                console.error('Axios Error Data:', error.response?.data);
-            } else {
-                console.error('Unexpected Error:', error);
-            }
-            throw error; // Re-throw if necessary
-        }
-    }
+
 
     async nouvelleLigneDefinition(definition:Partial<definition_reglement_stationnement>):Promise<ReponseLigneDefReglement>{
         try{

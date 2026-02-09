@@ -97,9 +97,9 @@ const MenuInventaire: React.FC<MenuInventaireProps> = (props: MenuInventaireProp
             <label htmlFor="select-quartier">Sélection Quartier</label>
             <select id="select-quartier" name="select-quartier" onChange={e => gestSelectQuartier(Number(e.target.value))}>
                 <option value="">Selection quartier</option>
-                {props.optionsQuartier.map(quartier => (
-                    <option key={quartier.id_quartier} value={quartier.id_quartier} >
-                        {quartier.nom_quartier}
+                {props.optionsQuartier.features.map(quartier => (
+                    <option key={quartier.properties.id_quartier} value={quartier.properties.id_quartier} >
+                        {quartier.properties.nom_quartier}
                     </option>
                 ))}
             </select>

@@ -1,4 +1,13 @@
-import { condition_strate, RequeteModifStrate, strate, strate_db, condition_echantillonage, RequeteResValide, CorpsValide, RequeteGraphiqueValidation, donneesHisto, serieHistogrammeVariabilite, dataHistogrammeVariabilite } from 'database';
+import { condition_strate, 
+    RequeteModifStrate, 
+    strate, 
+    strate_db, 
+    condition_echantillonage, 
+    RequeteResValide, 
+    CorpsValide, 
+    RequeteGraphiqueValidation,   
+} from 'validation.types';
+import { dataHistogrammeVariabilite } from 'analyseVariabilite.types';
 import { Router, RequestHandler } from 'express';
 import { Pool } from 'pg';
 import { bin, Bin, HistogramGeneratorNumber } from 'd3-array';
@@ -761,10 +770,10 @@ export const creationRouteurValidation = (pool: Pool): Router => {
             let query: string
             let result: any;
             query = `SELECT 
-                    rv.id_val,
-                    rv.id_strate,
+                    rv.id_val::int,
+                    rv.id_strate::int,
                     rv.g_no_lot,
-                    rv.n_places,
+                    rv.n_places::int,
                     rv.fond_tuile
                 FROM
                     public.resultats_validation rv
@@ -1121,7 +1130,7 @@ export const creationRouteurValidation = (pool: Pool): Router => {
     router.get('/resultats', obtiensResultats)
     router.post('/resultats', nouveauResultat)
     router.put('/resultats/:id', modifieResultat)
-    router.delete('resultats/:id', supprimeResultat)
+    router.delete('/resultats/:id', supprimeResultat)
     router.get('/graphiques', genereGraphiqueComparaison)
     router.get('/popu-strate',obtiensComptesStrates)
     return router;

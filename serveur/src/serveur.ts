@@ -32,7 +32,10 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 // Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
-  console.log(`Server address info:${config.database.database}`)
+  console.log(`Server user info:${config.database.user}`)
+  console.log(`Server pwd: ${config.database.password}`)
+  console.log(`Server address info:${config.database.host}`)
+  console.log(`Server database info:${config.database.database}`)
   console.log(`Server running at ${new Date().toISOString()}`); 
 });
 
@@ -86,6 +89,11 @@ app.get('/api/routes', (req, res) => {
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
+  pool.end();
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
   pool.end();
   process.exit(0);
 });

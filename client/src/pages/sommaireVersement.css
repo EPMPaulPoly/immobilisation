@@ -1,0 +1,11 @@
+.page-sommaire-versement{
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+
+.tableau-sommaire-donnees{
+    padding:10px;
+}

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
 //dotenv.config({path: '../../.env'});
-console.log(process.env.DB_USER);
+//console.log(process.env.DB_USER);
 export default {
   database: {
     user: process.env.DB_USER,

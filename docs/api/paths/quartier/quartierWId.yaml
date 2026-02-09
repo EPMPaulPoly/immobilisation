@@ -1,0 +1,93 @@
+put:
+  description: Met à jour un quartier existant
+  tags:
+    - Quartier
+  parameters:
+    - name: id_quartier
+      in: path
+      description: ID du quartier à mettre à jour
+      required: true
+      schema:
+        type: integer
+      example: 1
+  requestBody:
+    description: Données du quartier à mettre à jour
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/quartier_analyse_sans_id'
+        example:
+          nom_quartier: "Nouveau Nom du Quartier"
+          superf_quartier: 1250000
+          acro: "NNQ"
+          geometry:
+            type: "Polygon"
+            coordinates:
+              - [102.0, 2.0]
+              - [103.0, 2.0]
+              - [103.0, 3.0]
+              - [102.0, 3.0]
+              - [102.0, 2.0]  
+  responses:
+    '200':
+      description: Quartier mis à jour avec succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/reponse_quartier_analyse'
+          example:
+            success: true
+            data:
+              - id_quartier: 1
+                nom_quartier: "Nouveau Nom du Quartier"
+                superf_quartier: 1250000
+                acro: "NNQ"
+                geometry:
+                  type: "Polygon"
+                  coordinates:
+                    - [102.0, 2.0]
+                    - [103.0, 2.0]
+                    - [103.0, 3.0]
+                    - [102.0, 3.0]
+                    - [102.0, 2.0]  
+    '500':
+      description: Erreur serveur lors de la mise à jour du quartier
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: false
+            error: "Erreur interne serveur"
+delete:
+  description: Supprime un quartier existant
+  tags:
+    - Quartier
+  parameters:
+    - name: id_quartier
+      in: path
+      description: ID du quartier à supprimer
+      required: true
+      schema:
+        type: integer
+      example: 1
+  responses:
+    '200':
+      description: Quartier supprimé avec succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: true
+            message: "Quartier supprimé avec succès"
+    '500':
+      description: Erreur serveur lors de la suppression du quartier
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: false
+            error: "Erreur interne serveur"

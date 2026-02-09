@@ -1,0 +1,65 @@
+put:
+  summary: Modification d'une unité existante
+  deprecated: false
+  description: ''
+  tags: ['Unités']
+  parameters:
+    - name: id_unite
+      in: path
+      description: identifiant de l'unité qu'onmodifie
+      required: true
+      example: 1
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/unite_sans_id'
+        example:
+          desc_unite: Siège
+          facteur_correction: 0.5
+          abscisse_correction: 0
+          colonne_role_foncier: rl0308a
+  responses:
+    '200':
+      summary: Succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/unite'
+          example:
+            success: true
+            data: 
+              - id_unite: 4
+                desc_unite: Siège
+                facteur_correction: 0.5
+                abscisse_correction: 0
+                colonne_role_foncier: rl0308a
+delete:
+  summary: Suppression d'une unité existatne
+  deprecated: false
+  description: ''
+  tags: ['Unités']
+  parameters:
+    - name: id_unite
+      in: path
+      description: identifiant de l'unité qu'onmodifie
+      required: true
+      example: 1
+  responses:
+    '200':
+      summary: Succès
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: true
+    '500':
+      summary: Erreur interne serveur
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas.yaml#/api_response'
+          example:
+            success: false
+            message: Erreur interne serveur

@@ -48,7 +48,7 @@ def ouverture_role_xml(path_xml,usage_code_column_name_xml,dictionnaire_renommer
     tax_database_XML_data = tax_database_XML_data.rename(columns = dictionnaire_renommer)
     return tax_database_XML_data
 
-def conversion_FGDB_GeoJSON(fgdb_path,municipality_code):
+def conversion_FGDB_GeoJSON(fgdb_path,municipality_code,outFolder):
     #layer_names = f.listlayers(fgdb_path)
     #layer_names = ['rol_unite_p']
     #print(f"Layers in FGDB: {layer_names}")
@@ -74,7 +74,7 @@ def conversion_FGDB_GeoJSON(fgdb_path,municipality_code):
     gdf_inter = pd.merge(gdf1,gdf2,on="id_provinc",how="left")
     gdf_out = pd.merge(gdf_inter,gdf3,on="id_provinc",how="left")
     cwd_check = os.getcwd()
-    titre = f'{cwd_check}\\data_out\\role-foncier-concat-{municipality_code}.geojson'
+    titre = f'{outFolder}/role-foncier-concat-{municipality_code}.geojson'
     gdf_out.to_file(titre, driver='GeoJSON')  
     logger.info("completed conversion from FGDB to GeoJSON")
 

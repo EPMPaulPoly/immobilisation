@@ -1,11 +1,7 @@
-import { Router, Request, Response, RequestHandler } from 'express';
+import { Router,  RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbHistoriqueGeopol,ParamsAssocEnsReg,ParamsAssocEnsRegTerr,ParamsTerritoire } from '../../types/database';
-// Types pour les requêtes
-import { Polygon, MultiPolygon } from 'geojson';
-interface GeometryBody {
-    geometry: Polygon | MultiPolygon;
-}
+import { ParamsAssocEnsRegTerr, } from 'ensembleReglements.types';
+import { ParamsTerritoire } from 'historique.types'
 
 
 export const creationRouteurEnsRegTerr = (pool: Pool): Router => {

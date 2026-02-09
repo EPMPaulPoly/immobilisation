@@ -79,7 +79,7 @@ const ListeLotsValidation: React.FC<PropsListeLotsValid> = (props: PropsListeLot
             new_add= add_bits.join(' ')
             props.defAdresse(new_add)
         } else{ props.defAdresse('')}
-        const foundFeature = props.lots.features.find((feature) => feature.properties.g_no_lot === lot);
+        const foundFeature = props.lots?.features.find((feature) => feature.properties.g_no_lot === lot);
         const lotSelect:FeatureCollection<Geometry,lotCadastralAvecBoolInvGeoJsonProperties> = {
             type: 'FeatureCollection',
             features: foundFeature ? [foundFeature] : [
@@ -149,8 +149,8 @@ const ListeLotsValidation: React.FC<PropsListeLotsValid> = (props: PropsListeLot
                     aria-labelledby="nested-list-subheader"
                 >
 
-                    {props.lots.features.map((item) => (
-                        <ListItemButton onClick={() => handleListClick(item.properties.g_no_lot)} selected={props.lotSelect.features[0].properties.g_no_lot=== item.properties.g_no_lot}>
+                    {props.lots?.features.map((item) => (
+                        <ListItemButton onClick={() => handleListClick(item.properties.g_no_lot)} selected={props.lotSelect?.features[0].properties.g_no_lot=== item.properties.g_no_lot}>
                             <ListItemText
                                 primary={item.properties.g_no_lot}
                                 primaryTypographyProps={{

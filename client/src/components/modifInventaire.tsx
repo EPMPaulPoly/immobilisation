@@ -36,7 +36,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
     const [obtentionEnCoursReg,defObtentionEnCoursReg] = useState<boolean>(false);
 
     const renvoiInventaireReg = (methodeAMontrer:number): inventaire_stationnement => {
-        const foundItem = props.inventaire.find(item => item.methode_estime === methodeAMontrer);
+        const foundItem = props.inventaire?.find(item => item.methode_estime === methodeAMontrer);
         return foundItem ?? emptyFeature;
     }
     const [inputValues, setInputValues] = useState<InputValues>({});
@@ -63,12 +63,13 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
         defModifEnMarche(false)
         setNewRegInvToProc(false)
         defInventaireProp(emptyFeature)
+        if (props.defPanneauModifVisible)
         props.defPanneauModifVisible(false)
     }
     const gestDemarrerCalcul = async() =>{
         if (!modifEnMarche){
             defModifEnMarche(true)
-            if (optionCalcul===3){
+            if (optionCalcul===3 && props.lots){
                 defObtentionEnCoursReg(true)
                 const resultats = await obtRegManuel(props.lots.features[0].properties.g_no_lot)
                 defReglementsUnites(resultats)
@@ -91,7 +92,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
         const formData = new FormData(form);
         const inventaireASauvegarder = Number(formData.getAll("entree-manuelle-inventaire"));
         if (!isNaN(inventaireASauvegarder)) {
-            if (props.inventaire.find((o)=>o.methode_estime===1)){
+            if (props.inventaire?.find((o)=>o.methode_estime===1)){
                 const featureASauvegarder:inventaire_stationnement={
                     g_no_lot: props.inventaire.find((o)=>o.methode_estime===1)?.g_no_lot?? '',
                     n_places_min: 0,
@@ -117,7 +118,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
                 }
             } else{
                 const FeatureASauvegarder: Omit<inventaire_stationnement,'id_inv'>= {
-                    g_no_lot: props.lots.features[0].properties.g_no_lot,
+                    g_no_lot: props.lots?.features[0].properties.g_no_lot??'',
                     n_places_min: 0,
                     n_places_max: 0,
                     n_places_mesure: inventaireASauvegarder,
@@ -131,13 +132,15 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
                 const reussi = await serviceInventaire.nouvelInventaire(FeatureASauvegarder)
                 if (reussi){
                     console.log(`Entrée dans la table réussie`)
+                    if (props.quartier_select){
                     const rechargeInventaire = await serviceInventaire.obtientInventaireParQuartier(props.quartier_select)
                     if (rechargeInventaire.success){
-                        props.defInventaireQuartier(rechargeInventaire.data)
+                        if (props.defInventaireQuartier)props.defInventaireQuartier(rechargeInventaire.data)
                         alert('Mise a jour réussie')
-                        props.defPanneauModifVisible(false)
+                        if (props.defPanneauModifVisible) props.defPanneauModifVisible(false)
                         defModifEnMarche(false)
                     }
+                }
                 } else{
                     throw new Error('Écriture Échouée')
                 }
@@ -163,12 +166,14 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
             setNewRegInvToProc(false);
             defInventaireProp(emptyFeature);
             defModifEnMarche(false);
-            const rechargeInventaire = await serviceInventaire.obtientInventaireParQuartier(props.quartier_select)
-            if (rechargeInventaire.success){
-                props.defInventaireQuartier(rechargeInventaire.data)
-                props.defPanneauModifVisible(false)
+            if (props.quartier_select){
+                const rechargeInventaire = await serviceInventaire.obtientInventaireParQuartier(props.quartier_select)
+                if (rechargeInventaire.success){
+                    if (props.defInventaireQuartier) props.defInventaireQuartier(rechargeInventaire.data)
+                    if (props.defPanneauModifVisible) props.defPanneauModifVisible(false)
+                }
+                alert('Calcul sauvegardé');
             }
-            alert('Calcul sauvegardé');
         } else{
             alert('Sauvegarde échouée');
         }
@@ -203,7 +208,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
 
     const gestCalculLotInvReg = ()=>{
         const propsCalcul:calculateRegLotInventoryProps = {
-            lots:props.lots,
+            lots:props.lots??{type:'FeatureCollection',features:[]},
             modifEnMarche:modifEnMarche,
             defInventaireProp:defInventaireProp,
             defNvInvRegATrait:setNewRegInvToProc
@@ -216,7 +221,7 @@ const CompoModifInventaire: React.FC<TableRevueProps> = (props:TableRevueProps) 
         const matchCalcul: requete_calcul_manuel_reg[] = reglementUnites.map((item) => {
             const key:string = `${item.cubf}-${item.unite}-${item.id_reg_stat}-${item.id_er}`;
             return {
-                g_no_lot:props.lots.features[0].properties.g_no_lot,
+                g_no_lot:props.lots?.features[0].properties.g_no_lot??'',
                 cubf: item.cubf,
                 id_reg_stat: item.id_reg_stat,
                 id_er:item.id_er,

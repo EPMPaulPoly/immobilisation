@@ -13,6 +13,14 @@ import { creationRouteurEnsRegTerr } from './ensRegTerr';
 import { creationRouteurUtilsationDuSol } from './utilisationDuSol';
 import { creationRouteurAnalyseVariabilite } from './analyseVariabilite';
 import { creationRouteurValidation } from './validation';
+import { CreationRouteurUnites } from './unites';
+import { creationRouteurDonnees } from './geojsonGest';
+import { creationRouteurRoleFoncier } from './roleFoncier';
+import { creationRouteurAssocCadRole } from './assocCadRole';
+import { creationRouteurRecensement } from './recensement';
+import { creationRouteurEnqueteOD } from './enqueteOD';
+import { creationRouteurDonneesCSV } from './fichiersCSV';
+import { CreationRouteurSommaireDonnee } from './sommaireVersement';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -30,5 +38,13 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/cubf',creationRouteurUtilsationDuSol(pool))
     router.use('/ana-var',creationRouteurAnalyseVariabilite(pool))
     router.use('/valid',creationRouteurValidation(pool))
+    router.use('/unites',CreationRouteurUnites(pool))
+    router.use('/geojson',creationRouteurDonnees(pool))
+    router.use('/role-foncier',creationRouteurRoleFoncier(pool))
+    router.use('/assoc-cad-role',creationRouteurAssocCadRole(pool))
+    router.use('/recensement',creationRouteurRecensement(pool))
+    router.use('/enquete-od',creationRouteurEnqueteOD(pool))
+    router.use('/fichier-csv',creationRouteurDonneesCSV(pool))
+    router.use('/sommaire-donnees',CreationRouteurSommaireDonnee(pool))
     return router;
 }

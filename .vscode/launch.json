@@ -11,11 +11,37 @@
             "args": ["${input:myArgs}"]
         },
         {
+            "name": "Python: Current File (Conda Env)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "/"
+        },
+        {
             "name": "Debug Frontend",
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/client",
+            "sourceMapPathOverrides": {
+                "/app/*": "${workspaceFolder}/client/*"
+            }
+        },
+        {
+            "name": "Debug Frontend (Ubuntu)",
+            "type": "pwa-chrome",                // <-- moderne, fonctionne mieux
+            "request": "launch",
+            "runtimeExecutable": "/snap/bin/chromium",   // chemin absolu
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/client",
+            "runtimeArgs": [
+                "--user-data-dir=${workspaceFolder}/.vscode/chrome",   // profil séparé
+                "--remote-debugging-port=9222"                          // port pour debugger
+            ],
+            "breakOnLoad": true,
+            "sourceMaps": true,
+            "smartStep": true,
             "sourceMapPathOverrides": {
                 "/app/*": "${workspaceFolder}/client/*"
             }
@@ -37,6 +63,19 @@
             ],
             "outFiles": ["${workspaceFolder}/serveur/dist/**/*.js"],
             "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug Backend (nodemon + ts-node)",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}/serveur",
+            "remoteRoot": "/app/serveur",
+            "skipFiles": ["<node_internals>/**"],
+            "restart": true,
+            "timeout":3000,
+            "trace": true
         },
         {
             "name": "Attach to 3000",
@@ -77,6 +116,10 @@
         {
             "name": "Full Stack: Frontend + Backend",
             "configurations": ["Debug Frontend", "Debug Backend"]
+        },
+        {   
+            "name": "Full Stack Ubuntu",
+            "configurations": ["Debug Frontend (Ubuntu)","Debug Backend"]
         },
         {
             "name": "Full Stack: Frontend + Backend + Python",

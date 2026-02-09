@@ -1,4 +1,35 @@
-import Geometry from 'geojson';
+import Geometry, { FeatureCollection } from 'geojson';
+
+export type EquivalenceVersementCarto ={
+    colonne_db:string,
+    description:string,
+    colonne_fichier:string,
+    obligatoire:boolean,
+    page?:string
+}
+
+export type EquivalenceCSVCoordPoint={
+    colonne_db:string,
+    description:string,
+    page?:string,
+    obligatoire:boolean,
+    desc_geometrie:ColonneGeometriePoint|ColonneGeometrieLigne
+}
+
+export type ColonneGeometriePoint={
+    type:'Point'
+    descriptionXLon:string,
+    colonneXLon:string,
+    descriptionYLat:string,
+    colonneYLat:string
+}
+
+export type ColonneGeometrieLigne={
+    type:'Ligne'
+    pointDeb:ColonneGeometriePoint,
+    pointFin:ColonneGeometriePoint
+}
+
 
 export interface entete_reglement_stationnement{
     id_reg_stat: number,
@@ -46,6 +77,11 @@ export interface unites_reglement_stationnement{
     colonne_role_foncier?:string,
     facteur_correction?:number,
     abscisse_correction?:number
+}
+
+export interface colonnes_possibles_conversion{
+    nom_colonne:string,
+    description_colonne:string
 }
 
 export interface reglement_complet{
@@ -116,12 +152,8 @@ export interface periode{
     date_fin_periode: number,
 }
 
-export interface territoire{
-    id_periode_geo: number,
-    id_periode: number,
-    ville: string|null,
-    secteur: string|null,
-    geojson_geometry: Geometry
+export interface territoire extends territoireGeoJsonProperties{
+    geometry: Geometry
 }
 
 export interface territoireGeoJsonProperties {
@@ -207,10 +239,11 @@ export interface lotCadastralAvecBoolInvGeoJsonProperties extends lotCadastralGe
 
 export interface lotCadastralBoolInvDB extends lotCadastralAvecBoolInvGeoJsonProperties{
     geojson_geometry:string;
+    geometry?: Geometry
 }
 
 export interface roleFoncierGeoJsonProps{
-    id_provinc:number,
+    id_provinc:string,
     rl0105a:number,
     rl0306a:number,
     rl0307a:number,
@@ -226,6 +259,7 @@ export interface roleFoncierGeoJsonProps{
 
 export interface roleFoncierDB extends roleFoncierGeoJsonProps{
     geojson_geometry:string;
+    geometry?:Geometry
 }
 
 export interface comboERRoleFoncier{
@@ -234,6 +268,15 @@ export interface comboERRoleFoncier{
 }
 
 
+export interface assocRoleCadastre{
+    id_provinc:string,
+    g_no_lot:string,
+    id_assoc_cad_role?:number
+}
+
+export interface insertCount{
+    insert_rows:number
+}
 
 export interface inventaire_stationnement{
     g_no_lot:string,
@@ -253,7 +296,14 @@ export interface inventaire_stationnement{
 export interface quartiers_analyse{
     id_quartier:number,
     nom_quartier:string,
+    acro?:string,
+    superf_quartier?:number,
 }
+
+export interface quartiers_analyse_db extends quartiers_analyse{
+    geometry:Geometry,
+}
+
 
 export interface informations_reglementaire_manuelle{
     cubf:number,
@@ -316,6 +366,7 @@ export interface resultatAnalyseVariabilite{
     cubf: number,
     desc_cubf: string
     n_lots: number
+    facteur_echelle:number
 }
 
 export interface resultatHistoVariabilite{
@@ -383,4 +434,82 @@ export interface EntreeValidation{
 export type methodeCalcul = {
     methode_estime:number,
     description:string
+}
+
+export type recensementGeoJsonProperties ={
+    ADIDU:number,
+    pop_2021?:number,
+    pop_2016?:number,
+    habitats_2016?:number,
+    habitats_2021?:number
+}
+
+export type recensementDB =recensementGeoJsonProperties & {geometry: Geometry}
+
+export type menGeoJSONProperties ={
+    nolog:string,
+    tlog:boolean,
+    nbper:number,
+    nbveh:number,
+    facmen:number
+}
+
+export type menPropertiesDB =menGeoJSONProperties&{geometry:Geometry}
+
+export type persGeoJSONProperties={
+    clepersonne:string,
+    tper:boolean,
+    sexe:number,
+    age:number,
+    grpage:number,
+    percond:number,
+    occper:number,
+    mobil:number,
+    facper:number,
+    facpermc:number,
+    nolog:string
+}
+
+export type persPropertiesDB = persGeoJSONProperties&{geometry:Geometry}
+
+export type depGeoJSONProperties={
+    cledeplacement:string,
+    nodep:number,
+    hredep:string,
+    heure:number,
+    motif:number,
+    motif_gr:number,
+    mode1:number,
+    mode2:number,
+    mode3:number,
+    mode4:number,
+    stat:number,
+    cout_stat:number,
+    term_stat:number,
+    clepersonne:string
+}
+
+export type depPropertiesOriDB=depGeoJSONProperties&{geometry}
+export type depPropertiesDesDB=depGeoJSONProperties&{geometry}
+export type depPropertiesLigDB=depGeoJSONProperties&{geometry}
+
+export type ODFeatureCollection=FeatureCollection<Geometry,menGeoJSONProperties>|
+FeatureCollection<Geometry,persGeoJSONProperties>|
+FeatureCollection<Geometry,depGeoJSONProperties>|null
+
+export type menFeatureCol = FeatureCollection<Geometry,menGeoJSONProperties>|null
+export type persFeatureCol = FeatureCollection<Geometry,persGeoJSONProperties>|null
+export type depFeatureCol = FeatureCollection<Geometry,depGeoJSONProperties>|null
+
+export type ODFeature = Feature<Geometry,menGeoJSONProperties>|
+Feature<Geometry,persGeoJSONProperties>|
+Feature<Geometry,depGeoJSONProperties>|null
+
+export type ODDBType = menPropertiesDB|persPropertiesDB|depPropertiesOriDB|depPropertiesDesDB|depPropertiesLigDB
+
+
+export type sommaireDonnee={
+    table:string,
+    description:string,
+    nombre_entrees:string
 }

@@ -1,13 +1,18 @@
-import { Router, Request, Response, RequestHandler } from 'express';
-import { Pool, PoolClient } from 'pg';
-import { DbInventaire, ParamsQuartier, ParamsLot, ParamsInventaire, CorpsRequeteInventaire, RequeteCalculeInventaireRegMan, RequeteInventaireGros, CorpsRequeteInventaireGros, RequeteInventaire } from '../../types/database';
+import { Router, RequestHandler } from 'express';
+import { Pool } from 'pg';
+import { ParamsQuartier } from 'secteursAnalyse.types';
+import { 
+    CorpsRequeteInventaire,
+    RequeteCalculeInventaireRegMan,
+    RequeteInventaireGros,
+    CorpsRequeteInventaireGros,
+    RequeteInventaire ,
+    ParamsInventaire
+} from 'inventaire.types';
 // Types pour les requêtes
-import { Polygon, MultiPolygon } from 'geojson';
 import path from 'path';
 import { spawn } from 'child_process';
-interface GeometryBody {
-    geometry: Polygon | MultiPolygon;
-}
+import { ParamsCadastre } from 'cadastre.types';
 
 export const creationRouteurInventaire = (pool: Pool): Router => {
     const router = Router();
@@ -111,7 +116,7 @@ export const creationRouteurInventaire = (pool: Pool): Router => {
         });
     };
 
-    const calculInventairePythonLot: RequestHandler<ParamsLot> = async (req, res): Promise<void> => {
+    const calculInventairePythonLot: RequestHandler<ParamsCadastre> = async (req, res): Promise<void> => {
         const { id } = req.params;
         const decipheredId = id.replace(/_/g, " ");
         const scriptPath = path.resolve(__dirname, "../../../../serveur_calcul_python/calcul_par_lot.py");

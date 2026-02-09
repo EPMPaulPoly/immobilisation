@@ -1,13 +1,21 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { DbAssociationReglementUtilSol, DbEnteteEnsembleReglement, DbUtilisationSol, DbEnteteReglement, ParamsTerritoire, ParamsRole, DbReglementComplet, ParamsEnsReg, DbCountAssoc, ParamsAssocEnsReg, unit_reg_reg_set_land_use_query, unit_reg_reg_set_land_use_output } from '../../types/database';
+import { 
+  unit_reg_reg_set_land_use_query, 
+  unit_reg_reg_set_land_use_output } from 'inventaire.types';
+import { DbAssociationReglementUtilSol,DbEnteteEnsembleReglement,DbCountAssoc } from 'ensembleReglements.types';
+import { DbUtilisationSol } from 'utilisationDuSol.types';
+import { DbEnteteReglement,DbReglementComplet } from 'reglements.types';
+import {ParamsTerritoire} from 'historique.types'
+import { ParamsRole } from 'role.types';
+import { ParamsEnsReg, ParamsAssocEnsReg } from 'ensembleReglements.types';
 import path from 'path';
 import { spawn } from 'child_process';
 
 export const creationRouteurEnsemblesReglements = (pool: Pool): Router => {
   const router = Router();
   // Get all lines
-  const obtiensEntetesEnsemblesReglements: RequestHandler = async (req, res): Promise<void> => {
+  const obtiensEntetesEnsemblesReglements: RequestHandler = async (req:any, res:any): Promise<void> => {
     console.log('Serveur - Obtention entetes ensembles reglements')
     let client;
     try {
@@ -112,7 +120,7 @@ export const creationRouteurEnsemblesReglements = (pool: Pool): Router => {
     }
   };
 
-  const obtiensEnsembleReglementCompletParId: RequestHandler = async (req, res): Promise<void> => {
+  const obtiensEnsembleReglementCompletParId: RequestHandler = async (req:any, res:any): Promise<void> => {
     console.log('Serveur - Obtention ensembles reglements complets')
     let client;
     try {
@@ -120,7 +128,7 @@ export const creationRouteurEnsemblesReglements = (pool: Pool): Router => {
       // Parse the comma-separated IDs into an array of numbers
       const idArray = id.split(',').map(Number);
       // Dynamically create placeholders for the query (e.g., $1, $2, $3, ...)
-      const placeholders = idArray.map((_, index: number) => `$${index + 1}`).join(',');
+      const placeholders = idArray.map((_:number, index: number) => `$${index + 1}`).join(',');
 
       client = await pool.connect();
       const query_1 = `
@@ -240,7 +248,7 @@ export const creationRouteurEnsemblesReglements = (pool: Pool): Router => {
     try {
       client = await pool.connect();
       const { ids } = req.params;
-      const listeIds = ids.split(',')
+      const listeIds = typeof ids === 'string' ? ids.split(',') : ids;
       const stringToTransmit = "'" + listeIds.join("','") + "'"
       const query = `
         WITH role AS (

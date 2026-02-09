@@ -1,0 +1,14 @@
+.page-versement-od{
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+
+.menu-versement-enquete-od{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px; /* your spacing */
+}

@@ -1,3 +1,5 @@
+import { ParamsDictionary } from "express-serve-static-core"
+
 export type XYVariableInfo = {
     expression: (ordre?: string) => string;
     aggregateExpression: (ordre?:string)=>string;
@@ -18,3 +20,20 @@ export type variableInfo = {
     description: string;
     requiresOrdre: boolean;
 };
+
+// graphqiques
+export interface donneesHisto{
+    valeurVille:number,
+    description:'',
+    donnees:barChartData[]
+}
+
+export interface barChartData{
+    id_quartier:number,
+    nom_quartier:string,
+    valeurs:number
+}
+
+export interface ParamsAnaQuartierTot extends ParamsDictionary{
+    ordreEstime:string
+}

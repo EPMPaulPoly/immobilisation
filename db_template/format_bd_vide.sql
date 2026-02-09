@@ -2,30 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.3
--- Dumped by pg_dump version 16.3
+\restrict 68sC9mgPE9aVH0KJ7dD4Zz9a0OGC6o8Oh4AEUaPzlIXFbuw7QNk07roscmzoX4J
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: parking_regs_test; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE parking_regs_test WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'English_Canada.1252';
-
-
-ALTER DATABASE parking_regs_test OWNER TO postgres;
-
-\connect parking_regs_test
+-- Dumped from database version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
+-- Dumped by pg_dump version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -141,6 +121,112 @@ CREATE TABLE public.association_er_reg_stat (
 
 
 ALTER TABLE public.association_er_reg_stat OWNER TO postgres;
+
+--
+-- Name: cubf; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cubf (
+    cubf bigint NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.cubf OWNER TO postgres;
+
+--
+-- Name: ensembles_reglements_stat; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ensembles_reglements_stat (
+    id_er integer NOT NULL,
+    date_debut_er integer,
+    date_fin_er integer,
+    description_er character varying(255)
+);
+
+
+ALTER TABLE public.ensembles_reglements_stat OWNER TO postgres;
+
+--
+-- Name: entete_reg_stationnement; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.entete_reg_stationnement (
+    id_reg_stat integer NOT NULL,
+    description character varying(255),
+    annee_debut_reg integer,
+    annee_fin_reg integer,
+    texte_loi character varying(255),
+    article_loi character varying(255),
+    paragraphe_loi character varying(255),
+    ville character varying(255)
+);
+
+
+ALTER TABLE public.entete_reg_stationnement OWNER TO postgres;
+
+--
+-- Name: association_er_reg_stat_etendu; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.association_er_reg_stat_etendu AS
+ WITH ranked AS (
+         SELECT aers.id_er,
+            aers.id_reg_stat,
+            c.cubf,
+            c.description AS cubf_description,
+            aers.cubf AS cubf_prefix,
+            row_number() OVER (PARTITION BY aers.id_er, c.cubf ORDER BY (length((aers.cubf)::text)) DESC) AS rank
+           FROM (public.association_er_reg_stat aers
+             JOIN public.cubf c ON (("left"((c.cubf)::text, length((aers.cubf)::text)) = (aers.cubf)::text)))
+        ), wide AS (
+         SELECT ranked.id_er,
+            ranked.cubf,
+            ranked.cubf_description,
+            max(ranked.cubf_prefix) FILTER (WHERE (ranked.rank = 1)) AS rank_1_prefix,
+            max(ranked.id_reg_stat) FILTER (WHERE (ranked.rank = 1)) AS rank_1_id_reg_stat,
+            max(ranked.cubf_prefix) FILTER (WHERE (ranked.rank = 2)) AS rank_2_prefix,
+            max(ranked.id_reg_stat) FILTER (WHERE (ranked.rank = 2)) AS rank_2_id_reg_stat,
+            max(ranked.cubf_prefix) FILTER (WHERE (ranked.rank = 3)) AS rank_3_prefix,
+            max(ranked.id_reg_stat) FILTER (WHERE (ranked.rank = 3)) AS rank_3_id_reg_stat,
+            max(ranked.cubf_prefix) FILTER (WHERE (ranked.rank = 4)) AS rank_4_prefix,
+            max(ranked.id_reg_stat) FILTER (WHERE (ranked.rank = 4)) AS rank_4_id_reg_stat,
+            max(ranked.cubf_prefix) FILTER (WHERE (ranked.rank = 1)) AS final_prefix,
+            max(ranked.id_reg_stat) FILTER (WHERE (ranked.rank = 1)) AS id_reg_stat
+           FROM ranked
+          GROUP BY ranked.id_er, ranked.cubf, ranked.cubf_description
+        )
+ SELECT wide.id_er,
+    prs.description_er,
+    prs.date_debut_er,
+    prs.date_fin_er,
+    wide.cubf,
+    wide.cubf_description,
+    wide.rank_1_prefix,
+    wide.rank_1_id_reg_stat,
+    wide.rank_2_prefix,
+    wide.rank_2_id_reg_stat,
+    wide.rank_3_prefix,
+    wide.rank_3_id_reg_stat,
+    wide.rank_4_prefix,
+    wide.rank_4_id_reg_stat,
+    wide.final_prefix,
+    wide.id_reg_stat,
+    ers.description,
+    ers.annee_debut_reg,
+    ers.annee_fin_reg,
+    ers.texte_loi,
+    ers.article_loi,
+    ers.paragraphe_loi,
+    ers.ville
+   FROM ((wide
+     LEFT JOIN public.entete_reg_stationnement ers ON ((ers.id_reg_stat = wide.id_reg_stat)))
+     LEFT JOIN public.ensembles_reglements_stat prs ON ((prs.id_er = wide.id_er)))
+  ORDER BY wide.id_er, wide.cubf;
+
+
+ALTER VIEW public.association_er_reg_stat_etendu OWNER TO postgres;
 
 --
 -- Name: association_er_reg_stat_id_assoc_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -364,18 +450,6 @@ CREATE TABLE public.conditions_strates_a_echant (
 ALTER TABLE public.conditions_strates_a_echant OWNER TO postgres;
 
 --
--- Name: cubf; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.cubf (
-    cubf bigint NOT NULL,
-    description text
-);
-
-
-ALTER TABLE public.cubf OWNER TO postgres;
-
---
 -- Name: population_par_quartier; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -524,20 +598,6 @@ CREATE TABLE public.donnees_foncieres_agregees (
 ALTER TABLE public.donnees_foncieres_agregees OWNER TO postgres;
 
 --
--- Name: ensembles_reglements_stat; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.ensembles_reglements_stat (
-    id_er integer NOT NULL,
-    date_debut_er integer,
-    date_fin_er integer,
-    description_er character varying(255)
-);
-
-
-ALTER TABLE public.ensembles_reglements_stat OWNER TO postgres;
-
---
 -- Name: ensembles_reglements_stat_id_er_stat_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -558,24 +618,6 @@ ALTER SEQUENCE public.ensembles_reglements_stat_id_er_stat_seq OWNER TO postgres
 
 ALTER SEQUENCE public.ensembles_reglements_stat_id_er_stat_seq OWNED BY public.ensembles_reglements_stat.id_er;
 
-
---
--- Name: entete_reg_stationnement; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.entete_reg_stationnement (
-    id_reg_stat integer NOT NULL,
-    description character varying(255),
-    annee_debut_reg integer,
-    annee_fin_reg integer,
-    texte_loi character varying(255),
-    article_loi character varying(255),
-    paragraphe_loi character varying(255),
-    ville character varying(255)
-);
-
-
-ALTER TABLE public.entete_reg_stationnement OWNER TO postgres;
 
 --
 -- Name: entete_reg_stationnement_id_reg_stat_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -806,6 +848,27 @@ CREATE TABLE public.multiplicateur_facteurs_colonnes (
 
 
 ALTER TABLE public.multiplicateur_facteurs_colonnes OWNER TO postgres;
+
+--
+-- Name: multiplicateur_facteurs_colonnes_id_unite_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.multiplicateur_facteurs_colonnes_id_unite_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.multiplicateur_facteurs_colonnes_id_unite_seq OWNER TO postgres;
+
+--
+-- Name: multiplicateur_facteurs_colonnes_id_unite_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.multiplicateur_facteurs_colonnes_id_unite_seq OWNED BY public.multiplicateur_facteurs_colonnes.id_unite;
+
 
 --
 -- Name: od_data; Type: TABLE; Schema: public; Owner: postgres
@@ -1330,6 +1393,55 @@ CREATE VIEW public.visu_ens_a_reg AS
 ALTER VIEW public.visu_ens_a_reg OWNER TO postgres;
 
 --
+-- Name: vue_parametres_reglements; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.vue_parametres_reglements AS
+ SELECT ers.id_reg_stat,
+    ers.description,
+    ers.annee_debut_reg,
+    ers.annee_fin_reg,
+    ers.texte_loi,
+    ers.article_loi,
+    ers.paragraphe_loi,
+    ers.ville,
+    array_agg(DISTINCT rse.unite) AS unites_utilisees,
+    count(DISTINCT rse.unite) AS n_unites,
+    array_agg(DISTINCT rse.oper) FILTER (WHERE (rse.oper IS NOT NULL)) AS oper_utilises,
+    count(DISTINCT rse.oper) AS n_oper,
+    count(DISTINCT rse.ss_ensemble) AS n_ss_ensemble,
+    count(rse.id_reg_stat_emp) AS n_lignes
+   FROM (public.entete_reg_stationnement ers
+     LEFT JOIN public.reg_stationnement_empile rse ON ((rse.id_reg_stat = ers.id_reg_stat)))
+  GROUP BY ers.id_reg_stat, ers.description, ers.annee_debut_reg, ers.annee_fin_reg, ers.texte_loi, ers.article_loi, ers.paragraphe_loi, ers.ville;
+
+
+ALTER VIEW public.vue_parametres_reglements OWNER TO postgres;
+
+--
+-- Name: vue_periode_terr_er; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.vue_periode_terr_er AS
+ SELECT cs.id_periode_geo,
+    cs.id_periode,
+    cs.ville_sec,
+    hg.nom_periode,
+    hg.date_debut_periode,
+    hg.date_fin_periode,
+    rst.id_er,
+    ers.description_er,
+    ers.date_debut_er,
+    ers.date_fin_er
+   FROM (((public.cartographie_secteurs cs
+     LEFT JOIN public.historique_geopol hg ON ((hg.id_periode = cs.id_periode)))
+     LEFT JOIN public.association_er_territoire rst ON ((rst.id_periode_geo = cs.id_periode_geo)))
+     LEFT JOIN public.ensembles_reglements_stat ers ON ((ers.id_er = rst.id_er)));
+
+
+ALTER VIEW public.vue_periode_terr_er OWNER TO postgres;
+
+--
 -- Name: association_er_reg_stat id_assoc_er_reg; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1376,6 +1488,13 @@ ALTER TABLE ONLY public.historique_geopol ALTER COLUMN id_periode SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.inventaire_stationnement ALTER COLUMN id_inv SET DEFAULT nextval('public.inventaire_stationnement_id_inv_seq'::regclass);
+
+
+--
+-- Name: multiplicateur_facteurs_colonnes id_unite; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.multiplicateur_facteurs_colonnes ALTER COLUMN id_unite SET DEFAULT nextval('public.multiplicateur_facteurs_colonnes_id_unite_seq'::regclass);
 
 
 --
@@ -1635,4 +1754,6 @@ CREATE OR REPLACE VIEW public.dens_stat_reg_quartier AS
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict 68sC9mgPE9aVH0KJ7dD4Zz9a0OGC6o8Oh4AEUaPzlIXFbuw7QNk07roscmzoX4J
 

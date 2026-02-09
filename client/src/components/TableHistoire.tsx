@@ -50,17 +50,20 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
         defPeriodes(newPeriodes);
     }
 
-    const gestBoutonEdit = (periode:number) => {
+    const gestBoutonEdit = async(periode:number) => {
         props.defPeriodeSelect(periode)
+        const territoire = await serviceTerritoires.chercheTerritoiresParPeriode(periode)
+        props.defTerritoires(territoire.data)
+        props.defEditionEnCours(true);
         defEdit(true);
         defAnciennesPeriodes(etat_periodes);
     }
 
     const gestBoutonAnnul = () => { 
         defPeriodes(etat_anciennes_periodes)
-        defEdit(false)
+        props.defEditionEnCours(false)
+        defEdit(false);
         defAnciennesPeriodes([])
-        props.defPeriodeSelect(-1)
     }
 
     const gestBoutonAjout = () => {
@@ -71,9 +74,11 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
             date_fin_periode: 0        
         }
         defPeriodes([...etat_periodes, newPeriode])
+        props.defEditionEnCours(true)
         defEdit(true)
         props.defPeriodeSelect(newPeriode.id_periode)
         defAnciennesPeriodes(etat_periodes)
+        props.defTerritoires({type:'FeatureCollection',features:[]})
     }
 
     const gestSelectRadio = async(id_periode: number) => {
@@ -114,7 +119,8 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
                 });
                 props.defPeriodeSelect(updatedItem.id_periode)
                 defAnciennesPeriodes([]); // Clear previous periods
-                defEdit(false); // Disable edit mode
+                props.defEditionEnCours(false); // Disable edit mode
+                defEdit(false);
             } else {
                 console.warn('Entry not found for the selected period.');
             }
@@ -134,7 +140,15 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
 
     const renduBoutonsTableHistoire=() =>{
             return(<div className="bouton-modif-historique">
-                <AddIcon onClick={gestBoutonAjout}/>
+                {
+                    props.nouvelleCartoDispo || 
+                    edit ||
+                    (props.editionEnCours && !edit)?<></>:
+                    <AddIcon 
+                        onClick={gestBoutonAjout}
+                    />
+                }
+                
             </div>)
     };
 
@@ -185,7 +199,7 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
                                     name="periode_a_editer"
                                     value={periode.id_periode}
                                     onClick={()=>gestSelectRadio(periode.id_periode)}
-                                    disabled = {edit}
+                                    disabled = {edit || props.editionEnCours || props.nouvelleCartoDispo}
                                     checked = {props.periodeSelect === periode.id_periode}
                                 />    
                             </td>
@@ -228,8 +242,16 @@ const TableHistoire: React.FC<TableHistoireProps> = (props:TableHistoireProps) =
                                                 id='end-present'
                                                 checked={periode.date_fin_periode===null}
                                         />:(periode.date_fin_periode===null? 'Oui':'Non')}</td>
-                            <td>{(props.periodeSelect === periode.id_periode) && (edit)?<SaveIcon onClick={gestBoutonSauv}/>:<Edit onClick={()=>gestBoutonEdit(periode.id_periode)}/>}</td>
-                            <td>{(props.periodeSelect === periode.id_periode) && (edit)?<CancelIcon onClick={gestBoutonAnnul}/>:<DeleteIcon onClick={()=> gestBoutonSuppr(periode.id_periode)}/>}</td>
+                            <td>
+                                {props.nouvelleCartoDispo || 
+                                ((props.periodeSelect !== periode.id_periode) && (edit)) || 
+                                (props.editionEnCours && !edit)?
+                                    <>
+                                    </>
+                                :(props.periodeSelect === periode.id_periode) && (edit)?<SaveIcon onClick={gestBoutonSauv}/>:<Edit onClick={()=>gestBoutonEdit(periode.id_periode)}/>}</td>
+                            <td>{props.nouvelleCartoDispo || 
+                                ((props.periodeSelect !== periode.id_periode) && (edit)) || 
+                                (props.editionEnCours && !edit) ?<></>:(props.periodeSelect === periode.id_periode) && (edit)?<CancelIcon onClick={gestBoutonAnnul}/>:<DeleteIcon onClick={()=> gestBoutonSuppr(periode.id_periode)}/>}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -3,16 +3,30 @@ import { Link } from "react-router";
 import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobilisation';
 import { donneesCarteDeFond } from '../types/ContextTypes';
 import SubMenuComponent from './SubMenuComponent';
+import { latLng, LatLng } from 'leaflet';
 const MenuBar: React.FC<{}> = () => {
 
     const contexte = utiliserContexte();
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
     const changerCarto = contexte?.changerCarto ?? (() => {});
     const optionsCartos = contexte?.optionsCartos ?? [];
-
     return(
         <div className="menu-bar">
             <h1>Immobilisation</h1>
+            <SubMenuComponent
+                label={"Entrée Données Départ"}
+                options={[
+                    {label:"Secteurs d'analyse",path:"/sec-analyse-verse"},
+                    {label:"Conversion unité", path:"/unites"},
+                    {label:"Rôle Foncier",path:"/role-foncier"},
+                    {label:"Cadastre", path:"/cadastre"},
+                    {label:"Associations Cadastre-rôle",path:"/assoc-cadastre-role"},
+                    {label:"Données Recensement", path:"/recensement"},
+                    {label:'Enquête OD', path:'/enquete-od'},
+                    {label:'CUBF', path:'/cubf'},
+                    {label:'Sommaire Données', path:'/sommaire-versement'}
+                ]}
+            />
             <SubMenuComponent
                 label={"Entrée Règlementation"}
                 options={[
@@ -37,20 +51,28 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Analyse agrégée quartiers",path:"/ana-quartiers"}
                 ]}
             />
-            
             <div className="control-dds">
+            {/*
+            
                 <div className="ville-control">
                     <label 
                         htmlFor="ville-control-dd" 
                         className="label-ville-control">
                             Centre
                     </label>
-                    <select className="ville-control-dd" id="select-quartier" name="select-quartier">
-                        <option value="">Selection RMR</option>
-                        <option value="1">Québec</option>
-                        <option value="2">Montréal</option>
+                    <select 
+                        className="ville-control-dd" 
+                        id="select-quartier" 
+                        name="select-quartier"
+                        value={optionCentreChoisie}
+                        onChange={(e)=>changerCentre(Number(e.target.value))}
+                    >
+                        {
+                            optionsCentres.map((entree)=><option value={entree.idLieu}>{entree.nomLieu}</option>)
+            
+                        }
                     </select>
-                </div>
+                </div>*/}
                 <div className="map-bground-control">
                     <label 
                         htmlFor="fond-de-carte" 

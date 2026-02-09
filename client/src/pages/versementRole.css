@@ -1,0 +1,12 @@
+.page-versement-visu-role {
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+.map-container {
+  height: 100vh; /* ensure Leaflet has space */
+  width: 100%;
+  flex:1
+}

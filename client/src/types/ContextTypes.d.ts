@@ -1,3 +1,5 @@
+import { LatLng } from "leaflet";
+
 export interface donneesCarteDeFond{
     id:number,
     description:string,
@@ -9,9 +11,16 @@ export interface donneesCarteDeFond{
 export type ContexteImmobilisationType = {
     optionCartoChoisie: number;
     changerCarto: (idAUtiliser: number) => void;
-    optionsCartos: donneesCarteDeFond[]
+    optionsCartos: donneesCarteDeFond[],
 };
 
 export type FournisseurContexteProps = {
     children: ReactNode;
 };
+
+export interface CentreDeCarte{
+    idLieu:number,
+    nomLieu:string,
+    zoomDebut:number,
+    centreDebut:LatLng
+}

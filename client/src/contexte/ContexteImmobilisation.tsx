@@ -1,5 +1,6 @@
 import { createContext, useState, ReactNode, Dispatch, SetStateAction, useContext } from 'react';
-import { ContexteImmobilisationType, donneesCarteDeFond, FournisseurContexteProps } from '../types/ContextTypes';
+import { CentreDeCarte, ContexteImmobilisationType, donneesCarteDeFond, FournisseurContexteProps } from '../types/ContextTypes';
+import { latLng } from 'leaflet';
 
 
 const ContexteImmobilisation = createContext<ContexteImmobilisationType | undefined>(undefined);
@@ -37,8 +38,15 @@ const FournisseurContexte = ({ children }: FournisseurContexteProps) => {
         defOptionCartoChoisie(idAUtiliser)
     }
 
+
     return (
-        <ContexteImmobilisation.Provider value={{ optionCartoChoisie, changerCarto, optionsCartos }}>
+        <ContexteImmobilisation.Provider 
+            value={{ 
+                optionCartoChoisie, 
+                changerCarto, 
+                optionsCartos,
+             }}
+        >
             {children}
         </ContexteImmobilisation.Provider>
     );

@@ -2,8 +2,8 @@ import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
 // Types pour les requêtes
 import { Polygon, MultiPolygon } from 'geojson';
-import { ParamsTerritoire } from '../../types/database';
-import { variableInfo, XYVariableInfo } from '../../types/maps'
+import { ParamsTerritoire } from 'historique.types';
+import { variableInfo, XYVariableInfo } from '../../types/graphiquesAnalyse.types'
 interface GeometryBody {
     geometry: Polygon | MultiPolygon;
 }

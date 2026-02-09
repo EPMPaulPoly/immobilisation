@@ -11,6 +11,16 @@ import AnalyseVariabilite from './pages/AnalyseVariabilite';
 import { FournisseurContexte } from './contexte/ContexteImmobilisation';
 import ValidationStatistique from './pages/validationStatistique';
 import SommaireValidation from './pages/SommaireValidation';
+import VersementSecAnalyse from './pages/VersementSecAnalyse';
+import ModificationUnites from './pages/ModificationUnites';
+import VersementCadastre from './pages/VersementCadastre';
+import VersementRole from './pages/VersementRole';
+import CreationAssocRoleCadastre from './pages/CreationAssocRoleCadastre';
+import VersementRecensement from './pages/VersementRecensement';
+import VersementEnqueteOD from './pages/VersementEnqueteOD';
+import SommaireVersement from './pages/SommaireVersement';
+import VersementCUBF from './pages/VersementCUBF';
+
 const app: React.FC = () => {
   return (
     <FournisseurContexte>
@@ -27,6 +37,15 @@ const app: React.FC = () => {
           <Route path="/ana-quartiers" element={<AnalyseQuartiers/>}/>
           <Route path="/valid-stat" element ={<ValidationStatistique/>}/>
           <Route path="/sommaire-valid" element={<SommaireValidation/>}/>
+          <Route path="/sec-analyse-verse" element={<VersementSecAnalyse/>}/>
+          <Route path="/unites" element={<ModificationUnites/>}/>
+          <Route path="/cadastre" element={<VersementCadastre/>}/>
+          <Route path='/role-foncier' element={<VersementRole/>}/>
+          <Route path='/assoc-cadastre-role' element={<CreationAssocRoleCadastre/>}/>
+          <Route path='/recensement' element={<VersementRecensement/>}/>
+          <Route path='/enquete-od' element={<VersementEnqueteOD/>}/>
+          <Route path='/sommaire-versement' element={<SommaireVersement/>}/>
+          <Route path='/cubf' element={<VersementCUBF/>}/>
         </Routes>
       </Router>
     </FournisseurContexte>

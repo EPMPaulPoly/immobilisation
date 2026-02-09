@@ -67,7 +67,7 @@ const CarteInventaire: React.FC<CarteInventaireProps> = (props) => {
                     console.log('échelle')
                     const geoJsonLayer = L.geoJSON(lotsAMontrer, {
                         style: (feature) => {
-                            const isLotInAnalyse = feature && props.lotSelect.features.map((row)=>row.properties.g_no_lot).includes(feature.properties.g_no_lot)  ;
+                            const isLotInAnalyse = feature && props.lotSelect?.features.map((row)=>row.properties.g_no_lot).includes(feature.properties.g_no_lot)  ;
                             const hasInventaire = props.inventaire.find((item) => item.g_no_lot === feature?.properties.g_no_lot) ?? false;
                             const parkingInventory = hasInventaire ? Math.max(
                                 props.inventaire.find((item) => item.g_no_lot === feature?.properties?.g_no_lot && item.methode_estime === 2)?.n_places_min ?? 0,

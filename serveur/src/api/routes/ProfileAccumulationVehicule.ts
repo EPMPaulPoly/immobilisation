@@ -1,6 +1,7 @@
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Pool } from 'pg';
-import { ParamsQuartier,ParamsTerritoire } from '../../types/database';
+import { ParamsTerritoire } from 'historique.types';
+import { ParamsQuartier } from 'secteursAnalyse.types';
 import path from 'path';
 import { spawn } from 'child_process';
 // Types pour les requêtes

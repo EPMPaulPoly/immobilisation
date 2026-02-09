@@ -1,9 +1,20 @@
 import axios,{ AxiosResponse } from 'axios';
-import { lotCadastralGeoJsonProperties, quartiers_analyse, roleFoncierGeoJsonProps,lotCadastralAvecBoolInvGeoJsonProperties } from '../types/DataTypes';
-import { ReponseCadastre, ReponseRole,ReponseDBCadastre,ReponseDBRole, ReponseDBCadastreBoolInv,ReponseCadastreBoolInv, RequeteApiStrate, RequeteApiCadastre } from '../types/serviceTypes';
+import { 
+    roleFoncierGeoJsonProps,
+    lotCadastralAvecBoolInvGeoJsonProperties 
+} from '../types/DataTypes';
+import { 
+    ReponseCadastre, 
+    ReponseRole,
+    ReponseDBRole, 
+    ReponseDBCadastreBoolInv,
+    ReponseCadastreBoolInv, 
+    RequeteApiCadastre } from '../types/serviceTypes';
 import api from './api';
-import {FeatureCollection, Geometry } from 'geojson';
-
+import {
+    FeatureCollection, 
+    Geometry 
+} from 'geojson';
 
 class ServiceCadastre {
     async chercheTousCadastres():Promise<ReponseCadastre> {
@@ -73,7 +84,7 @@ class ServiceCadastre {
                 type: "FeatureCollection",
                 features: data_res.map((item) => ({
                     type: "Feature",
-                    geometry: JSON.parse(item.geojson_geometry),
+                    geometry: item.geometry??JSON.parse(item.geojson_geometry),
                     properties: {
                         g_no_lot:item.g_no_lot,
                         g_va_suprf:item.g_va_suprf,
