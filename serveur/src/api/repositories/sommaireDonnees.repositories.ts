@@ -86,6 +86,12 @@ const mapItemDescriptions = (items: sommaireDonnees[]):sommaireDonneesExplique[]
                         description: `Conversion d'unités spécifiées par l'utilisateur`
                     }
                     break;
+                case "cubf":
+                    item_out={
+                        ...item,
+                        description: `Code d'utilisation du bien fonds`
+                    }
+                    break;
                 default:
                     item_out={...item,description:''}
             }
