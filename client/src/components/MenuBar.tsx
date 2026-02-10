@@ -24,6 +24,7 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Données Recensement", path:"/recensement"},
                     {label:'Enquête OD', path:'/enquete-od'},
                     {label:'CUBF', path:'/cubf'},
+                    {label:'Opérateurs règlements',path:'/operateurs-reg'},
                     {label:'Sommaire Données', path:'/sommaire-versement'}
                 ]}
             />

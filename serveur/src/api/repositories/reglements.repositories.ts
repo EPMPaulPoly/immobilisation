@@ -191,13 +191,25 @@ export const construitRequetesGetReglements = (params: GetReglementsParams): Get
     };
 };
 
-
+export const construitRequeteCreeOperationsDefaut = ():string=>{
+    const out = `
+        INSERT INTO liste_operations (id_operation,desc_operation) VALUES 
+        (1,'+ (absolue)'),
+        (3,'ou (plus contraignant)'),
+        (4 ,'changement critère au-delà seuil (>=)'),
+        (6, 'ou (simple)') RETURNING *;
+    `
+    return out
+}
 export const rouleRequetesSQLGet = async (pool:Pool, query_data:GetReglementsQueries,complete: boolean) => {
     let client;
     try{
         client = await pool.connect()
         if (complete === true){
-            const [head,def,units] =  await Promise.all([client.query<ruleHeader[]>(query_data.sql_entete,query_data.entete_params), client.query<ruleDef>(query_data.sql_def,query_data.def_params),client.query<unitDef>(query_data.sql_unite)])
+            const [head,def,units] =  await Promise.all([
+                client.query<ruleHeader[]>(query_data.sql_entete,query_data.entete_params), 
+                client.query<ruleDef>(query_data.sql_def,query_data.def_params),
+                client.query<unitDef>(query_data.sql_unite)])
             return [head.rows,def.rows,units.rows]
         } else{
             const head = await client.query(query_data.sql_entete,query_data.entete_params)
@@ -205,5 +217,25 @@ export const rouleRequetesSQLGet = async (pool:Pool, query_data:GetReglementsQue
         }
     } finally{
         client?.release()
+    }
+}
+
+export const rouleRequeteCreationAuto = async(pool:Pool,query:string):Promise<number>=>{
+    let client;
+    try{
+        client = await pool.connect() 
+        const  nunty = await client.query('BEGIN')
+        const nunty2 = await client.query ('DELETE FROM liste_operations')
+        const head = await client.query(query)
+        const nunty3 = await client.query('COMMIT')
+        return head.rowCount??0
+    }catch(err:any) {
+        console.log(err)
+        return 0
+    } finally{
+        if(client){
+            const nunty3 = await client.query('ROLLBACK')
+            client?.release()
+        }
     }
 }

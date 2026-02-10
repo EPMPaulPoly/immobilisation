@@ -4,7 +4,7 @@ import { DbDefReglement, DbEnteteReglement, DbReglementComplet } from 'reglement
 import path from 'path';
 import { spawn } from 'child_process';
 import { GetReglementsParams } from '../repositories/reglements.repositories';
-import { serviceGetReg } from '../services/reglements.services';
+import { serviceCreeOperations, serviceGetReg } from '../services/reglements.services';
 
 export const creationRouteurReglements = (pool: Pool): Router => {
     const router = Router();
@@ -237,6 +237,21 @@ export const creationRouteurReglements = (pool: Pool): Router => {
         }
     };
 
+    const creeOperationsParDefaut: RequestHandler = async(_req,res):Promise<void>=>{
+        try {
+            console.log('Serveur règlements - créations opérations par défaut')
+            const result = await serviceCreeOperations(pool)
+            if ( result.success){
+                res.status(200).json({success:true,data:result.rowCount})
+            }else{
+                res.status(500).json({success:false,data:result.rowCount})
+            }
+        }catch(err:any){
+            res.status(500).json({ success: false, error: 'Database error' });
+        }
+        
+    }
+
 
 
     const nouvelleLigneDefinition: RequestHandler = async (req, res, next): Promise<void> => {
@@ -379,7 +394,7 @@ export const creationRouteurReglements = (pool: Pool): Router => {
     //router.get('/entete', obtiensTousEntetesReglements);
     //router.get('/complet/:idToSplit', obtiensReglementCompletParId);
     router.get('/operations', obtiensToutesOperations)
-    
+    router.post('/operation-defaults',creeOperationsParDefaut)
     router.post('/entete', nouvelEnteteReglement)
     router.put('/entete/:id', modifieEnteteReglement)
     router.delete('/:id', supprimeReglement)

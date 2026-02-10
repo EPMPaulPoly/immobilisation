@@ -20,6 +20,7 @@ import VersementRecensement from './pages/VersementRecensement';
 import VersementEnqueteOD from './pages/VersementEnqueteOD';
 import SommaireVersement from './pages/SommaireVersement';
 import VersementCUBF from './pages/VersementCUBF';
+import CreationOperateurs from './pages/CreationOperateurs';
 
 const app: React.FC = () => {
   return (
@@ -46,6 +47,7 @@ const app: React.FC = () => {
           <Route path='/enquete-od' element={<VersementEnqueteOD/>}/>
           <Route path='/sommaire-versement' element={<SommaireVersement/>}/>
           <Route path='/cubf' element={<VersementCUBF/>}/>
+          <Route path='/operateurs-reg' element={<CreationOperateurs/>}/>
         </Routes>
       </Router>
     </FournisseurContexte>

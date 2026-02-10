@@ -40,4 +40,59 @@ Il faut maitenant créer la définition mathématique du règlement" on clique s
 
 On clique sur la disquette permettant de sauvegarder, la page devrait maintenant ressemble à ce qui suit:
 
-![Premier Règlement Complet]
+![Premier Règlement Complet](images/creeReglements/PremierReglementComplet.png)
+[Retour au début](#création-des-règlements)
+### optionnel: vérification pg_admin
+
+Vous pouvez vérifier la formulation complète des règlements en allant regarder la vue visu_reg_tete_a_reg_empile_2. Cela devrait maintenant ressembler à ceci:
+
+![Validation PG Règl. simple](images/creeReglements/validPGAdminSimple.png)
+
+
+[Retour au début](#création-des-règlements)
+
+
+## Règlement par seuil simple
+### Exemple 1: Résidentiel pour l'ère moderne pour les autres secteurs
+
+On augmente maitenant légèrement 
+| Utilisation du sol    | Description du règlement | Formulation du règlement | Entrée en vigueur | Abrogation |
+|-----------------------|--------------------------|------------------------- |-------------------|------------|
+| 1 - Résidentielle     | Règlement résidentiel    | 1-3 log: 1 place par logement / 4+ logements:1.5pl. par logement  |1931 |2001|
+
+La première partie de l'entrée de donnée est la même où l'on crée l'entête pour le règlements
+![Création entête seuil simple](images/creeReglements/CréationReglementSeuilSimple.png)
+
+On entre ensuite le seuil le plus bas, il est important de ne pas remplir l'opératuer sur la première ligne. Les champs rentrés sont montrés ci-dessous:
+![Première ligne du règlement par seuil](images/creeReglements/seuilSimple1PremLigne.png)
+
+On sauvegarde cette première ligne avant de rappuye sur le bouton d'ajout. Sur toutes les lignes après la première ligne il est nécessaire d'ajouter un opérateur. s'il s'agit de la première ligne d'un nouveau sous-ensemble, il faut utiliser un opérateur ou, autrement on doit rentrer un opérateur d'addition ou de seuil. Un seul opérateur peut être utilisé par sous-ensement. La figure suivante montre la deuxième ligne complétée:
+![alt text](images/creeReglements/DeuxiemeLigneSeuilSimple1.png)
+
+On appuie maintenant sur la disquette pour sauvegarder la deuxième ligne.
+
+
+La figure montre le règlement complété:
+![alt text](images/creeReglements/ReglementSeuilSimple1Complet.png)
+
+#### optionel validation.
+
+Comme dans le cas précédent on peut aller valider les choses dans pgadmin
+![alt text](images/creeReglements/validationSeuilSimpl1.png)
+
+On peut aussi aller regarder la table de définition en rentrant la requête suivante en remplaçant l'identifiant de règlement au besoin
+``` 
+SELECT * FROM public.reg_stationnement_empile
+where id_reg_stat = 2
+ORDER BY id_reg_stat_emp ASC 
+```
+Obtenir le résultat suivant:
+|id_reg_stat_emp|id_reg_stat|ss_ensemble|seuil|oper |cases_fix_min|cases_fix_max|pente_min|pente_max|unite|
+|---------------|-----------|-----------|-----|-----|-------------|-------------|---------|---------|-----|
+|2              |2          |1          | 0   | null|0            |null         | 1       |  null   | 1   |
+|3              | 2         | 1         |4    | 4   | 0           |null         |  1.5    | null    | 1   |
+
+
+[Retour au début](#création-des-règlements)
+
+### Exemple 2: Commercial pour l'ère moderne pour

@@ -1,6 +1,6 @@
 import axios,{ AxiosResponse } from 'axios';
 import { definition_reglement_stationnement, entete_reglement_stationnement, parametres_requete_filtree_stationnement,  } from '../types/DataTypes';
-import { ReponseEntetesReglements, ReponseReglementComplet,ReponseDBInfoInventaireReglementManuel, ReponseEntetesEnsemblesReglement, ReponseOperationsReglements,ReponseUnitesReglements, ReponseLigneDefReglement, ReponseDataGraphique} from '../types/serviceTypes';
+import { ReponseEntetesReglements, ReponseReglementComplet,ReponseDBInfoInventaireReglementManuel, ReponseEntetesEnsemblesReglement, ReponseOperationsReglements,ReponseUnitesReglements, ReponseLigneDefReglement, ReponseDataGraphique, ApiResponse} from '../types/serviceTypes';
 import api from './api';
 import { promises } from 'dns';
 
@@ -185,7 +185,22 @@ class ServiceReglements {
         }
     }
 
-
+    async creeOperationsParDefaut():Promise<ApiResponse<number>>{
+        try {
+            const response: AxiosResponse<ApiResponse<number>> = await api.post(`/reglements/operation-defaults`);
+            const data_res = response.data.data;
+            return {success:response.data.success,data:data_res};
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.response?.data);
+                console.error('Axios Error Status:', error.response?.status);
+                console.error('Axios Error Data:', error.response?.data);
+            } else {
+                console.error('Unexpected Error:', error);
+            }
+            throw error; // Re-throw if necessary
+        }
+    }
 
     async nouvelleLigneDefinition(definition:Partial<definition_reglement_stationnement>):Promise<ReponseLigneDefReglement>{
         try{

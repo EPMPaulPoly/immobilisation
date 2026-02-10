@@ -37,7 +37,9 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Données CUBF](docs/md/027-VersementCUBF.md)
 
-[Sommaire Versement](docs/md/028-SommaireVersements.md)
+[Opérateurs Règlements](docs/md/028-CreationOperateursReglements.md)
+
+[Sommaire Versement](docs/md/029-SommaireVersements.md)
 ### Création de la réglementation
 
 [Intro à la réglementation - Cas démo](docs/md/030-IntroductionRegelementation.md)
