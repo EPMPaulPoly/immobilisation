@@ -160,4 +160,4 @@ et vérifier que les données ont bel et bien été versées:
 ```
 sudo -u postgres psql -d parking_regs -c "\dt"
 ```
-Alternativement, une fois le serveur lancé, on peut aller regarder le nombre d'entrée pour les tables de données tel que discuté à la section sur le [sommaire de versement](028-SommaireVersements.md)
+Alternativement, une fois le serveur lancé, on peut aller regarder le nombre d'entrées pour les tables de données tel que discuté à la section sur le [sommaire de versement](028-SommaireVersements.md)
