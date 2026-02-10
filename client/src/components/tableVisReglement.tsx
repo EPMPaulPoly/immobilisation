@@ -350,7 +350,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
                         {props.editionCorpsEnCours?<th>Util.</th>:<></>}
                         <th>Pente Maximum</th>
                         {props.editionCorpsEnCours?<th>Util.</th>:<></>}
-                        <th>Unite</th>
+                        <th>Pl. par</th>
                         <th></th>
                         <th></th>
                     </tr>
