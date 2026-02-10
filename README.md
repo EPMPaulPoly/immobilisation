@@ -40,17 +40,19 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 [Sommaire Versement](docs/md/028-SommaireVersements.md)
 ### Création de la réglementation
 
-[Intro à la réglementation - Cas démo(a faire)](docs/md/030-IntroductionRegelementation.md)
+[Intro à la réglementation - Cas démo](docs/md/030-IntroductionRegelementation.md)
 
-[Données historique(a faire)](docs/md/031-VersementModifHistorique.md)
+[Révision des unités](docs/md/031-RevisionDesUnites.md)
 
-[Création des règlements(a faire)](docs/md/032-RegCreation.md)
+[Données historique(a faire)](docs/md/032-VersementModifHistorique.md)
 
-[Création des ensembles de règlements(a faire)](docs/md/033-EnsRegCreation.md)
+[Création des règlements(a faire)](docs/md/033-RegCreation.md)
 
-[Association Ensemble de règlements aux territoires(a faire)](docs/md/034-EnsRegTerrCreation.md)
+[Création des ensembles de règlements(a faire)](docs/md/034-EnsRegCreation.md)
 
-[Visualisation règlements(a faire)](docs/md/035-VisualisationReg.md)
+[Association Ensemble de règlements aux territoires(a faire)](docs/md/035-EnsRegTerrCreation.md)
+
+[Visualisation règlements(a faire)](docs/md/036-VisualisationReg.md)
 
 ### Imputation de l'offre de stationnement
 [Prédiction automatique par les minimums(a faire)](docs/md/040-Prediction.md)

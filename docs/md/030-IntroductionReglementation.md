@@ -135,17 +135,21 @@ Règlements en vigueur partout
 ##### Urbain Dense
 | Utilisation du sol    | Description du règlement | Formulation du règlement | Entrée en vigueur | Abrogation |
 |-----------------------|--------------------------|------------------------- |-------------------|------------|
-| 1 - Résidentielle     | Règlement résidentiel    | Minimum 0.25 places par logement Maximum: 2 places par logement  | 1931              |2001        |
-| 2 - Industrielle      | Règlement Industriel     | 1 place par 200m²        | 1931              |2001        |
-| 3 - Indutrielle       | Règlement Industriel     | 1 place par 200m²        | 1931              |2001        |
-| 4 - Transport         | Règlement infrastructure | 1 place par 200m²        | 1931              |2001        |
-| 5 - Commercial        | Règlement commercial     | 0-1000m² 1 place par 35m² / 1000m²+: 34 places + 1 place par 50m² au-delà de 1000m² | 1931 |2001 |
-| 582 - Restaurants     | Règlement bouffe         | 1 place par table        | 1931              |2001        |
-| 6 - Services          | Règlement services       | 1 place par 35m²         | 1931              |2001        |
+| 1 - Résidentielle     | Règlement résidentiel    | Minimum 0.25 places par logement Maximum: 2 places par logement  | 2002              |2022        |
+| 2 - Industrielle      | Règlement Industriel     | 1 place par 200m²        | 2002              | En vigueur |
+| 3 - Indutrielle       | Règlement Industriel     | 1 place par 200m²        | 2002              | En vigueur |
+| 4 - Transport         | Règlement infrastructure | 1 place par 200m²        | 2002              | En vigueur |
+| 5 - Commercial        | Règlement commercial     | 0-1000m² 1 place par 35m² / 1000m²+: 34 places + 1 place par 50m² au-delà de 1000m² | 2002 |En vigueur  |
+| 582 - Restaurants     | Règlement bouffe         | 1 place par table        | 2002              |En vigueur  |
+| 6 - Services          | Règlement services       | 1 place par 35m²         | 2002              |En vigueur |
 | 7 - Récréation        | Règlement récréation     | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà  | 1931 |2001  |
-| 8 - Ress Nat          | Règlement ress. nat      | 0 places par mètre carré | 1931              |2001        | 
-| 9 - inexploité        | Règlement ress. nat      | 0 places par mètre carré | 1931              |2001        |
+| 8 - Ress Nat          | Règlement ress. nat      | 0 places par mètre carré | 2002              |En vigueur | 
+| 9 - inexploité        | Règlement ress. nat      | 0 places par mètre carré | 2002              |En vigueur |
 
+On a un changement de règlement pour le règlement sur le logemnt
+| Utilisation du sol    | Description du règlement | Formulation du règlement | Entrée en vigueur | Abrogation |
+|-----------------------|--------------------------|------------------------- |-------------------|------------|
+| 1 - Résidentielle     | Règlement résidentiel    | Minimum 0 places par logement Maximum: 2 places par logement  | 2023              |En vigueur        |
 
 ##### Structurant A et B 
 | Utilisation du sol    | Description du règlement | Formulation du règlement | Entrée en vigueur | Abrogation |
@@ -176,3 +180,5 @@ Règlements en vigueur partout
 | 7 - Récréation        | Règlement récréation     | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà  | 1931 |2001  |
 | 8 - Ress Nat          | Règlement ress. nat      | 0 places par mètre carré | 1931              |2001        | 
 | 9 - inexploité        | Règlement ress. nat      | 0 places par mètre carré | 1931              |2001        |
+
+[Retour au début](#références-utiles)
