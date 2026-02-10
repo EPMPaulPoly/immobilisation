@@ -35,12 +35,22 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Données OD](docs/md/026-VerseDonneesOD.md)
 
-[Données de l'historique de la ville](docs/md/027-VersementModifHistorique.md)
+[Données CUBF](docs/md/027-VersementCUBF.md)
+
+[Sommaire Versement](docs/md/028-SommaireVersements.md)
 ### Création de la réglementation
 
-[Création des règlements](docs/md/030-RegCreation.md)
+[Intro à la réglementation - Cas démo](docs/md/030-IntroductionRegelementation.md)
 
-[Création des ensembles de règlements](docs/md)
+[Données historique](docs/md/031-VersementModifHistorique.md)
+
+[Création des règlements](docs/md/032-RegCreation.md)
+
+[Création des ensembles de règlements](docs/md/033-EnsRegCreation.md)
+
+[Association Ensemble de règlements aux territoires](docs/md/034-EnsRegTerrCreation.md)
+
+[Visualisation règlements](docs/md/035-VisualisationReg.md)
 
 ### Imputation de l'offre de stationnement
 [Prédiction automatique par les minimums](docs/md/040-Prediction.md)
