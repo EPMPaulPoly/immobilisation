@@ -46,9 +46,9 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Révision des unités](docs/md/031-RevisionDesUnites.md)
 
-[Données historique(a faire)](docs/md/032-VersementModifHistorique.md)
+[Données historique](docs/md/032-VersementModifHistorique.md)
 
-[Création des règlements(a faire)](docs/md/033-RegCreation.md)
+[Création des règlements(en cours)](docs/md/033-RegCreation.md)
 
 [Création des ensembles de règlements(a faire)](docs/md/034-EnsRegCreation.md)
 
