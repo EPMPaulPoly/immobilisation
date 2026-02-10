@@ -11,7 +11,7 @@ Mémoire(À venir)
 En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter la création et l'analyse dans le futur
 
 ### Survol
-[Logigramme de l'analyse](/docs/md/000-Procedure.md)
+[Logigramme de l'analyse(a faire)](/docs/md/000-Procedure.md)
 ### Installation des logiciels et mise en place de la BD
 [Installations requises](/docs/md/010-Installation.md)
 
@@ -40,47 +40,47 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 [Sommaire Versement](docs/md/028-SommaireVersements.md)
 ### Création de la réglementation
 
-[Intro à la réglementation - Cas démo](docs/md/030-IntroductionRegelementation.md)
+[Intro à la réglementation - Cas démo(a faire)](docs/md/030-IntroductionRegelementation.md)
 
-[Données historique](docs/md/031-VersementModifHistorique.md)
+[Données historique(a faire)](docs/md/031-VersementModifHistorique.md)
 
-[Création des règlements](docs/md/032-RegCreation.md)
+[Création des règlements(a faire)](docs/md/032-RegCreation.md)
 
-[Création des ensembles de règlements](docs/md/033-EnsRegCreation.md)
+[Création des ensembles de règlements(a faire)](docs/md/033-EnsRegCreation.md)
 
-[Association Ensemble de règlements aux territoires](docs/md/034-EnsRegTerrCreation.md)
+[Association Ensemble de règlements aux territoires(a faire)](docs/md/034-EnsRegTerrCreation.md)
 
-[Visualisation règlements](docs/md/035-VisualisationReg.md)
+[Visualisation règlements(a faire)](docs/md/035-VisualisationReg.md)
 
 ### Imputation de l'offre de stationnement
-[Prédiction automatique par les minimums](docs/md/040-Prediction.md)
+[Prédiction automatique par les minimums(a faire)](docs/md/040-Prediction.md)
 
-[Méthodes alternatives supportées](docs/md/041-MethodesAlternatives.md)
+[Méthodes alternatives supportées(a faire)](docs/md/041-MethodesAlternatives.md)
 
 ### Évaluation de la performance
-[Survol](docs/md/050-EvaluationPerformance.md)
+[Survol(a faire)](docs/md/050-EvaluationPerformance.md)
 
-[Création des catégories](docs/md/051-CreationCateg.md)
+[Création des catégories(a faire)](docs/md/051-CreationCateg.md)
 
-[Collecte des données](docs/md/052-CollecteDonnees.md)
+[Collecte des données(a faire)](docs/md/052-CollecteDonnees.md)
 
-[Méthodes d'évaluation](docs/md/053-MethodesEvaluation.md)
+[Méthodes d'évaluation(a faire)](docs/md/053-MethodesEvaluation.md)
 
 ### Méthodes d'analyse
-[Survol](docs/md/060-Analyse.md)
+[Survol(a faire)](docs/md/060-Analyse.md)
 
-[Diagrammes à Barres](docs/md/061-Barres.md)
+[Diagrammes à Barres(a faire)](docs/md/061-Barres.md)
 
-[Diagrammes XY](docs/md/062-XY.md)
+[Diagrammes XY(a faire)](docs/md/062-XY.md)
 
-[Cartes](docs/md/063-Carto.md)
+[Cartes(a faire)](docs/md/063-Carto.md)
 
-[Profils d'accumulation de véhicules](docs/md/064-ProfilAccumulationVeh.md)
+[Profils d'accumulation de véhicules(a faire)](docs/md/064-ProfilAccumulationVeh.md)
 
-[Analyse de variabilité](docs/md/065-AnalyseVariabilite.md)
+[Analyse de variabilité(a faire)](docs/md/065-AnalyseVariabilite.md)
 
 ### Informations sur l'API
-[Information API](/docs/md/070-APIIntro.md)
+[Information API(a faire)](/docs/md/070-APIIntro.md)
 
 ## Références utiles pour la compréhension
 Chester, M., Fraser, A., Matute, J., Flower, C., & Pendyala, R. (2015). Parking Infrastructure : A Constraint on or Opportunity for Urban Redevelopment? A Study of Los Angeles County Parking Supply and Growth. Journal of the American Planning Association, 81(4), 268‑286. https://doi.org/10.1080/01944363.2015.1092879
