@@ -344,6 +344,7 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
                         <th>Seuil</th>
                         <th>Opération</th>
                         <th>Abscisse Min.</th>
+                        {props.editionCorpsEnCours?<th>Util.</th>:<></>}
                         <th>Abscisse Max.</th>
                         {props.editionCorpsEnCours?<th>Util.</th>:<></>}
                         <th>Pente Minimum</th>
@@ -404,6 +405,18 @@ const TableVisModReglement: React.FC<TableVisModRegProps> = (props) => {
                                         size={10}
                                     />
                                 :ligneDef.cases_fix_min}</td>
+                            {props.editionCorpsEnCours?
+                            idLigneAModifier===ligneDef.id_reg_stat_emp?
+                                <td>
+                                    <input 
+                                        type={"checkbox"} 
+                                        checked={ligneDef.cases_fix_min!==null}
+                                        onClick={()=>ligneDef.cases_fix_min===null?gestChangementLigneDef(idLigneAModifier,'cases_fix_min','0'):gestChangementLigneDef(idLigneAModifier,'cases_fix_min',null)}
+                                    />
+                                </td>
+                                :
+                                <td></td>:
+                                <></>}
                             {/* Cases fix max */}
                             <td>{props.editionCorpsEnCours && 
                                 idLigneAModifier===ligneDef.id_reg_stat_emp && ligneDef.cases_fix_max!==null? 

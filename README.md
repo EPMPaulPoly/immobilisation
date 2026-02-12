@@ -8,6 +8,8 @@ Ce projet a pour but de créer l'interface et le backend pour prédire la capaci
 
 Mémoire(À venir)
 
+[Source du mémoire](https://github.com/EPMPaulPoly/memoire_paul_charbonneau)
+
 En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter la création et l'analyse dans le futur
 
 ### Survol
