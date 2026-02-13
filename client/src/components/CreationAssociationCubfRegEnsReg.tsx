@@ -8,6 +8,7 @@ import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import FiltreReglement from './filtreReglement';
 import TableVisResultatsFiltreAssoc from './TableVisResultatsFiltreAssoc';
 import { DriveFileRenameOutlineTwoTone, Save } from '@mui/icons-material';
+import { flexDirection, maxWidth } from '@mui/system';
 const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (props) => {
     const [CUBFN1,defCUBFN1] = useState<number>(-1);
     const [optionsCUBFN1,defOptionsCUBFN1] = useState<utilisation_sol[]>([]);
@@ -30,10 +31,11 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
-        minWidth: 300,
+        minWidth: '70vw',
         width: 'auto',
         // This is key:
         maxHeight: '80vh', // Or any value
+        maxWidth: '95vw', // Or any value
         overflowY: 'auto', // Enables scrolling
         bgcolor: 'black',
         border: '2px solid #000',
@@ -313,6 +315,7 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
                     </p>
     
                 </div>
+                <div style={{display:'flex', flexDirection:'row', gap:'20px'}}>
                 {/*Utilisation du sol*/}
                 <div>
                     <h4>Utilisation du sol</h4>
@@ -382,6 +385,7 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
                         </div>
                     </div>
                 </div>
+                <div>
                 {/*Recherche Reglement*/}
                 <FiltreReglement
                     resultatReglements={entetesReglements}
@@ -396,6 +400,8 @@ const CreationAssociationCubfRegEnsReg: React.FC<creationAssocCubfErRegStat> = (
                     reglementsPossible={entetesReglements}
                     defReglementPossible={defEntetesReglements}
                 />
+                </div>
+                </div>
             </form>
             </Box>
         </Box>

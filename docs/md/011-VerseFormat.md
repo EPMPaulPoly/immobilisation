@@ -125,3 +125,39 @@ public | vue_periode_terr_er             | view | postgres
 
 Une fois le format versé vous pouvez procéder aux étapes de téléversement des données une à une [en commençant par les secteurs d'analyse](021-UploadSecteurs.md)
 # Téléversement d'un projet pré-existant
+
+
+## Versement sous Ubuntu
+Une approche alternative consiste à rétablir les données d'un projet passé dans la base de données. La procédure est largement la même que pour le versement de la base de données vide sur le serveur seulement le fichier SQL utilisé aura maintenant les données à l'intérieur en plus du schéma dans le format de BD vide qui a été discuté précédemment. 
+
+Si vous avez déja versé un format vide, la première étape est de supprimer cette base de données (ou de changer la BD cible du programme à l'aide du ficher .env discuté dans la procédure de démarrage). Si l'approche choisie est de supprimer la base de données, on utilise d'abord la ligne de commande suivant:
+```
+sudo -u postgres dropdb parking_regs
+```
+On peut ensuite valider la suppression à l'aide de la commande suivante. La BD parking_regs ne devrait plus apparaitre
+```
+sudo -u postogres psql -l
+```
+|Nom            | Propriétaire | Encodage | Fournisseur de locale | Collationnement | Type caract. | Locale ICU | Règles ICU : |    Droits d'accès                      |
+|---------------|--------------|----------|-----------------------|-----------------|--------------|------------|--------------|----------------------------------------|
+|postgres       | postgres     | UTF8     | libc                  | fr_FR.UTF-8     | fr_FR.UTF-8  |            |              |                                        |
+|template0      | postgres     | UTF8     | libc                  | fr_FR.UTF-8     | fr_FR.UTF-8  |            |              | =c/postgres + postgres=CTc/postgres    |
+|template1      | postgres     | UTF8     | libc                  | fr_FR.UTF-8     | fr_FR.UTF-8  |            |              | =c/postgres + postgres=CTc/postgres    |
+
+On peut ensuite compléter la procédure similaire à celle pour le format vide. On commence par trouver la sauvegarde de base de données et la copier dans un dossier pertinent:
+```
+cp dump_2_2026-01-13.sql /home/paul-charbonneau/Documents
+```
+On enlève ensuite de potentielles lignes qui concernent la création de la base de données 
+``` 
+sed '/CREATE DATABASE/,+6d' ~/Documents/dump_2_2026-01-13.sql > ~/Documents/donnees_memoire_sans_creation.sql
+```
+On peut maintenant verser les données sur la base de données avec la commande utilisée précédemment: 
+```
+sudo -u postgres psql -d parking_regs < ~/Documents/donnees_memoire_sans_creation.sql
+```
+et vérifier que les données ont bel et bien été versées:
+```
+sudo -u postgres psql -d parking_regs -c "\dt"
+```
+Alternativement, une fois le serveur lancé, on peut aller regarder le nombre d'entrées pour les tables de données tel que discuté à la section sur le [sommaire de versement](028-SommaireVersements.md)

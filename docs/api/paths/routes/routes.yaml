@@ -1,0 +1,15 @@
+get:
+  description: Renvoie les routes présentement implémentées et les routes associées
+  tags: ['Routes implémentées']
+  responses:
+    '200':
+      description: Succès
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+              path:
+                type: string

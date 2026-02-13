@@ -1,0 +1,19 @@
+post:
+  summary: Création des opérateurs par défaut dans la BD
+  tags: ['Règlement']
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success: 
+                type: boolean
+                description: Succèes vrai faux
+              data: 
+                type: number
+                description: nombre d'opérateurs créés
+          example:
+            success: true
+            data: 4

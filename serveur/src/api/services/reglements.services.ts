@@ -2,7 +2,10 @@ import { Request } from 'express'
 import * as repo from '../repositories/reglements.repositories'
 import { Pool } from 'pg'
 
-
+export interface rowCountWSucces{
+    success:boolean,
+    rowCount: number
+}
 
 export const serviceGetReg = async (
     pool:Pool,
@@ -30,6 +33,16 @@ export const serviceGetReg = async (
     const output = formatRulesOutput(head,def,units,params.reg_complet)
     return output
 } 
+
+export const serviceCreeOperations = async (pool:Pool):Promise<rowCountWSucces>=>{
+    const requete: string = repo.construitRequeteCreeOperationsDefaut()
+    const valeur = await repo.rouleRequeteCreationAuto(pool,requete)
+    if (valeur === 4){
+        return {success: true, rowCount:4}
+    }else{
+        return{success:false,rowCount:0}
+    }
+}
 
 const formatRulesOutput=(head:repo.ruleHeader[],def:repo.ruleDef[],units:repo.unitDef[],complete:boolean)=>{
     if (complete === true){

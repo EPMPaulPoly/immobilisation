@@ -1,0 +1,20 @@
+.page-creation-operateurs {
+    display: flex;
+    flex-direction: column; /* Stack vertically if necessary */
+    height: 100vh; /* Full height of the page */
+    overflow: hidden; /* Prevent overflow (no scrollbars) */
+    background-color: #1f1f1f;
+}
+
+.panneau-creat-operateurs{
+    flex:1
+}
+
+.table-vis-operateurs{
+    flex:1;
+    padding: 10px;
+}
+
+.bouton-creat-oper{
+    padding: 10px;
+}
