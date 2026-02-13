@@ -52,7 +52,7 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Création des règlements](docs/md/033-RegCreation.md)
 
-[Création des ensembles de règlements(a faire)](docs/md/034-EnsRegCreation.md)
+[Création des ensembles de règlements(Ébauche Complétée)](docs/md/034-EnsRegCreation.md)
 
 [Association Ensemble de règlements aux territoires(a faire)](docs/md/035-EnsRegTerrCreation.md)
 
