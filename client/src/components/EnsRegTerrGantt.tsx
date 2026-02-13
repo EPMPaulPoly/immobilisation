@@ -17,7 +17,7 @@ const EnsRegTerrGantt:React.FC<EnsRegTerrDispTable> =(props:EnsRegTerrDispTable)
     const panelRefGauche = useRef<HTMLDivElement>(null);
     const getYearSpan = (): number[] => {
         const years = [];
-        let startYear = 1950;
+        let startYear = 1920;
         let endYear = new Date().getFullYear();
         if (props.periodeSelect.id_periode!=-1){
             if (props.periodeSelect.date_debut_periode!=0){

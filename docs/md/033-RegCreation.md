@@ -6,6 +6,32 @@
 [Création des ensembles de règlements>](032-EnsRegCreation.md)
 ---
 
+
+## Table des matières locale
+- [Introductin](#introduction)
+- [Structure des données](#structure-des-données)
+    - [État actuel](#état-actuel)
+    - [Structure](#structure)
+    - [Opérateurs](#opérateurs)
+    - [Robustesse et travail à faire](#robustesse-et-travail-à-faire)
+- [Règlement simple](#règlement-simple)
+    - [Ex 1: Logement - Ère Moderne- HV-BV](#exemple-1-logement-hv-bv-ère-moderne)
+- [Règlement par seuil simple](#règlement-par-seuil-simple)
+    - [Ex 2: Résidentiel - Ère Moderne - Autres](#exemple-2-résidentiel-pour-lère-moderne-pour-les-autres-secteurs)
+    - [Ex 3: Commercial - Ère Moderne - Autres](#exemple-3-commercial-pour-lère-moderne-pour-les-autres-secteurs)
+- [Règlement par addition simple](#règlement-par-addition-simple)
+    - [Ex 4: Sanatorium - Ère Moderne - Autres](#exemple-4-sanatorium-ère-moderne---autres)
+- [Règlement de deux sous-ensembles simple](#règlement-de-deux-sous-ensembles-simples)
+    - [Ex 5: Industriel Ère Moderne - Autres](#exemple-5-formulations-avec-unités-alternatives---industriel---ère-moderne---autres)
+    - [Ex 6: Formulation avec plancher](#exemple-6-formulations-avec-plancher-sur-le-nombre-minimal-de-places)
+    - [Ex 7: Formulation avec plafond](#exemple-7-formulations-de-minimum-avec-plafond-maximum-sur-le-nombre-de-places)
+- [Règlements complexes](#règlements-les-plus-complexes)
+    - [Ex 8: Clinique médicale modifiée](#exemple-8-une-clinique-médicale-avec-une-formulation-par-addition-et-une-formulation-simple)
+- [Solution pour les règlements de l'exemple](#étude-de-cas-courante)
+    - [Solution pour l'ère pré automobile](#pré-automobile)
+    - [SOlution pour l'ère moderne](#ère-moderne)
+    - [Solution pour l'ère post fusion](#post---fusion)
+
 ## Introduction
 
 On va maintenant passer à l'étape de création de règlements. Cette étape risque d'être celle qui mène au plus grand nombre d'erreurs du fait de la fragilité du modèle actuel de la formulation des règlements. Cette section passera au-travers d'un règlement simple pour commencer puis augmentera la difficulté des règlements
@@ -15,7 +41,7 @@ On va maintenant passer à l'étape de création de règlements. Cette étape ri
 ## Structure des données
 
 ### État Actuel
-#### Structure des données
+#### Structure
 Les information sur les règlements sont entrposés dans deux tables. La première contient les informations administratives (dites entêtes) de règlements tandis que la deuxième (les règlements empilés ou définition mathématique) contient la définition mathématique:
 
 ![Diagramme entité relation des règlements](images/creeReglements/ERDRegs.png)
@@ -51,12 +77,25 @@ Dans le cas du ou plus contraignant, il est aussi utiliser pour imposer des vale
  - 1 places par 10m² jusqu'à concurrence de 10 places
  - 1 places par 50m² avec un minimum de 5 places  
 
+L'ordre de saisie de données à un effet ici puisqu'aucune procédure robuste d'ordonnancement des données n'a été mise en place ce qui peut rendre la saisie de donnée un peu sensible aux erreurs. C'est ce constat en fin de mémoire qui a mené aux réflexions sur la section suivante.
+
 #### Robustesse et travail à faire
 Un enjeu soulevé par cette formulation est qu'elle est très sensible aux erreurs de sémantiques et relativement peu robuste aux alterations. Une proposition de structure de données alternative qui est plus déconstruite mais plus robuste est données dans la [section des problèmes du dépôt github](https://github.com/EPMPaulPoly/immobilisation/issues/50)
 
 [Retour au début](#création-des-règlements)
 
-## Règlement simple : 
+## Recherche de règlements
+
+Il est possible de chercher des règlements en cliquant sur le bouton de filtre en haut à gauche de l'écran
+![alt text](images/creeReglements/lieuFiltre.png)
+
+Un modal s'ouvre alors, on peut cliquer sur les boites a cocher pour activer des filtres:
+![alt text](images/creeReglements/modalFiltre.png)
+
+
+On obtient alors une liste réduite de règlements:
+![alt text](images/creeReglements/ReglementsFiltres.png)
+## Règlement simple
 Les règlements simples constituent environ 75% des règlements recensés pour la ville de Québec. On va donner un cas type ici.
 
 ### Exemple 1: Logement HV-BV Ère moderne
@@ -180,7 +219,7 @@ Concernant les valeurs numériques à utiliser:
  - Dans tous les cas l'ordonnée à l'origine est de zéro
  - Pour le médecin, il s'agit d'une place par médecin, on fixe la pente à 1
  - Pour les lits, on a une place par 4 lits soit une pente sur le minimum de 0.25 (1/4) pl./lit
- - Pour les employé, on a une place par 2 employé soit une pente sur le minimum de 0.5 (1/2) pl./lit
+ - Pour les employé, on a une place par 2 employé soit une pente sur le minimum de 0.5 (1/2) pl./employé
 
 On utilise l'interface pour créer la structure suivante pour le règlement
 
@@ -197,11 +236,13 @@ La formulation du règlement décrite dans l'introduction est reproduite ici:
 Commençons par déterminer les pentes et les ordonnées à l'origine:
  - Dans les deux cas, l'ordonnée à l'origine est fixée à zéro
  - La pente est fixée à 0.005 pl/m² pour la partie en fonction de l'aire d'étages
- - La pente est fixée à 1 pl/ employé pour la partie en fonctrion de l'aire d'étages
+ - La pente est fixée à 1 pl/ employé pour la partie en fonctrion des employés
 
 ![Exemple de formulation avec unités alternatives](images/creeReglements/Exemple5FormulationsAlternatives.png)
 
 Il est important de noter que la deuxième ligne est sur un sous-ensemble différent de la première
+
+[Retour au début](#création-des-règlements)
 
 ### Exemple 6: Formulations avec plancher sur le nombre minimal de places
 
@@ -223,6 +264,22 @@ L'unité est fixée de manière identique dans les deux cas pour permettre la cr
 
 ![Exemple de règlement avec un configuration plancher](images/creeReglements/exemple6ConfigPlancher.png)
 
+Cette formulation pourrait aussi être complété en fixant des seuils appropriés. Dans ce cas, ci en fixant un seuil à 200m²
+ - Seuil inférieur:
+    - seuil: 0
+    - pente_min: 0
+    - oper: S/V
+    - cases_fix_min:10
+    - unite: m²
+ - Seuil supérieur
+    - Seuil: 200
+    - oper: changemetn au delà seuil
+    - cases_fix_min:0
+    - pente_min: 0.05
+    - unité: m²
+
+[Retour au début](#création-des-règlements)
+
 ### Exemple 7: Formulations de minimum avec plafond maximum sur le nombre de places
 Une formulation alternative constatée est l'imposition d'un minimum jusqu'à concurrence d'une valeur donnée. Un exemple est donné ci-dessous:
 | Utilisation du sol    | Description du règlement | Formulation du règlement |
@@ -243,7 +300,188 @@ On crée donc deux sous-ensembles, un pour la contrainte de nombre minimal de pl
 Dans ce cas-ci, l'algorithme fixerait la valeur du max à la valeur donnée à toutes les valeurs. Le minimum pour sa part est attribué à la valeur calculée en-dessous du maximum avant de saturer à la valeur du maximum. La figure suivante donne un aperçu de la formulation de ce type de règlement:
 ![Exemple d'un minimum avec un plafond maximum](images/creeReglements/exemple7ValeurPlafond.png)
 
+[Retour au début](#création-des-règlements)
 
 ## Règlements les plus complexes
 En plus des règlements stipulés plus hauts, des règlements peuvent inclure un combinaison d'une formulation par seuil et d'une formulation par addition(ou d,une formulation simple). Un exemple constaté et d'autres exemples potentiellement faisables sont montrés dans cette section. 
+### Exemple 8 une clinique médicale avec une formulation par addition et une formulation simple
+| Utilisation du sol    | Description du règlement | Formulation du règlement |
+|-----------------------|--------------------------|------------------------- |
+| 6516 - Sanatorium     | Règlement Santé avec hébergement | 1 place par médecin + 1 place par 4 lits + 1 place par 2 employés OU une place par 20m² au plus contraignant |
 
+Reprenant la formulation de [l'exemple 4](#exemple-4-sanatorium-ère-moderne---autres) et en ajoutant la contrainte par mètre carré. Concernant les valeurs numériques à utiliser:
+ - Dans tous les cas l'ordonnée à l'origine est de zéro
+ - Pour le médecin, il s'agit d'une place par médecin, on fixe la pente à 1
+ - Pour les lits, on a une place par 4 lits soit une pente sur le minimum de 0.25 (1/4) pl./lit
+ - Pour les employé, on a une place par 2 employé soit une pente sur le minimum de 0.5 (1/2) pl./employé
+ - Pour la fonction des mètres carrés, on a une place par 20m² soit une pente sur le minimum de 0.05 (1/20) pl/m²
+
+On implémente cette formulation de la manière suivante. Le premier sous-ensemble capture les 3 premières unités de la même manière que pour l'exmple 4. On crée cependant un deuxième sous-ensemble pour la contrainte par superficie d'étage. La figure suivante montre comment ce règlement serait implémenté dans l'interface.
+
+![Exemple de règlement addition avec formulation alternative](images/creeReglements/exemple8AdditionOuPlusContr.png)
+
+[Retour au début](#création-des-règlements)
+
+## Quelques exemples de maximums
+
+### Exemple 9: Logement - Dense
+
+Le cas de logement dense est reproduit ici:
+
+| Utilisation du sol    | Description     | Formulation du règlement                            | Entrée en vigueur | Abrogation |
+|-----------------------|-----------------|-------------------------                                         |------|----------|
+| 1 - Résidentielle     | Résidentiel     | Minimum 0.25 places par logement Maximum: 2 places par logement  | 2002 | 2022      |
+
+Ici, il n'y a aucun seuil on devrait être capable de tout formuler sur une ligne montrée ci-dessous:
+
+![alt text](images/creeReglements/Exemple9maxSimple.png)
+
+[Retour au début](#création-des-règlements)
+### Exemple 10: Lieux d'assemblée: minimum avec seuil - maximum au delà d'une certaine capacité
+
+Un minimum peut se superposer à un maximum avec potentiellement des seuils différents comme c'est le cas dans l'actuelle ville de québec. Le tableau suivant donne un  exemple:
+| Utilisation du sol    | Description     | Formulation du règlement                            | Entrée en vigueur | Abrogation |
+|-----------------------|-----------------|-------------------------                                         |------|----------|
+| 7 - Récréation        | Récréation      | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà                                   | 2002 |En vigueur |
+
+Décomposons ce règlement:
+ - de zéro à 500 sièges:
+    - Minimum:  1 places par 7 sièges / cases_fix_min: 0 pente_min: 0.142857 unite: pl/ siège
+    - Maximum: aucun
+ - de 500 à 800 sièrges
+     - Minimum 1 place par 7 sièges / cases_fix_min: 0 pente_min: 0.142857 unite: pl / siège
+     - Maximum: 1 place par 5 sièges / cases_fix_min: 0 pente_min: 0.2 unite: pl / siège
+ - 800+ sièges:
+     - Minimum 1 place par 9 sièges / cases_fix_min: (0.142857 - 0.11111) x 800 = 25.39 pente_min: 0.11111111 unite: pl / siège
+     - Maximum: 1 place par 5 sièges / cases_fix_min: 0 pente_min: 0.2 unite: pl / siège
+
+![alt text](images/creeReglements/ExempleAssembleeMinMax.png)
+
+[Retour au début](#création-des-règlements)
+
+## Étude de cas courante
+
+Chaque règlement discuté dans la section d'introduction seront montrés dans cette section. Il est suggéré d'essayer de compléter cette section soi-même avant de la lire afin de comprendre la création de règlements.
+
+### Pré automobile
+
+Un seul règlement requis 0 places peu importe les conditions
+
+![alt text](images/creeReglements/PreAutoReg.png)
+
+[Retour au début](#création-des-règlements)
+
+### Ère moderne
+
+L'image suivante donne un résumé des règlements à créer
+
+![alt text](images/creeReglements/SommaireModerne.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Règlements communs
+Plusieurs règlements ont une formulation commune entre la Haute ville basse ville et le reste de l'agglomération. Commençons par les services dont le règlement est formulé comme suit
+![alt text](images/creeReglements/ModerneComServices.png)
+
+Le règlement pour les lieux d'assemblée est formulé comme suit:
+![alt text](images/creeReglements/ModerneComAssembl.png)
+
+Le règlement pour les ressources naturelles et les immeubles inexploités:
+![alt text](images/creeReglements/ModerneComInex.png)
+####  HV-BV
+Commençons par le logement qui est formulé comme suit:
+![alt text](images/creeReglements/ModerneHVLogement.png)
+
+Le règlement industriel est formulé comme suit. Il est aussi utilisé pour le transport dans les autres quartiers.
+![alt text](images/creeReglements/ModerneHVIndus.png)
+
+Le règlement commercial est formulé comme suit:
+![alt text](images/creeReglements/ModerneHVCommer.png)
+
+Le règlement pour les restaurants est formulé comme suit:
+![alt text](images/creeReglements/ModerneHVResto.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Autres
+Le logement est formulé comme suit pour les quartiers périphériques pour cette période:
+![alt text](images/creeReglements/ModerneAutLogement.png)
+
+Le règlement industriel est formulé comme suit:
+![alt text](images/creeReglements/ModerneAutIndus.png)
+
+Le règlement pour les propriétés commerciales est formulé comme suit:
+![alt text](images/creeReglements/ModerneAutComm.png)
+
+Le règlement pour les restaurants est formulé comme suit:
+![alt text](images/creeReglements/ModerneAutResto.png)
+
+Ceci complète la section pour l'ère moderne
+
+[Retour au début](#création-des-règlements)
+
+### Post - Fusion
+La section passerat d'abord au travers des règlements communs avant de passer sur les règlements uniques à chaque jurdiction dans la dernière période de l'historique. La figure suivante donne un résumé des règles à créer pour la période post fusion
+
+![alt text](images/creeReglements/SommairePostFusion.png)
+
+
+[Retour au début](#création-des-règlements)
+
+
+#### Règlements communs
+
+Tous les règlements sauf les règlements de logement et de services ont une définition commune dans notre ville fictive. Pour les propriétés industrielles, le règlement est défini comme suit:
+![alt text](images/creeReglements/PostCommIndus.png)
+
+Dans le cas de propriétés commerciales, les requis de stationnement sont définis comme suit:
+![alt text](images/creeReglements/PostComCommerc.png)
+
+Dans le cas de restaurants, les requis de stationnement sont définis comme suit:
+![alt text](images/creeReglements/PostComResto.png)
+
+Dans le cas des salons funéraires, les requis de stationnement sont définis comme suit:
+![alt text](images/creeReglements/PostComSalonFun.png)
+
+Pour les lieux d'assemblée, les requis de stationnement sont définis comme suit:
+![alt text](images/creeReglements/PostComAssemb.png)
+
+Pour les propriétés d'exploitation des ressources naturelles et les immeubles inexploités les requis de stationnement sont définis comme suit:
+![alt text](images/creeReglements/PostComRessNat.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Quartiers Denses Règlements spécifiques
+
+Les règlements pour le logement et les services sont différenciés pour la catégorisation dense. D,autre part, le règlement de logement varie pendant la période ce qui requiert un règlement supplémentaire. Le règlement de début de période est montré ci-bas. Notez l,année d'abrogation différente des règlements communs qui ne changent pas
+![alt text](images/creeReglements/PostDenseLogStart.png)
+
+Les minimums sont les suivants après l'abroation des minimums dans le secteur dense pour le logement:
+![alt text](images/creeReglements/PostDenseLogEnd.png)
+
+Les minimums pour le service sont définis comme suit:
+![alt text](images/creeReglements/PostDenseServ.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Éléments communs des quartiers Structurants et généraux
+
+Les quartiers structurants et les quartiers de définition générale partagent une même définition des requis pour les propriétés dont l'utilisation des sols est pour le service. Cette définition est montré à la figure suivante:
+![alt text](images/creeReglements/PostAutresServices.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Logements dans les quartiers structurants
+
+Les logements dans les quartiers structurants ont les requis de stationnemetn spécifiés de la manière suivante:
+![alt text](images/creeReglements/PostStructurantsLog.png)
+
+[Retour au début](#création-des-règlements)
+
+#### Logements dans les quartiers généraux
+
+Les logements dans les quartiers généraux ont la définition de règle suivante
+
+![alt text](images/creeReglements/PostGenLog.png)
+
+[Retour au début](#création-des-règlements)

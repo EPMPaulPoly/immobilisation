@@ -108,7 +108,7 @@ Règlements en vigueur partout
 | 3 - Indutrielle       | Règlement Industriel     | 1 place par 200m²                          | 1931              |2001        |
 | 4 - Transport         | Règlement infrastructure | 1 place par 200m²                          | 1931              |2001        |
 | 5 - Commercial        | Règlement commercial     | 1 place par 20m²                           | 1931              |2001        |
-| 582 - Restaurants     | Règlement bouffe         | 1 place par 5 sièges ou une place par 10m² | 1931              |2001        |
+| 581 - Restaurants     | Règlement bouffe         | 1 place par 5 sièges ou une place par 10m² | 1931              |2001        |
 | 6 - Services          | Règlement services       | 1 place par 30m²                           | 1931              |2001        |
 | 7 - Récréation        | Règlement récréation     | 1 place par 4 sièges ou une place par 10m² | 1931              |2001        |
 | 8 - Ress Nat          | Règlement ress. nat      | 0 places par mètre carré                   | 1931              |2001        | 
@@ -122,7 +122,7 @@ Règlements en vigueur partout
 | 3 - Indutrielle       | Industriel               | 1 place par 200m² ou une place par employé(e) au plus contraignant            | 1931 |2001 |
 | 4 - transport         | infrastructure           | 1 place par 200m²                                                             | 1931 |2001 |
 | 5 - Commercial        | commercial               | 0-500m²: 1 place par 20m² / 500+m²: 25 pl. +1 place par 50m² au-delà de 500m² | 1931 |2001 |
-| 582 - Restaurants     | bouffe                   | 1 place par 4 sièges ou une place par 10m² avec un plancher de 10 places      | 1931 |2001 |
+| 581 - Restaurants     | bouffe                   | 1 place par 4 sièges ou une place par 10m² avec un plancher de 10 places      | 1931 |2001 |
 | 6 - Services          | services                 | 1 place par 30m²                                                              | 1931 |2001 |
 | 6516 - Sanatorium     | Santé avec hébergement   | 1 place par médecin + 1 place par 4 lits + 1 place par 2 employés             | 1931 |2001 |
 | 7 - Récréation        | récréation               | 1 place par 4 sièges ou une place par 10m²                                    | 1931 |2001 |
@@ -135,12 +135,12 @@ Règlements en vigueur partout
 ##### Urbain Dense
 | Utilisation du sol    | Description     | Formulation du règlement                            | Entrée en vigueur | Abrogation |
 |-----------------------|-----------------|-------------------------                                         |------|----------|
-| 1 - Résidentielle     | Résidentiel     | Minimum 0.25 places par logement Maximum: 2 places par logement  | 2002 |En vigueur|
+| 1 - Résidentielle     | Résidentiel     | Minimum 0.25 places par logement Maximum: 2 places par logement  | 2002 | 2022      |
 | 2 - Industrielle      | Industriel      | 1 place par 200m²                                                | 2002 |En vigueur|
 | 3 - Indutrielle       | Industriel      | 1 place par 200m²                                                | 2002 |En vigueur|
 | 4 - Transport         | Infrastructure  | 1 place par 200m²                                                | 2002 | En vigueur |
-| 5 - Commercial        | Commercial      | 0-1000m² 1 place par 35m² / 1000m²+: 34 places + 1 place par 50m² au-delà de 1000m² | 2002 |En vigueur  |
-| 582 - Restaurants     | Restaurants     | 1 place par table                                                | 2002 |En vigueur |
+| 5 - Commercial        | Commercial      | 0-1000m² 1 place par 35m² / 1000m²+: 29 places + 1 place par 50m² au-delà de 1000m² | 2002 |En vigueur  |
+| 581 - Restaurants     | Restaurants     | 1 place par table                                                | 2002 |En vigueur |
 | 6 - Services          | Services        | 1 place par 35m²                                                 | 2002 |En vigueur |
 | 6241 - Salon Funéraire | Salon funéraire| Une place par 10m² avec un maximum de 15 places                  | 2002 |En vigueur |
 | 7 - Récréation        | Récréation      | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà                                   | 2002 |En vigueur |
@@ -159,8 +159,8 @@ On a un changement de règlement pour le règlement sur le logemnt
 | 2 - Industrielle      | Industriel      | 1 place par 200m²                                              | 2002 |En vigueur|
 | 3 - Indutrielle       | Industriel      | 1 place par 200m²                                              | 2002 |En vigueur|
 | 4 - Transport         | infrastructure  | 1 place par 200m²                                              | 2002 |En vigueur|
-| 5 - Commercial        | commercial      | 0-1000m² 1 place par 30m² / 1000m²+: 34 places + 1 pl. par 50m² au-delà de 1000m² | 2002 |En vigueur|
-| 582 - Restaurants     | Restaurant      | 1 place par table                                              | 2002 |En vigueur|
+| 5 - Commercial        | commercial      | 0-1000m² 1 place par 35m² / 1000m²+: 29 places + 1 pl. par 50m² au-delà de 1000m² | 2002 |En vigueur|
+| 581 - Restaurants     | Restaurant      | 1 place par table                                              | 2002 |En vigueur|
 | 6 - Services          | Services        | 1 place par 30m²                                               | 2002 |En vigueur|
 | 6241 - Salon Funéraire| Salon funéraire | Une place par 10m² avec un maximum de 15 places                | 2002 | En vigueur |
 | 7 - Récréation        | récréation      | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges // Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà                                 | 2002 |En vigueur|
@@ -176,8 +176,8 @@ On a un changement de règlement pour le règlement sur le logemnt
 | 2 - Industrielle      | Règlement Industriel     | 1 place par 200m²        | 2002 |En vigueur|
 | 3 - Indutrielle       | Règlement Industriel     | 1 place par 200m²        | 2002 |En vigueur|
 | 4 - Transport         | Règlement infrastructure | 1 place par 200m²        | 2002 |En vigueur|
-| 5 - Commercial        | Règlement commercial     | 0-1000m² 1 place par 30m² / 1000m²+: 34 places + 1 place par 50m² au-delà de 1000m² | 2002 |En vigueur|
-| 582 - Restaurants     | Règlement bouffe         | 1 place par table        | 2002 |En vigueur|
+| 5 - Commercial        | Règlement commercial     | 0-1000m² 1 place par 35m² / 1000m²+: 29 places + 1 place par 50m² au-delà de 1000m² | 2002 |En vigueur|
+| 581 - Restaurants     | Règlement bouffe         | 1 place par table        | 2002 |En vigueur|
 | 6 - Services          | Règlement services       | 1 place par 30m²         | 2002 |En vigueur|
 | 6241 - Salon Funéraire | Salon funéraire         | Une place par 10m² avec un maximum de 15 places |2002 | En vigueur |
 | 7 - Récréation        | Règlement récréation     | Mimimum: 0-800 sièges: 1 place par 7 sièges/ 800+ sièges: 115 places + 1 place par 9 sièges au-delà de 800 sièges Maximum: aucun sous 500 sièges, une place par 5 sièges au-delà  | 2002 |En vigueur|

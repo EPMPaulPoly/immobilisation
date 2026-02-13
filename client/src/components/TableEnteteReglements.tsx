@@ -79,6 +79,7 @@ const TableEnteteReglements: React.FC<TableEnteteProps> = (props) => {
                 props.defEntetes(props.entetes.filter((entete) => entete.id_reg_stat !== idASupprimer));
                 props.defRegSelect(reglementCompletVide)
             }
+            window.history.replaceState({}, "", window.location.pathname);
         } 
     }
     return (

@@ -50,7 +50,7 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Données historique](docs/md/032-VersementModifHistorique.md)
 
-[Création des règlements(en cours)](docs/md/033-RegCreation.md)
+[Création des règlements](docs/md/033-RegCreation.md)
 
 [Création des ensembles de règlements(a faire)](docs/md/034-EnsRegCreation.md)
 

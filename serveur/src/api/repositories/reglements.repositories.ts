@@ -176,7 +176,7 @@ export const construitRequetesGetReglements = (params: GetReglementsParams): Get
     sql_entete_final = ancilary_values_header + `SELECT id_reg_stat,description,annee_debut_reg,annee_fin_reg,texte_loi,article_loi,paragraphe_loi,ville FROM entete_reg_stationnement ers 
     where id_reg_stat in (SELECT id_reg_stat FROM selection_universe)`
     sql_def_final = ancilary_values_header + `SELECT * FROM reg_stationnement_empile  rse 
-    where id_reg_stat in (SELECT id_reg_stat FROM selection_universe)`
+    where id_reg_stat in (SELECT id_reg_stat FROM selection_universe) order by id_reg_stat_emp`
     entete_params_final = values
     def_params_final = values
     sql_unite_final = 'SELECT id_unite, desc_unite from multiplicateur_facteurs_colonnes'
