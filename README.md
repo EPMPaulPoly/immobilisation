@@ -54,12 +54,12 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 
 [Création des ensembles de règlements(Ébauche Complétée)](docs/md/034-EnsRegCreation.md)
 
-[Association Ensemble de règlements aux territoires(a faire)](docs/md/035-EnsRegTerrCreation.md)
+[Association Ensemble de règlements aux territoires(Ébauche complétée)](docs/md/035-EnsRegTerrCreation.md)
 
-[Visualisation règlements(a faire)](docs/md/036-VisualisationReg.md)
+[Visualisation règlements(Ébauche complétée)](docs/md/036-VisualisationReg.md)
 
 ### Imputation de l'offre de stationnement
-[Prédiction automatique par les minimums(a faire)](docs/md/040-Prediction.md)
+[Prédiction automatique par les minimums(Ébauche complétée)](docs/md/040-Prediction.md)
 
 [Méthodes alternatives supportées(a faire)](docs/md/041-MethodesAlternatives.md)
 
