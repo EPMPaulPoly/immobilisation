@@ -44,7 +44,7 @@ En plus du mémoire, un manuel d'instruction a été mis en place pour faciliter
 [Sommaire Versement](docs/md/029-SommaireVersements.md)
 ### Création de la réglementation
 
-[Intro à la réglementation - Cas démo](docs/md/030-IntroductionRegelementation.md)
+[Intro à la réglementation - Cas démo](docs/md/030-IntroductionReglementation.md)
 
 [Révision des unités](docs/md/031-RevisionDesUnites.md)
 
