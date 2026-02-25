@@ -45,6 +45,10 @@ app.listen(port, async () => {
     console.log('Requête de validation paramètres db a réussi!!!! La bd contient les tables suivantes:\n',result.rows)
   }catch(error:any){
     console.error('Erreur rencontrée lors de la connexion. Vérifiez paramètres de connexion\n',error)
+  }finally{
+    if(client){
+      client.release()
+    }
   }
 });
 
