@@ -108,7 +108,7 @@ export async function rouleRequeteSommaireDonnees(pool:Pool,requete:string):Prom
         const out = mapItemDescriptions(resultat.rows)
         return out
     }catch(err:any){
-        console.log('error')
+        console.log('Erreur rencontrée lors de l\'exécution de la requete sommaire données\n',err)
         throw err
     }finally{
         if (client){
