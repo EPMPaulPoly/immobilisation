@@ -30,13 +30,26 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 });
 
 // Start server
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Server user info:${config.database.user}`)
   console.log(`Server pwd: ${config.database.password}`)
   console.log(`Server address info:${config.database.host}`)
   console.log(`Server database info:${config.database.database}`)
   console.log(`Server running at ${new Date().toISOString()}`); 
+  let client
+  try{
+    client = await pool.connect()
+    const query = "SELECT tablename,tableowner FROM pg_catalog.pg_tables WHERE schemaname='public';"
+    const result = await client.query(query)
+    console.log('Requête de validation paramètres db a réussi!!!! La bd contient les tables suivantes:\n',result.rows)
+  }catch(error:any){
+    console.error('Erreur rencontrée lors de la connexion. Vérifiez paramètres de connexion\n',error)
+  }finally{
+    if(client){
+      client.release()
+    }
+  }
 });
 
 type RouteInfo = {
