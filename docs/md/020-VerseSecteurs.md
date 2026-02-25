@@ -7,10 +7,15 @@
 
 ## Source des données et choix du niveau d'agrégation
 
-Le découpage des secteurs d'analyse demeure la prérogative de l'analyste à la fin de la journée. Des secteurs plus fins osnt plus discriminants spatialement mais comportent le risque d'avoir des enjeux de taille d'échantillon. Dans le cadre du mémoire, les quartiers de la ville de Québec ont été utilisés pour démontrer les procédures d'analyse. Ces derniers sont disponibles sur le site [Données Québec](https://www.donneesquebec.ca/recherche/dataset/vque_9).
+Le découpage des secteurs d'analyse demeure la prérogative de l'analyste à la fin de la journée. Des secteurs plus fins sont plus discriminants spatialement mais comportent le risque d'avoir des enjeux de taille d'échantillon. Dans le cadre du mémoire, les quartiers de la ville de Québec ont été utilisés pour démontrer les procédures d'analyse. Ces derniers sont disponibles sur le site [Données Québec](https://www.donneesquebec.ca/recherche/dataset/vque_9).
 
 Une approche alternative pourrait être d'utiliser les secteurs de l'enquête OD et de n'utiliser que les secteurs qui sont à l'intérieur de la ville. Ces derniers ne sont cependant pas disponibles en données ouvertes en format géospatial ou sur Géo-index. Une carte [pdf](https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/transports/transports/recherches-statistiques/planification/EOD/quebec/2017/EOD17_sommaire.pdf) est disponible pour référence à la page 31 du fichier mis en lien. Un fichier json peut aussi être extrait des flux de données de la [carte interactive](https://www.enqueteodregionquebec.cmquebec.qc.ca/index.html) de l'enquête OD, mais sont protégés par les droits d'auteur.
 
+Au final, n'importe quel type de division peuvent être utilisé, tant que le fichier contient au moins des zones, qui ont les attributs suivants:
+ - un identifiant de quartier
+ - un nom de quartier
+ - une superficie calculée (dans les propriétés)
+ - optionnellement un acronyme
 
 ## Procédure de versement
 Les secteurs d'analyse sont les premiers à être versés. Pour ce faire, on choisi l'onglet [Entrée données départ](http://localhost:3000/sec-analyse-verse) ou l'on arrive à la page montrée à la figure suivante
