@@ -9,7 +9,7 @@
 
 Le découpage des secteurs d'analyse demeure la prérogative de l'analyste à la fin de la journée. Des secteurs plus fins osnt plus discriminants spatialement mais comportent le risque d'avoir des enjeux de taille d'échantillon. Dans le cadre du mémoire, les quartiers de la ville de Québec ont été utilisés pour démontrer les procédures d'analyse. Ces derniers sont disponibles sur le site [Données Québec](https://www.donneesquebec.ca/recherche/dataset/vque_9).
 
-Une approche alternative pourrait être d'utiliser les secteurs de l'enquête OD et de n'utiliser que les secteurs qui sont à l'intérieur de la ville. Ces derniers ne sont cependant pas disponibles en données ouvertes en format géospatial ou sur Géo-index. Une carte [pdf](https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/transports/transports/recherches-statistiques/planification/EOD/quebec/2017/EOD17_sommaire.pdf) est disponible pour référence 
+Une approche alternative pourrait être d'utiliser les secteurs de l'enquête OD et de n'utiliser que les secteurs qui sont à l'intérieur de la ville. Ces derniers ne sont cependant pas disponibles en données ouvertes en format géospatial ou sur Géo-index. Une carte [pdf](https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/transports/transports/recherches-statistiques/planification/EOD/quebec/2017/EOD17_sommaire.pdf) est disponible pour référence.
 
 
 ## Procédure de versement
