@@ -1,27 +1,27 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug report / Rapport Bogue
+about: Create a report to help us improve / Crée un rapport pour nous aider avec les enjeux
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the bug / Décris le bogue**
+A clear and concise description of what the bug is./Description claire et concise du bogue
 
-**To Reproduce**
-Steps to reproduce the behavior:
+**To Reproduce / Pour reproduire**
+Steps to reproduce the behavior:/Étapes pour reproduire
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Expected behavior / Comportement attendu**
+A clear and concise description of what you expected to happen./Description claire du comportement attendu
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots / Captures d'écran**
+If applicable, add screenshots to help explain your problem./ Capture d'écran pour aider à l'explication
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
@@ -34,5 +34,5 @@ If applicable, add screenshots to help explain your problem.
  - Browser [e.g. stock browser, safari]
  - Version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+**Additional context / Contexte Additionnel**
+Add any other context about the problem here. / Toute autre information contextuelle
