@@ -23,7 +23,7 @@ On navique à l'onglet nouveaux secteurs d'analyse dans la barre déroulante à 
 Une fois le fichier choisi on peu sélectionner l'affectation des colonnes![Affectation des colonnes](images/secteurs-verse/SelectionColonnesSecteurs.png)
 
 En cliquant sur charger les données on charge les données dans le frontend (elles ne sont pas encore côté serveur). Notez que cette approche limite la complexité des secteurs choisis. une approche alternative pourrait être mise en place comme c'est le cas pour le cadastre et le rôle foncier. La page ressemble alors à ce qui est montrée ci dessous:
-![Copie locale sectuers](images/secteurs-verse/VersementLocal.png)
+![Copie locale secteurs](images/secteurs-verse/VersementLocal.png)
 
 En cliquant sur écraser anciens secteurs on peut alors verser sur la base de données
 On peut alors changer la valeur de la liste déroulante en haut à gauche pour voir ce qui est sur la bd et le modifier:
