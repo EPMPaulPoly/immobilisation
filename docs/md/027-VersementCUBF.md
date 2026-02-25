@@ -2,7 +2,7 @@
 ---
 [^Tables des matières](../../README.md)|
 [<Versement des données d'enquête OD](026-VerseDonneesOD.md)| 
-[Création des opérateurs de règlements>](028-CreationOperateuresReglements.md)
+[Création des opérateurs de règlements>](028-CreationOperateursReglements.md)
 ---
 
 Le ministère des affaires municipales garde à jour [une liste](https://www.quebec.ca/habitation-territoire/information-fonciere/evaluation-fonciere/manuel/codes-utilisation-biens-fonds) des codes d'utilsation du bien fonds
