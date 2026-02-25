@@ -11,6 +11,15 @@
             "args": ["${input:myArgs}"]
         },
         {
+            "name": "Python: Script with Prompted Args (Conda Env) Ubuntu",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "${command:python.interpreterPath}",
+            "args": ["${input:myArgs}"]
+        },
+        {
             "name": "Python: Current File (Conda Env)",
             "type": "debugpy",
             "request": "launch",
