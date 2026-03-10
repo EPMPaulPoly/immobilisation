@@ -75,6 +75,7 @@ class ParkingRegulations():
     
     def get_subset_numbers(self)->list[int]:
         subsets = self.reg_def[config_db.db_column_parking_subset_id].unique().tolist()
+        subsets.sort()
         return subsets
     
     def check_only_one_regulation(self)->bool:

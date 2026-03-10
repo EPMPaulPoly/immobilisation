@@ -1,7 +1,7 @@
 import pandas as pd
 import logging
 from config import config_db
-from classes import parking_inventory as PI
+import classes.parking_inventory as PI
 
 
 def dissolve_list(list_to_dissolve:list[PI.ParkingInventory])->PI.ParkingInventory:
@@ -71,12 +71,25 @@ def merge_lot_data(inventory:PI.ParkingInventory)->None:
     lots_to_clean_up = inventory.parking_frame.loc[inventory.parking_frame[config_db.db_column_lot_id].duplicated(keep=False)]
     lots_list_to_purge_from_self = lots_to_clean_up[config_db.db_column_lot_id].unique().tolist()
     if len(lots_list_to_purge_from_self)>0:
-        aggregate_parking_data = lots_to_clean_up.groupby([config_db.db_column_lot_id]).apply(inventory_duplicates_agg_function, include_groups=True).reset_index()
-        aggregate_parking_data.loc[(aggregate_parking_data['n_places_min']>aggregate_parking_data['n_places_max']) |(aggregate_parking_data['n_places_max']==0.0),'n_places_max'] =None
-        new_parking_frame = inventory.parking_frame.drop(inventory.parking_frame[inventory.parking_frame[config_db.db_column_lot_id].isin(lots_list_to_purge_from_self)].index)
-        new_parking_frame = pd.concat([new_parking_frame,aggregate_parking_data])
+        aggregate_parking_data = lots_to_clean_up.groupby([config_db.db_column_lot_id]).apply(
+            inventory_duplicates_agg_function, include_groups=True).reset_index()
+        aggregate_parking_data.loc[
+            (aggregate_parking_data['n_places_min']>aggregate_parking_data['n_places_max']) |
+            (aggregate_parking_data['n_places_max']==0.0),'n_places_max'] = None
+        new_parking_frame = inventory.parking_frame.drop(
+            inventory.parking_frame[
+                inventory.parking_frame[config_db.db_column_lot_id].isin(lots_list_to_purge_from_self)
+                ].index)
+        new_parking_frame = pd.concat(
+            [
+                new_parking_frame,
+                aggregate_parking_data
+            ])
 
         inventory.parking_frame = new_parking_frame 
         logger.info(f'found following items which have two estimates : {lots_list_to_purge_from_self} - estimates were summed')
     else: 
-            logger.info('No duplicate entries, continue,continuting on')
+        logger.info('No duplicate entries, continue,continuting on')
+        new_parking_frame = inventory.parking_frame
+    out = PI.ParkingInventory(new_parking_frame) 
+    return out

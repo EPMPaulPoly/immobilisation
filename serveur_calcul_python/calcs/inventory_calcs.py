@@ -285,13 +285,14 @@ def subset_operation(inventory_1:PI.ParkingInventory,operator:int,inventory_2:PI
             case 2:
                 raise NotImplementedError('Obsolete operator')
             case 3:
-                most_constraining_or_operation(inventory_1,inventory_2)
+                new_parking = most_constraining_or_operation(inventory_1,inventory_2)
             case 4:
                 raise NotImplementedError('Subset Operator not implemented')
             case 5:
                 raise NotImplementedError('Obsolete operator')
             case 6:
-                simple_or_operation(inventory_1,inventory_2)
+                new_parking = simple_or_operation(inventory_1,inventory_2)
+        return new_parking
     else:
         raise ValueError(f'Operator must be integer, you supplied {type(operator)}')
  
