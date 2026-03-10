@@ -11,6 +11,7 @@ import classes.parking_inventory_inputs as PII
 import classes.parking_regs as PR
 import classes.parking_reg_sets as PRS
 import serveur_calcul_python.calcs.calcs_inventaire as IC
+import calcs.calcs_conversion_unite as CCU
 
 def main():
     if os.getenv("DEBUGPY_CALC_ENABLE", "true").lower() == "true":
@@ -29,7 +30,7 @@ def main():
     array = json.loads(data)
 
     # Convert the list of dictionaries to a DataFrame
-    generated_parking_inventory_inputs = PII.generate_values_based_on_available_data(array)
+    generated_parking_inventory_inputs = CCU.generate_values_based_on_available_data(array)
     #breakpoint()
     # Perform your calculations here
     inventaire = IC.calculate_inventory_from_inputs_class(generated_parking_inventory_inputs)

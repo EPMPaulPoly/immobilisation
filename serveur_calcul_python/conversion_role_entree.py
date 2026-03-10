@@ -1,4 +1,5 @@
 import classes.parking_inventory_inputs as PII
+import calcs.calcs_conversion_unite as CCU
 import classes.parking_inventory as PI
 import classes.parking_reg_sets as PRS
 import classes.tax_dataset as TD
@@ -21,6 +22,6 @@ if __name__ =="__main__":
         [random_prs] = PRS.from_sql(1,con=con)
         # va chercher un territoire d'analyse pour l'instant
         tax_data = TD.tax_database_for_analysis_territory(1)
-        parking_inputs = PII.generate_input_from_PRS_TD(random_prs,tax_data)
+        parking_inputs = CCU.generate_input_from_PRS_TD(random_prs,tax_data)
         parking_inventory = IC.calculate_inventory_from_inputs_class(parking_inputs)
         print(parking_inventory)

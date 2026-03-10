@@ -1,4 +1,5 @@
 import classes.vehicle_accumulation_profile as VAP
+import calcs.calcs_profils_accumulation_vehicule as CVAP
 import sys
 import json
 import psycopg2
@@ -24,7 +25,7 @@ if __name__=="__main__":
             connection = psycopg2.connect(cf_db.pg_string)
             print("Connexion à la base de données réussie")
         con = sqlalchemy.create_engine(cf_db.pg_string)
-        vap:VAP.VehicleAccumulationProfile = VAP.calculate_VAP_from_database_data(quartier_a_analyser,con=con)
+        vap:VAP.VehicleAccumulationProfile = CVAP.calculate_VAP_from_database_data(quartier_a_analyser,con=con)
         #print(inventaire_quartier)
         json_vap = vap.to_json()
         #breakpoint()

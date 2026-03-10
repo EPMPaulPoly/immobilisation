@@ -169,15 +169,15 @@ def calculate_threshold_based_subset_from_inputs_class(reg_to_calculate:PR.Parki
                     slope_max = line_def[config_db.db_column_parking_slope_max].values[0]
                     parking_frame_thresh = pd.DataFrame()
                     parking_frame_thresh[config_db.db_column_lot_id] = relevant_data[config_db.db_column_lot_id]
-                    if zero_crossing_min is not None and slope_min is not None:
+                    if (zero_crossing_min is not None and bool(np.isnan(zero_crossing_min)) == False) and (slope_min is not None and bool(np.isnan(slope_min)) == False):
                         parking_frame_thresh['n_places_min'] = zero_crossing_min + slope_min * relevant_data['valeur']
-                    elif zero_crossing_min is not None:
+                    elif (zero_crossing_min is not None and bool(np.isnan(zero_crossing_min)) == False):
                         parking_frame_thresh['n_places_min'] = zero_crossing_min
                     else:
                         parking_frame_thresh['n_places_min'] = None
-                    if zero_crossing_max is not None and slope_max is not None:
+                    if (zero_crossing_max is not None and bool(np.isnan(zero_crossing_max)) == False) and (slope_max is not None and bool(np.isnan(slope_max)) == False):
                         parking_frame_thresh['n_places_max'] = zero_crossing_max + slope_max * relevant_data['valeur']
-                    elif zero_crossing_max is not None:
+                    elif (zero_crossing_max is not None and bool(np.isnan(zero_crossing_max)) == False):
                         parking_frame_thresh['n_places_max'] = zero_crossing_max
                     else: 
                         parking_frame_thresh['n_places_max'] = None
