@@ -135,18 +135,18 @@ def calculate_parking_subset_from_inputs_class(reg_to_calculate:PR.ParkingRegula
                 inventory = calculate_addition_based_subset_from_inputs_class(reg_to_calculate,subset,relevant_inputs,methode_estime)
                 #NotImplementedError('Not yet Implemented')
             case 2:
-                AttributeError('Operation 2  deprecated and no longer in use. Use operator 4 instead')
+                raise AttributeError(f'Operation 2  deprecated and no longer in use. Use operator 4 instead - Check rule id {reg_to_calculate.get_reg_id()} subset {subset}')
             case 3:
-                AttributeError('Operation 3 not supported within one subset')
+                raise AttributeError(f'Operation 3 not supported within one subset - Check rule id {reg_to_calculate.get_reg_id()} subset {subset}')
             case 4:
                 inventory = calculate_threshold_based_subset_from_inputs_class(reg_to_calculate,subset,relevant_inputs,methode_estime)
             case 5:
-                AttributeError('Operation 5 not supported within one subset')
+                raise AttributeError(f'Operation 5 not supported within one subset - Check rule id {reg_to_calculate.get_reg_id()} subset {subset}')
             case 6:
-                AttributeError('Operation 6 not supported within one subset')
+                raise AttributeError(f'Operation 6 not supported within one subset - Check rule id {reg_to_calculate.get_reg_id()} subset {subset}')
         return inventory
     else:
-        ValueError('Can only calculate one rule at a time')
+        raise ValueError('Can only calculate one rule at a time')
 
 def calculate_threshold_based_subset_from_inputs_class(reg_to_calculate:PR.ParkingRegulations,subset:int,data:PII.ParkingCalculationInputs,methode_estime:int=3):
     if reg_to_calculate.check_subset_exists(subset) and reg_to_calculate.check_only_one_regulation():

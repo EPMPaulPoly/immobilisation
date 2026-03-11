@@ -164,7 +164,7 @@ export const creationRouteurInventaire = (pool: Pool): Router => {
                 }
             } else {
                 console.error(`Processus enfant échoué avec le code : ${code}`);
-                console.error(`Error output: ${errorData}`);
+                console.error(`Error output: \n ${errorData}`);
                 return res.status(500).send(`Erreur: ${errorData}`);
             }
         });
@@ -301,10 +301,12 @@ export const creationRouteurInventaire = (pool: Pool): Router => {
                     }
                 } catch (err) {
                     console.error('Failed to parse JSON:', err);
+                    console.error( `Error detail: \n ${errorData}`);
                     return res.status(500).send('Erreur: JSON parsing failed.');
                 }
             } else {
                 console.error(`Processus enfant échoué avec le code : ${code}`);
+                    console.error( `Error detail: \n ${errorData}`);
                 return res.status(500).send(`Erreur: ${errorData}`);
             }
         });
