@@ -4,8 +4,8 @@ import os
 import sys
 from pathlib import Path
 # ajoute le dossier serveur_calcul_python (qui contient classes, calcs, etc.) au sys.path
-sys.path.append(str(Path(__file__).resolve().parents[2]))
-print(sys.path)
+#sys.path.append(str(Path(__file__).resolve().parents[2]))
+#print(sys.path)
 from classes import parking_inventory_inputs as PCI
 from classes import parking_regs as PR
 from calcs import calcs_inventaire as IC

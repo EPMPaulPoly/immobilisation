@@ -18,7 +18,7 @@ class ParkingInventory():
             # __init__
             Fonction d'instanciation de l'object ParkingInventory.
             Inputs:
-                - parking_inventory_frame: dataframe with columns:g_no_lot, n_places_min,n_places_max,methode_estime,id_ens_reg,id_reg_stat,rl,commentaire
+                - parking_inventory_frame: dataframe with columns:g_no_lot, n_places_min,n_places_max,methode_estime,id_er,id_reg_stat,cubf,commentaire
         '''
         fields_to_confirm = [config_db.db_column_lot_id,'n_places_min','n_places_max','methode_estime',config_db.db_column_reg_sets_id,config_db.db_column_parking_regs_id,config_db.db_column_land_use_id, 'commentaire']
         if all(item in parking_inventory_frame.columns for item in fields_to_confirm):

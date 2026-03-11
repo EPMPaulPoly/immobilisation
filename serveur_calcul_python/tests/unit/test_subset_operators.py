@@ -6,7 +6,7 @@ import os
 import sys
 from pathlib import Path
 # ajoute le dossier serveur_calcul_python (qui contient classes, calcs, etc.) au sys.path
-sys.path.append(str(Path(__file__).resolve().parents[2]))
+#sys.path.append(str(Path(__file__).resolve().parents[2]))
 # import des classes et fonctions à tester
 from classes import parking_inventory as PI
 import calcs.calcs_inventaire as IC
