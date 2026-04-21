@@ -29,13 +29,13 @@ def generate_values_based_on_available_data(entree:dict)->PCI.ParkingCalculation
 
     
     if reglements != ['0'] and ensembles_reglements != ['0']:
-        KeyError('Il ne faut pas fournir les ensembles de règlements et les règlements en même temps')
+        raise KeyError('Il ne faut pas fournir les ensembles de règlements et les règlements en même temps')
     if reglements ==['0'] and ensembles_reglements == ['0']:
-        KeyError("Il faut au moins fournir un identifiant de règlement ou un identifiant d'ensemble de règlements")
+        raise KeyError("Il faut au moins fournir un identifiant de règlement ou un identifiant d'ensemble de règlements")
     if ensembles_reglements != ['0'] and cubf =='0':
-        KeyError('Pour fournir les ensembles de règlements, il faut aussi fournir un CUBF')
+        raise KeyError('Pour fournir les ensembles de règlements, il faut aussi fournir un CUBF')
     if int(cubf)<0 and int(cubf)>9999:
-       ValueError('cubf doit être en 1 et 9999') 
+       raise ValueError('cubf doit être en 1 et 9999') 
     df_out = pd.DataFrame()
     if reglements !=['0']:
         for i, reglement in enumerate(reglements):
@@ -139,23 +139,30 @@ def generate_input_from_PRS_TD(prs: PRS.ParkingRegulationSet,td:TD.TaxDataset, s
             units.loc[units[config_db.db_column_tax_data_conversion_slope]!=1,config_db.db_column_tax_data_conversion_slope] =  units.loc[units[config_db.db_column_tax_data_conversion_slope]!=1,config_db.db_column_tax_data_conversion_slope] * scale
         # relevant reg ids
         relevant_regulation_ids = prs.get_unique_reg_ids()
-        # 
+        # get the units that are relevant and list relevant columns
         units_used = prs.get_all_units_used()
         units_final = units.loc[units[config_db.db_column_units_id].isin(units_used)]
         relevant_columns:list[str] = units_final[config_db.db_column_tax_data_column_to_multiply].unique().tolist()
+        # add the tax id and land use to relevant columns
         relevant_columns.append(config_db.db_column_tax_id)
         relevant_columns.append(config_db.db_column_tax_land_use)
+        # merge the tax tables together
         combined_tax_table = td.lot_table[[config_db.db_column_lot_id,'g_va_suprf']].merge(td.lot_association,how='left',on=config_db.db_column_lot_id).merge(td.tax_table[relevant_columns],how='left',on=config_db.db_column_tax_id)
+        # merge the rule land use match to the merged tax table
         tax_rule_table = combined_tax_table.merge(prs.expanded_table,how='left',left_on=config_db.db_column_tax_land_use,right_on=config_db.db_column_land_use_id)
+        # get unique units for each rule
         rule_units_association = prs.reg_def[[config_db.db_column_parking_regs_id, config_db.db_column_parking_unit_id]].drop_duplicates()
-        # You can now use rule_units_association as needed, for example:
+        # merge the units to the tax rule assocition
         tax_rule_units_merge= tax_rule_table.merge(rule_units_association,how='inner',on=config_db.db_column_parking_regs_id)
+        # merge the conversion factors to the above table
         conversion_factors_merge = tax_rule_units_merge.merge(units_final[[config_db.db_column_units_id,config_db.db_column_tax_data_conversion_slope,config_db.db_column_tax_data_conversion_zero,config_db.db_column_tax_data_column_to_multiply]],how='left',left_on=config_db.db_column_parking_unit_id,right_on=config_db.db_column_units_id)
-        
+        # do conversion
         conversion_factors_merge['valeur'] = conversion_factors_merge.apply(compute_valeur,
             axis=1
         )
+        # clean up column list
         conversion_factors_merge_out_start = conversion_factors_merge[[config_db.db_column_lot_id,config_db.db_column_parking_regs_id,config_db.db_column_parking_unit_id,config_db.db_column_land_use_id,'valeur']]
+        # aggregate by lot, rule id, unit and land use
         final_out = conversion_factors_merge_out_start.groupby(
             [config_db.db_column_lot_id, config_db.db_column_parking_regs_id, config_db.db_column_parking_unit_id, config_db.db_column_land_use_id]
         ).agg({'valeur': 'sum'}).reset_index()
@@ -163,9 +170,12 @@ def generate_input_from_PRS_TD(prs: PRS.ParkingRegulationSet,td:TD.TaxDataset, s
         #duplicates_for_fun = duplicates_for_fun.loc[duplicates_for_fun['count']>1,config_db.db_column_lot_id].to_list()
         #complex_outs = final_out.loc[final_out[config_db.db_column_lot_id].isin(duplicates_for_fun)]
         #print(final_out)
+        # clean up the types
         final_out[config_db.db_column_reg_sets_id] = int(prs.ruleset_id)
         final_out[config_db.db_column_parking_regs_id] = final_out[config_db.db_column_parking_regs_id].astype(int)
+        # spit it out
         PCI_to_Out = PCI.ParkingCalculationInputs(final_out)
         return PCI_to_Out
     except Exception as e:
-        print('caught error in conversion from tax dataset to relevant calculation input')
+        print(f'caught error in conversion from tax dataset to relevant calculation input. Error details:\n {e}')
+        raise
