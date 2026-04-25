@@ -4,17 +4,25 @@ import cors from 'cors';
 import { createApiRouter } from './api/routes';
 import config from './config';
 import listEndpoints from 'express-list-endpoints';
-
+import {auth} from './lib/auth';
+import { toNodeHandler } from 'better-auth/node';
+import {pool} from './lib/poolCreate';
 const app = express();
 const port = config.server.port;
 
 // Middleware
-app.use(cors());
-app.use(express.json({ limit: '10mb' }));
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // Database connection
-const pool = new Pool(config.database);
+app.all("/api/auth/*",toNodeHandler(auth));
 
+// Move JSON middleware
+app.use(express.json({ limit: '10mb' }));
 
 // Routes
 app.use('/api', createApiRouter(pool));
