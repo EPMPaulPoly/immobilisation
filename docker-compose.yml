@@ -13,8 +13,6 @@ services:
       - CHOKIDAR_USEPOLLING=true  # Enable polling for hot reload
       - FAST_REFRESH=true
       - WDS_SOCKET_PORT=3000
-      - REACT_APP_BE_USER=${BE_USER}
-      - REACT_APP_BE_PASSWORD=${BE_PASSWORD}
     volumes:
       - ./client:/app
       - client_node_modules:/app/node_modules
