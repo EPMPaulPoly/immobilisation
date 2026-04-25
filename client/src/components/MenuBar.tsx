@@ -4,6 +4,9 @@ import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobi
 import { donneesCarteDeFond } from '../types/ContextTypes';
 import SubMenuComponent from './SubMenuComponent';
 import { latLng, LatLng } from 'leaflet';
+import { Logout } from '@mui/icons-material';
+import { authClient } from '../lib/auth-client';
+
 const MenuBar: React.FC<{}> = () => {
 
     const contexte = utiliserContexte();
@@ -52,6 +55,7 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Analyse agrégée quartiers",path:"/ana-quartiers"}
                 ]}
             />
+            <Logout onClick={()=>{authClient.signOut()}}/>
             <div className="control-dds">
             {/*
             
