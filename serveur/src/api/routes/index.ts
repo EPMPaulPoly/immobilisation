@@ -21,6 +21,7 @@ import { creationRouteurRecensement } from './recensement';
 import { creationRouteurEnqueteOD } from './enqueteOD';
 import { creationRouteurDonneesCSV } from './fichiersCSV';
 import { CreationRouteurSommaireDonnee } from './sommaireVersement';
+import adminRoutes from './admin';
 
 export const createApiRouter = (pool: Pool) => {
     const router = Router();
@@ -46,5 +47,6 @@ export const createApiRouter = (pool: Pool) => {
     router.use('/enquete-od',creationRouteurEnqueteOD(pool))
     router.use('/fichier-csv',creationRouteurDonneesCSV(pool))
     router.use('/sommaire-donnees',CreationRouteurSommaireDonnee(pool))
+    router.use('/routes',adminRoutes)
     return router;
 }
