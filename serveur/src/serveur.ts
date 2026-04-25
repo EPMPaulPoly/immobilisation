@@ -7,10 +7,13 @@ import listEndpoints from 'express-list-endpoints';
 import {auth} from './lib/auth';
 import { toNodeHandler } from 'better-auth/node';
 import {pool} from './lib/poolCreate';
+
+
+// Create Express app
 const app = express();
 const port = config.server.port;
 
-// Middleware
+// Middleware for cors
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true,
@@ -18,13 +21,13 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Database connection
+// add better-auth middleware for auth routes
 app.all("/api/auth/*",toNodeHandler(auth));
 
-// Move JSON middleware
+// Move JSON middleware after auth middle ware to ensure auth routes are processed first
 app.use(express.json({ limit: '10mb' }));
 
-// Routes
+// Routes for actual queries
 app.use('/api', createApiRouter(pool));
 
 // Error handling middleware
