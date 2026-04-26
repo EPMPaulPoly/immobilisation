@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router";
+import { Link, Navigate,useNavigate } from "react-router";
 import { FournisseurContexte,utiliserContexte } from '../contexte/ContexteImmobilisation';
 import { donneesCarteDeFond } from '../types/ContextTypes';
 import SubMenuComponent from './SubMenuComponent';
 import { latLng, LatLng } from 'leaflet';
-import { Logout } from '@mui/icons-material';
+import { Logout, AccountBox } from '@mui/icons-material';
 import { authClient } from '../lib/auth-client';
 
 const MenuBar: React.FC<{}> = () => {
 
+    const navigate = useNavigate();
     const contexte = utiliserContexte();
     const optionCartoChoisie = contexte?.optionCartoChoisie ?? "";
     const changerCarto = contexte?.changerCarto ?? (() => {});
@@ -55,7 +56,10 @@ const MenuBar: React.FC<{}> = () => {
                     {label:"Analyse agrégée quartiers",path:"/ana-quartiers"}
                 ]}
             />
-            <Logout onClick={()=>{authClient.signOut()}}/>
+            <div className='gestionUtilsateur'>
+                <AccountBox onClick={()=>{navigate('/profil')}}/>
+                <Logout onClick={()=>{authClient.signOut()}}/>
+            </div>
             <div className="control-dds">
             {/*
             

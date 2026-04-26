@@ -24,6 +24,8 @@ import CreationOperateurs from './pages/CreationOperateurs';
 import LoginPage from './pages/LoginPage';
 import { authClient } from "./lib/auth-client";
 import ProtectedRoute from './lib/protectedRouted';
+import ParamsUtilisateurs from './pages/ParamUtilisateurs';
+
 
 const app: React.FC = () => {
   return (
@@ -58,6 +60,7 @@ const app: React.FC = () => {
             <Route path='/sommaire-versement' element={<SommaireVersement/>}/>
             <Route path='/cubf' element={<VersementCUBF/>}/>
             <Route path='/operateurs-reg' element={<CreationOperateurs/>}/>
+            <Route path='/profil' element={<ParamsUtilisateurs/>}/>
           </Route>
           {/* fallback */}
           <Route path="*" element={<Navigate to="/historique" />} />
