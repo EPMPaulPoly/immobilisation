@@ -2,18 +2,18 @@ import { auth } from "../lib/auth";
 import config from "../config";
 // Database connection
 
-async function createFirstUser() {
+async function createFirstAdmin() {
   console.log(config.database);
   const res = await auth.api.createUser({
       body:{
-        email:"user@test.com",
-        password: 'user123',
-        name:"User Test",
-        role:'user'
+        email:"admin@test.com",
+        password: 'admin123',
+        name:"Admin Test",
+        role:'admin'
       }
     }
 );
   console.log(res);
 }
 
-createFirstUser();
+createFirstAdmin();
