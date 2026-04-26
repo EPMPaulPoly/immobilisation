@@ -1,6 +1,8 @@
 import { Pool } from "pg";
 import { betterAuth } from "better-auth";
 import {pool} from "./poolCreate";
+import { admin } from 'better-auth/plugins'
+import { apiKey } from '@better-auth/api-key'
 
 export const auth = betterAuth({
     database: pool,
@@ -9,5 +11,9 @@ export const auth = betterAuth({
     emailAndPassword:{
         enabled:true,
     },
-    trustedOrigins:["http://localhost:3000"]
+    trustedOrigins:["http://localhost:3000"],
+    plugins:[
+        admin(),
+        apiKey()
+    ]
 });
