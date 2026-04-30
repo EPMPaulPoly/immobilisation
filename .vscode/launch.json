@@ -11,6 +11,20 @@
             "args": ["${input:myArgs}"]
         },
         {
+            "name": "Coverage: run any file",
+            "type": "python",
+            "request": "launch",
+            "module": "coverage",
+            "args": [
+                "run",
+                "${file}",
+                "${input:myArgs}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "envFile": "${workspaceFolder}/.env",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Script with Prompted Args (Conda Env) Ubuntu",
             "type": "debugpy",
             "request": "launch",
@@ -26,6 +40,15 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "python": "/"
+        },
+        {
+            "name": "Python: Current File (Conda Env) Ubuntu",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "${command:python.interpreterPath}",
+            "cwd": "${workspaceFolder}/serveur_calcul_python" // <-- ajoute cette ligne
         },
         {
             "name": "Debug Frontend",
