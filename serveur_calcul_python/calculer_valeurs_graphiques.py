@@ -10,9 +10,11 @@ import config.config_db as cf_db
 import classes.parking_inventory_inputs as PII
 import classes.parking_regs as PR
 import classes.parking_reg_sets as PRS
+import calcs.calcs_inventaire as IC
+import calcs.calcs_conversion_unite as CCU
 
 def main():
-    if os.getenv("DEBUGPY_CALC_ENABLE", "true").lower() == "true":
+    if os.getenv("DEBUGPY_CALC_ENABLE", "false").lower() == "true":
         time.sleep(10)
         debugpy.listen(("0.0.0.0", 5678))
         print("Waiting for debugger attach...")
@@ -28,10 +30,10 @@ def main():
     array = json.loads(data)
 
     # Convert the list of dictionaries to a DataFrame
-    generated_parking_inventory_inputs = PII.generate_values_based_on_available_data(array)
+    generated_parking_inventory_inputs = CCU.generate_values_based_on_available_data(array)
     #breakpoint()
     # Perform your calculations here
-    inventaire = PI.calculate_inventory_from_inputs_class(generated_parking_inventory_inputs)
+    inventaire = IC.calculate_inventory_from_inputs_class(generated_parking_inventory_inputs)
 
     # cleaning up the data set in order to output it
     inventaire_frame = inventaire.parking_frame.drop(columns=cf_db.db_column_parking_regs_id)
