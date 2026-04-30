@@ -49,6 +49,8 @@ db_column_tax_constr_year = 'rl0307a'
 db_column_tax_land_use = 'rl0105a'
 db_column_tax_gross_floor_area ='rl0308a'
 db_column_tax_number_dwellings = 'rl0311a'
+db_column_tax_n_rooms_rentals = 'rl0312a'
+db_column_tax_n_other_rooms = 'rl0313a'
 # cadastre
 db_column_lot_id = 'g_no_lot'
 # cartographie_secteurs

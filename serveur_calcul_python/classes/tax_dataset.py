@@ -72,7 +72,7 @@ class TaxDataset():
             m1 = self.lot_table.explore()
         else:
             m1 = self.lot_table.explore(m=m)
-        tax_table = self.tax_table.drop(columns="dat_cond_mrche")
+        tax_table = self.tax_table
         tax_table.explore(m=m1,color='red')
         return m1
 

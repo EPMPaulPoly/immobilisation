@@ -162,7 +162,8 @@ class ParkingRegulations():
     def _(self,id_to_get_:int):
         data = self.reg_head.loc[self.reg_head[config_db.db_column_parking_regs_id]==id_to_get_]
         long_regs = self.reg_def.loc[self.reg_def[config_db.db_column_parking_regs_id]==id_to_get_]
-        object_out = ParkingRegulations(data,long_regs,self.units_table)
+        units_out = self.units_table[self.units_table[config_db.db_column_units_id].isin(long_regs[config_db.db_column_parking_unit_id].unique().tolist())]
+        object_out = ParkingRegulations(data,long_regs,units_out)
         return object_out
 
 
@@ -170,14 +171,16 @@ class ParkingRegulations():
     def _(self,id_to_get_:np.ndarray):
         data = self.reg_head.loc[self.reg_head[config_db.db_column_parking_regs_id].isin(id_to_get_)]
         long_regs = self.reg_def.loc[self.reg_def[config_db.db_column_parking_regs_id].isin(id_to_get_)]
-        object_out = ParkingRegulations(data,long_regs,self.units_table)
+        units_out = self.units_table[self.units_table[config_db.db_column_units_id].isin(long_regs[config_db.db_column_parking_unit_id].unique().tolist())]
+        object_out = ParkingRegulations(data,long_regs,units_out)
         return object_out
     
     @get_reg_by_id.register
     def _(self,id_to_get_:list):
         data = self.reg_head.loc[self.reg_head[config_db.db_column_parking_regs_id].isin(id_to_get_)]
         long_regs = self.reg_def.loc[self.reg_def[config_db.db_column_parking_regs_id].isin(id_to_get_)]
-        object_out = ParkingRegulations(data,long_regs,self.units_table)
+        units_out = self.units_table[self.units_table[config_db.db_column_units_id].isin(long_regs[config_db.db_column_parking_unit_id].unique().tolist())]
+        object_out = ParkingRegulations(data,long_regs,units_out)
         return object_out
     
 @singledispatch

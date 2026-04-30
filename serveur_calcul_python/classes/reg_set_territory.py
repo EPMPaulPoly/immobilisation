@@ -112,11 +112,15 @@ def get_rst_by_tax_data(tax_data:TD.TaxDataset,db_eng=None)->list[list[RegSetTer
     # va chercher les associations territoire règlements pour l'ensemble de ces territoires
     relevant_rsts = get_postgis_rst_by_terr_id(relevant_territory_ids)
     # pour chaque RST, va chercher les points correspondants
-    tax_dataset_match = []
-    for rst_to_filter_by in relevant_rsts:
-        filtered_tax_dataset = tax_data.year_filter(rst_to_filter_by.start_year,rst_to_filter_by.end_year).territory_filter(rst_to_filter_by.territory_info)
-        tax_dataset_match.append(filtered_tax_dataset)
+    tax_dataset_match = split_td_by_rst(tax_data,relevant_rsts)
     return relevant_rsts,tax_dataset_match
+
+def split_td_by_rst(td: TD.TaxDataset,rst:list[RegSetTerritory])->list[TD.TaxDataset]:
+    tax_dataset_match = []
+    for rst_to_filter_by in rst:
+        filtered_tax_dataset = td.year_filter(rst_to_filter_by.start_year,rst_to_filter_by.end_year).territory_filter(rst_to_filter_by.territory_info)
+        tax_dataset_match.append(filtered_tax_dataset)
+    return tax_dataset_match
 
 def explore_RST_TD(reg_sets:Union[RegSetTerritory,list[RegSetTerritory]],tax_data:Union[TD.TaxDataset,list[TD.TaxDataset]])->Union[Map,list[Map]]:
     '''# explore_RST
