@@ -28,6 +28,14 @@
             "python": "/"
         },
         {
+            "name": "Python: Current File (Conda Env) Ubuntu",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "${command:python.interpreterPath}",
+        },
+        {
             "name": "Debug Frontend",
             "type": "chrome",
             "request": "launch",

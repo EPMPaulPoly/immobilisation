@@ -5,6 +5,7 @@ import sys
 import psycopg2
 import config.config_db as cf_db
 from psycopg2 import OperationalError
+from db_interface import db_parking_reg_sets as DBPRS
 import time
 if __name__=="__main__":
     #print(sys.argv)
@@ -20,7 +21,7 @@ if __name__=="__main__":
             # Établir la connexion
             connection = psycopg2.connect(cf_db.pg_string)
             print("Connexion à la base de données réussie")
-        association = PRS.get_parking_reg_for_lot(lot_a_analyser)
+        association = DBPRS.get_parking_reg_for_lot(lot_a_analyser)
         #print(inventaire_quartier)
         json_inventaire_quartier = association.to_json(orient='records',force_ascii=False)
         #breakpoint()

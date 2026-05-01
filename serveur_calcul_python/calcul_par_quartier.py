@@ -7,12 +7,13 @@ import config.config_db as cf_db
 import debugpy
 import time
 import os
+import calcs.calcs_inventaire_entree as IC
 
 if __name__=="__main__":
     #print(sys.argv)
     try:
         quartier_a_analyser = int(sys.argv[1])
-        if os.getenv("DEBUGPY_CALC_ENABLE", "true").lower() == "true":
+        if os.getenv("DEBUGPY_CALC_ENABLE", "false").lower() == "true":
             print(f'Quartier à analyser: {quartier_a_analyser}')
             time.sleep(10) 
             debugpy.listen(("0.0.0.0", 5678))
@@ -22,7 +23,7 @@ if __name__=="__main__":
             # Établir la connexion
             connection = psycopg2.connect(cf_db.pg_string)
             print("Connexion à la base de données réussie")
-        inventaire_quartier = PI.calculate_inventory_by_analysis_sector(quartier_a_analyser)
+        inventaire_quartier:PI.ParkingInventory = IC.calculate_inventory_by_analysis_sector(quartier_a_analyser)
         #print(inventaire_quartier)
         json_inventaire_quartier = inventaire_quartier.to_json()
         #breakpoint()

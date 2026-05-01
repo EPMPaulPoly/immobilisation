@@ -8,12 +8,13 @@ import debugpy
 import time
 import os
 import sqlalchemy
+from calcs import calcs_vehicle_accumulation_profile as CVAP
 
 if __name__=="__main__":
     #print(sys.argv)
     try:
         quartier_a_analyser = int(sys.argv[1])
-        if os.getenv("DEBUGPY_CALC_ENABLE", "true").lower() == "true":
+        if os.getenv("DEBUGPY_CALC_ENABLE", "false").lower() == "true":
             print(f'Quartier à analyser: {quartier_a_analyser}')
             time.sleep(10) 
             debugpy.listen(("0.0.0.0", 5678))
@@ -24,7 +25,7 @@ if __name__=="__main__":
             connection = psycopg2.connect(cf_db.pg_string)
             print("Connexion à la base de données réussie")
         con = sqlalchemy.create_engine(cf_db.pg_string)
-        vap:VAP.VehicleAccumulationProfile = VAP.calculate_VAP_from_database_data(quartier_a_analyser,con=con)
+        vap:VAP.VehicleAccumulationProfile = CVAP.calculate_VAP_from_database_data(quartier_a_analyser,con=con)
         #print(inventaire_quartier)
         json_vap = vap.to_json()
         #breakpoint()

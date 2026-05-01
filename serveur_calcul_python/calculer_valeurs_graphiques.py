@@ -10,7 +10,11 @@ import config.config_db as cf_db
 import classes.parking_inventory_inputs as PII
 import classes.parking_regs as PR
 import classes.parking_reg_sets as PRS
-
+from calcs import calcs_conversion_unite as CCU
+from calcs import calcs_inventaire_entree as CIE
+from calcs import calcs_mins_from_inputs as CMFI
+from db_interface import db_parking_regs as DBPR
+from db_interface import db_parking_reg_sets as DBPRS
 def main():
     if os.getenv("DEBUGPY_CALC_ENABLE", "true").lower() == "true":
         time.sleep(10)
@@ -28,10 +32,10 @@ def main():
     array = json.loads(data)
 
     # Convert the list of dictionaries to a DataFrame
-    generated_parking_inventory_inputs = PII.generate_values_based_on_available_data(array)
+    generated_parking_inventory_inputs = CCU.generate_values_based_on_available_data(array)
     #breakpoint()
     # Perform your calculations here
-    inventaire = PI.calculate_inventory_from_inputs_class(generated_parking_inventory_inputs)
+    inventaire = CMFI.calculate_inventory_from_inputs_class(generated_parking_inventory_inputs)
 
     # cleaning up the data set in order to output it
     inventaire_frame = inventaire.parking_frame.drop(columns=cf_db.db_column_parking_regs_id)
@@ -49,13 +53,13 @@ def main():
         reg_er = reglement.split('-')
         reg = int(reg_er[0])
         er = int(reg_er[1])
-        rule: PR.ParkingRegulations = PR.from_postgis(reg)
+        rule: PR.ParkingRegulations = DBPR.from_postgis(reg)
         unique_rule: PR.ParkingRegulations = rule.get_reg_by_id(reg)
         description: str = unique_rule.reg_head.iloc[0].description
         dataset_out = '{'
         dataset_out += f'"data": [{",".join(inventaire_pivot[reglement].astype(str).tolist())}],'
         if er!=0:
-            reg_set:PRS.ParkingRegulationSet = PRS.from_sql(er)[0]
+            reg_set:PRS.ParkingRegulationSet = DBPRS.from_sql(er)[0]
             dataset_out += f'"label": "{reg_set.description}", '
             dataset_out += f'"id_reg_stat":{reg},'
             dataset_out += f'"id_er":{er},'

@@ -111,6 +111,7 @@ export const creationRouteurInventaire = (pool: Pool): Router => {
                 }
             } else {
                 console.error(`Processus enfant échoué avec le code : ${code}`);
+                console.error(`Erreur : ${errorData}`)
                 return res.status(500).send(`Erreur: ${errorData}`);
             }
         });

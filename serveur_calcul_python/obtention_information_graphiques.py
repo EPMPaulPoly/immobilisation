@@ -9,6 +9,8 @@ from psycopg2 import OperationalError
 import time
 import json
 import pandas as pd
+from db_interface import db_parking_reg_sets as DBPRS
+from db_interface import db_parking_regs as DBPR
 if __name__=="__main__":
     #print(sys.argv)
     try:
@@ -31,7 +33,8 @@ if __name__=="__main__":
         land_use_id = array_entry['cubf']
         prs_ids = array_entry['id_er']
         #breakpoint()
-        reg_sets = PRS.from_sql(prs_ids)
+        # get the regulation setes
+        reg_sets = DBPRS.from_sql(prs_ids)
         reg_set_list =[]
         reg_list = []
         unit_list = []
