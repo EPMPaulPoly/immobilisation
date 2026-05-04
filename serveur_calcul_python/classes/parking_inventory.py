@@ -90,7 +90,7 @@ class ParkingInventory():
         lots_to_clean_up = self.parking_frame.loc[self.parking_frame[config_db.db_column_lot_id].duplicated(keep=False)]
         lots_list_to_purge_from_self = lots_to_clean_up[config_db.db_column_lot_id].unique().tolist()
         if len(lots_list_to_purge_from_self)>0:
-            aggregate_parking_data = lots_to_clean_up.groupby([config_db.db_column_lot_id]).apply(inventory_duplicates_agg_function, include_groups=True).reset_index()
+            aggregate_parking_data = lots_to_clean_up.groupby([config_db.db_column_lot_id]).apply(inventory_duplicates_agg_function, include_groups=False).reset_index()
             aggregate_parking_data.loc[(aggregate_parking_data['n_places_min']>aggregate_parking_data['n_places_max']) |(aggregate_parking_data['n_places_max']==0.0),'n_places_max'] =None
             new_parking_frame = self.parking_frame.drop(self.parking_frame[self.parking_frame[config_db.db_column_lot_id].isin(lots_list_to_purge_from_self)].index)
             new_parking_frame = pd.concat([new_parking_frame,aggregate_parking_data])
@@ -714,15 +714,15 @@ def calculate_threshold_based_subset_from_inputs_class(reg_to_calculate:PR.Parki
                     slope_max = line_def[config_db.db_column_parking_slope_max].values[0]
                     parking_frame_thresh = pd.DataFrame()
                     parking_frame_thresh[config_db.db_column_lot_id] = relevant_data[config_db.db_column_lot_id]
-                    if zero_crossing_min is not None and slope_min is not None:
+                    if is_number(zero_crossing_min) and is_number(slope_min):
                         parking_frame_thresh['n_places_min'] = zero_crossing_min + slope_min * relevant_data['valeur']
-                    elif zero_crossing_min is not None:
+                    elif is_number(zero_crossing_min) :
                         parking_frame_thresh['n_places_min'] = zero_crossing_min
                     else:
                         parking_frame_thresh['n_places_min'] = None
-                    if zero_crossing_max is not None and slope_max is not None:
+                    if is_number(zero_crossing_max) and is_number(slope_max):
                         parking_frame_thresh['n_places_max'] = zero_crossing_max + slope_max * relevant_data['valeur']
-                    elif zero_crossing_max is not None:
+                    elif is_number(zero_crossing_max) :
                         parking_frame_thresh['n_places_max'] = zero_crossing_max
                     else: 
                         parking_frame_thresh['n_places_max'] = None
@@ -748,6 +748,10 @@ def calculate_threshold_based_subset_from_inputs_class(reg_to_calculate:PR.Parki
             ValueError('subset should have operator 4 and only one unit') 
     else:
         ValueError('Can only calculate one rule at a time')
+
+def is_number(x):
+    return isinstance(x, (int, float, np.number)) and np.isfinite(x)
+
 
 def calculate_addition_based_subset_from_inputs_class(reg_to_calculate:PR.ParkingRegulations,subset:int,data:PII.ParkingCalculationInputs,methode_estime:int=3):
     if reg_to_calculate.check_subset_exists(subset) and reg_to_calculate.check_only_one_regulation():
