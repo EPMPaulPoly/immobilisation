@@ -15,9 +15,8 @@
       "isolatedModules": true,
       "noEmit": true,
       "jsx": "react-jsx",
-      "typeRoots": [
-        "./node_modules/@types",
-        "./src/@types"
+      "types":[
+        "vite/client"
       ]
     },
     "include": ["src"]
