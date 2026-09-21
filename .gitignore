@@ -11,3 +11,4 @@ test.geojson
 /docs/api/openapi-bundled.yaml
 /.vscode/chrome
 **/__pycache__
+/docs/api/api-docs.html
